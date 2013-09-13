@@ -1,0 +1,713 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Page 4 | Archives: 2013 | Hexo</title>
+  <meta name="author" content="virgil">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title">2013</h2>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-26T06:29:00.000Z"><a href="/2013/04/26/2013-04-26-air-print/">Apr 26 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/26/2013-04-26-air-print/">Air Print</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Air Print</p>
+
+<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="code"><pre>- (void)drawPageAtIndex:(NSInteger)pageIndex inRect:(CGRect)printableRect
+{
+    CGRect pageRect = CGPDFPageGetBoxRect([_item openPage:pageIndex +<span class="number">1</span>], kCGPDFMediaBox)<span class="comment">;</span>
+    CGContextRef context = UIGraphicsGetCurrentContext()<span class="comment">;</span>
+    CGContextSetRGBFillColor(context, <span class="number">1.0</span>,<span class="number">1.0</span>,<span class="number">1.0</span>,<span class="number">1.0</span>)<span class="comment">;</span>
+    CGContextFillRect(context,printableRect)<span class="comment">;</span>
+    CGContextTranslateCTM(context, <span class="number">0.0</span>, printableRect<span class="preprocessor">.size</span><span class="preprocessor">.height</span>)<span class="comment">;</span>
+    CGContextTranslateCTM(context, printableRect<span class="preprocessor">.origin</span><span class="preprocessor">.x</span>, printableRect<span class="preprocessor">.origin</span><span class="preprocessor">.y</span>)<span class="comment">;</span>
+    CGContextScaleCTM(context, printableRect<span class="preprocessor">.size</span><span class="preprocessor">.width</span>/pageRect<span class="preprocessor">.size</span><span class="preprocessor">.width</span>, -printableRect<span class="preprocessor">.size</span><span class="preprocessor">.height</span>/pageRect<span class="preprocessor">.size</span><span class="preprocessor">.height</span>)<span class="comment">;</span>
+    CGContextSaveGState(context)<span class="comment">;</span>
+    CGContextDrawPDFPage(context, [_item openPage:pageIndex + <span class="number">1</span>])<span class="comment">;</span>
+    CGContextRestoreGState(context)<span class="comment">;</span>
+
+
+} 
+</pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-26T01:30:00.000Z"><a href="/2013/04/26/2013-04-26-c-number-abstracegen-virtuade-qu-bie/">Apr 26 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/26/2013-04-26-c-number-abstracegen-virtuade-qu-bie/">C#abstrace跟virtua的区别</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h5>一、Virtual方法（虚方法）</h5>
+<p><br>virtual 关键字用于在基类中修饰方法。virtual的使用会有两种情况：<br><br>     情况1：在基类中定义了virtual方法，但在派生类中没有重写该虚方法。那么在对派生类实例的调用中，该虚方法使用的是基类定义的方法。<br><br>     情况2：在基类中定义了virtual方法，然后在派生类中使用override重写该方法。那么在对派生类实例的调用中，该虚方法使用的是派生重写的方法。<br></p><br>#####二、Abstract方法（抽象方法）<br><p><br> abstract关键字只能用在抽象类中修饰方法，并且没有具体的实现。抽象方法的实现必须在派生类中使用override关键字来实现。<br><br>接口和抽象类:<br><br>最本质的区别：抽象类是一个不完全的类，是对对象的抽象，而接口是一种行为规范。<br><br> C# 是面向对象的程序设计语言，每一个函数都属于一个类。<br>Static：当一个方法被声明为Static时，这个方法是一个静态方法，编译器会在编译时保留这个方法的实现。也就是说，这个方法属于类，但是不属于任何成员，不管这个类的实例是否存在，它们都会存在。就像入口函数Static void Main，因为它是静态函数，所以可以直接被调用。</p><br><p><br>Virtua：当一个方法被声明为Virtual时，它是一个虚拟方法，直到你使用ClassName variable = new ClassName();声明一个类的实例之前，它都不存在于真实的内存空间中。这个关键字在类的继承中非常常用，用来提供类方法的多态性支持。<br>overrride：表示重写 这个类是继承于Shape类<br>public override double Area 这个属性再shape中肯定存在 但是这里我们不想用shape中的 所以要重写<br>virtual，abstract是告诉其它想继承于他的类 你可以重写我的这个方法或属性，否则不允许。<br>一个生动的例子 :老爸表示基类（被继承的类） 儿子表示子类（继承的类）<br>老爸用virtual告诉儿子:“孩子,你要继承我的事业,在这块上面可以自己继续发展你自己的”<br>儿子用override告诉全世界:“这个我可不是直接拿我爸的,他只是指个路给我,是我自己奋斗出来的”<br></p><br><p><br>abstract：抽象方法声明使用，是必须被派生类覆写的方法，抽象类就是用来被继承的；可以看成是没有实现体的虚方法；如果类中包含抽象方法，那么类就必须定义为抽象类，不论是否还包含其他一般方法；抽象类不能有实体的。<br>实例解答:<br>interface:用来声明接口<br></p>
+
+<p><br>1.只提供一些方法规约，不提供方法主体. 如:<br></p>
+
+<figure class="highlight lang-csharp"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IPerson</span>
+{</span>
+<span class="keyword">void</span> getName();<span class="comment">//不包含方法主体</span>
+}
+</pre></td></tr></table></figure>
+
+
+<p><br>2.方法不能用public abstract等修饰,无字段变量，无构造函数。<br></p>
+
+
+<p><br>3.方法可包含参数。 如:<br></p>
+
+<figure class="highlight lang-csharp"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre> <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IPerson</span>
+{</span>
+<span class="keyword">void</span> getAge(<span class="keyword">string</span> s);
+}
+</pre></td></tr></table></figure>
+
+
+
+<p><br>一个例子(例1)：<br></p>
+
+<figure class="highlight lang-csharp"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IPerson</span>
+{</span>
+IPerson(); <span class="comment">//错误</span>
+<span class="keyword">string</span> name; <span class="comment">//错误</span>
+<span class="keyword">public</span> <span class="keyword">void</span> getIDcard();<span class="comment">//错误</span>
+<span class="keyword">void</span> getName(); <span class="comment">//right</span>
+<span class="keyword">void</span> getAge(<span class="keyword">string</span> s); <span class="comment">//right</span>
+}
+</pre></td></tr></table></figure>
+
+
+
+<p><br>实现interface的类<br>1.与继承类的格式一致，如 public class Chinese:IPerson{}<br>2.必须实现 interface 中的各个方法<br>例2，继承例1<br></p>
+
+
+<figure class="highlight lang-csharp"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Chinese</span>:<span class="title">IPerson</span>
+{</span>
+<span class="keyword">public</span> Chinese(){} <span class="comment">//添加构造</span>
+<span class="keyword">public</span> <span class="keyword">void</span> getName(){} <span class="comment">//实现getName()</span>
+<span class="keyword">public</span> <span class="keyword">void</span> getAge(<span class="keyword">string</span> s){} <span class="comment">//实现getAge()</span>
+}
+</pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/04/26/2013-04-26-c-number-abstracegen-virtuade-qu-bie/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-25T07:11:00.000Z"><a href="/2013/04/25/2013-04-25-c-number-jie-kou/">Apr 25 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/25/2013-04-25-c-number-jie-kou/">C# 接口</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><br>定义接口，里面包含方法，但没有方法具体实现的代码，然后在继承该接口的类里面要实现接口的所有方法的代码。<br></p>
+
+<p>定义接口</p]><br><br><figure class="highlight lang-csharp"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IBark</span>
+{</span>
+    <span class="keyword">void</span> Bark();
+}
+</pre></td></tr></table></figure><br><br><br><p><br>再定义一个类,继承于IBark,并且必需实现其中的Bark()方法。<br></p>
+
+<figure class="highlight lang-csharp"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre>public <span class="class"><span class="keyword">class</span> <span class="title">Dog</span>:</span>IBark
+{
+    public Dog()
+    {}
+    public void Bark()
+    {
+       Consol.write(<span class="string">"汪汪"</span>);
+     }
+}
+</pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-24T01:51:00.000Z"><a href="/2013/04/24/2013-04-24-jin-ru-google-dot-com/">Apr 24 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/24/2013-04-24-jin-ru-google-dot-com/">进入google.com</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><p>怎么进入www.google.com而不是www.google.com/hk,很简单，进这个地址：<br><a href="http://www.google.com/intl/zh-EN/" target="_blank"><a href="http://www.google.com/intl/zh-EN/">http://www.google.com/intl/zh-EN/</a></a> 打开中文google后,<br>点击下面的:<a href="http://www.google.com/ncr" target="_blank"><a href="http://www.google.com/ncr">http://www.google.com/ncr</a></a>就可以了。</p><br>&lt;!-103844721&gt;</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-24T01:30:00.000Z"><a href="/2013/04/24/2013-04-24-cgpdfbox/">Apr 24 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/24/2013-04-24-cgpdfbox/">CGPDFBox</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>A PDF describes the content and appearance of one or more pages. The exact size of that page is not as straightforward as you might think. There can be up to 5 different descriptions in a PDF that relate to its size. These are called the page boxes:</p>
+
+<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre><span class="title">enum</span> CGPDFBox {
+   <span class="title">kCGPDFMediaBox</span> = <span class="number">0</span>,
+   kCGPDFCropBox = <span class="number">1</span>,
+   kCGPDFBleedBox = <span class="number">2</span>,
+   kCGPDFTrimBox = <span class="number">3</span>,
+   kCGPDFArtBox = <span class="number">4</span>
+};
+<span class="title">typedef</span> enum CGPDFBox CGPDFBox;
+</pre></td></tr></table></figure>
+
+
+<h5>KCGPDFMediaBox</h5>
+<p><br>The MediaBox is used to specify the width and height of the page. For the average user, this probably equals the actual page size. For prepress use, this is not the case as we prefer our pages to be defined slightly oversized so that we can see the bleed (Images or other elements touching an outer edge of a printed page need to extend beyond the edge of the paper to compensate for inaccuracies in trimming the page), the crop marks and useful information such as the file name or the date and time when the file was created. This means that PDF files used in graphic arts usually have a MediaBox which is larger then the trimmed page size. The MediaBox is the largest page box in a PDF. The other page boxes can equal the size of the MediaBox but they cannot be larger.<br></p>
+
+<h5>kCGPDFCropBox</h5>
+<p><br>The CropBox defines the region to which the page contents are to be clipped. Acrobat uses this size for screen display and printing. For prepress use, the CropBox is pretty irrelevant. The GWG industry association recommends not to use the CropBox at all.<br></p>
+
+ 
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/04/24/2013-04-24-cgpdfbox/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-23T07:56:00.000Z"><a href="/2013/04/23/2013-04-23-pdfnei-rong-liu-jie-xi/">Apr 23 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/23/2013-04-23-pdfnei-rong-liu-jie-xi/">PDF内容流解析</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3>PDF Document Parsing</h3>
+<p>Quartz提供了让你检查PDF文档结构和内容流的方法。通过这些方法，你可以获取文档目录的条目和与每个条目相关的内容。一个PDF的内容流（contentstream）正如其名字所暗示的—一个连续的数据流 例如‘BT 12 /F71 Tf (draw thistext) Tj . . . ’此处PDF操作符以及他们的描述符都混有实际的PDF内容。检查内容流,你需要按顺序访问它。</p>
+
+<h3>PDF操作符</h3>
+<p><p>1). General graphics state(普通图形状态操作符)</p></p>
+<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre> <span class="attribute">w</span>: <span class="string">设置线的宽度</span>
+ <span class="attribute">J</span>: <span class="string">设置线端点风格. Butt/Round/Projecting square </span>
+ <span class="attribute">j</span>: <span class="string">设置线交叉风格. Miter/Round/Bevel</span>
+ <span class="attribute">M</span>: <span class="string">设置Miter Limit</span>
+ <span class="attribute">d</span>: <span class="string">设置虚线风格.</span>
+ <span class="attribute">ri</span>: <span class="string">设置Rendering Intent(呈色意向)</span>
+ <span class="attribute">i</span>: <span class="string">设置平面化容忍度.</span>
+ <span class="attribute">gs</span>: <span class="string">设置图形状态参数.</span>
+</pre></td></tr></table></figure>
+
+
+<p><p>2). Special graphics state(特殊图形状态操作符)</p></p>
+<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre> <span class="method">q:</span> 保存当前图形状态
+ <span class="class">Q</span>：回复图形状态.
+ cm：设置当前装换矩阵.
+</pre></td></tr></table></figure>
+
+
+<p><p>3). Path construction(路径构建操作符)</p></p>
+<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre> <span class="attribute">m</span>: <span class="string">移动当前指针到指定位置.</span>
+ <span class="attribute">l</span>: <span class="string">添加一条连接当前指针到指定位置的线段.</span>
+ <span class="attribute">c</span>: <span class="string">添加一条Bezier曲线， 有2个控制点，2个端点.</span>
+ <span class="attribute">v</span>: <span class="string">添加一条Bezier曲线， 2个控制点重合.</span>
+ <span class="attribute">y</span>: <span class="string">添加一条Bezier曲线， 第二个控制点和第二个端点重合.</span>
+ <span class="attribute">h</span>: <span class="string">闭合路径</span>
+ <span class="attribute">re</span>: <span class="string">添加一个矩形.</span>
+</pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/04/23/2013-04-23-pdfnei-rong-liu-jie-xi/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-22T08:43:00.000Z"><a href="/2013/04/22/2013-04-23-ios-4chu-shi-hua-han-shu-de-guan-xi/">Apr 22 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/22/2013-04-23-ios-4chu-shi-hua-han-shu-de-guan-xi/">iOS的init、loadView、 viewDidLoad、viewDidUnload的关系</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3>init方法</h3>
+<p><br>在init方法中实例化必要的对象（遵从LazyLoad思想）<br>init方法中初始化ViewController本身<br></p>
+
+<h3>loadView方法</h3>
+<p><br>当view需要被展示而它却是nil时，viewController会调用该方法。不要直接调用该方法。<br>如果手工维护views，必须重写该方法。<br>如果使用IB维护views，必须不能重写该方法。<br>loadView和IB构建view<br></p>
+
+<h3>viewDidLoad方法</h3>
+<p><br>重写该方法以进一步定制view。<br>在iPhone OS 3.0及之后的版本中，还应该重写viewDidUnload来释放对view的任何索引。<br>viewDidLoad后调用数据Model。<br></p><br>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/04/22/2013-04-23-ios-4chu-shi-hua-han-shu-de-guan-xi/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-22T06:39:00.000Z"><a href="/2013/04/22/2013-04-22-tong-guo-diao-yong-urltiao-zhuan-dao-xiang-ying-de-she-zhi-ye-mian/">Apr 22 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/22/2013-04-22-tong-guo-diao-yong-urltiao-zhuan-dao-xiang-ying-de-she-zhi-ye-mian/">通过调用url跳转到相应的设置页面</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>调用如下代码：</p><br><figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre> NSURL *url = [NSURL URLWithString:@<span class="string">"prefs:root=WIFI"</span>];
+ <span class="string">[[UIApplication sharedApplication] openURL:url];
+</pre></td></tr></table></figure><br><br><p>即可跳转到设置页面的对应项。</p>
+
+<p><p>相关的URL string：</p><br>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/04/22/2013-04-22-tong-guo-diao-yong-urltiao-zhuan-dao-xiang-ying-de-she-zhi-ye-mian/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-22T06:34:00.000Z"><a href="/2013/04/22/2013-04-22-nsuserdefaults-standarduserdefaultszhu-yi-shi-xiang/">Apr 22 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/22/2013-04-22-nsuserdefaults-standarduserdefaultszhu-yi-shi-xiang/">NSUserDefaults standardUserDefaults注意事项</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>NSUserDefaults standardUserDefaults一种便利的序列化方式、当使用</p>
+
+<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="string">[[NSUserDefaults  standardUserDefaults] setObject:object textforKey:key];
+</pre></td></tr></table></figure>
+
+
+<p>这时候该对象只是写在内存中。要真正保存到磁盘、应该还要调用</p>
+
+<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="string">[[NSUserDefaults  standardUserDefaults] synchronize];
+</pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-22T05:46:00.000Z"><a href="/2013/04/22/2013-04-22-grand-central-dispatch/">Apr 22 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/22/2013-04-22-grand-central-dispatch/">Grand Central Dispatch </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><br>Grand Central Dispatch (GCD)是Apple开发的一个多核编程的解决方法。该方法在Mac OS X 10.6雪豹中首次推出，并随后被引入到了iOS4.0中。GCD是一个替代诸如NSThread, NSOperationQueue, NSInvocationOperation等技术的很高效和强大的技术，它看起来象就其它语言的闭包(Closure)一样，但苹果把它叫做blocks<br></p>
+
+<p><br>应用举例<br>让我们来看一个编程场景。我们要在iphone上做一个下载网页的功能，该功能非常简单，就是在iphone上放置一个按钮，点击该按钮时，显示一个转动的圆圈，表示正在进行下载，下载完成之后，将内容加载到界面上的一个文本控件中。不用GCD前<br>虽然功能简单，但是我们必须把下载过程放到后台线程中，否则会阻塞UI线程显示。所以，如果不用GCD, 我们需要写如下3个方法：<font color='red'>someClick</font> 方法是点击按钮后的代码，可以看到我们用NSInvocationOperation建了一个后台线程，并且放到NSOperationQueue中。后台线程执行<font color='red'>download</font>方法。<br><font color='red'>download</font> 方法处理下载网页的逻辑。下载完成后用<font color='red'>performSelectorOnMainThread</font>执行<font color='red'>download_completed</font> 方法。<br><font color='red'>download_completed</font> 进行clear up的工作，并把下载的内容显示到文本控件中。<br><br>这3个方法的代码如下:<br></p>
+
+<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre>-(<span class="keyword">IBAction</span>)someClick:(<span class="keyword">id</span>)sender
+{ 
+  <span class="keyword">self</span><span class="variable">.indicator</span><span class="variable">.hidden</span> = <span class="literal">NO</span>; 
+  [<span class="keyword">self</span><span class="variable">.indicatorstart</span>  Animating];
+  queue = [[NSOperationQueue  alloc]init];
+  NSInvocationOperation *op = [[[NSInvocationOperation alloc]initWithTarget:<span class="keyword">self</span> 
+                                                                   <span class="keyword">selector</span>:@<span class="keyword">selector</span>(download) 
+                                                                     object:<span class="literal">nil</span>]autorelease];    
+  [queueaddOperation:op];
+ }
+
+</pre></td></tr></table></figure>
+
+<p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/04/22/2013-04-22-grand-central-dispatch/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+
+  <nav id="pagination">
+  
+    <a href="/archives/2013/page/3/" class="alignleft prev">Prev</a>
+  
+  
+    <a href="/archives/2013/page/5/" class="alignright next">Next</a>
+  
+  <div class="clearfix"></div>
+</nav>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/IOS/">IOS</a><small>44</small></li>
+  
+    <li><a href="/categories/OSX/">OSX</a><small>1</small></li>
+  
+    <li><a href="/categories/Other/">Other</a><small>4</small></li>
+  
+    <li><a href="/categories/windowsphone/">windowsphone</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2013 virgil
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
