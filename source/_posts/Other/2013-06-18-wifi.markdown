@@ -1,0 +1,10 @@
+---
+layout: post
+title: "wifi"
+date: 2013-06-18 14:26
+comments: true
+categories: Other
+---
+<p>
+netsh wlan set hostednexx ork mode=allow ssid=SoftAP key=99887766回车 netsh wlan start hosted
+</p>

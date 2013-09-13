@@ -1,0 +1,712 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Page 2 | Archives: 2013/4 | Hexo</title>
+  <meta name="author" content="virgil">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title">2013/4</h2>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-22T06:39:00.000Z"><a href="/2013/04/22/2013-04-22-tong-guo-diao-yong-urltiao-zhuan-dao-xiang-ying-de-she-zhi-ye-mian/">Apr 22 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/22/2013-04-22-tong-guo-diao-yong-urltiao-zhuan-dao-xiang-ying-de-she-zhi-ye-mian/">通过调用url跳转到相应的设置页面</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>调用如下代码：</p><br><figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre> NSURL *url = [NSURL URLWithString:@<span class="string">"prefs:root=WIFI"</span>];
+ <span class="string">[[UIApplication sharedApplication] openURL:url];
+</pre></td></tr></table></figure><br><br><p>即可跳转到设置页面的对应项。</p>
+
+<p><p>相关的URL string：</p><br>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/04/22/2013-04-22-tong-guo-diao-yong-urltiao-zhuan-dao-xiang-ying-de-she-zhi-ye-mian/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-22T06:34:00.000Z"><a href="/2013/04/22/2013-04-22-nsuserdefaults-standarduserdefaultszhu-yi-shi-xiang/">Apr 22 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/22/2013-04-22-nsuserdefaults-standarduserdefaultszhu-yi-shi-xiang/">NSUserDefaults standardUserDefaults注意事项</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>NSUserDefaults standardUserDefaults一种便利的序列化方式、当使用</p>
+
+<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="string">[[NSUserDefaults  standardUserDefaults] setObject:object textforKey:key];
+</pre></td></tr></table></figure>
+
+
+<p>这时候该对象只是写在内存中。要真正保存到磁盘、应该还要调用</p>
+
+<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="string">[[NSUserDefaults  standardUserDefaults] synchronize];
+</pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-22T05:46:00.000Z"><a href="/2013/04/22/2013-04-22-grand-central-dispatch/">Apr 22 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/22/2013-04-22-grand-central-dispatch/">Grand Central Dispatch </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><br>Grand Central Dispatch (GCD)是Apple开发的一个多核编程的解决方法。该方法在Mac OS X 10.6雪豹中首次推出，并随后被引入到了iOS4.0中。GCD是一个替代诸如NSThread, NSOperationQueue, NSInvocationOperation等技术的很高效和强大的技术，它看起来象就其它语言的闭包(Closure)一样，但苹果把它叫做blocks<br></p>
+
+<p><br>应用举例<br>让我们来看一个编程场景。我们要在iphone上做一个下载网页的功能，该功能非常简单，就是在iphone上放置一个按钮，点击该按钮时，显示一个转动的圆圈，表示正在进行下载，下载完成之后，将内容加载到界面上的一个文本控件中。不用GCD前<br>虽然功能简单，但是我们必须把下载过程放到后台线程中，否则会阻塞UI线程显示。所以，如果不用GCD, 我们需要写如下3个方法：<font color='red'>someClick</font> 方法是点击按钮后的代码，可以看到我们用NSInvocationOperation建了一个后台线程，并且放到NSOperationQueue中。后台线程执行<font color='red'>download</font>方法。<br><font color='red'>download</font> 方法处理下载网页的逻辑。下载完成后用<font color='red'>performSelectorOnMainThread</font>执行<font color='red'>download_completed</font> 方法。<br><font color='red'>download_completed</font> 进行clear up的工作，并把下载的内容显示到文本控件中。<br><br>这3个方法的代码如下:<br></p>
+
+<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre>-(<span class="keyword">IBAction</span>)someClick:(<span class="keyword">id</span>)sender
+{ 
+  <span class="keyword">self</span><span class="variable">.indicator</span><span class="variable">.hidden</span> = <span class="literal">NO</span>; 
+  [<span class="keyword">self</span><span class="variable">.indicatorstart</span>  Animating];
+  queue = [[NSOperationQueue  alloc]init];
+  NSInvocationOperation *op = [[[NSInvocationOperation alloc]initWithTarget:<span class="keyword">self</span> 
+                                                                   <span class="keyword">selector</span>:@<span class="keyword">selector</span>(download) 
+                                                                     object:<span class="literal">nil</span>]autorelease];    
+  [queueaddOperation:op];
+ }
+
+</pre></td></tr></table></figure>
+
+<p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/04/22/2013-04-22-grand-central-dispatch/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-22T05:42:00.000Z"><a href="/2013/04/22/2013-04-22-intxing-zhuan-hua-wei-nsdata/">Apr 22 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/22/2013-04-22-intxing-zhuan-hua-wei-nsdata/">int型和NSdata型互相转化</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>int转化成NSdata</p><br><figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre><span class="title">int</span> i =<span class="number">1</span>;
+<span class="type">NSData</span> *<span class="typedef"><span class="keyword">data</span> =[<span class="type">NSDatadataWithBytes</span>:&amp;i length:sizeof<span class="container">(<span class="title">i</span>)</span>];</span>
+</pre></td></tr></table></figure><br><br><br><p>NSdata转化成int</p>
+
+<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="title">int</span> i = [<span class="typedef"><span class="keyword">data</span> getBytes:&amp;i length:sizeof<span class="container">(<span class="title">i</span>)</span>];</span>
+</pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-22T04:20:00.000Z"><a href="/2013/04/22/2013-04-22-zheng-que-chu-li-memory-waring/">Apr 22 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/22/2013-04-22-zheng-que-chu-li-memory-waring/">正确处理Memory Waring</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>  IPhone下每个app可用的内存是被限制的，如果一个app使用的内存超过20M，则系统会向该app发送Memory Warning消息。收到此消息后，app必须正确处理，否则可能出错或者出现内存泄露。</p>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-22T04:10:00.000Z"><a href="/2013/04/22/2013-04-22-iosshe-bei-huo-qu-ben-ji-ipdi-zhi/">Apr 22 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/22/2013-04-22-iosshe-bei-huo-qu-ben-ji-ipdi-zhi/">IOS设备获取本机IP地址</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+</pre></td><td class="code"><pre><span class="comment">#include &lt;ifaddrs.h&gt;</span>
+<span class="comment">#include &lt;arpa/inet.h&gt;</span>
+- (NSString*)getIPAddress
+{
+   NSString*address = @<span class="string">"error"</span>;
+   structifaddrs*interfaces = NULL;
+   structifaddrs*temp_addr = NULL;
+   intsuccess = <span class="number">0</span>;
+    
+   // retrieve <span class="keyword">the</span> current interfaces - returns <span class="number">0</span> <span class="function_start"><span class="keyword">on</span> <span class="title">success</span></span>
+   success = getifaddrs(&amp;interfaces);
+   <span class="keyword">if</span>(success == <span class="number">0</span>)
+     {
+   // Loop <span class="keyword">through</span> linked <span class="type">list</span> <span class="keyword">of</span> interfaces
+        temp_addr = interfaces;
+        <span class="keyword">while</span>(temp_addr != NULL) 
+        {
+            <span class="keyword">if</span>( temp_addr-&gt;ifa_addr-&gt;sa_family== AF_INET) 
+            {
+   // Check <span class="keyword">if</span> interface <span class="keyword">is</span> en0 which <span class="keyword">is</span> <span class="keyword">the</span> wifi connection <span class="function_start"><span class="keyword">on</span> <span class="title">the</span></span> iPhone
+                 <span class="keyword">if</span>([[NSStringstringWithUTF8String:temp_addr-&gt;ifa_name] isEqualToString:@<span class="string">"en0"</span>])
+                {
+  // Get NSString <span class="keyword">from</span> C String
+                   address = [NSStringstringWithUTF8String:inet_ntoa(((structsockaddr_in*)temp_addr-&gt;ifa_addr)-&gt;sin_addr)];
+                }
+            }
+            
+            temp_addr = temp_addr-&gt;ifa_next;
+        }
+    }
+    
+    // Free memory    
+    freeifaddrs(interfaces);
+    returnaddress;
+}
+
+
+</pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-22T04:03:00.000Z"><a href="/2013/04/22/2013-04-22-uiviewcontroller-zai-uinavigationcontroller-zhong-dang-uinavigationbarchu-xian-hou-de-bian-hua/">Apr 22 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/22/2013-04-22-uiviewcontroller-zai-uinavigationcontroller-zhong-dang-uinavigationbarchu-xian-hou-de-bian-hua/">UIViewController 在UINavigationController 中，当UINavigationBar出现后的变化</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>如果UIViewController 是在导航控制器中<br>在navigationbar 出现后self.view 的高度减少了44。如：<br>在viewDidLoad 中 </p>
+
+<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="built_in">NSLog</span>(@<span class="string">"self height %f"</span>,<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.heigt</span>);  
+</pre></td></tr></table></figure>
+
+ <p><br>在viewDidAppear 中 </p><br><figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="built_in">NSLog</span>(@<span class="string">"self height %f"</span>,<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.heigt</span>);  
+</pre></td></tr></table></figure><br><br><p> 两个结果相差 44。</p>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-22T03:58:00.000Z"><a href="/2013/04/22/2013-04-22-nstimershi-fang/">Apr 22 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/22/2013-04-22-nstimershi-fang/">NSTimer释放</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>IOS</p>
+<p>NSTimer 是一个比较麻烦的东东，理解不清楚的时候释放它、很可能会出现crash。<br>NSTimer的创建一般使用俩种方式：</p><br><p>1， 类方法直接创建：</p>
+
+<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre>+ (<span class="tag">NSTimer</span>*)<span class="tag">timerWithTimeInterval</span><span class="pseudo">:(NSTimeInterval)ti</span> <span class="tag">invocation</span><span class="pseudo">:(NSInvocation</span>*)<span class="tag">invocation</span> <span class="tag">repeats</span><span class="pseudo">:(BOOL)yesOrNo</span>;
+
++ (<span class="tag">NSTimer</span>*)<span class="tag">scheduledTimerWithTimeInterval</span><span class="pseudo">:(NSTimeInterval)ti</span> <span class="tag">invocation</span><span class="pseudo">:(NSInvocation</span>*)<span class="tag">invocation</span> <span class="tag">repeats</span><span class="pseudo">:(BOOL)yesOrNo</span>;
+
++ (<span class="tag">NSTimer</span>*)<span class="tag">timerWithTimeInterval</span><span class="pseudo">:(NSTimeInterval)ti</span> <span class="tag">target</span><span class="pseudo">:(id)aTarget</span> <span class="tag">selector</span><span class="pseudo">:(SEL)aSelector</span> <span class="tag">userInfo</span><span class="pseudo">:(id)userInfo</span> <span class="tag">repeats</span><span class="pseudo">:(BOOL)yesOrNo</span>;
+
++ (<span class="tag">NSTimer</span>*)<span class="tag">scheduledTimerWithTimeInterval</span><span class="pseudo">:(NSTimeInterval)ti</span> <span class="tag">target</span><span class="pseudo">:(id)aTarget</span> <span class="tag">selector</span><span class="pseudo">:(SEL)aSelector</span> <span class="tag">userInfo</span><span class="pseudo">:(id)userInfo</span> <span class="tag">repeats</span><span class="pseudo">:(BOOL)yesOrNo</span>;
+</pre></td></tr></table></figure>
+
+<p><p>由这些方法所创建的NSTimer的retain count是由NSRunloop保持、所以我们不需要对这个对象进行release的操作。但是如果我们想要在某个具体的地方<br>停止这个计数器的时候。如果repeats参数是YES的时候我们不需要增加这个对象的retain count。就可以在其他地方引用这个对象了。如果repeats参数shi是NO的时候、我们就应该手动增加、再release。如果不retain它、如果在你引用这个对象的时候、定时器的时间还没到，方法还没执行。NSRunloop<br>还保留这retain count。这时候是没问题的、但是如果方法已经执行完了、NSRunloop释放了NSTimer这个对象。这个时候就会crash了。&lt;/p&gt;</p>
+<p><p>2、直接创建：</p]></p>
+<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="pp">- <span class="params">(id)</span>initWithFireDate:<span class="params">(<span class="variable">NSDate</span>*)</span>date interval:<span class="params">(<span class="variable">NSTimeInterval</span>)</span>ti target:<span class="params">(id)</span>t selector:<span class="params">(<span class="variable">SEL</span>)</span>s userInfo:<span class="params">(id)</span>ui repeats:<span class="params">(<span class="variable">BOOL</span>)</span>rep;
+</pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-22T03:38:00.000Z"><a href="/2013/04/22/2013-04-22-chang-yong-dai-ma/">Apr 22 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/22/2013-04-22-chang-yong-dai-ma/">常用代码</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><p>1.判断邮箱格式是否正确的代码</p></p>
+<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre>-(BOOL)isValidateEmail:(NSString <span class="variable">*)</span>email
+{
+  NSString <span class="variable">*emailRegex</span> = <span class="variable">@"</span>[A-Z<span class="number">0</span>-<span class="number">9</span>a-z.<span class="number">_</span><span class="variable">%+</span>-]+<span class="variable">@[</span>A-Za-z<span class="number">0</span>-<span class="number">9</span>.-]+\\.[A-Za-z]{<span class="number">2</span>,<span class="number">4</span>}<span class="string">";
+  NSPredicate <span class="variable">*emailTest</span> = [NSPredicate predicateWithFormat:<span class="variable">@"</span>SELF MATCHES<span class="variable">%@</span>"</span>,emailRegex];
+  <span class="keyword">return</span> [emailTest evaluateWithObject:email];
+}
+</pre></td></tr></table></figure>
+
+
+<p><p>2.图片压缩</p></p>
+<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="code"><pre>- (<span class="built_in">UIImage</span>*)imageWithImageSimple:(<span class="built_in">UIImage</span>*)image scaledToSize:(<span class="built_in">CGSize</span>)newSize
+{
+<span class="comment">// Create a graphics image context</span>
+   UIGraphicsBeginImageContext(newSize);
+<span class="comment">// Tell the old image to draw in this newcontext, with the desired</span>
+<span class="comment">// new size</span>
+   [image drawInRect:CGRectMake(<span class="number">0</span>,<span class="number">0</span>,newSize<span class="variable">.width</span>,newSize<span class="variable">.height</span>)];
+<span class="comment">// Get the new image from the context</span>
+   <span class="built_in">UIImage</span>* newImage = UIGraphicsGetImageFromCurrentImageContext();
+<span class="comment">// End the context</span>
+   UIGraphicsEndImageContext();
+<span class="comment">// Return the new image.</span>
+   <span class="keyword">return</span> newImage;
+}
+</pre></td></tr></table></figure>
+
+
+<p><p>3.亲测可用的图片上传代码</p></p>
+<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+</pre></td><td class="code"><pre>- (IBAction)uploadButton:(id)sender 
+{
+   UIImage *image = [UIImage imageNamed:@<span class="string">"1.jpg"</span>]; //图片名
+   NSData *imageData = UIImageJPEGRepresentation(image,<span class="number">0.5</span>);//压缩比例
+   NSLog(@<span class="string">"字节数:%i"</span>,[imageData length]);
+// post url
+   NSString *urlString = @<span class="string">"http://192.168.1.113:8090/text/UploadServlet"</span>;
+//服务器地址
+// setting up the request object now
+   NSMutableURLRequest *request = <span class="string">[[NSMutableURLRequest alloc] init] ;
+   [request setURL:[NSURL URLWithString:urlString]]</span>;
+   [request setHTTPMethod:@<span class="string">"POST"</span>];
+//
+   NSString *boundary = [NSString stringWithString:@<span class="string">"---------------------------14737809831466499882746641449"</span>];
+   NSString *contentType = [NSString stringWithFormat:@<span class="string">"multipart/form-data;boundary=%@"</span>,boundary];
+   [request addValue:contentType forHTTPHeaderField: @<span class="string">"Content-Type"</span>];
+//
+   NSMutableData *body = [NSMutableData data];
+   [body appendData:<span class="string">[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]]</span>;
+   [body appendData:<span class="string">[[NSString stringWithString:@"Content-Disposition:form-data; name=\"userfile\"; filename=\"2.png\"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]]</span>; //上传上去的图片名字
+   [body appendData:<span class="string">[[NSString stringWithString:@"Content-Type: application/octet-stream\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]]</span>;
+   [body appendData:[NSData dataWithData:imageData]];
+   [body appendData:<span class="string">[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]]</span>;
+   [request setHTTPBody:body];
+// NSLog(@<span class="string">"1-body:%@"</span>,body);
+   NSLog(@<span class="string">"2-request:%@"</span>,request);
+   NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:<span class="keyword">nil</span> <span class="built_in">error</span>:<span class="keyword">nil</span>];
+   NSString *returnString = <span class="string">[[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+   NSLog(@"3-测试输出：%@",returnString);
+</pre></td></tr></table></figure>
+
+
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/04/22/2013-04-22-chang-yong-dai-ma/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-22T03:36:00.000Z"><a href="/2013/04/22/2013-04-22-she-uiimagewei-backgroundcolor/">Apr 22 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/22/2013-04-22-she-uiimagewei-backgroundcolor/">设UIImage为backgroundColor</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre>
++ (UIColor<span class="variable">*)</span>colorWithPatternImage:(UIImage<span class="variable">*)</span><span class="keyword">image</span>;
+
+</pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+
+  <nav id="pagination">
+  
+    <a href="/archives/2013/04/" class="alignleft prev">Prev</a>
+  
+  
+    <a href="/archives/2013/04/page/3/" class="alignright next">Next</a>
+  
+  <div class="clearfix"></div>
+</nav>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/IOS/">IOS</a><small>44</small></li>
+  
+    <li><a href="/categories/OSX/">OSX</a><small>1</small></li>
+  
+    <li><a href="/categories/Other/">Other</a><small>4</small></li>
+  
+    <li><a href="/categories/windowsphone/">windowsphone</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2013 virgil
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

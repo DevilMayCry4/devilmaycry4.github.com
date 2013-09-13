@@ -1,0 +1,12 @@
+---
+layout: post
+title: "ARC"
+date: 2013-05-06 13:45
+comments: true
+categories: IOS
+---
+<p>非ARC工程使用ARC文件时候，选中工程->TARGETS->相应的target然后选中右侧的“Build Phases”，向下就找到“Compile Sources”了。对相应的文件添加:-fobjc-arc参数。
+</p>
+<p>
+ARC工程使用非ARC文件时候，选中工程->TARGETS->相应的target然后选中右侧的“Build Phases”，向下就找到“Compile Sources”了。对相应的文件添加:-fno-objc-arc参数。
+</p>

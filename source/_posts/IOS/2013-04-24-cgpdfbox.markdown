@@ -1,0 +1,91 @@
+---
+layout: post
+title: "CGPDFBox"
+date: 2013-04-24 09:30
+comments: true
+categories: IOS
+---
+<p>A PDF describes the content and appearance of one or more pages. The exact size of that page is not as straightforward as you might think. There can be up to 5 different descriptions in a PDF that relate to its size. These are called the page boxes:</p>
+
+{% codeblock lang:objc %}
+enum CGPDFBox {
+   kCGPDFMediaBox = 0,
+   kCGPDFCropBox = 1,
+   kCGPDFBleedBox = 2,
+   kCGPDFTrimBox = 3,
+   kCGPDFArtBox = 4
+};
+typedef enum CGPDFBox CGPDFBox;
+{% endcodeblock %}
+
+#####KCGPDFMediaBox
+<p>
+The MediaBox is used to specify the width and height of the page. For the average user, this probably equals the actual page size. For prepress use, this is not the case as we prefer our pages to be defined slightly oversized so that we can see the bleed (Images or other elements touching an outer edge of a printed page need to extend beyond the edge of the paper to compensate for inaccuracies in trimming the page), the crop marks and useful information such as the file name or the date and time when the file was created. This means that PDF files used in graphic arts usually have a MediaBox which is larger then the trimmed page size. The MediaBox is the largest page box in a PDF. The other page boxes can equal the size of the MediaBox but they cannot be larger.
+</p>
+
+#####kCGPDFCropBox
+<p>
+The CropBox defines the region to which the page contents are to be clipped. Acrobat uses this size for screen display and printing. For prepress use, the CropBox is pretty irrelevant. The GWG industry association recommends not to use the CropBox at all.
+</p>
+
+ <!--more-->
+
+#####kCGPDFBleedBox
+<p>
+determines the region to which the page contents needs to be clipped when output in a production environment. Usually the BleedBox is 3 to 5 millimetres larger than the TrimBox. It is nice to know the size of the BleedBox but it isn’t that important in graphic arts. Most prepress systems allow you to define the amount of bleed yourself and ignore the BleedBox. By default the BleedBox equals the CropBox.
+</p> 
+
+#####KCGPDFTrimeBox
+<p>
+The TrimBox defines the intended dimensions of the finished page. Contrary to the CropBox, the TrimBox is very important because it defines the actual page size. The imposition programs and workflows that I know all use the TrimBox as the basis for positioning pages on a press sheet. By default the TrimBox equals the CropBox. When creating PDFs that are PDF/X-1a or PDF/X-3 compliant it is a requirement that the MediaBox, TrimBox and BleedBox are properly defined in the PDF.
+</p>
+
+#####KCGPDFArtBox
+
+<p>
+is a bit of a special case. It can define a region within a page that is of special interest. It is rarely used by applications. One way in which it can be used is to handle ads: on a PDF of a page on which there is an advertisement, the ArtBox can define the size of that ad. This allows you to place that PDF on another page but only use the ad from that PDF.
+</p>
+
+#####How to see the presence and/or size of the page boxes
+
+<p>
+A PDF always has a MediaBox definition. All the other page boxes do not necessarily have to be present within the file.
+
+If you crop pages in Adobe Acrobat 6 and later, the window that is shown displays the size of the various box sizes. Another option is to use the Preflight function in Acrobat Professional (version 6 and later). The pages boxes are shown in the Page information section.
+
+There are a number of plug-ins that are a bit more user friendly than the Acrobat functions. I personally love the DocuBox plug-in which is a part of Agfa’s Apogee Prepress workflow.
+</p>
+
+
+#####How to change page boxes
+
+<p>
+You can use the Crop Pages tool in Acrobat Professional to change the page boxes. A number of plug-ins offer more sophisticated control. Enfocus PitStop isn’t too bad but again I prefer the Agfa DocuBox plug-in. If you know about a good plug-in, add a comment to this page!
+</p>
+
+
+#####Do I even need to worry about all these boxes?
+
+<p>
+In the past: YES. Older applications did not define the trim box properly, forcing most prepress operators to center pages and hope everything worked out fine (which it usually did, by the way).
+
+Nowadays applications are PDF-aware enough to get things right from the start. Take Adobe InDesign for example:
+
+BleedBox information is sourced from the bleed settings in the marks & bleeds section of the print dialog box.
+The TrimBox is taken from the document setup.
+The MediaBox size is defined by the media size to which you print. If the “paper”-size width and height are set to automatic, the MediaBox size will be equal to the BleedBox size.
+The CropBox size is set to be the same as the Media size.
+</p>
+
+
+#####I want to see the finished trim size of a PDF
+
+<p>
+To view a PDF at it’s finished (trim) size, set the CropBox to match the TrimBox. Some systems do this by default. This has users who are not familiar with PDF worry if there is any bleed in the document. They do not realise that there may be information available which simply isn’t visible on-screen. Acrobat plug-ins such as Enfocus PitStop allow you to alternate the PDF view between TrimBox and MediaBox.
+</p>
+
+#####Errors referring to the BBox
+
+<p>
+To view a PDF at it’s finished (trim) size, set the CropBox to match the TrimBox. Some systems do this by default. This has users who are not familiar with PDF worry if there is any bleed in the document. They do not realise that there may be information available which simply isn’t visible on-screen. Acrobat plug-ins such as Enfocus PitStop allow you to alternate the PDF view between TrimBox and MediaBox.
+</p>

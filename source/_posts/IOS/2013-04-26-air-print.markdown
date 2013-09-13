@@ -1,0 +1,26 @@
+---
+layout: post
+title: "Air Print"
+date: 2013-04-26 14:29
+comments: true
+categories: IOS
+---
+<p>Air Print</p>
+
+{% codeblock lang:objc %}
+- (void)drawPageAtIndex:(NSInteger)pageIndex inRect:(CGRect)printableRect
+{
+    CGRect pageRect = CGPDFPageGetBoxRect([_item openPage:pageIndex +1], kCGPDFMediaBox);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetRGBFillColor(context, 1.0,1.0,1.0,1.0);
+    CGContextFillRect(context,printableRect);
+    CGContextTranslateCTM(context, 0.0, printableRect.size.height);
+    CGContextTranslateCTM(context, printableRect.origin.x, printableRect.origin.y);
+    CGContextScaleCTM(context, printableRect.size.width/pageRect.size.width, -printableRect.size.height/pageRect.size.height);
+    CGContextSaveGState(context);
+    CGContextDrawPDFPage(context, [_item openPage:pageIndex + 1]);
+    CGContextRestoreGState(context);
+
+
+} 
+{%  endcodeblock %}
