@@ -1,0 +1,419 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>PDF内容流解析 | Hexo</title>
+  <meta name="author" content="virgil">
+  
+  <meta name="description" content="PDF Document Parsing
+Quartz提供了让你检查PDF文档结构和内容流的方法。通过这些方法，你可以获取文档目录的条目和与每个条目相关的内容。一个PDF的内容流（contentstream）正如其名字所暗示的—一个连续的数据流 例如‘BT 12 /F71 Tf (draw thistext) Tj . . . ’此处PDF操作符以及他们的描述符都混有实际的PDF内容。检查内容流,你需要按顺序访问它。
+
+PDF操作符
+1). General graphics state(普通图形状态操作符)
+1
+2
+3
+4
+5
+6
+7
+8
+ w: 设置线的宽度
+ J: 设置线端点风格. Butt/Round/Projecting square 
+ j: 设置线交叉风格. Miter/Round/Bevel
+ M: 设置Miter Limit
+ d: 设置虚线风格.
+ ri: 设置Rendering Intent(呈色意向)
+ i: 设置平面化容忍度.
+ gs: 设置图形状态参数.
+
+
+
+2). Special graphics state(特殊图形状态操作符)
+1
+2
+3
+ q: 保存当前图形状态
+ Q：回复图形状态.
+ cm：设置当前装换矩阵.
+
+
+
+3). Path construction(路径构建操作符)
+1
+2
+3
+4
+5
+6
+7
+ m: 移动当前指针到指定位置.
+ l: 添加一条连接当前指针到指定位置的线段.
+ c: 添加一条Bezier曲线， 有2个控制点，2个端点.
+ v: 添加一条Bezier曲线， 2个控制点重合.
+ y: 添加一条Bezier曲线， 第二个控制点和第二个端点重合.
+ h: 闭合路径
+ re: 添加一个矩形.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="PDF内容流解析"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-23T07:56:00.000Z"><a href="/2013/04/23/IOS/2013-04-23-pdfnei-rong-liu-jie-xi/">Apr 23 2013</a></time>
+      
+      
+  
+    <h1 class="title">PDF内容流解析</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3>PDF Document Parsing</h3>
+<p>Quartz提供了让你检查PDF文档结构和内容流的方法。通过这些方法，你可以获取文档目录的条目和与每个条目相关的内容。一个PDF的内容流（contentstream）正如其名字所暗示的—一个连续的数据流 例如‘BT 12 /F71 Tf (draw thistext) Tj . . . ’此处PDF操作符以及他们的描述符都混有实际的PDF内容。检查内容流,你需要按顺序访问它。</p>
+
+<h3>PDF操作符</h3>
+<p><p>1). General graphics state(普通图形状态操作符)</p></p>
+<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre> <span class="attribute">w</span>: <span class="string">设置线的宽度</span>
+ <span class="attribute">J</span>: <span class="string">设置线端点风格. Butt/Round/Projecting square </span>
+ <span class="attribute">j</span>: <span class="string">设置线交叉风格. Miter/Round/Bevel</span>
+ <span class="attribute">M</span>: <span class="string">设置Miter Limit</span>
+ <span class="attribute">d</span>: <span class="string">设置虚线风格.</span>
+ <span class="attribute">ri</span>: <span class="string">设置Rendering Intent(呈色意向)</span>
+ <span class="attribute">i</span>: <span class="string">设置平面化容忍度.</span>
+ <span class="attribute">gs</span>: <span class="string">设置图形状态参数.</span>
+</pre></td></tr></table></figure>
+
+
+<p><p>2). Special graphics state(特殊图形状态操作符)</p></p>
+<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre> <span class="method">q:</span> 保存当前图形状态
+ <span class="class">Q</span>：回复图形状态.
+ cm：设置当前装换矩阵.
+</pre></td></tr></table></figure>
+
+
+<p><p>3). Path construction(路径构建操作符)</p></p>
+<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre> <span class="attribute">m</span>: <span class="string">移动当前指针到指定位置.</span>
+ <span class="attribute">l</span>: <span class="string">添加一条连接当前指针到指定位置的线段.</span>
+ <span class="attribute">c</span>: <span class="string">添加一条Bezier曲线， 有2个控制点，2个端点.</span>
+ <span class="attribute">v</span>: <span class="string">添加一条Bezier曲线， 2个控制点重合.</span>
+ <span class="attribute">y</span>: <span class="string">添加一条Bezier曲线， 第二个控制点和第二个端点重合.</span>
+ <span class="attribute">h</span>: <span class="string">闭合路径</span>
+ <span class="attribute">re</span>: <span class="string">添加一个矩形.</span>
+</pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p><p>4). Path painting(路径绘制操作符)</p></p>
+<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="code"><pre> <span class="attribute">S</span>: <span class="string">描绘路径.</span>
+ <span class="attribute">s</span>: <span class="string">闭合路径并描绘路径.</span>
+ <span class="attribute">f</span>: <span class="string">填充路径，使用非零回转数规则确定区域，路径在填充之前闭合.</span>
+ <span class="attribute">F</span>: <span class="string">等同f，为了兼容.</span>
+ <span class="attribute">f*</span>: <span class="string">填充路径，使用奇偶规则确定区域.</span>
+ <span class="attribute">B</span>: <span class="string">填充路径，使用非零回转数规则确定区域， 并描绘路径.</span>
+ <span class="attribute">B*</span>: <span class="string">填充路径，使用奇偶规则确定区域， 并描绘路径.</span>
+ <span class="attribute">b</span>: <span class="string">闭合路径, 填充路径，使用非零回转数规则确定区域， 并描绘路径.</span>
+ <span class="attribute">b*</span>: <span class="string">闭合路径，使用奇偶规则确定区域， 并描绘路径.</span>
+ <span class="attribute">n</span>: <span class="string">结束路径，不做任何描绘和填充.</span>
+</pre></td></tr></table></figure>
+
+
+
+<p><p>5). Clipping paths(路径修剪操作符)</p></p>
+<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre> <span class="attribute">W</span>: <span class="string">将当前修剪区域和当前路径做交，使用非零回转数规则.</span>
+ <span class="attribute">W*</span>: <span class="string">将当前修剪区域和当前路径做交，使用奇偶规则.</span>
+</pre></td></tr></table></figure>
+
+
+
+<p><p>6). Text  objects(文本对象操作符)</p></p>
+<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre> <span class="attribute">BT</span>: <span class="string">开始一个文本对象.</span>
+ <span class="attribute">ET</span>: <span class="string">结束一个文本对象.</span>
+</pre></td></tr></table></figure>
+
+
+
+<p><p>7). Text  state(文本状态操作符)</p></p>
+<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre> <span class="attribute">Tc</span>: <span class="string">设置字符间隔.</span>
+ <span class="attribute">Tw</span>: <span class="string">设置单词间隔.</span>
+ <span class="attribute">Tz</span>: <span class="string">设置水平缩放.</span>
+ <span class="attribute">TL</span>: <span class="string">设置Leading.</span>
+ <span class="attribute">Tf</span>: <span class="string">设置文本字体.</span>
+ <span class="attribute">Tr</span>: <span class="string">设置Render(渲染)模式.</span>
+ <span class="attribute">Ts</span>: <span class="string">设置Rise</span>
+</pre></td></tr></table></figure>
+
+
+
+<p><p>8). Text  positioning(文本位置操作符)</p></p>
+<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre> <span class="attribute">Td</span>: <span class="string">移动到下一行的开始，通过偏移(tx,ty).</span>
+ <span class="attribute">TD</span>: <span class="string">移动到下一行的开始，通过偏移(tx,ty). 同时设置Leading为-ty.</span>
+ <span class="attribute">Tm</span>: <span class="string">设置文本矩阵和文本线矩阵.</span>
+ <span class="attribute">T*</span>: <span class="string">移动到下一行的开始位置. 和0 Tl Td相同.</span>
+</pre></td></tr></table></figure>
+
+
+
+<p><p>9). Text  showing(文本显示操作符)</p></p>
+<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre> Tj: 显示一个文本字符串.
+ TJ: 显示一个或者多个文本字符串，允许独立的制定各个字型的位置.
+ <span class="comment">': 移动到下一行并显示一个文本字符串.</span>
+ <span class="string">": 移动到下一行并显示一个文本字符串. 并指定字符间距为ac, 单词间距为aw.
+</pre></td></tr></table></figure>
+
+
+
+<p><p>10). Type3 fonts(type3字体操作符)</p></p>
+<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre> <span class="attribute">d0</span>: <span class="string"> 设置字型的宽度.</span>
+ <span class="attribute">d1</span>: <span class="string">设置字型的宽度及自行的bounding box(边界矩形).</span>
+</pre></td></tr></table></figure>
+
+
+
+<p><p>11). Color(颜色操作符)</p></p>
+<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="code"><pre> <span class="attribute">CS</span>: <span class="string">设置描绘颜色空间.</span>
+ <span class="attribute">cs</span>: <span class="string">设置非描绘颜色空间.</span>
+ <span class="attribute">SC</span>: <span class="string">设置描绘颜色值，针对一般颜色空间.</span>
+ <span class="attribute">SCN</span>: <span class="string">设置描绘颜色值，允许特殊颜色空间.</span>
+ <span class="attribute">sc</span>: <span class="string">设置非描绘颜色值，针对一般颜色空间.</span>
+ <span class="attribute">scn</span>: <span class="string">设置非描绘颜色值，允许特殊颜色空间.</span>
+ <span class="attribute">G</span>: <span class="string">设置描绘颜色空间为DeviceGray，并设置颜色值.</span>
+ <span class="attribute">g</span>: <span class="string">设置非描绘颜色空间为DeviceGray, 并设置颜色值.</span>
+ <span class="attribute">RG</span>: <span class="string">设置描绘颜色空间为DeviceRGB，并设置颜色值.</span>
+ <span class="attribute">rg</span>: <span class="string">设置非描绘样色空间为DeviceRGB，并设置颜色值.</span>
+ <span class="attribute">K</span>: <span class="string">设置描绘颜色空间为DeviceCMYK，并设置颜色值.</span>
+ <span class="attribute">k</span>: <span class="string">设置非描绘颜色空间为DeviceCMYK，并设置颜色值.</span>
+</pre></td></tr></table></figure>
+
+
+<p><p>12). Shading patterns(渐变样式操作符)</p></p>
+<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre> <span class="attribute">sh</span>: <span class="string">输出一个shading对象.</span>
+</pre></td></tr></table></figure>
+
+
+<p><p>13). Inline images(内联图像操作符)</p></p>
+<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre> <span class="attribute">BI</span>: <span class="string">开始一个内联图像.</span>
+ <span class="attribute">ID</span>: <span class="string">开始内联图像数据.</span>
+ <span class="attribute">EI</span>: <span class="string">结束一个内敛图像.</span>
+</pre></td></tr></table></figure>
+
+
+<p><p>14). XObjects(外部对象操作符)</p></p>
+<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre> <span class="attribute">Do</span>: <span class="string">输出一个外部对象.</span>
+</pre></td></tr></table></figure>
+
+
+<p><p>15). Marked content(标记内容操作符)</p></p>
+<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre> <span class="attribute">MP</span>: <span class="string">定义一个标记内容点.</span>
+ <span class="attribute">DP</span>: <span class="string">定义一个带属性列表的标记内容点.</span>
+ <span class="attribute">BMC</span>: <span class="string">开始一个标记内容序列.</span>
+ <span class="attribute">BDC</span>: <span class="string">开始一个带属性列表的标记内容序列.</span>
+ <span class="attribute">EMC</span>: <span class="string">结束一个标记内容序列.</span>
+</pre></td></tr></table></figure>
+
+
+
+<p><p>16). Compatibility(兼容性操作符)</p></p>
+<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre> <span class="attribute">BX</span>: <span class="string">开始一个兼容段.</span>
+ <span class="attribute">EX</span>: <span class="string">结束一个兼容段.</span>
+</pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/IOS/">IOS</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/IOS/">IOS</a><small>44</small></li>
+  
+    <li><a href="/categories/OSX/">OSX</a><small>1</small></li>
+  
+    <li><a href="/categories/Other/">Other</a><small>4</small></li>
+  
+    <li><a href="/categories/windowsphone/">windowsphone</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2013 virgil
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
