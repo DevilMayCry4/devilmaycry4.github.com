@@ -3,21 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Page 5 | Archives | Hexo</title>
+  <title>Page 5 | Archives | 無限大な夢</title>
   <meta name="author" content="virgil">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-  <meta property="og:site_name" content="Hexo"/>
+  <meta property="og:site_name" content="無限大な夢"/>
 
   
     <meta property="og:image" content="undefined"/>
   
 
   <link href="/favicon.png" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="alternate" href="/atom.xml" title="無限大な夢" type="application/atom+xml">
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
@@ -26,7 +26,7 @@
 
 <body>
   <header id="header" class="inner"><div class="alignleft">
-  <h1><a href="/">Hexo</a></h1>
+  <h1><a href="/">無限大な夢</a></h1>
   <h2><a href="/"></a></h2>
 </div>
 <nav id="main-nav" class="alignright">
@@ -52,56 +52,33 @@
     <header>
       
         <div class="icon"></div>
-<<<<<<< HEAD
-        <time datetime="2013-04-22T05:46:00.000Z"><a href="/2013/04/22/IOS/2013-04-22-grand-central-dispatch/">Apr 22 2013</a></time>
-=======
-        <time datetime="2013-04-22T05:46:00.000Z"><a href="/2013/04/22/2013-04-22-grand-central-dispatch/">Apr 22 2013</a></time>
+        <time datetime="2013-04-22T06:34:00.000Z"><a href="/2013/04/22/IOS/2013-04-22-nsuserdefaults-standarduserdefaultszhu-yi-shi-xiang/">Apr 22 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/04/22/2013-04-22-grand-central-dispatch/">Grand Central Dispatch </a></h1>
+    <h1 class="title"><a href="/2013/04/22/IOS/2013-04-22-nsuserdefaults-standarduserdefaultszhu-yi-shi-xiang/">NSUserDefaults standardUserDefaults注意事项</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p><br>Grand Central Dispatch (GCD)是Apple开发的一个多核编程的解决方法。该方法在Mac OS X 10.6雪豹中首次推出，并随后被引入到了iOS4.0中。GCD是一个替代诸如NSThread, NSOperationQueue, NSInvocationOperation等技术的很高效和强大的技术，它看起来象就其它语言的闭包(Closure)一样，但苹果把它叫做blocks<br></p>
-
-<p><br>应用举例<br>让我们来看一个编程场景。我们要在iphone上做一个下载网页的功能，该功能非常简单，就是在iphone上放置一个按钮，点击该按钮时，显示一个转动的圆圈，表示正在进行下载，下载完成之后，将内容加载到界面上的一个文本控件中。不用GCD前<br>虽然功能简单，但是我们必须把下载过程放到后台线程中，否则会阻塞UI线程显示。所以，如果不用GCD, 我们需要写如下3个方法：<font color='red'>someClick</font> 方法是点击按钮后的代码，可以看到我们用NSInvocationOperation建了一个后台线程，并且放到NSOperationQueue中。后台线程执行<font color='red'>download</font>方法。<br><font color='red'>download</font> 方法处理下载网页的逻辑。下载完成后用<font color='red'>performSelectorOnMainThread</font>执行<font color='red'>download_completed</font> 方法。<br><font color='red'>download_completed</font> 进行clear up的工作，并把下载的内容显示到文本控件中。<br><br>这3个方法的代码如下:<br></p>
+        <p>NSUserDefaults standardUserDefaults一种便利的序列化方式、当使用</p>
 
 <figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-</pre></td><td class="code"><pre>-(<span class="keyword">IBAction</span>)someClick:(<span class="keyword">id</span>)sender
-{ 
-  <span class="keyword">self</span><span class="variable">.indicator</span><span class="variable">.hidden</span> = <span class="literal">NO</span>; 
-  [<span class="keyword">self</span><span class="variable">.indicatorstart</span>  Animating];
-  queue = [[NSOperationQueue  alloc]init];
-  NSInvocationOperation *op = [[[NSInvocationOperation alloc]initWithTarget:<span class="keyword">self</span> 
-                                                                   <span class="keyword">selector</span>:@<span class="keyword">selector</span>(download) 
-                                                                     object:<span class="literal">nil</span>]autorelease];    
-  [queueaddOperation:op];
- }
-
+</pre></td><td class="code"><pre><span class="string">[[NSUserDefaults  standardUserDefaults] setObject:object textforKey:key];
 </pre></td></tr></table></figure>
 
-<p>
+
+<p>这时候该对象只是写在内存中。要真正保存到磁盘、应该还要调用</p>
+
+<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="string">[[NSUserDefaults  standardUserDefaults] synchronize];
+</pre></td></tr></table></figure>
+
       
     </div>
     <footer>
       
-        
-          <div class="alignleft">
-            <a href="/2013/04/22/2013-04-22-grand-central-dispatch/#more" class="more-link">Read More</a>
-          </div>
         
         
       
@@ -118,8 +95,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-04-22T05:42:00.000Z"><a href="/2013/04/22/2013-04-22-intxing-zhuan-hua-wei-nsdata/">Apr 22 2013</a></time>
->>>>>>> 1e31a4d7c1998d78865dac80e7c9c8668587ef67
+        <time datetime="2013-04-22T05:46:00.000Z"><a href="/2013/04/22/IOS/2013-04-22-grand-central-dispatch/">Apr 22 2013</a></time>
       
       
   
@@ -708,37 +684,6 @@
 
 
   
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-04-22T03:18:00.000Z"><a href="/2013/04/22/IOS/2013-04-22-svn-shang-chuan-dot-awen-jian/">Apr 22 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/04/22/IOS/2013-04-22-svn-shang-chuan-dot-awen-jian/">svn 上传.a文件</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>1. 在每个用户主文件夹下有一个名为.subversion的隐藏文件夹，打开里面的config文件。</p><br><p>2. 查找 [miscellany] 字段，即可看到下面有个 global-ignores 键名，默认为注释掉了的，这表示SVN已经将它们作为默认值了。</p><br><p>3. 取消注释，把 <em>.so </em>.so.[0-9]<em> </em>.a 去掉，当然你也可以根据需要增加或减少你的过滤选项。</p>
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
 
   <nav id="pagination">
   
@@ -780,7 +725,7 @@
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/IOS/">IOS</a><small>1</small></li>
+    <li><a href="/tags/IOS/">IOS</a><small>2</small></li>
   
   </ul>
 </div>
