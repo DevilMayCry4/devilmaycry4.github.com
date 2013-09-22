@@ -48,6 +48,37 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2013-06-18T01:08:00.000Z"><a href="/2013/06/18/IOS/2013-06-18-xcode-zhu-ti-wen-jian-jia/">Jun 18 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/06/18/IOS/2013-06-18-xcode-zhu-ti-wen-jian-jia/">Xcode 主题文件夹</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><br>~/Library/Developer/Xcode/UserData/FontAndColorThemes<br></p>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2013-06-17T01:37:00.000Z"><a href="/2013/06/17/IOS/2013-06-17-nstimerde-shi-yong/">Jun 17 2013</a></time>
       
       
@@ -504,82 +535,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-05-29T03:47:00.000Z"><a href="/2013/05/29/Other/2013-05-29-python-qu-diao-at-2xjiao-ben/">May 29 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/05/29/Other/2013-05-29-python-qu-diao-at-2xjiao-ben/">python 去掉@2x脚本</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <figure class="highlight lang-py"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-</pre></td><td class="code"><pre><span class="keyword">import</span> os
-<span class="function"><span class="keyword">def</span> <span class="title">rename</span><span class="params">()</span>:</span>
-    path = input(<span class="string">"请输入要处理的文件夹路径"</span>)
-    print(path)
-    old_ext = <span class="string">"@2x.png"</span>
-    new_ext = <span class="string">".png"</span>
-    <span class="keyword">for</span> (path, dirs, files) <span class="keyword">in</span> os.walk(path):<span class="comment">#遍历目录树</span>
-        <span class="keyword">for</span> filename <span class="keyword">in</span> files:
-            ext = os.path.splitext(filename)[<span class="number">1</span>]
-            all = os.path.normpath(filename)
-            a = all.find(old_ext)
-            <span class="keyword">if</span>(a != -<span class="number">1</span>):
-                newname = filename.replace(old_ext,new_ext)
-                oldpath = path + <span class="string">"/"</span> + filename
-                newpath = path + <span class="string">"/"</span> + newname
-                os.rename(oldpath, newpath)
-
-
-<span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:
-    print(<span class="string">"去掉png文件命中的@2x"</span>)
-    rename()
-    print(<span class="string">"finish"</span>)
-</pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
 
 <nav id="pagination">
   
@@ -616,6 +571,15 @@
 
 
   
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/IOS/">IOS</a><small>1</small></li>
+  
+  </ul>
+</div>
+
 </aside>
     <div class="clearfix"></div>
   </div>
