@@ -48,11 +48,107 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-09-22T11:16:57.000Z"><a href="/2013/09/22/IOS/1080后环境变量/">Sep 22 2013</a></time>
+        <time datetime="2013-10-09T09:31:15.000Z"><a href="/2013/10/09/block-内存/">Oct 9 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/09/22/IOS/1080后环境变量/">10.8.0后环境变量</a></h1>
+    <h1 class="title"><a href="/2013/10/09/block-内存/">Block 内存</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><p><br>block调用自身在前面添加__block关键字<br></p></p>
+<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="code"><pre>- (IBAction)grabURLInBackground:(id)sender
+{
+   NSURL <span class="variable">*url</span> = [NSURL URLWithString:<span class="variable">@"</span>http:<span class="comment">//allseeing-i.com"];</span>
+   __block ASIHTTPRequest <span class="variable">*request</span> = [ASIHTTPRequest requestWithURL:url];
+   [request setCompletionBlock:^{
+      <span class="comment">// Use when fetching text data</span>
+      NSString <span class="variable">*responseString</span> = [request responseString];
+ 
+      <span class="comment">// Use when fetching binary data</span>
+      NSData <span class="variable">*responseData</span> = [request responseData];
+   }];
+   [request setFailedBlock:^{
+      NSError <span class="variable">*error</span> = [request <span class="keyword">error</span>];
+   }];
+   [request startAsynchronous];
+}
+</pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-09-23T04:14:09.000Z"><a href="/2013/09/23/uiimageview不调用drawatrect/">Sep 23 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/09/23/uiimageview不调用drawatrect/">UIImageView不调用drawAtRect</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><br>UIImageView 不会调用drawAtRect这个函数、因为它是专门用来做图像显示的控件、苹果对这个控件做了最优显示。<br></p>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-09-22T11:16:57.000Z"><a href="/2013/09/22/1080后环境变量/">Sep 22 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/09/22/1080后环境变量/">10.8.0后环境变量</a></h1>
   
 
     </header>
@@ -79,11 +175,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-09-17T06:59:08.000Z"><a href="/2013/09/17/IOS/nscoding/">Sep 17 2013</a></time>
+        <time datetime="2013-09-17T06:59:08.000Z"><a href="/2013/09/17/nscoding/">Sep 17 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/09/17/IOS/nscoding/">NSCoding</a></h1>
+    <h1 class="title"><a href="/2013/09/17/nscoding/">NSCoding</a></h1>
   
 
     </header>
@@ -110,11 +206,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-07-25T01:39:00.000Z"><a href="/2013/07/25/IOS/2013-07-25-gei-mu-lu-xia-de-suo-you-wen-jian-tian-jia-qian-zhui/">Jul 25 2013</a></time>
+        <time datetime="2013-07-25T01:39:00.000Z"><a href="/2013/07/25/2013-07-25-gei-mu-lu-xia-de-suo-you-wen-jian-tian-jia-qian-zhui/">Jul 25 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/07/25/IOS/2013-07-25-gei-mu-lu-xia-de-suo-you-wen-jian-tian-jia-qian-zhui/">给目录下的所有文件添加前缀</a></h1>
+    <h1 class="title"><a href="/2013/07/25/2013-07-25-gei-mu-lu-xia-de-suo-you-wen-jian-tian-jia-qian-zhui/">给目录下的所有文件添加前缀</a></h1>
   
 
     </header>
@@ -180,11 +276,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-07-05T01:14:00.000Z"><a href="/2013/07/05/IOS/2013-07-05-dian-ji-ding-bu-zhuang-tai-lan-,-gun-dong-dao-ding-bu/">Jul 5 2013</a></time>
+        <time datetime="2013-07-05T01:14:00.000Z"><a href="/2013/07/05/2013-07-05-dian-ji-ding-bu-zhuang-tai-lan--gun-dong-dao-ding-bu/">Jul 5 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/07/05/IOS/2013-07-05-dian-ji-ding-bu-zhuang-tai-lan-,-gun-dong-dao-ding-bu/">点击顶部状态栏、滚动到顶部</a></h1>
+    <h1 class="title"><a href="/2013/07/05/2013-07-05-dian-ji-ding-bu-zhuang-tai-lan--gun-dong-dao-ding-bu/">点击顶部状态栏、滚动到顶部</a></h1>
   
 
     </header>
@@ -212,11 +308,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-07-04T09:34:00.000Z"><a href="/2013/07/04/IOS/2013-07-04-http-code/">Jul 4 2013</a></time>
+        <time datetime="2013-07-04T09:34:00.000Z"><a href="/2013/07/04/2013-07-04-http-code/">Jul 4 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/07/04/IOS/2013-07-04-http-code/">Http Code</a></h1>
+    <h1 class="title"><a href="/2013/07/04/2013-07-04-http-code/">Http Code</a></h1>
   
 
     </header>
@@ -244,11 +340,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-07-01T01:43:00.000Z"><a href="/2013/07/01/IOS/2013-07-01-xcode-debug/">Jul 1 2013</a></time>
+        <time datetime="2013-07-01T01:43:00.000Z"><a href="/2013/07/01/2013-07-01-xcode-debug/">Jul 1 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/07/01/IOS/2013-07-01-xcode-debug/">Xcode Debug</a></h1>
+    <h1 class="title"><a href="/2013/07/01/2013-07-01-xcode-debug/">Xcode Debug</a></h1>
   
 
     </header>
@@ -286,11 +382,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-06-26T02:50:00.000Z"><a href="/2013/06/26/IOS/2013-06-26-catalogtian-jia-shu-xing/">Jun 26 2013</a></time>
+        <time datetime="2013-06-26T02:50:00.000Z"><a href="/2013/06/26/2013-06-26-catalogtian-jia-shu-xing/">Jun 26 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/06/26/IOS/2013-06-26-catalogtian-jia-shu-xing/">Catalog添加属性</a></h1>
+    <h1 class="title"><a href="/2013/06/26/2013-06-26-catalogtian-jia-shu-xing/">Catalog添加属性</a></h1>
   
 
     </header>
@@ -394,11 +490,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-06-25T01:53:00.000Z"><a href="/2013/06/25/IOS/2013-06-25-test-install/">Jun 25 2013</a></time>
+        <time datetime="2013-06-25T01:53:00.000Z"><a href="/2013/06/25/2013-06-25-test-install/">Jun 25 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/06/25/IOS/2013-06-25-test-install/">Test Install</a></h1>
+    <h1 class="title"><a href="/2013/06/25/2013-06-25-test-install/">Test Install</a></h1>
   
 
     </header>
@@ -406,126 +502,6 @@
       
         <p><a href="itms-services://?action=download-manifest&url=http://devilmaycry4.github.io/images/yun.plist">Install App</a></p>
 
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-06-20T08:24:00.000Z"><a href="/2013/06/20/IOS/2013-06-20-yin-ying-xiao-lu/">Jun 20 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/06/20/IOS/2013-06-20-yin-ying-xiao-lu/">阴影效率</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p><br>UIView 如果没有设置阴影的边框会导致、在旋转屏幕或者滑动的时候，界面卡顿，因为设置了阴影的view会不断地重新绘制。解决的方法:<br></p>
-
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-</pre></td><td class="code"><pre>        <span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.shadowColor</span> = [<span class="built_in">UIColor</span> blackColor]<span class="variable">.CGColor</span>;
-        <span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.shadowOffset</span> = CGSizeMake(<span class="number">0</span>, <span class="number">3</span>);
-        <span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.shadowOpacity</span> = <span class="number">0.6</span>;
-        <span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.masksToBounds</span> = <span class="literal">NO</span>;
-        <span class="comment">/*********
-           self.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.bounds].CGPath;
-           *********/</span>
-</pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-06-20T07:55:00.000Z"><a href="/2013/06/20/IOS/2013-06-20-block/">Jun 20 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/06/20/IOS/2013-06-20-block/">Block</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p><br>IOS4后苹果开始使用block作为回调函数来取代传统的delegate。这种闭包函数可以是代码的逻辑更加清晰。精简大量的代码，但是由于block会隐藏式地retain在block中使用的变量 ，而没有注意这种情况的情况下，程序很容易出现内存泄露。<br></p>
-
-<p><br>假设我们有一个controller，有个view是加到这个controller的view上面，当view中的某些功能完成的时候，view回调原来设置好的block。但是你会发现这个controller和这个view都无法调用到dealloc了。<br></p>
-
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-</pre></td><td class="code"><pre>
-- (<span class="keyword">void</span>)viewDidLoad
-{
-   [<span class="keyword">super</span> viewDidLoad];
-   View *view = [View alloc]initWithFrame:CGRectMake(<span class="number">0</span>,<span class="number">0</span>,<span class="number">100</span>,<span class="number">100</span>)];
-   view.OnComplete= ^{
-   [self print];
-   };
-}
-
-<span class="javadoc">/************/</span>
-typedef <span class="keyword">void</span>(^Block) block;
-
-<span class="annotation">@property</span>(noautomatic,copy)block OnComplete;
-
-
- 
-</pre></td></tr></table></figure>
-
-
-<p>上例中，view的语法块中访问self，所以view  retian self一次，所以但view没有调用[_OnComplete  release];之前，controller是不会被dealloc的，而view是在controller的view上面。如果controller不释放，view也不会被释放，这样就进入retain circle了。<br></p>
       
     </div>
     <footer>
@@ -578,7 +554,7 @@ typedef <span class="keyword">void</span>(^Block) block;
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/IOS/">IOS</a><small>2</small></li>
+    <li><a href="/tags/IOS/">IOS</a><small>4</small></li>
   
   </ul>
 </div>

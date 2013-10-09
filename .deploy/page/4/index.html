@@ -48,11 +48,122 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-04-27T09:18:00.000Z"><a href="/2013/04/27/IOS/2013-04-27-ios-zhi-zuo-jing-tai-ku/">Apr 27 2013</a></time>
+        <time datetime="2013-05-06T01:58:00.000Z"><a href="/2013/05/06/2013-05-06-c-number-shu-chu-ri-zhi/">May 6 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/04/27/IOS/2013-04-27-ios-zhi-zuo-jing-tai-ku/">IOS 制作静态库</a></h1>
+    <h1 class="title"><a href="/2013/05/06/2013-05-06-c-number-shu-chu-ri-zhi/">C#输出日志</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><p><br>windows phone debug输出日志<br></p></p>
+<figure class="highlight lang-csharp"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre>using System<span class="preprocessor">.Diagnostics</span><span class="comment">; </span>
+Debug<span class="preprocessor">.WriteLine</span>(<span class="string">"LogText"</span>)<span class="comment">;</span>
+</pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-28T06:31:00.000Z"><a href="/2013/04/28/2013-04-28-c-number-delegatehe-event/">Apr 28 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/28/2013-04-28-c-number-delegatehe-event/">C#delegate和event</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h4>C# Delegate概念</h4>
+<p><br>在基于Windows平台的程序设计中，事件（event）是一个很重要的概念。因为在几乎所有的Windows应用程序中，都会涉及大量的异步调 用，比如响应点击按钮、处理Windows系统消息等，这些异步调用都需要通过事件的方式来完成。即使在下一代开发平台——.NET中也不例外。<br>那么什么是事件呢？所谓事件，就是由某个对象发出的消息，这个消息标志着某个特定的行为发生了，或者某个特定的条件成立了。比如用户点击了鼠标、 socket上有数据到达等。那个触发（raise）事件的对象称为事件的发送者（event sender），捕获并响应事件的对象称为事件的接收者（event receiver）。<br>在这里，我们将要讨论的是，在.NET的主流开发语言C#中如何使用自定义的事件来实现我们自己的异步调用。<br>在C#中，事件的实现依赖于delegate，因此我们有必要先了解一下delegate的概念。<br>delegate是C#中的一种类型，它实际上是一个能够持有对某个方法的引用的类。与其它的类不同，delegate类能够拥有一个签名 （signature），并且它只能持有与它的签名相匹配的方法的引用。它所实现的功能与C/C++中的函数指针十分相似。它允许你传递一个类A的方法m 给另一个类B的对象，使得类B的对象能够调用这个方法m。但与函数指针相比，delegate有许多函数指针不具备的优点。首先，函数指针只能指向静态函 数，而delegate既可以引用静态函数，又可以引用非静态成员函数。在引用非静态成员函数时，delegate不但保存了对此函数入口指针的引用，而 且还保存了调用此函数的类实例的引用。其次，与函数指针相比，delegate是面向对象、类型安全、可靠的受控（managed）对象。也就是 说，runtime能够保证delegate指向一个有效的方法，你无须担心delegate会指向无效地址或者越界地址。<br>实现一个C# delegate是很简单的，通过以下3个步骤即可实现一个delegate：<br>1． 声明一个delegate对象，它应当与你想要传递的方法具有相同的参数和返回值类型。<br>2． 创建delegate对象，并将你想要传递的函数作为参数传入。<br>3． 在要实现异步调用的地方，通过上一步创建的对象来调用方法。<br>下面是一个简单的例子：<br><br></p><br><figure class="highlight lang-csharp"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="code"><pre><span class="keyword">using</span> System;  
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyDelegateTest</span>  
+{</span>  
+<span class="comment">// 步骤1，声明delegate对象  </span>
+<span class="keyword">public</span> <span class="class"><span class="keyword">delegate</span> <span class="title">void</span> <span class="title">MyDelegate</span>(<span class="title">string</span> <span class="title">name</span>);  
+// 这是我们欲传递的方法，它与<span class="title">MyDelegate</span>具有相同的参数和返回值类型  
+<span class="title">public</span> <span class="title">static</span> <span class="title">void</span> <span class="title">MyDelegateFunc</span>(<span class="title">string</span> <span class="title">name</span>)  
+{</span>  
+Console.WriteLine(<span class="string">"Hello, {0}"</span>, name);  
+}  
+ 
+<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> Main()  
+{  
+<span class="comment">// 步骤2，创建delegate对象  </span>
+MyDelegate md = <span class="keyword">new</span> MyDelegate(MyDelegateTest.MyDelegateFunc);  
+<span class="comment">// 步骤3，调用delegate  </span>
+md(<span class="string">"sam1111"</span>);  
+}  
+} 
+</pre></td></tr></table></figure><br><br><br><p><br>输出结果是：Hello, sam1111<br>了解了delegate，下面我们来看看，在C#中对event是如何处理的。<br></p><br>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/04/28/2013-04-28-c-number-delegatehe-event/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-27T09:18:00.000Z"><a href="/2013/04/27/2013-04-27-ios-zhi-zuo-jing-tai-ku/">Apr 27 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/27/2013-04-27-ios-zhi-zuo-jing-tai-ku/">IOS 制作静态库</a></h1>
   
 
     </header>
@@ -80,11 +191,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-04-26T08:25:00.000Z"><a href="/2013/04/26/IOS/2013-04-26-xcode-bu-jin-c-plus-plus-duan-dian/">Apr 26 2013</a></time>
+        <time datetime="2013-04-26T08:25:00.000Z"><a href="/2013/04/26/2013-04-26-xcode-bu-jin-c-plus-plus-duan-dian/">Apr 26 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/04/26/IOS/2013-04-26-xcode-bu-jin-c-plus-plus-duan-dian/">Xcode 不进C++ 断点</a></h1>
+    <h1 class="title"><a href="/2013/04/26/2013-04-26-xcode-bu-jin-c-plus-plus-duan-dian/">Xcode 不进C++ 断点</a></h1>
   
 
     </header>
@@ -111,11 +222,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-04-26T06:29:00.000Z"><a href="/2013/04/26/IOS/2013-04-26-air-print/">Apr 26 2013</a></time>
+        <time datetime="2013-04-26T06:29:00.000Z"><a href="/2013/04/26/2013-04-26-air-print/">Apr 26 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/04/26/IOS/2013-04-26-air-print/">Air Print</a></h1>
+    <h1 class="title"><a href="/2013/04/26/2013-04-26-air-print/">Air Print</a></h1>
   
 
     </header>
@@ -175,11 +286,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-04-26T01:30:00.000Z"><a href="/2013/04/26/WindowsPhone/2013-04-26-c-number-abstracegen-virtuade-qu-bie/">Apr 26 2013</a></time>
+        <time datetime="2013-04-26T01:30:00.000Z"><a href="/2013/04/26/2013-04-26-c-number-abstracegen-virtuade-qu-bie/">Apr 26 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/04/26/WindowsPhone/2013-04-26-c-number-abstracegen-virtuade-qu-bie/">C#abstrace跟virtua的区别</a></h1>
+    <h1 class="title"><a href="/2013/04/26/2013-04-26-c-number-abstracegen-virtuade-qu-bie/">C#abstrace跟virtua的区别</a></h1>
   
 
     </header>
@@ -264,7 +375,7 @@ IPerson(); <span class="comment">//错误</span>
       
         
           <div class="alignleft">
-            <a href="/2013/04/26/WindowsPhone/2013-04-26-c-number-abstracegen-virtuade-qu-bie/#more" class="more-link">Read More</a>
+            <a href="/2013/04/26/2013-04-26-c-number-abstracegen-virtuade-qu-bie/#more" class="more-link">Read More</a>
           </div>
         
         
@@ -282,11 +393,11 @@ IPerson(); <span class="comment">//错误</span>
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-04-25T07:11:00.000Z"><a href="/2013/04/25/WindowsPhone/2013-04-25-c-number-jie-kou/">Apr 25 2013</a></time>
+        <time datetime="2013-04-25T07:11:00.000Z"><a href="/2013/04/25/2013-04-25-c-number-jie-kou/">Apr 25 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/04/25/WindowsPhone/2013-04-25-c-number-jie-kou/">C# 接口</a></h1>
+    <h1 class="title"><a href="/2013/04/25/2013-04-25-c-number-jie-kou/">C# 接口</a></h1>
   
 
     </header>
@@ -344,11 +455,11 @@ IPerson(); <span class="comment">//错误</span>
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-04-24T01:51:00.000Z"><a href="/2013/04/24/Other/2013-04-24-jin-ru-google-dot-com/">Apr 24 2013</a></time>
+        <time datetime="2013-04-24T01:51:00.000Z"><a href="/2013/04/24/2013-04-24-jin-ru-google-dot-com/">Apr 24 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/04/24/Other/2013-04-24-jin-ru-google-dot-com/">进入google.com</a></h1>
+    <h1 class="title"><a href="/2013/04/24/2013-04-24-jin-ru-google-dot-com/">进入google.com</a></h1>
   
 
     </header>
@@ -376,11 +487,11 @@ IPerson(); <span class="comment">//错误</span>
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-04-24T01:30:00.000Z"><a href="/2013/04/24/IOS/2013-04-24-cgpdfbox/">Apr 24 2013</a></time>
+        <time datetime="2013-04-24T01:30:00.000Z"><a href="/2013/04/24/2013-04-24-cgpdfbox/">Apr 24 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/04/24/IOS/2013-04-24-cgpdfbox/">CGPDFBox</a></h1>
+    <h1 class="title"><a href="/2013/04/24/2013-04-24-cgpdfbox/">CGPDFBox</a></h1>
   
 
     </header>
@@ -420,7 +531,7 @@ IPerson(); <span class="comment">//错误</span>
       
         
           <div class="alignleft">
-            <a href="/2013/04/24/IOS/2013-04-24-cgpdfbox/#more" class="more-link">Read More</a>
+            <a href="/2013/04/24/2013-04-24-cgpdfbox/#more" class="more-link">Read More</a>
           </div>
         
         
@@ -438,11 +549,11 @@ IPerson(); <span class="comment">//错误</span>
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-04-23T07:56:00.000Z"><a href="/2013/04/23/IOS/2013-04-23-pdfnei-rong-liu-jie-xi/">Apr 23 2013</a></time>
+        <time datetime="2013-04-23T07:56:00.000Z"><a href="/2013/04/23/2013-04-23-pdfnei-rong-liu-jie-xi/">Apr 23 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/04/23/IOS/2013-04-23-pdfnei-rong-liu-jie-xi/">PDF内容流解析</a></h1>
+    <h1 class="title"><a href="/2013/04/23/2013-04-23-pdfnei-rong-liu-jie-xi/">PDF内容流解析</a></h1>
   
 
     </header>
@@ -506,90 +617,7 @@ IPerson(); <span class="comment">//错误</span>
       
         
           <div class="alignleft">
-            <a href="/2013/04/23/IOS/2013-04-23-pdfnei-rong-liu-jie-xi/#more" class="more-link">Read More</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-04-22T08:43:00.000Z"><a href="/2013/04/22/IOS/2013-04-23-ios-4chu-shi-hua-han-shu-de-guan-xi/">Apr 22 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/04/22/IOS/2013-04-23-ios-4chu-shi-hua-han-shu-de-guan-xi/">iOS的init、loadView、 viewDidLoad、viewDidUnload的关系</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h3>init方法</h3>
-<p><br>在init方法中实例化必要的对象（遵从LazyLoad思想）<br>init方法中初始化ViewController本身<br></p>
-
-<h3>loadView方法</h3>
-<p><br>当view需要被展示而它却是nil时，viewController会调用该方法。不要直接调用该方法。<br>如果手工维护views，必须重写该方法。<br>如果使用IB维护views，必须不能重写该方法。<br>loadView和IB构建view<br></p>
-
-<h3>viewDidLoad方法</h3>
-<p><br>重写该方法以进一步定制view。<br>在iPhone OS 3.0及之后的版本中，还应该重写viewDidUnload来释放对view的任何索引。<br>viewDidLoad后调用数据Model。<br></p><br>
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/04/22/IOS/2013-04-23-ios-4chu-shi-hua-han-shu-de-guan-xi/#more" class="more-link">Read More</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-04-22T06:39:00.000Z"><a href="/2013/04/22/IOS/2013-04-22-tong-guo-diao-yong-urltiao-zhuan-dao-xiang-ying-de-she-zhi-ye-mian/">Apr 22 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/04/22/IOS/2013-04-22-tong-guo-diao-yong-urltiao-zhuan-dao-xiang-ying-de-she-zhi-ye-mian/">通过调用url跳转到相应的设置页面</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>调用如下代码：</p><br><figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre> NSURL *url = [NSURL URLWithString:@<span class="string">"prefs:root=WIFI"</span>];
- <span class="string">[[UIApplication sharedApplication] openURL:url];
-</pre></td></tr></table></figure><br><br><p>即可跳转到设置页面的对应项。</p>
-
-<p><p>相关的URL string：</p><br>
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/04/22/IOS/2013-04-22-tong-guo-diao-yong-urltiao-zhuan-dao-xiang-ying-de-she-zhi-ye-mian/#more" class="more-link">Read More</a>
+            <a href="/2013/04/23/2013-04-23-pdfnei-rong-liu-jie-xi/#more" class="more-link">Read More</a>
           </div>
         
         
@@ -641,7 +669,7 @@ IPerson(); <span class="comment">//错误</span>
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/IOS/">IOS</a><small>2</small></li>
+    <li><a href="/tags/IOS/">IOS</a><small>4</small></li>
   
   </ul>
 </div>

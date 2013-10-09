@@ -48,11 +48,94 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-04-22T06:34:00.000Z"><a href="/2013/04/22/IOS/2013-04-22-nsuserdefaults-standarduserdefaultszhu-yi-shi-xiang/">Apr 22 2013</a></time>
+        <time datetime="2013-04-22T08:43:00.000Z"><a href="/2013/04/22/2013-04-23-ios-4chu-shi-hua-han-shu-de-guan-xi/">Apr 22 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/04/22/IOS/2013-04-22-nsuserdefaults-standarduserdefaultszhu-yi-shi-xiang/">NSUserDefaults standardUserDefaults注意事项</a></h1>
+    <h1 class="title"><a href="/2013/04/22/2013-04-23-ios-4chu-shi-hua-han-shu-de-guan-xi/">iOS的init、loadView、 viewDidLoad、viewDidUnload的关系</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3>init方法</h3>
+<p><br>在init方法中实例化必要的对象（遵从LazyLoad思想）<br>init方法中初始化ViewController本身<br></p>
+
+<h3>loadView方法</h3>
+<p><br>当view需要被展示而它却是nil时，viewController会调用该方法。不要直接调用该方法。<br>如果手工维护views，必须重写该方法。<br>如果使用IB维护views，必须不能重写该方法。<br>loadView和IB构建view<br></p>
+
+<h3>viewDidLoad方法</h3>
+<p><br>重写该方法以进一步定制view。<br>在iPhone OS 3.0及之后的版本中，还应该重写viewDidUnload来释放对view的任何索引。<br>viewDidLoad后调用数据Model。<br></p><br>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/04/22/2013-04-23-ios-4chu-shi-hua-han-shu-de-guan-xi/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-22T06:39:00.000Z"><a href="/2013/04/22/2013-04-22-tong-guo-diao-yong-urltiao-zhuan-dao-xiang-ying-de-she-zhi-ye-mian/">Apr 22 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/22/2013-04-22-tong-guo-diao-yong-urltiao-zhuan-dao-xiang-ying-de-she-zhi-ye-mian/">通过调用url跳转到相应的设置页面</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>调用如下代码：</p><br><figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre> NSURL *url = [NSURL URLWithString:@<span class="string">"prefs:root=WIFI"</span>];
+ <span class="string">[[UIApplication sharedApplication] openURL:url];
+</pre></td></tr></table></figure><br><br><p>即可跳转到设置页面的对应项。</p>
+
+<p><p>相关的URL string：</p><br>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/04/22/2013-04-22-tong-guo-diao-yong-urltiao-zhuan-dao-xiang-ying-de-she-zhi-ye-mian/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-22T06:34:00.000Z"><a href="/2013/04/22/2013-04-22-nsuserdefaults-standarduserdefaultszhu-yi-shi-xiang/">Apr 22 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/22/2013-04-22-nsuserdefaults-standarduserdefaultszhu-yi-shi-xiang/">NSUserDefaults standardUserDefaults注意事项</a></h1>
   
 
     </header>
@@ -91,11 +174,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-04-22T05:46:00.000Z"><a href="/2013/04/22/IOS/2013-04-22-grand-central-dispatch/">Apr 22 2013</a></time>
+        <time datetime="2013-04-22T05:46:00.000Z"><a href="/2013/04/22/2013-04-22-grand-central-dispatch/">Apr 22 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/04/22/IOS/2013-04-22-grand-central-dispatch/">Grand Central Dispatch </a></h1>
+    <h1 class="title"><a href="/2013/04/22/2013-04-22-grand-central-dispatch/">Grand Central Dispatch </a></h1>
   
 
     </header>
@@ -136,7 +219,7 @@
       
         
           <div class="alignleft">
-            <a href="/2013/04/22/IOS/2013-04-22-grand-central-dispatch/#more" class="more-link">Read More</a>
+            <a href="/2013/04/22/2013-04-22-grand-central-dispatch/#more" class="more-link">Read More</a>
           </div>
         
         
@@ -154,11 +237,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-04-22T05:42:00.000Z"><a href="/2013/04/22/IOS/2013-04-22-intxing-zhuan-hua-wei-nsdata/">Apr 22 2013</a></time>
+        <time datetime="2013-04-22T05:42:00.000Z"><a href="/2013/04/22/2013-04-22-intxing-zhuan-hua-wei-nsdata/">Apr 22 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/04/22/IOS/2013-04-22-intxing-zhuan-hua-wei-nsdata/">int型和NSdata型互相转化</a></h1>
+    <h1 class="title"><a href="/2013/04/22/2013-04-22-intxing-zhuan-hua-wei-nsdata/">int型和NSdata型互相转化</a></h1>
   
 
     </header>
@@ -194,11 +277,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-04-22T04:20:00.000Z"><a href="/2013/04/22/IOS/2013-04-22-zheng-que-chu-li-memory-waring/">Apr 22 2013</a></time>
+        <time datetime="2013-04-22T04:20:00.000Z"><a href="/2013/04/22/2013-04-22-zheng-que-chu-li-memory-waring/">Apr 22 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/04/22/IOS/2013-04-22-zheng-que-chu-li-memory-waring/">正确处理Memory Waring</a></h1>
+    <h1 class="title"><a href="/2013/04/22/2013-04-22-zheng-que-chu-li-memory-waring/">正确处理Memory Waring</a></h1>
   
 
     </header>
@@ -225,11 +308,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-04-22T04:10:00.000Z"><a href="/2013/04/22/IOS/2013-04-22-iosshe-bei-huo-qu-ben-ji-ipdi-zhi/">Apr 22 2013</a></time>
+        <time datetime="2013-04-22T04:10:00.000Z"><a href="/2013/04/22/2013-04-22-iosshe-bei-huo-qu-ben-ji-ipdi-zhi/">Apr 22 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/04/22/IOS/2013-04-22-iosshe-bei-huo-qu-ben-ji-ipdi-zhi/">IOS设备获取本机IP地址</a></h1>
+    <h1 class="title"><a href="/2013/04/22/2013-04-22-iosshe-bei-huo-qu-ben-ji-ipdi-zhi/">IOS设备获取本机IP地址</a></h1>
   
 
     </header>
@@ -331,11 +414,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-04-22T04:03:00.000Z"><a href="/2013/04/22/IOS/2013-04-22-uiviewcontroller-zai-uinavigationcontroller-zhong-,dang-uinavigationbarchu-xian-hou-de-bian-hua/">Apr 22 2013</a></time>
+        <time datetime="2013-04-22T04:03:00.000Z"><a href="/2013/04/22/2013-04-22-uiviewcontroller-zai-uinavigationcontroller-zhong-dang-uinavigationbarchu-xian-hou-de-bian-hua/">Apr 22 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/04/22/IOS/2013-04-22-uiviewcontroller-zai-uinavigationcontroller-zhong-,dang-uinavigationbarchu-xian-hou-de-bian-hua/">UIViewController 在UINavigationController 中，当UINavigationBar出现后的变化</a></h1>
+    <h1 class="title"><a href="/2013/04/22/2013-04-22-uiviewcontroller-zai-uinavigationcontroller-zhong-dang-uinavigationbarchu-xian-hou-de-bian-hua/">UIViewController 在UINavigationController 中，当UINavigationBar出现后的变化</a></h1>
   
 
     </header>
@@ -370,11 +453,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-04-22T03:58:00.000Z"><a href="/2013/04/22/IOS/2013-04-22-nstimershi-fang/">Apr 22 2013</a></time>
+        <time datetime="2013-04-22T03:58:00.000Z"><a href="/2013/04/22/2013-04-22-nstimershi-fang/">Apr 22 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/04/22/IOS/2013-04-22-nstimershi-fang/">NSTimer释放</a></h1>
+    <h1 class="title"><a href="/2013/04/22/2013-04-22-nstimershi-fang/">NSTimer释放</a></h1>
   
 
     </header>
@@ -425,11 +508,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-04-22T03:38:00.000Z"><a href="/2013/04/22/IOS/2013-04-22-chang-yong-dai-ma/">Apr 22 2013</a></time>
+        <time datetime="2013-04-22T03:38:00.000Z"><a href="/2013/04/22/2013-04-22-chang-yong-dai-ma/">Apr 22 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/04/22/IOS/2013-04-22-chang-yong-dai-ma/">常用代码</a></h1>
+    <h1 class="title"><a href="/2013/04/22/2013-04-22-chang-yong-dai-ma/">常用代码</a></h1>
   
 
     </header>
@@ -552,124 +635,8 @@
       
         
           <div class="alignleft">
-            <a href="/2013/04/22/IOS/2013-04-22-chang-yong-dai-ma/#more" class="more-link">Read More</a>
+            <a href="/2013/04/22/2013-04-22-chang-yong-dai-ma/#more" class="more-link">Read More</a>
           </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-04-22T03:36:00.000Z"><a href="/2013/04/22/IOS/2013-04-22-she-uiimagewei-backgroundcolor/">Apr 22 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/04/22/IOS/2013-04-22-she-uiimagewei-backgroundcolor/">设UIImage为backgroundColor</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre>
-+ (UIColor<span class="variable">*)</span>colorWithPatternImage:(UIImage<span class="variable">*)</span><span class="keyword">image</span>;
-
-</pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-04-22T03:26:00.000Z"><a href="/2013/04/22/IOS/2013-04-22-ioshuo-qu-dan-wen-jian-de-da-xiao/">Apr 22 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/04/22/IOS/2013-04-22-ioshuo-qu-dan-wen-jian-de-da-xiao/">IOS获取单文件的大小</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>c语言实现：</p><br><figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-</pre></td><td class="code"><pre><span class="preprocessor">#include "sys/stat.h"</span>
-- (<span class="keyword">long</span> <span class="keyword">long</span>) fileSizeAtPath:(<span class="built_in">NSString</span>*) filePath
-{  
-    <span class="keyword">struct</span> stat st;  
-    <span class="keyword">if</span>(lstat([filePath cStringUsingEncoding:NSUTF8StringEncoding], &amp;st) == <span class="number">0</span>)
-    {  
-        <span class="keyword">return</span> st<span class="variable">.st_size</span>;  
-    }  
-    <span class="keyword">return</span> <span class="number">0</span>;  
-}  
-
-</pre></td></tr></table></figure><br><br><br><p>object-c实现：</p>
-
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-</pre></td><td class="code"><pre>
--(long long) fileSizeAtPath:(NSString*) filePath
-{  
-  NSFileManager* manager = [NSFileManager defaultManager];  
-  <span class="keyword">if</span> ([manager fileExistsAtPath:filePath])
-  {  
-    <span class="keyword">return</span> <span class="string">[[manager attributesOfItemAtPath:filePath error:nil] fileSize];  
-  }  
-  return 0;  
-}  
-
-</pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer>
-      
         
         
       
@@ -720,7 +687,7 @@
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/IOS/">IOS</a><small>2</small></li>
+    <li><a href="/tags/IOS/">IOS</a><small>4</small></li>
   
   </ul>
 </div>
