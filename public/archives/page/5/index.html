@@ -52,6 +52,154 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2013-04-24T01:30:00.000Z"><a href="/2013/04/24/2013-04-24-cgpdfbox/">Apr 24 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/24/2013-04-24-cgpdfbox/">CGPDFBox</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>A PDF describes the content and appearance of one or more pages. The exact size of that page is not as straightforward as you might think. There can be up to 5 different descriptions in a PDF that relate to its size. These are called the page boxes:</p>
+
+<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre><span class="title">enum</span> CGPDFBox {
+   <span class="title">kCGPDFMediaBox</span> = <span class="number">0</span>,
+   kCGPDFCropBox = <span class="number">1</span>,
+   kCGPDFBleedBox = <span class="number">2</span>,
+   kCGPDFTrimBox = <span class="number">3</span>,
+   kCGPDFArtBox = <span class="number">4</span>
+};
+<span class="title">typedef</span> enum CGPDFBox CGPDFBox;
+</pre></td></tr></table></figure>
+
+
+<h5>KCGPDFMediaBox</h5>
+<p><br>The MediaBox is used to specify the width and height of the page. For the average user, this probably equals the actual page size. For prepress use, this is not the case as we prefer our pages to be defined slightly oversized so that we can see the bleed (Images or other elements touching an outer edge of a printed page need to extend beyond the edge of the paper to compensate for inaccuracies in trimming the page), the crop marks and useful information such as the file name or the date and time when the file was created. This means that PDF files used in graphic arts usually have a MediaBox which is larger then the trimmed page size. The MediaBox is the largest page box in a PDF. The other page boxes can equal the size of the MediaBox but they cannot be larger.<br></p>
+
+<h5>kCGPDFCropBox</h5>
+<p><br>The CropBox defines the region to which the page contents are to be clipped. Acrobat uses this size for screen display and printing. For prepress use, the CropBox is pretty irrelevant. The GWG industry association recommends not to use the CropBox at all.<br></p>
+
+ 
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/04/24/2013-04-24-cgpdfbox/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-23T07:56:00.000Z"><a href="/2013/04/23/2013-04-23-pdfnei-rong-liu-jie-xi/">Apr 23 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/23/2013-04-23-pdfnei-rong-liu-jie-xi/">PDF内容流解析</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3>PDF Document Parsing</h3>
+<p>Quartz提供了让你检查PDF文档结构和内容流的方法。通过这些方法，你可以获取文档目录的条目和与每个条目相关的内容。一个PDF的内容流（contentstream）正如其名字所暗示的—一个连续的数据流 例如‘BT 12 /F71 Tf (draw thistext) Tj . . . ’此处PDF操作符以及他们的描述符都混有实际的PDF内容。检查内容流,你需要按顺序访问它。</p>
+
+<h3>PDF操作符</h3>
+<p><p>1). General graphics state(普通图形状态操作符)</p></p>
+<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre> <span class="attribute">w</span>: <span class="string">设置线的宽度</span>
+ <span class="attribute">J</span>: <span class="string">设置线端点风格. Butt/Round/Projecting square </span>
+ <span class="attribute">j</span>: <span class="string">设置线交叉风格. Miter/Round/Bevel</span>
+ <span class="attribute">M</span>: <span class="string">设置Miter Limit</span>
+ <span class="attribute">d</span>: <span class="string">设置虚线风格.</span>
+ <span class="attribute">ri</span>: <span class="string">设置Rendering Intent(呈色意向)</span>
+ <span class="attribute">i</span>: <span class="string">设置平面化容忍度.</span>
+ <span class="attribute">gs</span>: <span class="string">设置图形状态参数.</span>
+</pre></td></tr></table></figure>
+
+
+<p><p>2). Special graphics state(特殊图形状态操作符)</p></p>
+<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre> <span class="method">q:</span> 保存当前图形状态
+ <span class="class">Q</span>：回复图形状态.
+ cm：设置当前装换矩阵.
+</pre></td></tr></table></figure>
+
+
+<p><p>3). Path construction(路径构建操作符)</p></p>
+<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre> <span class="attribute">m</span>: <span class="string">移动当前指针到指定位置.</span>
+ <span class="attribute">l</span>: <span class="string">添加一条连接当前指针到指定位置的线段.</span>
+ <span class="attribute">c</span>: <span class="string">添加一条Bezier曲线， 有2个控制点，2个端点.</span>
+ <span class="attribute">v</span>: <span class="string">添加一条Bezier曲线， 2个控制点重合.</span>
+ <span class="attribute">y</span>: <span class="string">添加一条Bezier曲线， 第二个控制点和第二个端点重合.</span>
+ <span class="attribute">h</span>: <span class="string">闭合路径</span>
+ <span class="attribute">re</span>: <span class="string">添加一个矩形.</span>
+</pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/04/23/2013-04-23-pdfnei-rong-liu-jie-xi/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2013-04-22T08:43:00.000Z"><a href="/2013/04/22/2013-04-23-ios-4chu-shi-hua-han-shu-de-guan-xi/">Apr 22 2013</a></time>
       
       
@@ -451,206 +599,6 @@
 
 
   
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-04-22T03:58:00.000Z"><a href="/2013/04/22/2013-04-22-nstimershi-fang/">Apr 22 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/04/22/2013-04-22-nstimershi-fang/">NSTimer释放</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>IOS</p>
-<p>NSTimer 是一个比较麻烦的东东，理解不清楚的时候释放它、很可能会出现crash。<br>NSTimer的创建一般使用俩种方式：</p><br><p>1， 类方法直接创建：</p>
-
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-</pre></td><td class="code"><pre>+ (<span class="tag">NSTimer</span>*)<span class="tag">timerWithTimeInterval</span><span class="pseudo">:(NSTimeInterval)ti</span> <span class="tag">invocation</span><span class="pseudo">:(NSInvocation</span>*)<span class="tag">invocation</span> <span class="tag">repeats</span><span class="pseudo">:(BOOL)yesOrNo</span>;
-
-+ (<span class="tag">NSTimer</span>*)<span class="tag">scheduledTimerWithTimeInterval</span><span class="pseudo">:(NSTimeInterval)ti</span> <span class="tag">invocation</span><span class="pseudo">:(NSInvocation</span>*)<span class="tag">invocation</span> <span class="tag">repeats</span><span class="pseudo">:(BOOL)yesOrNo</span>;
-
-+ (<span class="tag">NSTimer</span>*)<span class="tag">timerWithTimeInterval</span><span class="pseudo">:(NSTimeInterval)ti</span> <span class="tag">target</span><span class="pseudo">:(id)aTarget</span> <span class="tag">selector</span><span class="pseudo">:(SEL)aSelector</span> <span class="tag">userInfo</span><span class="pseudo">:(id)userInfo</span> <span class="tag">repeats</span><span class="pseudo">:(BOOL)yesOrNo</span>;
-
-+ (<span class="tag">NSTimer</span>*)<span class="tag">scheduledTimerWithTimeInterval</span><span class="pseudo">:(NSTimeInterval)ti</span> <span class="tag">target</span><span class="pseudo">:(id)aTarget</span> <span class="tag">selector</span><span class="pseudo">:(SEL)aSelector</span> <span class="tag">userInfo</span><span class="pseudo">:(id)userInfo</span> <span class="tag">repeats</span><span class="pseudo">:(BOOL)yesOrNo</span>;
-</pre></td></tr></table></figure>
-
-<p><p>由这些方法所创建的NSTimer的retain count是由NSRunloop保持、所以我们不需要对这个对象进行release的操作。但是如果我们想要在某个具体的地方<br>停止这个计数器的时候。如果repeats参数是YES的时候我们不需要增加这个对象的retain count。就可以在其他地方引用这个对象了。如果repeats参数shi是NO的时候、我们就应该手动增加、再release。如果不retain它、如果在你引用这个对象的时候、定时器的时间还没到，方法还没执行。NSRunloop<br>还保留这retain count。这时候是没问题的、但是如果方法已经执行完了、NSRunloop释放了NSTimer这个对象。这个时候就会crash了。&lt;/p&gt;</p>
-<p><p>2、直接创建：</p]></p>
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="pp">- <span class="params">(id)</span>initWithFireDate:<span class="params">(<span class="variable">NSDate</span>*)</span>date interval:<span class="params">(<span class="variable">NSTimeInterval</span>)</span>ti target:<span class="params">(id)</span>t selector:<span class="params">(<span class="variable">SEL</span>)</span>s userInfo:<span class="params">(id)</span>ui repeats:<span class="params">(<span class="variable">BOOL</span>)</span>rep;
-</pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-04-22T03:38:00.000Z"><a href="/2013/04/22/2013-04-22-chang-yong-dai-ma/">Apr 22 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/04/22/2013-04-22-chang-yong-dai-ma/">常用代码</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p><p>1.判断邮箱格式是否正确的代码</p></p>
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre>-(BOOL)isValidateEmail:(NSString <span class="variable">*)</span>email
-{
-  NSString <span class="variable">*emailRegex</span> = <span class="variable">@"</span>[A-Z<span class="number">0</span>-<span class="number">9</span>a-z.<span class="number">_</span><span class="variable">%+</span>-]+<span class="variable">@[</span>A-Za-z<span class="number">0</span>-<span class="number">9</span>.-]+\\.[A-Za-z]{<span class="number">2</span>,<span class="number">4</span>}<span class="string">";
-  NSPredicate <span class="variable">*emailTest</span> = [NSPredicate predicateWithFormat:<span class="variable">@"</span>SELF MATCHES<span class="variable">%@</span>"</span>,emailRegex];
-  <span class="keyword">return</span> [emailTest evaluateWithObject:email];
-}
-</pre></td></tr></table></figure>
-
-
-<p><p>2.图片压缩</p></p>
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-</pre></td><td class="code"><pre>- (<span class="built_in">UIImage</span>*)imageWithImageSimple:(<span class="built_in">UIImage</span>*)image scaledToSize:(<span class="built_in">CGSize</span>)newSize
-{
-<span class="comment">// Create a graphics image context</span>
-   UIGraphicsBeginImageContext(newSize);
-<span class="comment">// Tell the old image to draw in this newcontext, with the desired</span>
-<span class="comment">// new size</span>
-   [image drawInRect:CGRectMake(<span class="number">0</span>,<span class="number">0</span>,newSize<span class="variable">.width</span>,newSize<span class="variable">.height</span>)];
-<span class="comment">// Get the new image from the context</span>
-   <span class="built_in">UIImage</span>* newImage = UIGraphicsGetImageFromCurrentImageContext();
-<span class="comment">// End the context</span>
-   UIGraphicsEndImageContext();
-<span class="comment">// Return the new image.</span>
-   <span class="keyword">return</span> newImage;
-}
-</pre></td></tr></table></figure>
-
-
-<p><p>3.亲测可用的图片上传代码</p></p>
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-</pre></td><td class="code"><pre>- (IBAction)uploadButton:(id)sender 
-{
-   UIImage *image = [UIImage imageNamed:@<span class="string">"1.jpg"</span>]; //图片名
-   NSData *imageData = UIImageJPEGRepresentation(image,<span class="number">0.5</span>);//压缩比例
-   NSLog(@<span class="string">"字节数:%i"</span>,[imageData length]);
-// post url
-   NSString *urlString = @<span class="string">"http://192.168.1.113:8090/text/UploadServlet"</span>;
-//服务器地址
-// setting up the request object now
-   NSMutableURLRequest *request = <span class="string">[[NSMutableURLRequest alloc] init] ;
-   [request setURL:[NSURL URLWithString:urlString]]</span>;
-   [request setHTTPMethod:@<span class="string">"POST"</span>];
-//
-   NSString *boundary = [NSString stringWithString:@<span class="string">"---------------------------14737809831466499882746641449"</span>];
-   NSString *contentType = [NSString stringWithFormat:@<span class="string">"multipart/form-data;boundary=%@"</span>,boundary];
-   [request addValue:contentType forHTTPHeaderField: @<span class="string">"Content-Type"</span>];
-//
-   NSMutableData *body = [NSMutableData data];
-   [body appendData:<span class="string">[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]]</span>;
-   [body appendData:<span class="string">[[NSString stringWithString:@"Content-Disposition:form-data; name=\"userfile\"; filename=\"2.png\"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]]</span>; //上传上去的图片名字
-   [body appendData:<span class="string">[[NSString stringWithString:@"Content-Type: application/octet-stream\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]]</span>;
-   [body appendData:[NSData dataWithData:imageData]];
-   [body appendData:<span class="string">[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]]</span>;
-   [request setHTTPBody:body];
-// NSLog(@<span class="string">"1-body:%@"</span>,body);
-   NSLog(@<span class="string">"2-request:%@"</span>,request);
-   NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:<span class="keyword">nil</span> <span class="built_in">error</span>:<span class="keyword">nil</span>];
-   NSString *returnString = <span class="string">[[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
-   NSLog(@"3-测试输出：%@",returnString);
-</pre></td></tr></table></figure>
-
-
-
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/04/22/2013-04-22-chang-yong-dai-ma/#more" class="more-link">Read More</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
 
   <nav id="pagination">
   
@@ -692,7 +640,7 @@
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/IOS/">IOS</a><small>4</small></li>
+    <li><a href="/tags/IOS/">IOS</a><small>6</small></li>
   
   </ul>
 </div>

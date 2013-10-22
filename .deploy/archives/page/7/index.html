@@ -1,0 +1,199 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Page 7 | Archives | 無限大な夢</title>
+  <meta name="author" content="virgil">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="無限大な夢"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="無限大な夢" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">無限大な夢</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title">Archives</h2>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-21T06:04:00.000Z"><a href="/2013/04/21/2013-04-21-githubda-jian-zi-ji-de-bo-ke/">Apr 21 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/21/2013-04-21-githubda-jian-zi-ji-de-bo-ke/">github搭建自己的博客</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>登陆<a herf="https://github.com/">github</a>，创建一个个人账号。假设叫做：rubyonchina。</p><br><p><a href="https://help.github.com/articles/generating-ssh-keys" target="_blank">按照github的指示</a>添加ssh key</p><br><p>新建一个目录 dev.cd 到这个目录下<pre><code>cd  ~/dev/<br>git clone git://github.com/imathis/octopress.git rubyonchina.github.com<br>cd  ~/dev/rubyonchina.github.com</code></pre></p><br><p>安装ruby,rvm</p><br><p>修改默认的.rvmrc文件的内容为:</p><br><p><pre><code> rvm use 1.9.2@rails31</code></pre></p><br><p>安装相应的gem:</p><br><p><pre><code>bundle update</code></pre></p><br><p>然后生成模版文件:</p><br><p><pre>rake install</pre></p><br><p> 分发到github上。分发之前，假设你已经注册用户名为rubyonchina的github.com账号，已经创建名为rubyonchina.github.com项目。</p><br>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/04/21/2013-04-21-githubda-jian-zi-ji-de-bo-ke/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-21T02:22:00.000Z"><a href="/2013/04/21/2013-04-21-ios-diao-yong-di-san-fang-appda-kai-wen-jian/">Apr 21 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/21/2013-04-21-ios-diao-yong-di-san-fang-appda-kai-wen-jian/">IOS 调用第三方App打开文件</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre>NSString  *filePath =<span class="string">[[NSBundlemainBundle]pathForResource:@"1"ofType:@"docx"];
+UIDocumentInteractionController  *documentController=[UIDocumentInteractionControllerinteractionControllerWithURL:[NSURLfileURLWithPath:filePath]]</span>;
+documentController.UTI= @<span class="string">"com.microsoft.word.doc"</span>;
+[documentController presentOpenInMenuFromRect:CGRectZero
+                    		    	 inView:self.view
+                                     animated:YES];
+</pre></td></tr></table></figure>
+
+
+<p><a href="https://developer.apple.com/library/ios/#documentation/Miscellaneous/Reference/UTIRef/Articles/System-DeclaredUniformTypeIdentifiers.html#//apple_ref/doc/uid/TP40009259-SW1" target="_blank">UTI 列表</a></p>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+
+  <nav id="pagination">
+  
+    <a href="/archives/page/6/" class="alignleft prev">Prev</a>
+  
+  
+  <div class="clearfix"></div>
+</nav>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/IOS/">IOS</a><small>44</small></li>
+  
+    <li><a href="/categories/OSX/">OSX</a><small>1</small></li>
+  
+    <li><a href="/categories/Other/">Other</a><small>4</small></li>
+  
+    <li><a href="/categories/windowsphone/">windowsphone</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/IOS/">IOS</a><small>6</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2013 virgil
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

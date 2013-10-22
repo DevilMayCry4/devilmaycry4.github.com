@@ -52,6 +52,79 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2013-06-06T07:45:00.000Z"><a href="/2013/06/06/2013-06-06-dan-li-de-shu-xing/">Jun 6 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/06/06/2013-06-06-dan-li-de-shu-xing/">单例的属性</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><br>由于单例的生命周期是在整个程序的生命周期中的，所以单例的属性也是一样，要主要属性的更新。<br></p>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-06-04T00:58:00.000Z"><a href="/2013/06/04/2013-06-04-gong-cheng-zhong-ming-ming/">Jun 4 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/06/04/2013-06-04-gong-cheng-zhong-ming-ming/">工程重命名</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <img src="/images/Project/img1.png">
+
+
+ <img src="/images/Project/img2.png">
+
+
+ <img src="/images/Project/img3.png">
+
+
+ <img src="/images/Project/img4.png">
+
+ <p><br> 如果要修改info.plist 和pch的路径<br>In the left side of the middle pane, select your app under “Targets”<br>Select the tab “Build Settings”<br>Search the following keywords: “info.plist” and “pch”<br>At this point it should be pretty clear which are the ones you need to modify.<br>Click on “Validate Settings” and you&#39;re done.<br> </p>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2013-05-30T05:49:00.000Z"><a href="/2013/05/30/2013-05-30-svnshang-chuan-gong-cheng/">May 30 2013</a></time>
       
       
@@ -557,85 +630,6 @@ DT_BLK        块设备文件
 
 
   
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-05-14T04:18:00.000Z"><a href="/2013/05/14/2013-05-14-xi-tong-uiben-di-hua/">May 14 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/05/14/2013-05-14-xi-tong-uiben-di-hua/">系统UI本地化</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p><br>在iOS应用中，有时候会需要调用系统的一些UI控件，例如：<br><br>在UIWebView中长按会弹出系统的上下文菜单<br>在UIImagePickerController中会使用系统的照相机界面<br>在编译状态下的UITableViewCell，处于待删除时，会有一个系统的删除按钮。<br>以上这些UI控件中，其显示的语言并不是和你当前手机的系统语言一致的。而是根据你的App内部的语言设置来显示。结果就是，如果你没有设置恰当的话，你的中文App可能会出现一些英文的控件文字。<br></p>
-
-<p><br>用vim直接打开工程的Info.plist文件，在文件中增加如下内容即可：<br></p>
-
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">key</span>&gt;</span>CFBundleLocalizations<span class="tag">&lt;/<span class="title">key</span>&gt;</span>
-   <span class="tag">&lt;<span class="title">array</span>&gt;</span>
-           <span class="tag">&lt;<span class="title">string</span>&gt;</span>zh_CN<span class="tag">&lt;/<span class="title">string</span>&gt;</span>
-           <span class="tag">&lt;<span class="title">string</span>&gt;</span>en<span class="tag">&lt;/<span class="title">string</span>&gt;</span>
-   <span class="tag">&lt;/<span class="title">array</span>&gt;</span>
-</pre></td></tr></table></figure>
-
-
-<p>from:<br><a href="http://blog.devtang.com/blog/2013/01/23/set-ios-system-ui-language/" target="_blank"><br><a href="http://blog.devtang.com/blog/2013/01/23/set-ios-system-ui-language/">http://blog.devtang.com/blog/2013/01/23/set-ios-system-ui-language/</a><br></a><br></p>
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-05-06T05:45:00.000Z"><a href="/2013/05/06/2013-05-06-arc/">May 6 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/05/06/2013-05-06-arc/">ARC</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>非ARC工程使用ARC文件时候，选中工程-&gt;TARGETS-&gt;相应的target然后选中右侧的“Build Phases”，向下就找到“Compile Sources”了。对相应的文件添加:-fobjc-arc参数。<br></p><br><p><br>ARC工程使用非ARC文件时候，选中工程-&gt;TARGETS-&gt;相应的target然后选中右侧的“Build Phases”，向下就找到“Compile Sources”了。对相应的文件添加:-fno-objc-arc参数。<br></p>
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
 
   <nav id="pagination">
   
@@ -677,7 +671,7 @@ DT_BLK        块设备文件
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/IOS/">IOS</a><small>4</small></li>
+    <li><a href="/tags/IOS/">IOS</a><small>6</small></li>
   
   </ul>
 </div>
