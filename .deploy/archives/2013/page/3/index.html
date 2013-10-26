@@ -52,11 +52,104 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-06-06T07:45:00.000Z"><a href="/2013/06/06/2013-06-06-dan-li-de-shu-xing/">Jun 6 2013</a></time>
+        <time datetime="2013-06-07T08:00:00.000Z"><a href="/2013/06/07/IOS/2013-06-07-time-out-waiting-for-app-to-launch/">Jun 7 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/06/06/2013-06-06-dan-li-de-shu-xing/">单例的属性</a></h1>
+    <h1 class="title"><a href="/2013/06/07/IOS/2013-06-07-time-out-waiting-for-app-to-launch/">time out waiting for app to launch</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><br>在真机器debug的时候不要使用企业证书。<br></p>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-06-07T05:34:00.000Z"><a href="/2013/06/07/IOS/2013-06-07-uiimag-scale/">Jun 7 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/06/07/IOS/2013-06-07-uiimag-scale/">UIImag Scale</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="code"><pre>- (UIImage*)scaleToSize:(CGSize)size {
+    UIGraphicsBeginImageContext(size)<span class="comment">;</span>
+    
+    CGContextRef context = UIGraphicsGetCurrentContext()<span class="comment">;</span>
+    CGContextTranslateCTM(context, <span class="number">0.0</span>, size<span class="preprocessor">.height</span>)<span class="comment">;</span>
+    CGContextScaleCTM(context, <span class="number">1.0</span>, -<span class="number">1.0</span>)<span class="comment">;</span>
+    
+    CGContextDrawImage(context, CGRectMake(<span class="number">0.0</span>f, <span class="number">0.0</span>f, size<span class="preprocessor">.width</span>, size<span class="preprocessor">.height</span> - <span class="number">4.5</span>), self<span class="preprocessor">.CGImage</span>)<span class="comment">;</span>
+    
+    UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext()<span class="comment">;</span>
+    
+    UIGraphicsEndImageContext()<span class="comment">;</span>
+    
+    return scaledImage<span class="comment">;</span>
+}
+</pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-06-06T07:45:00.000Z"><a href="/2013/06/06/IOS/2013-06-06-dan-li-de-shu-xing/">Jun 6 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/06/06/IOS/2013-06-06-dan-li-de-shu-xing/">单例的属性</a></h1>
   
 
     </header>
@@ -83,11 +176,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-06-04T00:58:00.000Z"><a href="/2013/06/04/2013-06-04-gong-cheng-zhong-ming-ming/">Jun 4 2013</a></time>
+        <time datetime="2013-06-04T00:58:00.000Z"><a href="/2013/06/04/IOS/2013-06-04-gong-cheng-zhong-ming-ming/">Jun 4 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/06/04/2013-06-04-gong-cheng-zhong-ming-ming/">工程重命名</a></h1>
+    <h1 class="title"><a href="/2013/06/04/IOS/2013-06-04-gong-cheng-zhong-ming-ming/">工程重命名</a></h1>
   
 
     </header>
@@ -125,11 +218,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-05-30T05:49:00.000Z"><a href="/2013/05/30/2013-05-30-svnshang-chuan-gong-cheng/">May 30 2013</a></time>
+        <time datetime="2013-05-30T05:49:00.000Z"><a href="/2013/05/30/IOS/2013-05-30-svnshang-chuan-gong-cheng/">May 30 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/05/30/2013-05-30-svnshang-chuan-gong-cheng/">svn上传工程</a></h1>
+    <h1 class="title"><a href="/2013/05/30/IOS/2013-05-30-svnshang-chuan-gong-cheng/">svn上传工程</a></h1>
   
 
     </header>
@@ -160,11 +253,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-05-29T07:37:00.000Z"><a href="/2013/05/29/2013-05-29-zhi-yun-xing--ci-de-dai-ma/">May 29 2013</a></time>
+        <time datetime="2013-05-29T07:37:00.000Z"><a href="/2013/05/29/IOS/2013-05-29-zhi-yun-xing-[?]-ci-de-dai-ma/">May 29 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/05/29/2013-05-29-zhi-yun-xing--ci-de-dai-ma/">只运行一次的代码</a></h1>
+    <h1 class="title"><a href="/2013/05/29/IOS/2013-05-29-zhi-yun-xing-[?]-ci-de-dai-ma/">只运行一次的代码</a></h1>
   
 
     </header>
@@ -200,11 +293,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-05-29T03:52:00.000Z"><a href="/2013/05/29/2013-05-29-pythongei-pngwen-jian-tian-jia-at-2x/">May 29 2013</a></time>
+        <time datetime="2013-05-29T03:52:00.000Z"><a href="/2013/05/29/Other/2013-05-29-pythongei-pngwen-jian-tian-jia-at-2x/">May 29 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/05/29/2013-05-29-pythongei-pngwen-jian-tian-jia-at-2x/">python给png文件添加@2x</a></h1>
+    <h1 class="title"><a href="/2013/05/29/Other/2013-05-29-pythongei-pngwen-jian-tian-jia-at-2x/">python给png文件添加@2x</a></h1>
   
 
     </header>
@@ -276,11 +369,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-05-29T03:47:00.000Z"><a href="/2013/05/29/2013-05-29-python-qu-diao-at-2xjiao-ben/">May 29 2013</a></time>
+        <time datetime="2013-05-29T03:47:00.000Z"><a href="/2013/05/29/Other/2013-05-29-python-qu-diao-at-2xjiao-ben/">May 29 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/05/29/2013-05-29-python-qu-diao-at-2xjiao-ben/">python 去掉@2x脚本</a></h1>
+    <h1 class="title"><a href="/2013/05/29/Other/2013-05-29-python-qu-diao-at-2xjiao-ben/">python 去掉@2x脚本</a></h1>
   
 
     </header>
@@ -352,11 +445,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-05-29T03:24:00.000Z"><a href="/2013/05/29/2013-05-29-shan-chu-mu-lu-xia-suo-you-svnwen-jian-ming-ling-xing/">May 29 2013</a></time>
+        <time datetime="2013-05-29T03:24:00.000Z"><a href="/2013/05/29/IOS/2013-05-29-shan-chu-mu-lu-xia-suo-you-svnwen-jian-ming-ling-xing/">May 29 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/05/29/2013-05-29-shan-chu-mu-lu-xia-suo-you-svnwen-jian-ming-ling-xing/">删除目录下所有svn文件命令行</a></h1>
+    <h1 class="title"><a href="/2013/05/29/IOS/2013-05-29-shan-chu-mu-lu-xia-suo-you-svnwen-jian-ming-ling-xing/">删除目录下所有svn文件命令行</a></h1>
   
 
     </header>
@@ -388,11 +481,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-05-24T07:15:00.000Z"><a href="/2013/05/24/2013-05-24-hou-tai-qing-qiu-duo-xie-shi-jian/">May 24 2013</a></time>
+        <time datetime="2013-05-24T07:15:00.000Z"><a href="/2013/05/24/IOS/2013-05-24-hou-tai-qing-qiu-duo-xie-shi-jian/">May 24 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/05/24/2013-05-24-hou-tai-qing-qiu-duo-xie-shi-jian/">后台请求多些时间</a></h1>
+    <h1 class="title"><a href="/2013/05/24/IOS/2013-05-24-hou-tai-qing-qiu-duo-xie-shi-jian/">后台请求多些时间</a></h1>
   
 
     </header>
@@ -458,178 +551,6 @@
 
 
   
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-05-24T03:57:00.000Z"><a href="/2013/05/24/2013-05-24-ya-suo-shi-pin/">May 24 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/05/24/2013-05-24-ya-suo-shi-pin/">压缩视频</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-</pre></td><td class="code"><pre>- (void) lowQuailtyWithInputURL:(NSURL*)inputURL
-                                   outputURL:(NSURL*)outputURL
-                                     blockHandler:(void (^)(AVAssetExportSession*))handler
-{
-    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:inputURL options:<span class="keyword">nil</span>];
-    AVAssetExportSession *session = <span class="string">[[AVAssetExportSession alloc] initWithAsset:asset     presetName:AVAssetExportPresetMediumQuality];
-    session.outputURL = outputURL;
-    session.outputFileType = AVFileTypeQuickTimeMovie;
-    [session exportAsynchronouslyWithCompletionHandler:^(void)
-     {
-         handler(session);
-     }];
-}
-
-</pre></td></tr></table></figure>
-
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-</pre></td><td class="code"><pre>[<span class="keyword">self</span> <span class="method">lowQuailtyWithInputURL:</span>video <span class="method">outputURL:</span>output <span class="method">blockHandler:</span>^(<span class="class">AVAssetExportSession</span> *session)
-{
-     if (session.status == <span class="class">AVAssetExportSessionStatusCompleted</span>)
-     {
-         
-     }
-     else
-     {
-         
-         
-     }
-}];
-
-</pre></td></tr></table></figure>
-
-
-<p><br>在block里面检测成功，失败，或者是取消，然后释放session.<br><br>期间可以通过不断的查看session的progress属性来获取转换的进度。<br><br>可以设置这些压缩质量<br><br>AVF_EXPORT NSString <em>const AVAssetExportPresetLowQuality        NS_AVAILABLE_IOS(4_0);<br>AVF_EXPORT NSString </em>const AVAssetExportPresetMediumQuality     NS_AVAILABLE_IOS(4_0);<br>AVF_EXPORT NSString *const AVAssetExportPresetHighestQuality    NS_AVAILABLE_IOS(4_0);<br></p>
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-05-22T01:54:00.000Z"><a href="/2013/05/22/2013-05-22-ftpwen-jian-lei-xing/">May 22 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/05/22/2013-05-22-ftpwen-jian-lei-xing/">FTP文件类型</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p><br>IOS FTP获取文件列表信息后。kCFFTPResourceType 对应的是文件类型。这个在 sys/dirent.h 头文件中有定义。<br></p>
-
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td><td class="code"><pre><span class="preprocessor">#<span class="keyword">define</span>	DT_UNKNOWN	 0</span>
-<span class="preprocessor">#<span class="keyword">define</span>	DT_FIFO		 1</span>
-<span class="preprocessor">#<span class="keyword">define</span>	DT_CHR		 2</span>
-<span class="preprocessor">#<span class="keyword">define</span>	DT_DIR		 4</span>
-<span class="preprocessor">#<span class="keyword">define</span>	DT_BLK		 6</span>
-<span class="preprocessor">#<span class="keyword">define</span>	DT_REG		 8</span>
-<span class="preprocessor">#<span class="keyword">define</span>	DT_LNK		10</span>
-<span class="preprocessor">#<span class="keyword">define</span>	DT_SOCK		12</span>
-<span class="preprocessor">#<span class="keyword">define</span>	DT_WHT		14</span>
-</pre></td></tr></table></figure>
-
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-</pre></td><td class="code"><pre>
-<span class="title">DT_UNKNOWN</span>    未知类型
-
-DT_RET        普通文件
-
-DT_DIR        目录文件
-
-DT_FIFO       命名管道
-
-DT_SOCK       本地套接口
-
-DT_CHR        字符设备文件
-
-DT_BLK        块设备文件
-</pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
 
   <nav id="pagination">
   
@@ -671,7 +592,7 @@ DT_BLK        块设备文件
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/IOS/">IOS</a><small>6</small></li>
+    <li><a href="/tags/IOS/">IOS</a><small>8</small></li>
   
   </ul>
 </div>

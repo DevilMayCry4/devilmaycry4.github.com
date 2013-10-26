@@ -52,6 +52,108 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2013-10-26T06:04:47.000Z"><a href="/2013/10/26/uitabbaritem-定制/">Oct 26 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/10/26/uitabbaritem-定制/">UITabbarItem 定制</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><br>设置item的标题颜色：<br></p><br><figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre>        <span class="string">[[UITabBarItem appearance] setTitleTextAttributes:@{ UITextAttributeTextColor : [UIColor grayColor] }
+                                                 forState:UIControlStateNormal];
+        [[UITabBarItem appearance] setTitleTextAttributes:@{ UITextAttributeTextColor : [UIColor redColor] }
+                                                 forState:UIControlStateSelected];
+</pre></td></tr></table></figure><br><br><br><p><br>设置选中和没有选中时候都图片：<br></p><br><figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre>//<span class="keyword">for</span> ios7 before
+- (void)setFinishedSelectedImage:(UIImage *)selectedImage withFinishedUnselectedImage:(UIImage *)unselectedImage ;
+
+//<span class="keyword">for</span> ios7 <span class="keyword">and</span> later
+//tips:设置图片的时候要用
+//<span class="string">[[UIImage imageNamed:@"ImageName"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+- (instancetype)initWithTitle:(NSString *)title image:(UIImage *)image selectedImage:(UIImage *)selectedImage;
+
+</pre></td></tr></table></figure><br><br><p><br>ios7 去掉默认都选中颜色<br></p>
+
+<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>   <span class="keyword">self</span><span class="variable">.tabBar</span><span class="variable">.tintColor</span> = [<span class="built_in">UIColor</span> clearColor];
+</pre></td></tr></table></figure>
+
+
+<p><br>ios7之前去掉选中的时候都mask方块<br></p>
+
+<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre><span class="comment">//empty.png 是一张透明都png图</span>
+     <span class="keyword">self</span><span class="variable">.tabBar</span><span class="variable">.selectionIndicatorImage</span> = [<span class="built_in">UIImage</span> imageNamed:@<span class="string">"empty.png"</span>];
+     <span class="keyword">self</span><span class="variable">.tabBar</span><span class="variable">.selectedImageTintColor</span> = [<span class="built_in">UIColor</span> clearColor];
+</pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-10-26T06:02:18.000Z"><a href="/2013/10/26/xcode使用github/">Oct 26 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/10/26/xcode使用github/">xcode使用github</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><br>Xcode 中使用Github<br>第一步：为你的mac添加认证，使得它能够连接到github。<br><br>参考<a href="http://help.github.com/mac-set-up-git/" target="_blank">http://help.github.com/mac-set-up-git/</a> 一步一步操作即可<br>====================================================================<br>第二步：新建项目<br>先在github里面添加一个Repository，通过<a href="http://github.com/首页的new" target="_blank">http://github.com/首页的new</a> Repository连接进入，填写相关的项目信息，创建即可。创建后会跳转到初始项目界面，先暂停，在第三步再使用这个界面。<br>在mac上使用xcode新建一个项目，为项目使用git，创建过程中使用 create local git repository for this project，指定要存储的目录即可。<br>====================================================================<br>第三步：初始化提交项目<br>回到第二步github创建项目后的界面。初始化有几种方式，这里我们选择从已有仓库提交代码。执行下面的代码即可。<br>Existing Git Repo?<br>cd existing_git_repo<br>git remote add origin git@github.com:your_account/your_project.git<br>git push -u origin master<br>上面的代码将本地的仓库连接到远程仓库，并且将代码提交到master分支上。<br>====================================================================<br>第四步：提交代码<br>新建的文件，XCode会提示一个A标签，表示是added的。<br>编辑的文件，XCode会提示一个M标签，表示是Modified的。<br>选中要更新的文件，右键—&gt;Source Control—&gt;Commit Selected Files 通过此操作将变更提交到本地的仓库中。<br>选中要更新的文件，File菜单—&gt;Source Control—&gt;Push 将本地变化存储到远程服务器中。<br><br></p><br><p><br>from:<a href="http://qiufangzhou.blog.163.com/blog/static/506421802011924102515390/" target="_blank">http://qiufangzhou.blog.163.com/blog/static/506421802011924102515390/</a><br></p>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2013-10-21T05:56:35.000Z"><a href="/2013/10/21/ios7-tips/">Oct 21 2013</a></time>
       
       
@@ -114,11 +216,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-10-09T09:31:15.000Z"><a href="/2013/10/09/block-内存/">Oct 9 2013</a></time>
+        <time datetime="2013-10-09T09:31:15.000Z"><a href="/2013/10/09/IOS/block-内存/">Oct 9 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/10/09/block-内存/">Block 内存</a></h1>
+    <h1 class="title"><a href="/2013/10/09/IOS/block-内存/">Block 内存</a></h1>
   
 
     </header>
@@ -179,11 +281,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-09-23T04:14:09.000Z"><a href="/2013/09/23/uiimageview不调用drawatrect/">Sep 23 2013</a></time>
+        <time datetime="2013-09-23T04:14:09.000Z"><a href="/2013/09/23/IOS/uiimageview不调用drawatrect/">Sep 23 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/09/23/uiimageview不调用drawatrect/">UIImageView不调用drawAtRect</a></h1>
+    <h1 class="title"><a href="/2013/09/23/IOS/uiimageview不调用drawatrect/">UIImageView不调用drawAtRect</a></h1>
   
 
     </header>
@@ -210,11 +312,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-09-22T11:16:57.000Z"><a href="/2013/09/22/1080后环境变量/">Sep 22 2013</a></time>
+        <time datetime="2013-09-22T11:16:57.000Z"><a href="/2013/09/22/IOS/1080后环境变量/">Sep 22 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/09/22/1080后环境变量/">10.8.0后环境变量</a></h1>
+    <h1 class="title"><a href="/2013/09/22/IOS/1080后环境变量/">10.8.0后环境变量</a></h1>
   
 
     </header>
@@ -241,11 +343,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-09-17T06:59:08.000Z"><a href="/2013/09/17/nscoding/">Sep 17 2013</a></time>
+        <time datetime="2013-09-17T06:59:08.000Z"><a href="/2013/09/17/IOS/nscoding/">Sep 17 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/09/17/nscoding/">NSCoding</a></h1>
+    <h1 class="title"><a href="/2013/09/17/IOS/nscoding/">NSCoding</a></h1>
   
 
     </header>
@@ -303,7 +405,7 @@
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/IOS/">IOS</a><small>6</small></li>
+    <li><a href="/tags/IOS/">IOS</a><small>8</small></li>
   
   </ul>
 </div>
