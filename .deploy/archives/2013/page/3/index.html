@@ -52,6 +52,7 @@
     <header>
       
         <div class="icon"></div>
+<<<<<<< HEAD
         <time datetime="2013-06-07T05:34:00.000Z"><a href="/2013/06/07/2013-06-07-uiimag-scale/">Jun 7 2013</a></time>
       
       
@@ -115,10 +116,106 @@
       
         <div class="icon"></div>
         <time datetime="2013-06-06T07:45:00.000Z"><a href="/2013/06/06/2013-06-06-dan-li-de-shu-xing/">Jun 6 2013</a></time>
+=======
+        <time datetime="2013-06-07T08:00:00.000Z"><a href="/2013/06/07/IOS/2013-06-07-time-out-waiting-for-app-to-launch/">Jun 7 2013</a></time>
+>>>>>>> 2f6763fb70d4976cdc1e0a43476dc82a84dac3ff
       
       
   
-    <h1 class="title"><a href="/2013/06/06/2013-06-06-dan-li-de-shu-xing/">单例的属性</a></h1>
+    <h1 class="title"><a href="/2013/06/07/IOS/2013-06-07-time-out-waiting-for-app-to-launch/">time out waiting for app to launch</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><br>在真机器debug的时候不要使用企业证书。<br></p>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-06-07T05:34:00.000Z"><a href="/2013/06/07/IOS/2013-06-07-uiimag-scale/">Jun 7 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/06/07/IOS/2013-06-07-uiimag-scale/">UIImag Scale</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="code"><pre>- (UIImage*)scaleToSize:(CGSize)size {
+    UIGraphicsBeginImageContext(size)<span class="comment">;</span>
+    
+    CGContextRef context = UIGraphicsGetCurrentContext()<span class="comment">;</span>
+    CGContextTranslateCTM(context, <span class="number">0.0</span>, size<span class="preprocessor">.height</span>)<span class="comment">;</span>
+    CGContextScaleCTM(context, <span class="number">1.0</span>, -<span class="number">1.0</span>)<span class="comment">;</span>
+    
+    CGContextDrawImage(context, CGRectMake(<span class="number">0.0</span>f, <span class="number">0.0</span>f, size<span class="preprocessor">.width</span>, size<span class="preprocessor">.height</span> - <span class="number">4.5</span>), self<span class="preprocessor">.CGImage</span>)<span class="comment">;</span>
+    
+    UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext()<span class="comment">;</span>
+    
+    UIGraphicsEndImageContext()<span class="comment">;</span>
+    
+    return scaledImage<span class="comment">;</span>
+}
+</pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-06-06T07:45:00.000Z"><a href="/2013/06/06/IOS/2013-06-06-dan-li-de-shu-xing/">Jun 6 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/06/06/IOS/2013-06-06-dan-li-de-shu-xing/">单例的属性</a></h1>
   
 
     </header>
@@ -145,11 +242,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-06-04T00:58:00.000Z"><a href="/2013/06/04/2013-06-04-gong-cheng-zhong-ming-ming/">Jun 4 2013</a></time>
+        <time datetime="2013-06-04T00:58:00.000Z"><a href="/2013/06/04/IOS/2013-06-04-gong-cheng-zhong-ming-ming/">Jun 4 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/06/04/2013-06-04-gong-cheng-zhong-ming-ming/">工程重命名</a></h1>
+    <h1 class="title"><a href="/2013/06/04/IOS/2013-06-04-gong-cheng-zhong-ming-ming/">工程重命名</a></h1>
   
 
     </header>
@@ -187,11 +284,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-05-30T05:49:00.000Z"><a href="/2013/05/30/2013-05-30-svnshang-chuan-gong-cheng/">May 30 2013</a></time>
+        <time datetime="2013-05-30T05:49:00.000Z"><a href="/2013/05/30/IOS/2013-05-30-svnshang-chuan-gong-cheng/">May 30 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/05/30/2013-05-30-svnshang-chuan-gong-cheng/">svn上传工程</a></h1>
+    <h1 class="title"><a href="/2013/05/30/IOS/2013-05-30-svnshang-chuan-gong-cheng/">svn上传工程</a></h1>
   
 
     </header>
@@ -222,11 +319,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-05-29T07:37:00.000Z"><a href="/2013/05/29/2013-05-29-zhi-yun-xing--ci-de-dai-ma/">May 29 2013</a></time>
+        <time datetime="2013-05-29T07:37:00.000Z"><a href="/2013/05/29/IOS/2013-05-29-zhi-yun-xing-[?]-ci-de-dai-ma/">May 29 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/05/29/2013-05-29-zhi-yun-xing--ci-de-dai-ma/">只运行一次的代码</a></h1>
+    <h1 class="title"><a href="/2013/05/29/IOS/2013-05-29-zhi-yun-xing-[?]-ci-de-dai-ma/">只运行一次的代码</a></h1>
   
 
     </header>
@@ -262,11 +359,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-05-29T03:52:00.000Z"><a href="/2013/05/29/2013-05-29-pythongei-pngwen-jian-tian-jia-at-2x/">May 29 2013</a></time>
+        <time datetime="2013-05-29T03:52:00.000Z"><a href="/2013/05/29/Other/2013-05-29-pythongei-pngwen-jian-tian-jia-at-2x/">May 29 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/05/29/2013-05-29-pythongei-pngwen-jian-tian-jia-at-2x/">python给png文件添加@2x</a></h1>
+    <h1 class="title"><a href="/2013/05/29/Other/2013-05-29-pythongei-pngwen-jian-tian-jia-at-2x/">python给png文件添加@2x</a></h1>
   
 
     </header>
@@ -338,11 +435,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-05-29T03:47:00.000Z"><a href="/2013/05/29/2013-05-29-python-qu-diao-at-2xjiao-ben/">May 29 2013</a></time>
+        <time datetime="2013-05-29T03:47:00.000Z"><a href="/2013/05/29/Other/2013-05-29-python-qu-diao-at-2xjiao-ben/">May 29 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/05/29/2013-05-29-python-qu-diao-at-2xjiao-ben/">python 去掉@2x脚本</a></h1>
+    <h1 class="title"><a href="/2013/05/29/Other/2013-05-29-python-qu-diao-at-2xjiao-ben/">python 去掉@2x脚本</a></h1>
   
 
     </header>
@@ -414,11 +511,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-05-29T03:24:00.000Z"><a href="/2013/05/29/2013-05-29-shan-chu-mu-lu-xia-suo-you-svnwen-jian-ming-ling-xing/">May 29 2013</a></time>
+        <time datetime="2013-05-29T03:24:00.000Z"><a href="/2013/05/29/IOS/2013-05-29-shan-chu-mu-lu-xia-suo-you-svnwen-jian-ming-ling-xing/">May 29 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/05/29/2013-05-29-shan-chu-mu-lu-xia-suo-you-svnwen-jian-ming-ling-xing/">删除目录下所有svn文件命令行</a></h1>
+    <h1 class="title"><a href="/2013/05/29/IOS/2013-05-29-shan-chu-mu-lu-xia-suo-you-svnwen-jian-ming-ling-xing/">删除目录下所有svn文件命令行</a></h1>
   
 
     </header>
@@ -450,11 +547,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-05-24T07:15:00.000Z"><a href="/2013/05/24/2013-05-24-hou-tai-qing-qiu-duo-xie-shi-jian/">May 24 2013</a></time>
+        <time datetime="2013-05-24T07:15:00.000Z"><a href="/2013/05/24/IOS/2013-05-24-hou-tai-qing-qiu-duo-xie-shi-jian/">May 24 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/05/24/2013-05-24-hou-tai-qing-qiu-duo-xie-shi-jian/">后台请求多些时间</a></h1>
+    <h1 class="title"><a href="/2013/05/24/IOS/2013-05-24-hou-tai-qing-qiu-duo-xie-shi-jian/">后台请求多些时间</a></h1>
   
 
     </header>
@@ -520,6 +617,7 @@
 
 
   
+<<<<<<< HEAD
     <article class="post">
   
   <div class="post-content">
@@ -610,6 +708,8 @@
 
 
   
+=======
+>>>>>>> 2f6763fb70d4976cdc1e0a43476dc82a84dac3ff
 
   <nav id="pagination">
   
@@ -651,7 +751,11 @@
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
+<<<<<<< HEAD
     <li><a href="/tags/IOS/">IOS</a><small>7</small></li>
+=======
+    <li><a href="/tags/IOS/">IOS</a><small>8</small></li>
+>>>>>>> 2f6763fb70d4976cdc1e0a43476dc82a84dac3ff
   
   </ul>
 </div>

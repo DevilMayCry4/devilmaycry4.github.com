@@ -52,6 +52,7 @@
     <header>
       
         <div class="icon"></div>
+<<<<<<< HEAD
         <time datetime="2013-04-21T12:18:00.000Z"><a href="/2013/04/21/2013-04-21-google-di-tu-de-lu-xian-huo-qu-he-jie-xi/">Apr 21 2013</a></time>
       
       
@@ -284,23 +285,253 @@
       
         <div class="icon"></div>
         <time datetime="2013-04-21T06:04:00.000Z"><a href="/2013/04/21/2013-04-21-githubda-jian-zi-ji-de-bo-ke/">Apr 21 2013</a></time>
+=======
+        <time datetime="2013-04-21T12:37:00.000Z"><a href="/2013/04/21/IOS/2013-04-21-ios5-mo-ni-qi-bug-cfxpreferencessearchlistsource-trylock/">Apr 21 2013</a></time>
+>>>>>>> 2f6763fb70d4976cdc1e0a43476dc82a84dac3ff
       
       
   
-    <h1 class="title"><a href="/2013/04/21/2013-04-21-githubda-jian-zi-ji-de-bo-ke/">github搭建自己的博客</a></h1>
+    <h1 class="title"><a href="/2013/04/21/IOS/2013-04-21-ios5-mo-ni-qi-bug-cfxpreferencessearchlistsource-trylock/">IOS5 模拟器bug:CFXPreferencesSearchListSource tryLock</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>登陆<a herf="https://github.com/">github</a>，创建一个个人账号。假设叫做：rubyonchina。</p><br><p><a href="https://help.github.com/articles/generating-ssh-keys" target="_blank">按照github的指示</a>添加ssh key</p><br><p>新建一个目录 dev.cd 到这个目录下<pre><code>cd  ~/dev/<br>git clone git://github.com/imathis/octopress.git rubyonchina.github.com<br>cd  ~/dev/rubyonchina.github.com</code></pre></p><br><p>安装ruby,rvm</p><br><p>修改默认的.rvmrc文件的内容为:</p><br><p><pre><code> rvm use 1.9.2@rails31</code></pre></p><br><p>安装相应的gem:</p><br><p><pre><code>bundle update</code></pre></p><br><p>然后生成模版文件:</p><br><p><pre>rake install</pre></p><br><p> 分发到github上。分发之前，假设你已经注册用户名为rubyonchina的github.com账号，已经创建名为rubyonchina.github.com项目。</p><br>
+        <p>ios5 模拟器在程序弹出UIAlertview或者键盘之类的控件时，返回桌面就会出现[CFXPreferencesSearchListSource tryLock]。<br>是模拟器的bug。真机上不会出现,不用管。<br></p>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-21T12:18:00.000Z"><a href="/2013/04/21/IOS/2013-04-21-google-di-tu-de-lu-xian-huo-qu-he-jie-xi/">Apr 21 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/21/IOS/2013-04-21-google-di-tu-de-lu-xian-huo-qu-he-jie-xi/">google 地图的路线获取和解析</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>头文件和宏定义</p><br><figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre>
+<span class="preprocessor">#import &lt;MapKit/MapKit.h&gt;</span>
+<span class="preprocessor">#import "RegexKitLite.h"</span>
+<span class="preprocessor">#import "JSONKit.h"</span>
+
+<span class="preprocessor">#define Mode_Walk    @"walking"</span>
+<span class="preprocessor">#define Mode_Drive   @"driving"</span>
+<span class="preprocessor">#define Mode_Bycle   @"bicycling"</span>
+<span class="preprocessor">#define Mode_Transit @"transit"</span>
+</pre></td></tr></table></figure><br><br><p>获取两个点之间的路线</p><br><figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+</pre></td><td class="code"><pre>- (NSArray <span class="variable">*)</span>calculateRoutesFrom:(CLLocationCoordinate2D)f to:(CLLocationCoordinate2D)t mode:(NSString <span class="variable">*)</span>mode
+{
+    NSString    <span class="variable">*saddr</span> = [NSString stringWithFormat:<span class="variable">@"</span><span class="variable">%f</span>,<span class="variable">%f</span><span class="string">", f.latitude, f.longitude];
+    NSString    <span class="variable">*daddr</span> = [NSString stringWithFormat:<span class="variable">@"</span><span class="variable">%f</span>,<span class="variable">%f</span>"</span>, t.latitude, t.longitude];
+
+    NSString    <span class="variable">*apiUrlStr</span> = [NSString stringWithFormat:<span class="variable">@"</span>http:<span class="regexp">//maps</span>.google.com/maps/api/directions/json?origin=<span class="variable">%@</span>&amp;destination=<span class="variable">%@</span>&amp;sensor=false&amp;mode=<span class="variable">%@</span><span class="string">", saddr, daddr,mode];
+   
+    NSURL       <span class="variable">*apiUrl</span> = [NSURL URLWithString:apiUrlStr];
+    NSString    <span class="variable">*apiResponse</span> = [NSString stringWithContentsOfURL:apiUrl encoding:NSASCIIStringEncoding error:nil];
+    NSDictionary <span class="variable">*dictionaryFromJson</span> = [apiResponse  objectFromJSONString];
+    if([[dictionaryFromJson objectForKey:<span class="variable">@"</span>status"</span>] isEqualToString:<span class="variable">@"</span>OK<span class="string">"])
+    {
+        NSDictionary  <span class="variable">*dict</span> = [[[[dictionaryFromJson objectForKey:<span class="variable">@"</span>routes"</span>] objectAtIndex:<span class="number">0</span>] objectForKey:<span class="variable">@"</span>legs<span class="string">"] objectAtIndex:0];
+        NSArray <span class="variable">*legArray</span> = [dict objectForKey:<span class="variable">@"</span>steps"</span>];
+        
+        NSMutableArray <span class="variable">*stepArray</span> = [NSMutableArray array];
+        NSAutoreleasePool <span class="variable">*pool</span> = [[NSAutoreleasePool alloc] init];
+        <span class="keyword">for</span> (id step in legArray)
+        {
+            id start = [step objectForKey:<span class="variable">@"</span>start_location<span class="string">"];
+            
+            CLLocation  <span class="variable">*loc0</span> = [[[CLLocation alloc] initWithLatitude:[[start objectForKey:<span class="variable">@"</span>lat"</span>] doubleValue]
+                                                            longitude:[[start objectForKey:<span class="variable">@"</span>lng<span class="string">"] doubleValue]] autorelease];
+            
+            [stepArray addObject:loc0];
+            
+            NSString <span class="variable">*polyline</span> = [[step objectForKey:<span class="variable">@"</span>polyline"</span>] objectForKey:<span class="variable">@"</span>points<span class="string">"];
+            NSArray <span class="variable">*polylineArrary</span> = [self decodePolyLine:[[polyline mutableCopy] autorelease]];
+            [stepArray addObjectsFromArray:polylineArrary];
+            
+            id end = [step objectForKey:<span class="variable">@"</span>end_location"</span>];
+            
+            CLLocation  <span class="variable">*loc1</span> = [[[CLLocation alloc] initWithLatitude:[[end objectForKey:<span class="variable">@"</span>lat<span class="string">"] floatValue]
+                                                            longitude:[[end objectForKey:<span class="variable">@"</span>lng"</span>] floatValue]] autorelease];
+            [stepArray addObject:loc1];
+            
+            
+        }
+        [pool drain];
+        <span class="keyword">return</span> stepArray;
+  
+    }
+    <span class="keyword">else</span>
+    {
+        NSString <span class="variable">*tipString</span> = nil;
+        <span class="keyword">if</span> ([[dictionaryFromJson objectForKey:<span class="variable">@"</span>status<span class="string">"] isEqualToString:<span class="variable">@"</span>NOT_FOUND"</span>])
+        {
+             tipString = <span class="variable">@"</span>请求的起点、终点或路标中指定的至少一个位置无法进行地理编码<span class="string">";
+        }
+        else if ([[dictionaryFromJson objectForKey:<span class="variable">@"</span>status"</span>] isEqualToString:<span class="variable">@"</span>ZERO_RESULTS<span class="string">"])
+        {
+            tipString = <span class="variable">@"</span>起点和终点之间找不到路线"</span>;
+        }
+        <span class="keyword">else</span> <span class="keyword">if</span> ([[dictionaryFromJson objectForKey:<span class="variable">@"</span>status<span class="string">"] isEqualToString:<span class="variable">@"</span>MAX_WAYPOINTS_EXCEEDED"</span>])
+        {
+            tipString = <span class="variable">@"</span>请求中提供的 waypoints 过多<span class="string">";
+        }
+        else if ([[dictionaryFromJson objectForKey:<span class="variable">@"</span>status"</span>] isEqualToString:<span class="variable">@"</span>INVALID_REQUEST<span class="string">"])
+        {
+            tipString = <span class="variable">@"</span>提供的请求无效"</span>;
+        }
+        <span class="keyword">else</span> <span class="keyword">if</span>([[dictionaryFromJson objectForKey:<span class="variable">@"</span>status<span class="string">"] isEqualToString:<span class="variable">@"</span>OVER_QUERY_LIMIT"</span>])
+        {
+            tipString = <span class="variable">@"</span>该服务在允许的时间段内从您的应用收到的请求过多<span class="string">";
+        }
+        else if([[dictionaryFromJson objectForKey:<span class="variable">@"</span>status"</span>] isEqualToString:<span class="variable">@"</span>REQUEST_DENIED<span class="string">"])
+        {
+             tipString = <span class="variable">@"</span>该服务已拒绝您的应用使用路线服务"</span>;
+        }
+        <span class="keyword">else</span> <span class="keyword">if</span>([[dictionaryFromJson objectForKey:<span class="variable">@"</span>status<span class="string">"] isEqualToString:<span class="variable">@"</span>OVER_QUERY_LIMIT"</span>])
+        {
+            tipString = <span class="variable">@"</span>路线请求因服务器出错而无法得到处理。如果您重试一次，该请求可能就会成功<span class="string">";
+            
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIAlertView <span class="variable">*alertView</span> = [[UIAlertView alloc] initWithTitle:<span class="variable">@"</span>提示"</span>
+                                                                message:tipString
+                                                               delegate:nil
+                                                      cancelButtonTitle:<span class="variable">@"</span>OK<span class="string">"
+                                                      otherButtonTitles:nil, nil];
+            [alertView show];
+            [alertView release];
+        });
+       
+        
+        return nil;
+    }
+
+}
+</pre></td></tr></table></figure><br><br>
       
     </div>
     <footer>
       
         
           <div class="alignleft">
-            <a href="/2013/04/21/2013-04-21-githubda-jian-zi-ji-de-bo-ke/#more" class="more-link">Read More</a>
+            <a href="/2013/04/21/IOS/2013-04-21-google-di-tu-de-lu-xian-huo-qu-he-jie-xi/#more" class="more-link">Read More</a>
           </div>
         
         
@@ -318,11 +549,46 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-04-21T02:22:00.000Z"><a href="/2013/04/21/2013-04-21-ios-diao-yong-di-san-fang-appda-kai-wen-jian/">Apr 21 2013</a></time>
+        <time datetime="2013-04-21T06:04:00.000Z"><a href="/2013/04/21/OSX/2013-04-21-githubda-jian-zi-ji-de-bo-ke/">Apr 21 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/04/21/2013-04-21-ios-diao-yong-di-san-fang-appda-kai-wen-jian/">IOS 调用第三方App打开文件</a></h1>
+    <h1 class="title"><a href="/2013/04/21/OSX/2013-04-21-githubda-jian-zi-ji-de-bo-ke/">github搭建自己的博客</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>登陆<a herf="https://github.com/">github</a>，创建一个个人账号。假设叫做：rubyonchina。</p><br><p><a href="https://help.github.com/articles/generating-ssh-keys" target="_blank">按照github的指示</a>添加ssh key</p><br><p>新建一个目录 dev.cd 到这个目录下<pre><code>cd  ~/dev/<br>git clone git://github.com/imathis/octopress.git rubyonchina.github.com<br>cd  ~/dev/rubyonchina.github.com</code></pre></p><br><p>安装ruby,rvm</p><br><p>修改默认的.rvmrc文件的内容为:</p><br><p><pre><code> rvm use 1.9.2@rails31</code></pre></p><br><p>安装相应的gem:</p><br><p><pre><code>bundle update</code></pre></p><br><p>然后生成模版文件:</p><br><p><pre>rake install</pre></p><br><p> 分发到github上。分发之前，假设你已经注册用户名为rubyonchina的github.com账号，已经创建名为rubyonchina.github.com项目。</p><br>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/04/21/OSX/2013-04-21-githubda-jian-zi-ji-de-bo-ke/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-21T02:22:00.000Z"><a href="/2013/04/21/IOS/2013-04-21-ios-diao-yong-di-san-fang-appda-kai-wen-jian/">Apr 21 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/21/IOS/2013-04-21-ios-diao-yong-di-san-fang-appda-kai-wen-jian/">IOS 调用第三方App打开文件</a></h1>
   
 
     </header>
@@ -397,7 +663,11 @@ documentController.UTI= @<span class="string">"com.microsoft.word.doc"</span>;
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
+<<<<<<< HEAD
     <li><a href="/tags/IOS/">IOS</a><small>7</small></li>
+=======
+    <li><a href="/tags/IOS/">IOS</a><small>8</small></li>
+>>>>>>> 2f6763fb70d4976cdc1e0a43476dc82a84dac3ff
   
   </ul>
 </div>

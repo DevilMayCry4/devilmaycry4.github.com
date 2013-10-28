@@ -1,0 +1,208 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>UITabbarItem 定制 | 無限大な夢</title>
+  <meta name="author" content="virgil">
+  
+  <meta name="description" content="设置item的标题颜色：1
+2
+3
+4
+        [[UITabBarItem appearance] setTitleTextAttributes:@{ UITextAttributeTextColor : [UIColor grayColor] }
+                    ">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="UITabbarItem 定制"/>
+  <meta property="og:site_name" content="無限大な夢"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="無限大な夢" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">無限大な夢</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-10-26T06:04:47.000Z"><a href="/2013/10/26/uitabbaritem-定制/">Oct 26 2013</a></time>
+      
+      
+  
+    <h1 class="title">UITabbarItem 定制</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><br>设置item的标题颜色：<br></p><br><figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre>        <span class="string">[[UITabBarItem appearance] setTitleTextAttributes:@{ UITextAttributeTextColor : [UIColor grayColor] }
+                                                 forState:UIControlStateNormal];
+        [[UITabBarItem appearance] setTitleTextAttributes:@{ UITextAttributeTextColor : [UIColor redColor] }
+                                                 forState:UIControlStateSelected];
+</pre></td></tr></table></figure><br><br><br><p><br>设置选中和没有选中时候都图片：<br></p><br><figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre>//<span class="keyword">for</span> ios7 before
+- (void)setFinishedSelectedImage:(UIImage *)selectedImage withFinishedUnselectedImage:(UIImage *)unselectedImage ;
+
+//<span class="keyword">for</span> ios7 <span class="keyword">and</span> later
+//tips:设置图片的时候要用
+//<span class="string">[[UIImage imageNamed:@"ImageName"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+- (instancetype)initWithTitle:(NSString *)title image:(UIImage *)image selectedImage:(UIImage *)selectedImage;
+
+</pre></td></tr></table></figure><br><br><p><br>ios7 去掉默认都选中颜色<br></p>
+
+<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>   <span class="keyword">self</span><span class="variable">.tabBar</span><span class="variable">.tintColor</span> = [<span class="built_in">UIColor</span> clearColor];
+</pre></td></tr></table></figure>
+
+
+<p><br>ios7之前去掉选中的时候都mask方块<br></p>
+
+<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre><span class="comment">//empty.png 是一张透明都png图</span>
+     <span class="keyword">self</span><span class="variable">.tabBar</span><span class="variable">.selectionIndicatorImage</span> = [<span class="built_in">UIImage</span> imageNamed:@<span class="string">"empty.png"</span>];
+     <span class="keyword">self</span><span class="variable">.tabBar</span><span class="variable">.selectedImageTintColor</span> = [<span class="built_in">UIColor</span> clearColor];
+</pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/IOS/">IOS</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/IOS/">IOS</a><small>44</small></li>
+  
+    <li><a href="/categories/OSX/">OSX</a><small>1</small></li>
+  
+    <li><a href="/categories/Other/">Other</a><small>4</small></li>
+  
+    <li><a href="/categories/windowsphone/">windowsphone</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+<<<<<<< HEAD:.deploy/2013/05/22/2013-05-22-ftpwen-jian-lei-xing/index.html
+    <li><a href="/tags/IOS/">IOS</a><small>7</small></li>
+=======
+    <li><a href="/tags/IOS/">IOS</a><small>8</small></li>
+>>>>>>> 2f6763fb70d4976cdc1e0a43476dc82a84dac3ff:.deploy/2013/10/26/uitabbaritem-定制/index.html
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2013 virgil
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

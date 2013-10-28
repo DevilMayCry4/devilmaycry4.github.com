@@ -52,6 +52,7 @@
     <header>
       
         <div class="icon"></div>
+<<<<<<< HEAD
         <time datetime="2013-05-22T01:54:00.000Z"><a href="/2013/05/22/2013-05-22-ftpwen-jian-lei-xing/">May 22 2013</a></time>
       
       
@@ -135,10 +136,185 @@ DT_BLK        块设备文件
       
         <div class="icon"></div>
         <time datetime="2013-05-14T04:18:00.000Z"><a href="/2013/05/14/2013-05-14-xi-tong-uiben-di-hua/">May 14 2013</a></time>
+=======
+        <time datetime="2013-05-24T03:57:00.000Z"><a href="/2013/05/24/IOS/2013-05-24-ya-suo-shi-pin/">May 24 2013</a></time>
+>>>>>>> 2f6763fb70d4976cdc1e0a43476dc82a84dac3ff
       
       
   
-    <h1 class="title"><a href="/2013/05/14/2013-05-14-xi-tong-uiben-di-hua/">系统UI本地化</a></h1>
+    <h1 class="title"><a href="/2013/05/24/IOS/2013-05-24-ya-suo-shi-pin/">压缩视频</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="code"><pre>- (void) lowQuailtyWithInputURL:(NSURL*)inputURL
+                                   outputURL:(NSURL*)outputURL
+                                     blockHandler:(void (^)(AVAssetExportSession*))handler
+{
+    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:inputURL options:<span class="keyword">nil</span>];
+    AVAssetExportSession *session = <span class="string">[[AVAssetExportSession alloc] initWithAsset:asset     presetName:AVAssetExportPresetMediumQuality];
+    session.outputURL = outputURL;
+    session.outputFileType = AVFileTypeQuickTimeMovie;
+    [session exportAsynchronouslyWithCompletionHandler:^(void)
+     {
+         handler(session);
+     }];
+}
+
+</pre></td></tr></table></figure>
+
+<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="code"><pre>[<span class="keyword">self</span> <span class="method">lowQuailtyWithInputURL:</span>video <span class="method">outputURL:</span>output <span class="method">blockHandler:</span>^(<span class="class">AVAssetExportSession</span> *session)
+{
+     if (session.status == <span class="class">AVAssetExportSessionStatusCompleted</span>)
+     {
+         
+     }
+     else
+     {
+         
+         
+     }
+}];
+
+</pre></td></tr></table></figure>
+
+
+<p><br>在block里面检测成功，失败，或者是取消，然后释放session.<br><br>期间可以通过不断的查看session的progress属性来获取转换的进度。<br><br>可以设置这些压缩质量<br><br>AVF_EXPORT NSString <em>const AVAssetExportPresetLowQuality        NS_AVAILABLE_IOS(4_0);<br>AVF_EXPORT NSString </em>const AVAssetExportPresetMediumQuality     NS_AVAILABLE_IOS(4_0);<br>AVF_EXPORT NSString *const AVAssetExportPresetHighestQuality    NS_AVAILABLE_IOS(4_0);<br></p>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-22T01:54:00.000Z"><a href="/2013/05/22/IOS/2013-05-22-ftpwen-jian-lei-xing/">May 22 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/05/22/IOS/2013-05-22-ftpwen-jian-lei-xing/">FTP文件类型</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><br>IOS FTP获取文件列表信息后。kCFFTPResourceType 对应的是文件类型。这个在 sys/dirent.h 头文件中有定义。<br></p>
+
+<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre><span class="preprocessor">#<span class="keyword">define</span>	DT_UNKNOWN	 0</span>
+<span class="preprocessor">#<span class="keyword">define</span>	DT_FIFO		 1</span>
+<span class="preprocessor">#<span class="keyword">define</span>	DT_CHR		 2</span>
+<span class="preprocessor">#<span class="keyword">define</span>	DT_DIR		 4</span>
+<span class="preprocessor">#<span class="keyword">define</span>	DT_BLK		 6</span>
+<span class="preprocessor">#<span class="keyword">define</span>	DT_REG		 8</span>
+<span class="preprocessor">#<span class="keyword">define</span>	DT_LNK		10</span>
+<span class="preprocessor">#<span class="keyword">define</span>	DT_SOCK		12</span>
+<span class="preprocessor">#<span class="keyword">define</span>	DT_WHT		14</span>
+</pre></td></tr></table></figure>
+
+<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="code"><pre>
+<span class="title">DT_UNKNOWN</span>    未知类型
+
+DT_RET        普通文件
+
+DT_DIR        目录文件
+
+DT_FIFO       命名管道
+
+DT_SOCK       本地套接口
+
+DT_CHR        字符设备文件
+
+DT_BLK        块设备文件
+</pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-14T04:18:00.000Z"><a href="/2013/05/14/IOS/2013-05-14-xi-tong-uiben-di-hua/">May 14 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/05/14/IOS/2013-05-14-xi-tong-uiben-di-hua/">系统UI本地化</a></h1>
   
 
     </header>
@@ -182,11 +358,11 @@ DT_BLK        块设备文件
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-05-06T05:45:00.000Z"><a href="/2013/05/06/2013-05-06-arc/">May 6 2013</a></time>
+        <time datetime="2013-05-06T05:45:00.000Z"><a href="/2013/05/06/IOS/2013-05-06-arc/">May 6 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/05/06/2013-05-06-arc/">ARC</a></h1>
+    <h1 class="title"><a href="/2013/05/06/IOS/2013-05-06-arc/">ARC</a></h1>
   
 
     </header>
@@ -213,11 +389,11 @@ DT_BLK        块设备文件
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-05-06T01:58:00.000Z"><a href="/2013/05/06/2013-05-06-c-number-shu-chu-ri-zhi/">May 6 2013</a></time>
+        <time datetime="2013-05-06T01:58:00.000Z"><a href="/2013/05/06/WindowsPhone/2013-05-06-c-number-shu-chu-ri-zhi/">May 6 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/05/06/2013-05-06-c-number-shu-chu-ri-zhi/">C#输出日志</a></h1>
+    <h1 class="title"><a href="/2013/05/06/WindowsPhone/2013-05-06-c-number-shu-chu-ri-zhi/">C#输出日志</a></h1>
   
 
     </header>
@@ -250,11 +426,11 @@ Debug<span class="preprocessor">.WriteLine</span>(<span class="string">"LogText"
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-04-28T06:31:00.000Z"><a href="/2013/04/28/2013-04-28-c-number-delegatehe-event/">Apr 28 2013</a></time>
+        <time datetime="2013-04-28T06:31:00.000Z"><a href="/2013/04/28/WindowsPhone/2013-04-28-c-number-delegatehe-event/">Apr 28 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/04/28/2013-04-28-c-number-delegatehe-event/">C#delegate和event</a></h1>
+    <h1 class="title"><a href="/2013/04/28/WindowsPhone/2013-04-28-c-number-delegatehe-event/">C#delegate和event</a></h1>
   
 
     </header>
@@ -306,7 +482,7 @@ md(<span class="string">"sam1111"</span>);
       
         
           <div class="alignleft">
-            <a href="/2013/04/28/2013-04-28-c-number-delegatehe-event/#more" class="more-link">Read More</a>
+            <a href="/2013/04/28/WindowsPhone/2013-04-28-c-number-delegatehe-event/#more" class="more-link">Read More</a>
           </div>
         
         
@@ -324,11 +500,11 @@ md(<span class="string">"sam1111"</span>);
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-04-27T09:18:00.000Z"><a href="/2013/04/27/2013-04-27-ios-zhi-zuo-jing-tai-ku/">Apr 27 2013</a></time>
+        <time datetime="2013-04-27T09:18:00.000Z"><a href="/2013/04/27/IOS/2013-04-27-ios-zhi-zuo-jing-tai-ku/">Apr 27 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/04/27/2013-04-27-ios-zhi-zuo-jing-tai-ku/">IOS 制作静态库</a></h1>
+    <h1 class="title"><a href="/2013/04/27/IOS/2013-04-27-ios-zhi-zuo-jing-tai-ku/">IOS 制作静态库</a></h1>
   
 
     </header>
@@ -356,11 +532,11 @@ md(<span class="string">"sam1111"</span>);
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-04-26T08:25:00.000Z"><a href="/2013/04/26/2013-04-26-xcode-bu-jin-c-plus-plus-duan-dian/">Apr 26 2013</a></time>
+        <time datetime="2013-04-26T08:25:00.000Z"><a href="/2013/04/26/IOS/2013-04-26-xcode-bu-jin-c-plus-plus-duan-dian/">Apr 26 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/04/26/2013-04-26-xcode-bu-jin-c-plus-plus-duan-dian/">Xcode 不进C++ 断点</a></h1>
+    <h1 class="title"><a href="/2013/04/26/IOS/2013-04-26-xcode-bu-jin-c-plus-plus-duan-dian/">Xcode 不进C++ 断点</a></h1>
   
 
     </header>
@@ -387,11 +563,11 @@ md(<span class="string">"sam1111"</span>);
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-04-26T06:29:00.000Z"><a href="/2013/04/26/2013-04-26-air-print/">Apr 26 2013</a></time>
+        <time datetime="2013-04-26T06:29:00.000Z"><a href="/2013/04/26/IOS/2013-04-26-air-print/">Apr 26 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/04/26/2013-04-26-air-print/">Air Print</a></h1>
+    <h1 class="title"><a href="/2013/04/26/IOS/2013-04-26-air-print/">Air Print</a></h1>
   
 
     </header>
@@ -451,11 +627,11 @@ md(<span class="string">"sam1111"</span>);
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-04-26T01:30:00.000Z"><a href="/2013/04/26/2013-04-26-c-number-abstracegen-virtuade-qu-bie/">Apr 26 2013</a></time>
+        <time datetime="2013-04-26T01:30:00.000Z"><a href="/2013/04/26/WindowsPhone/2013-04-26-c-number-abstracegen-virtuade-qu-bie/">Apr 26 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/04/26/2013-04-26-c-number-abstracegen-virtuade-qu-bie/">C#abstrace跟virtua的区别</a></h1>
+    <h1 class="title"><a href="/2013/04/26/WindowsPhone/2013-04-26-c-number-abstracegen-virtuade-qu-bie/">C#abstrace跟virtua的区别</a></h1>
   
 
     </header>
@@ -540,7 +716,7 @@ IPerson(); <span class="comment">//错误</span>
       
         
           <div class="alignleft">
-            <a href="/2013/04/26/2013-04-26-c-number-abstracegen-virtuade-qu-bie/#more" class="more-link">Read More</a>
+            <a href="/2013/04/26/WindowsPhone/2013-04-26-c-number-abstracegen-virtuade-qu-bie/#more" class="more-link">Read More</a>
           </div>
         
         
@@ -552,6 +728,7 @@ IPerson(); <span class="comment">//错误</span>
 
 
   
+<<<<<<< HEAD
     <article class="post">
   
   <div class="post-content">
@@ -614,6 +791,8 @@ IPerson(); <span class="comment">//错误</span>
 
 
   
+=======
+>>>>>>> 2f6763fb70d4976cdc1e0a43476dc82a84dac3ff
 
   <nav id="pagination">
   
@@ -655,7 +834,11 @@ IPerson(); <span class="comment">//错误</span>
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
+<<<<<<< HEAD
     <li><a href="/tags/IOS/">IOS</a><small>7</small></li>
+=======
+    <li><a href="/tags/IOS/">IOS</a><small>8</small></li>
+>>>>>>> 2f6763fb70d4976cdc1e0a43476dc82a84dac3ff
   
   </ul>
 </div>
