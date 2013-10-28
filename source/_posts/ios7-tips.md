@@ -7,3 +7,17 @@ tags: IOS
 <p>
 ios7如果某个item左右两边的items不相等，即使左右各放置一个UIBarButtonSystemItemFlexibleSpace也是没法使这个item居中的、可以放置一些隐藏的item使两边相等。
 </p>
+
+<p>
+调整viewcontroller适配ios7状态栏
+</p>
+{% codeblock lang:objc %}
+if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) 
+{
+        self.view.bounds = CGRectMake(0, -20, self.view.frame.size.width, self.view.frame.size.height );
+    }
+ {% endcodeblock %}
+ 
+ <p>
+ 参考：http://www.ifun.cc/blog/2013/09/28/gua-pei-ios7kai-fa/
+ <p>

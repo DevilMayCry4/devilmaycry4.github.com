@@ -52,6 +52,88 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2013-05-22T01:54:00.000Z"><a href="/2013/05/22/2013-05-22-ftpwen-jian-lei-xing/">May 22 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/05/22/2013-05-22-ftpwen-jian-lei-xing/">FTP文件类型</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><br>IOS FTP获取文件列表信息后。kCFFTPResourceType 对应的是文件类型。这个在 sys/dirent.h 头文件中有定义。<br></p>
+
+<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre><span class="preprocessor">#<span class="keyword">define</span>	DT_UNKNOWN	 0</span>
+<span class="preprocessor">#<span class="keyword">define</span>	DT_FIFO		 1</span>
+<span class="preprocessor">#<span class="keyword">define</span>	DT_CHR		 2</span>
+<span class="preprocessor">#<span class="keyword">define</span>	DT_DIR		 4</span>
+<span class="preprocessor">#<span class="keyword">define</span>	DT_BLK		 6</span>
+<span class="preprocessor">#<span class="keyword">define</span>	DT_REG		 8</span>
+<span class="preprocessor">#<span class="keyword">define</span>	DT_LNK		10</span>
+<span class="preprocessor">#<span class="keyword">define</span>	DT_SOCK		12</span>
+<span class="preprocessor">#<span class="keyword">define</span>	DT_WHT		14</span>
+</pre></td></tr></table></figure>
+
+<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="code"><pre>
+<span class="title">DT_UNKNOWN</span>    未知类型
+
+DT_RET        普通文件
+
+DT_DIR        目录文件
+
+DT_FIFO       命名管道
+
+DT_SOCK       本地套接口
+
+DT_CHR        字符设备文件
+
+DT_BLK        块设备文件
+</pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2013-05-14T04:18:00.000Z"><a href="/2013/05/14/2013-05-14-xi-tong-uiben-di-hua/">May 14 2013</a></time>
       
       
@@ -532,38 +614,6 @@ IPerson(); <span class="comment">//错误</span>
 
 
   
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-04-24T01:51:00.000Z"><a href="/2013/04/24/2013-04-24-jin-ru-google-dot-com/">Apr 24 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/04/24/2013-04-24-jin-ru-google-dot-com/">进入google.com</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p><p>怎么进入www.google.com而不是www.google.com/hk,很简单，进这个地址：<br><a href="http://www.google.com/intl/zh-EN/" target="_blank"><a href="http://www.google.com/intl/zh-EN/">http://www.google.com/intl/zh-EN/</a></a> 打开中文google后,<br>点击下面的:<a href="http://www.google.com/ncr" target="_blank"><a href="http://www.google.com/ncr">http://www.google.com/ncr</a></a>就可以了。</p><br>&lt;!-103844721&gt;</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
 
   <nav id="pagination">
   
@@ -605,7 +655,7 @@ IPerson(); <span class="comment">//错误</span>
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/IOS/">IOS</a><small>6</small></li>
+    <li><a href="/tags/IOS/">IOS</a><small>7</small></li>
   
   </ul>
 </div>

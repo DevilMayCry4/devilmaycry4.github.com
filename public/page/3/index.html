@@ -48,6 +48,68 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2013-06-07T05:34:00.000Z"><a href="/2013/06/07/2013-06-07-uiimag-scale/">Jun 7 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/06/07/2013-06-07-uiimag-scale/">UIImag Scale</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="code"><pre>- (UIImage*)scaleToSize:(CGSize)size {
+    UIGraphicsBeginImageContext(size)<span class="comment">;</span>
+    
+    CGContextRef context = UIGraphicsGetCurrentContext()<span class="comment">;</span>
+    CGContextTranslateCTM(context, <span class="number">0.0</span>, size<span class="preprocessor">.height</span>)<span class="comment">;</span>
+    CGContextScaleCTM(context, <span class="number">1.0</span>, -<span class="number">1.0</span>)<span class="comment">;</span>
+    
+    CGContextDrawImage(context, CGRectMake(<span class="number">0.0</span>f, <span class="number">0.0</span>f, size<span class="preprocessor">.width</span>, size<span class="preprocessor">.height</span> - <span class="number">4.5</span>), self<span class="preprocessor">.CGImage</span>)<span class="comment">;</span>
+    
+    UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext()<span class="comment">;</span>
+    
+    UIGraphicsEndImageContext()<span class="comment">;</span>
+    
+    return scaledImage<span class="comment">;</span>
+}
+</pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2013-06-06T07:45:00.000Z"><a href="/2013/06/06/2013-06-06-dan-li-de-shu-xing/">Jun 6 2013</a></time>
       
       
@@ -544,88 +606,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-05-22T01:54:00.000Z"><a href="/2013/05/22/2013-05-22-ftpwen-jian-lei-xing/">May 22 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/05/22/2013-05-22-ftpwen-jian-lei-xing/">FTP文件类型</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p><br>IOS FTP获取文件列表信息后。kCFFTPResourceType 对应的是文件类型。这个在 sys/dirent.h 头文件中有定义。<br></p>
-
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td><td class="code"><pre><span class="preprocessor">#<span class="keyword">define</span>	DT_UNKNOWN	 0</span>
-<span class="preprocessor">#<span class="keyword">define</span>	DT_FIFO		 1</span>
-<span class="preprocessor">#<span class="keyword">define</span>	DT_CHR		 2</span>
-<span class="preprocessor">#<span class="keyword">define</span>	DT_DIR		 4</span>
-<span class="preprocessor">#<span class="keyword">define</span>	DT_BLK		 6</span>
-<span class="preprocessor">#<span class="keyword">define</span>	DT_REG		 8</span>
-<span class="preprocessor">#<span class="keyword">define</span>	DT_LNK		10</span>
-<span class="preprocessor">#<span class="keyword">define</span>	DT_SOCK		12</span>
-<span class="preprocessor">#<span class="keyword">define</span>	DT_WHT		14</span>
-</pre></td></tr></table></figure>
-
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-</pre></td><td class="code"><pre>
-<span class="title">DT_UNKNOWN</span>    未知类型
-
-DT_RET        普通文件
-
-DT_DIR        目录文件
-
-DT_FIFO       命名管道
-
-DT_SOCK       本地套接口
-
-DT_CHR        字符设备文件
-
-DT_BLK        块设备文件
-</pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
 
 <nav id="pagination">
   
@@ -666,7 +646,7 @@ DT_BLK        块设备文件
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/IOS/">IOS</a><small>6</small></li>
+    <li><a href="/tags/IOS/">IOS</a><small>7</small></li>
   
   </ul>
 </div>

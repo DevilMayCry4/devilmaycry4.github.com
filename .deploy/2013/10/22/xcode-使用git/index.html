@@ -1,0 +1,159 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Xcode 使用git | 無限大な夢</title>
+  <meta name="author" content="virgil">
+  
+  <meta name="description" content="Xcode 中使用Github第一步：为你的mac添加认证，使得它能够连接到github。 参考http://help.github.com/mac-set-up-git/  一步一步操作即可======================================================">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Xcode 使用git"/>
+  <meta property="og:site_name" content="無限大な夢"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="無限大な夢" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">無限大な夢</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-10-22T07:29:05.000Z"><a href="/2013/10/22/xcode-使用git/">Oct 22 2013</a></time>
+      
+      
+  
+    <h1 class="title">Xcode 使用git</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><br>Xcode 中使用Github<br>第一步：为你的mac添加认证，使得它能够连接到github。<br><br> 参考<a href="http://help.github.com/mac-set-up-git/" target="_blank">http://help.github.com/mac-set-up-git/</a>  一步一步操作即可<br>====================================================================<br>第二步：新建项目<br> 先在github里面添加一个Repository，通过<a href="http://github.com/首页的new" target="_blank">http://github.com/首页的new</a> Repository连接进入，填写相关的项目信息，创建即可。创建后会跳转到初始项目界面，先暂停，在第三步再使用这个界面。<br> 在mac上使用xcode新建一个项目，为项目使用git，创建过程中使用 create local git repository for this project，指定要存储的目录即可。<br>====================================================================<br>第三步：初始化提交项目<br> 回到第二步github创建项目后的界面。初始化有几种方式，这里我们选择从已有仓库提交代码。执行下面的代码即可。<br>  Existing Git Repo?<br>   cd existing_git_repo<br>   git remote add origin git@github.com:your_account/your_project.git<br>   git push -u origin master<br>上面的代码将本地的仓库连接到远程仓库，并且将代码提交到master分支上。<br>====================================================================<br>第四步：提交代码<br>   新建的文件，XCode会提示一个A标签，表示是added的。<br>   编辑的文件，XCode会提示一个M标签，表示是Modified的。<br>   选中要更新的文件，右键—&gt;Source Control—&gt;Commit Selected Files 通过此操作将变更提交到本地的仓库中。<br>   选中要更新的文件，File菜单—&gt;Source Control—&gt;Push 将本地变化存储到远程服务器中。<br><br>from：<a href="http://qiufangzhou.blog.163.com/blog/static/506421802011924102515390/" target="_blank">http://qiufangzhou.blog.163.com/blog/static/506421802011924102515390/</a><br></p>
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/IOS/">IOS</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/IOS/">IOS</a><small>44</small></li>
+  
+    <li><a href="/categories/OSX/">OSX</a><small>1</small></li>
+  
+    <li><a href="/categories/Other/">Other</a><small>4</small></li>
+  
+    <li><a href="/categories/windowsphone/">windowsphone</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/IOS/">IOS</a><small>7</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2013 virgil
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
