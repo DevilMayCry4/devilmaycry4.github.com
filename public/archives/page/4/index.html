@@ -52,67 +52,20 @@
     <header>
       
         <div class="icon"></div>
-<<<<<<< HEAD
-        <time datetime="2013-05-22T01:54:00.000Z"><a href="/2013/05/22/2013-05-22-ftpwen-jian-lei-xing/">May 22 2013</a></time>
+        <time datetime="2013-05-29T03:24:00.000Z"><a href="/2013/05/29/2013-05-29-shan-chu-mu-lu-xia-suo-you-svnwen-jian-ming-ling-xing/">May 29 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/05/22/2013-05-22-ftpwen-jian-lei-xing/">FTP文件类型</a></h1>
+    <h1 class="title"><a href="/2013/05/29/2013-05-29-shan-chu-mu-lu-xia-suo-you-svnwen-jian-ming-ling-xing/">删除目录下所有svn文件命令行</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p><br>IOS FTP获取文件列表信息后。kCFFTPResourceType 对应的是文件类型。这个在 sys/dirent.h 头文件中有定义。<br></p>
-
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+        <figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
 2
-3
-4
-5
-6
-7
-8
-9
-</pre></td><td class="code"><pre><span class="preprocessor">#<span class="keyword">define</span>	DT_UNKNOWN	 0</span>
-<span class="preprocessor">#<span class="keyword">define</span>	DT_FIFO		 1</span>
-<span class="preprocessor">#<span class="keyword">define</span>	DT_CHR		 2</span>
-<span class="preprocessor">#<span class="keyword">define</span>	DT_DIR		 4</span>
-<span class="preprocessor">#<span class="keyword">define</span>	DT_BLK		 6</span>
-<span class="preprocessor">#<span class="keyword">define</span>	DT_REG		 8</span>
-<span class="preprocessor">#<span class="keyword">define</span>	DT_LNK		10</span>
-<span class="preprocessor">#<span class="keyword">define</span>	DT_SOCK		12</span>
-<span class="preprocessor">#<span class="keyword">define</span>	DT_WHT		14</span>
-</pre></td></tr></table></figure>
+</pre></td><td class="code"><pre>su<span class="operator"><span class="keyword">do</span> find /Users/<span class="keyword">user</span>/Desktop/svn目录/ -name <span class="string">".svn"</span> -<span class="keyword">exec</span> rm -r {} \;</span>
 
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-</pre></td><td class="code"><pre>
-<span class="title">DT_UNKNOWN</span>    未知类型
-
-DT_RET        普通文件
-
-DT_DIR        目录文件
-
-DT_FIFO       命名管道
-
-DT_SOCK       本地套接口
-
-DT_CHR        字符设备文件
-
-DT_BLK        块设备文件
 </pre></td></tr></table></figure>
 
       
@@ -135,14 +88,87 @@ DT_BLK        块设备文件
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-05-14T04:18:00.000Z"><a href="/2013/05/14/2013-05-14-xi-tong-uiben-di-hua/">May 14 2013</a></time>
-=======
-        <time datetime="2013-05-24T03:57:00.000Z"><a href="/2013/05/24/IOS/2013-05-24-ya-suo-shi-pin/">May 24 2013</a></time>
->>>>>>> 2f6763fb70d4976cdc1e0a43476dc82a84dac3ff
+        <time datetime="2013-05-24T07:15:00.000Z"><a href="/2013/05/24/2013-05-24-hou-tai-qing-qiu-duo-xie-shi-jian/">May 24 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/05/24/IOS/2013-05-24-ya-suo-shi-pin/">压缩视频</a></h1>
+    <h1 class="title"><a href="/2013/05/24/2013-05-24-hou-tai-qing-qiu-duo-xie-shi-jian/">后台请求多些时间</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+</pre></td><td class="code"><pre>   <span class="built_in">UIApplication</span> *app = [<span class="built_in">UIApplication</span> sharedApplication];
+    
+    <span class="comment">//一个后台任务标识符</span>
+    UIBackgroundTaskIdentifier taskID;
+    taskID = [app beginBackgroundTaskWithExpirationHandler:^{
+        <span class="comment">//如果系统觉得我们还是运行了太久，将执行这个程序块，并停止运行应用程序</span>
+        [app endBackgroundTask:taskID];
+    }];
+    <span class="comment">//UIBackgroundTaskInvalid表示系统没有为我们提供额外的时候</span>
+    <span class="keyword">if</span> (taskID == UIBackgroundTaskInvalid) {
+        <span class="built_in">NSLog</span>(@<span class="string">"Failed to start background task!"</span>);
+        <span class="keyword">return</span>;
+    }
+    <span class="keyword">while</span> (app<span class="variable">.backgroundTimeRemaining</span> &gt;<span class="number">0.0</span>)
+    {
+        
+    }
+    <span class="built_in">NSLog</span>(@<span class="string">"Starting background task with %f seconds remaining"</span>, app<span class="variable">.backgroundTimeRemaining</span>);
+    [<span class="built_in">NSThread</span> sleepForTimeInterval:<span class="number">10</span>];
+    <span class="built_in">NSLog</span>(@<span class="string">"Finishing background task with %f seconds remaining"</span>,app<span class="variable">.backgroundTimeRemaining</span>);
+    <span class="comment">//告诉系统我们完成了</span>
+    [app endBackgroundTask:taskID];
+</pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-24T03:57:00.000Z"><a href="/2013/05/24/2013-05-24-ya-suo-shi-pin/">May 24 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/05/24/2013-05-24-ya-suo-shi-pin/">压缩视频</a></h1>
   
 
     </header>
@@ -228,11 +254,11 @@ DT_BLK        块设备文件
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-05-22T01:54:00.000Z"><a href="/2013/05/22/IOS/2013-05-22-ftpwen-jian-lei-xing/">May 22 2013</a></time>
+        <time datetime="2013-05-22T01:54:00.000Z"><a href="/2013/05/22/2013-05-22-ftpwen-jian-lei-xing/">May 22 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/05/22/IOS/2013-05-22-ftpwen-jian-lei-xing/">FTP文件类型</a></h1>
+    <h1 class="title"><a href="/2013/05/22/2013-05-22-ftpwen-jian-lei-xing/">FTP文件类型</a></h1>
   
 
     </header>
@@ -310,11 +336,11 @@ DT_BLK        块设备文件
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-05-14T04:18:00.000Z"><a href="/2013/05/14/IOS/2013-05-14-xi-tong-uiben-di-hua/">May 14 2013</a></time>
+        <time datetime="2013-05-14T04:18:00.000Z"><a href="/2013/05/14/2013-05-14-xi-tong-uiben-di-hua/">May 14 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/05/14/IOS/2013-05-14-xi-tong-uiben-di-hua/">系统UI本地化</a></h1>
+    <h1 class="title"><a href="/2013/05/14/2013-05-14-xi-tong-uiben-di-hua/">系统UI本地化</a></h1>
   
 
     </header>
@@ -358,11 +384,11 @@ DT_BLK        块设备文件
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-05-06T05:45:00.000Z"><a href="/2013/05/06/IOS/2013-05-06-arc/">May 6 2013</a></time>
+        <time datetime="2013-05-06T05:45:00.000Z"><a href="/2013/05/06/2013-05-06-arc/">May 6 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/05/06/IOS/2013-05-06-arc/">ARC</a></h1>
+    <h1 class="title"><a href="/2013/05/06/2013-05-06-arc/">ARC</a></h1>
   
 
     </header>
@@ -389,11 +415,11 @@ DT_BLK        块设备文件
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-05-06T01:58:00.000Z"><a href="/2013/05/06/WindowsPhone/2013-05-06-c-number-shu-chu-ri-zhi/">May 6 2013</a></time>
+        <time datetime="2013-05-06T01:58:00.000Z"><a href="/2013/05/06/2013-05-06-c-number-shu-chu-ri-zhi/">May 6 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/05/06/WindowsPhone/2013-05-06-c-number-shu-chu-ri-zhi/">C#输出日志</a></h1>
+    <h1 class="title"><a href="/2013/05/06/2013-05-06-c-number-shu-chu-ri-zhi/">C#输出日志</a></h1>
   
 
     </header>
@@ -426,11 +452,11 @@ Debug<span class="preprocessor">.WriteLine</span>(<span class="string">"LogText"
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-04-28T06:31:00.000Z"><a href="/2013/04/28/WindowsPhone/2013-04-28-c-number-delegatehe-event/">Apr 28 2013</a></time>
+        <time datetime="2013-04-28T06:31:00.000Z"><a href="/2013/04/28/2013-04-28-c-number-delegatehe-event/">Apr 28 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/04/28/WindowsPhone/2013-04-28-c-number-delegatehe-event/">C#delegate和event</a></h1>
+    <h1 class="title"><a href="/2013/04/28/2013-04-28-c-number-delegatehe-event/">C#delegate和event</a></h1>
   
 
     </header>
@@ -482,7 +508,7 @@ md(<span class="string">"sam1111"</span>);
       
         
           <div class="alignleft">
-            <a href="/2013/04/28/WindowsPhone/2013-04-28-c-number-delegatehe-event/#more" class="more-link">Read More</a>
+            <a href="/2013/04/28/2013-04-28-c-number-delegatehe-event/#more" class="more-link">Read More</a>
           </div>
         
         
@@ -500,11 +526,11 @@ md(<span class="string">"sam1111"</span>);
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-04-27T09:18:00.000Z"><a href="/2013/04/27/IOS/2013-04-27-ios-zhi-zuo-jing-tai-ku/">Apr 27 2013</a></time>
+        <time datetime="2013-04-27T09:18:00.000Z"><a href="/2013/04/27/2013-04-27-ios-zhi-zuo-jing-tai-ku/">Apr 27 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/04/27/IOS/2013-04-27-ios-zhi-zuo-jing-tai-ku/">IOS 制作静态库</a></h1>
+    <h1 class="title"><a href="/2013/04/27/2013-04-27-ios-zhi-zuo-jing-tai-ku/">IOS 制作静态库</a></h1>
   
 
     </header>
@@ -532,11 +558,11 @@ md(<span class="string">"sam1111"</span>);
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-04-26T08:25:00.000Z"><a href="/2013/04/26/IOS/2013-04-26-xcode-bu-jin-c-plus-plus-duan-dian/">Apr 26 2013</a></time>
+        <time datetime="2013-04-26T08:25:00.000Z"><a href="/2013/04/26/2013-04-26-xcode-bu-jin-c-plus-plus-duan-dian/">Apr 26 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/04/26/IOS/2013-04-26-xcode-bu-jin-c-plus-plus-duan-dian/">Xcode 不进C++ 断点</a></h1>
+    <h1 class="title"><a href="/2013/04/26/2013-04-26-xcode-bu-jin-c-plus-plus-duan-dian/">Xcode 不进C++ 断点</a></h1>
   
 
     </header>
@@ -557,242 +583,6 @@ md(<span class="string">"sam1111"</span>);
 
 
   
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-04-26T06:29:00.000Z"><a href="/2013/04/26/IOS/2013-04-26-air-print/">Apr 26 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/04/26/IOS/2013-04-26-air-print/">Air Print</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>Air Print</p>
-
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-</pre></td><td class="code"><pre>- (void)drawPageAtIndex:(NSInteger)pageIndex inRect:(CGRect)printableRect
-{
-    CGRect pageRect = CGPDFPageGetBoxRect([_item openPage:pageIndex +<span class="number">1</span>], kCGPDFMediaBox)<span class="comment">;</span>
-    CGContextRef context = UIGraphicsGetCurrentContext()<span class="comment">;</span>
-    CGContextSetRGBFillColor(context, <span class="number">1.0</span>,<span class="number">1.0</span>,<span class="number">1.0</span>,<span class="number">1.0</span>)<span class="comment">;</span>
-    CGContextFillRect(context,printableRect)<span class="comment">;</span>
-    CGContextTranslateCTM(context, <span class="number">0.0</span>, printableRect<span class="preprocessor">.size</span><span class="preprocessor">.height</span>)<span class="comment">;</span>
-    CGContextTranslateCTM(context, printableRect<span class="preprocessor">.origin</span><span class="preprocessor">.x</span>, printableRect<span class="preprocessor">.origin</span><span class="preprocessor">.y</span>)<span class="comment">;</span>
-    CGContextScaleCTM(context, printableRect<span class="preprocessor">.size</span><span class="preprocessor">.width</span>/pageRect<span class="preprocessor">.size</span><span class="preprocessor">.width</span>, -printableRect<span class="preprocessor">.size</span><span class="preprocessor">.height</span>/pageRect<span class="preprocessor">.size</span><span class="preprocessor">.height</span>)<span class="comment">;</span>
-    CGContextSaveGState(context)<span class="comment">;</span>
-    CGContextDrawPDFPage(context, [_item openPage:pageIndex + <span class="number">1</span>])<span class="comment">;</span>
-    CGContextRestoreGState(context)<span class="comment">;</span>
-
-
-} 
-</pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-04-26T01:30:00.000Z"><a href="/2013/04/26/WindowsPhone/2013-04-26-c-number-abstracegen-virtuade-qu-bie/">Apr 26 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/04/26/WindowsPhone/2013-04-26-c-number-abstracegen-virtuade-qu-bie/">C#abstrace跟virtua的区别</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h5>一、Virtual方法（虚方法）</h5>
-<p><br>virtual 关键字用于在基类中修饰方法。virtual的使用会有两种情况：<br><br>     情况1：在基类中定义了virtual方法，但在派生类中没有重写该虚方法。那么在对派生类实例的调用中，该虚方法使用的是基类定义的方法。<br><br>     情况2：在基类中定义了virtual方法，然后在派生类中使用override重写该方法。那么在对派生类实例的调用中，该虚方法使用的是派生重写的方法。<br></p><br>#####二、Abstract方法（抽象方法）<br><p><br> abstract关键字只能用在抽象类中修饰方法，并且没有具体的实现。抽象方法的实现必须在派生类中使用override关键字来实现。<br><br>接口和抽象类:<br><br>最本质的区别：抽象类是一个不完全的类，是对对象的抽象，而接口是一种行为规范。<br><br> C# 是面向对象的程序设计语言，每一个函数都属于一个类。<br>Static：当一个方法被声明为Static时，这个方法是一个静态方法，编译器会在编译时保留这个方法的实现。也就是说，这个方法属于类，但是不属于任何成员，不管这个类的实例是否存在，它们都会存在。就像入口函数Static void Main，因为它是静态函数，所以可以直接被调用。</p><br><p><br>Virtua：当一个方法被声明为Virtual时，它是一个虚拟方法，直到你使用ClassName variable = new ClassName();声明一个类的实例之前，它都不存在于真实的内存空间中。这个关键字在类的继承中非常常用，用来提供类方法的多态性支持。<br>overrride：表示重写 这个类是继承于Shape类<br>public override double Area 这个属性再shape中肯定存在 但是这里我们不想用shape中的 所以要重写<br>virtual，abstract是告诉其它想继承于他的类 你可以重写我的这个方法或属性，否则不允许。<br>一个生动的例子 :老爸表示基类（被继承的类） 儿子表示子类（继承的类）<br>老爸用virtual告诉儿子:“孩子,你要继承我的事业,在这块上面可以自己继续发展你自己的”<br>儿子用override告诉全世界:“这个我可不是直接拿我爸的,他只是指个路给我,是我自己奋斗出来的”<br></p><br><p><br>abstract：抽象方法声明使用，是必须被派生类覆写的方法，抽象类就是用来被继承的；可以看成是没有实现体的虚方法；如果类中包含抽象方法，那么类就必须定义为抽象类，不论是否还包含其他一般方法；抽象类不能有实体的。<br>实例解答:<br>interface:用来声明接口<br></p>
-
-<p><br>1.只提供一些方法规约，不提供方法主体. 如:<br></p>
-
-<figure class="highlight lang-csharp"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IPerson</span>
-{</span>
-<span class="keyword">void</span> getName();<span class="comment">//不包含方法主体</span>
-}
-</pre></td></tr></table></figure>
-
-
-<p><br>2.方法不能用public abstract等修饰,无字段变量，无构造函数。<br></p>
-
-
-<p><br>3.方法可包含参数。 如:<br></p>
-
-<figure class="highlight lang-csharp"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre> <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IPerson</span>
-{</span>
-<span class="keyword">void</span> getAge(<span class="keyword">string</span> s);
-}
-</pre></td></tr></table></figure>
-
-
-
-<p><br>一个例子(例1)：<br></p>
-
-<figure class="highlight lang-csharp"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-</pre></td><td class="code"><pre><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IPerson</span>
-{</span>
-IPerson(); <span class="comment">//错误</span>
-<span class="keyword">string</span> name; <span class="comment">//错误</span>
-<span class="keyword">public</span> <span class="keyword">void</span> getIDcard();<span class="comment">//错误</span>
-<span class="keyword">void</span> getName(); <span class="comment">//right</span>
-<span class="keyword">void</span> getAge(<span class="keyword">string</span> s); <span class="comment">//right</span>
-}
-</pre></td></tr></table></figure>
-
-
-
-<p><br>实现interface的类<br>1.与继承类的格式一致，如 public class Chinese:IPerson{}<br>2.必须实现 interface 中的各个方法<br>例2，继承例1<br></p>
-
-
-<figure class="highlight lang-csharp"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Chinese</span>:<span class="title">IPerson</span>
-{</span>
-<span class="keyword">public</span> Chinese(){} <span class="comment">//添加构造</span>
-<span class="keyword">public</span> <span class="keyword">void</span> getName(){} <span class="comment">//实现getName()</span>
-<span class="keyword">public</span> <span class="keyword">void</span> getAge(<span class="keyword">string</span> s){} <span class="comment">//实现getAge()</span>
-}
-</pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/04/26/WindowsPhone/2013-04-26-c-number-abstracegen-virtuade-qu-bie/#more" class="more-link">Read More</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
-<<<<<<< HEAD
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-04-25T07:11:00.000Z"><a href="/2013/04/25/2013-04-25-c-number-jie-kou/">Apr 25 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/04/25/2013-04-25-c-number-jie-kou/">C# 接口</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p><br>定义接口，里面包含方法，但没有方法具体实现的代码，然后在继承该接口的类里面要实现接口的所有方法的代码。<br></p>
-
-<p>定义接口</p]><br><br><figure class="highlight lang-csharp"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IBark</span>
-{</span>
-    <span class="keyword">void</span> Bark();
-}
-</pre></td></tr></table></figure><br><br><br><p><br>再定义一个类,继承于IBark,并且必需实现其中的Bark()方法。<br></p>
-
-<figure class="highlight lang-csharp"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td><td class="code"><pre>public <span class="class"><span class="keyword">class</span> <span class="title">Dog</span>:</span>IBark
-{
-    public Dog()
-    {}
-    public void Bark()
-    {
-       Consol.write(<span class="string">"汪汪"</span>);
-     }
-}
-</pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
-=======
->>>>>>> 2f6763fb70d4976cdc1e0a43476dc82a84dac3ff
 
   <nav id="pagination">
   
@@ -834,11 +624,7 @@ IPerson(); <span class="comment">//错误</span>
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-<<<<<<< HEAD
-    <li><a href="/tags/IOS/">IOS</a><small>7</small></li>
-=======
-    <li><a href="/tags/IOS/">IOS</a><small>8</small></li>
->>>>>>> 2f6763fb70d4976cdc1e0a43476dc82a84dac3ff
+    <li><a href="/tags/IOS/">IOS</a><small>10</small></li>
   
   </ul>
 </div>
@@ -848,7 +634,7 @@ IPerson(); <span class="comment">//错误</span>
   </div>
   <footer id="footer" class="inner"><div class="alignleft">
   
-  &copy; 2013 virgil
+  &copy; 2014 virgil
   
 </div>
 <div class="clearfix"></div></footer>
