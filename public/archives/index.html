@@ -52,6 +52,116 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2014-03-05T02:08:49.000Z"><a href="/2014/03/05/nslayoutconstraint/">Mar 5 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/05/nslayoutconstraint/">NSLayoutConstraint</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><p><br>ios6之后开始使用自动约束布局NSLayoutConstraint，这个可以解决对于不同的ios设备、autoresizingMask的不足。<br></p><br> <figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+</pre></td><td class="code"><pre>- (void)viewDidLoad
+{
+    [<span class="keyword">super</span> viewDidLoad];
+    _originV = [[<span class="class">UIView</span> alloc] init];
+    _originV.backgroundColor = [<span class="class">UIColor</span> redColor];
+    _originV.translatesAutoresizingMaskIntoConstraints = <span class="class">NO</span>;
+    [<span class="keyword">self</span>.view <span class="method">addSubview:</span>_originV];
+    
+    [<span class="keyword">self</span>.view <span class="method">addConstraint:</span>[<span class="class">NSLayoutConstraint</span> <span class="method">constraintWithItem:</span>_originV <span class="method">attribute:</span><span class="class">NSLayoutAttributeWidth</span> <span class="method">relatedBy:</span><span class="class">NSLayoutRelationEqual</span>  <span class="method">toItem:</span><span class="keyword">self</span>.view <span class="method">attribute:</span><span class="class">NSLayoutAttributeWidth</span> <span class="method">multiplier:</span><span class="number">1</span> <span class="method">constant:</span>-<span class="number">40</span>]];
+    
+    [<span class="keyword">self</span>.view <span class="method">addConstraint:</span>[<span class="class">NSLayoutConstraint</span> <span class="method">constraintWithItem:</span>_originV <span class="method">attribute:</span><span class="class">NSLayoutAttributeHeight</span> <span class="method">relatedBy:</span><span class="class">NSLayoutRelationEqual</span>  <span class="method">toItem:</span><span class="keyword">self</span>.view <span class="method">attribute:</span><span class="class">NSLayoutAttributeHeight</span> <span class="method">multiplier:</span><span class="number">1</span> <span class="method">constant:</span>-<span class="number">40</span>]];
+    
+    [<span class="keyword">self</span>.view <span class="method">addConstraint:</span>[<span class="class">NSLayoutConstraint</span> <span class="method">constraintWithItem:</span>_originV <span class="method">attribute:</span><span class="class">NSLayoutAttributeCenterY</span> <span class="method">relatedBy:</span><span class="class">NSLayoutRelationEqual</span>  <span class="method">toItem:</span><span class="keyword">self</span>.view <span class="method">attribute:</span><span class="class">NSLayoutAttributeCenterY</span> <span class="method">multiplier:</span><span class="number">1</span> <span class="method">constant:</span><span class="number">0</span>]];
+    
+    _constran = [<span class="class">NSLayoutConstraint</span> <span class="method">constraintWithItem:</span>_originV <span class="method">attribute:</span><span class="class">NSLayoutAttributeCenterX</span> <span class="method">relatedBy:</span><span class="class">NSLayoutRelationEqual</span> <span class="method">toItem:</span><span class="keyword">self</span>.view <span class="method">attribute:</span><span class="class">NSLayoutAttributeCenterX</span> <span class="method">multiplier:</span><span class="number">1</span> <span class="method">constant:</span><span class="number">0</span>];
+  
+    [<span class="keyword">self</span>.view <span class="method">addConstraint:</span>_constran];
+    
+    _but = [<span class="class">UIButton</span> <span class="method">buttonWithType:</span><span class="class">UIButtonTypeRoundedRect</span>];
+    _but.backgroundColor =[<span class="class">UIColor</span> blueColor];
+    _but.translatesAutoresizingMaskIntoConstraints = <span class="class">NO</span>;
+    [_but <span class="method">addTarget:</span><span class="keyword">self</span> <span class="method">action:</span>@selector(<span class="method">changeButton:</span>) <span class="method">forControlEvents:</span><span class="class">UIControlEventTouchUpInside</span>];
+    [<span class="keyword">self</span>.view <span class="method">addSubview:</span>_but];
+   
+    [<span class="keyword">self</span>.view <span class="method">addConstraint:</span>[<span class="class">NSLayoutConstraint</span> <span class="method">constraintWithItem:</span>_but <span class="method">attribute:</span><span class="class">NSLayoutAttributeLeft</span> <span class="method">relatedBy:</span><span class="class">NSLayoutRelationEqual</span> <span class="method">toItem:</span>_originV <span class="method">attribute:</span><span class="class">NSLayoutAttributeLeft</span> <span class="method">multiplier:</span><span class="number">1</span> <span class="method">constant:</span><span class="number">30</span>]];
+    
+      [<span class="keyword">self</span>.view <span class="method">addConstraint:</span>[<span class="class">NSLayoutConstraint</span> <span class="method">constraintWithItem:</span>_but <span class="method">attribute:</span><span class="class">NSLayoutAttributeTop</span> <span class="method">relatedBy:</span><span class="class">NSLayoutRelationEqual</span> <span class="method">toItem:</span>_originV <span class="method">attribute:</span><span class="class">NSLayoutAttributeTop</span> <span class="method">multiplier:</span><span class="number">1</span> <span class="method">constant:</span><span class="number">30</span>]];
+    
+    [<span class="keyword">self</span>.view <span class="method">addConstraint:</span>[<span class="class">NSLayoutConstraint</span> <span class="method">constraintWithItem:</span>_but <span class="method">attribute:</span><span class="class">NSLayoutAttributeRight</span> <span class="method">relatedBy:</span><span class="class">NSLayoutRelationEqual</span> <span class="method">toItem:</span>_originV <span class="method">attribute:</span><span class="class">NSLayoutAttributeRight</span> <span class="method">multiplier:</span><span class="number">1</span> <span class="method">constant:</span> -<span class="number">30</span>]];
+    
+    [<span class="keyword">self</span>.view <span class="method">addConstraint:</span>[<span class="class">NSLayoutConstraint</span> <span class="method">constraintWithItem:</span>_but <span class="method">attribute:</span><span class="class">NSLayoutAttributeBottom</span> <span class="method">relatedBy:</span><span class="class">NSLayoutRelationEqual</span> <span class="method">toItem:</span>_originV <span class="method">attribute:</span><span class="class">NSLayoutAttributeBottom</span> <span class="method">multiplier:</span><span class="number">1</span> <span class="method">constant:</span>-<span class="number">30</span>]];
+}
+
+- (void)<span class="method">changeButton:</span>(<span class="class">UIButton</span> *)button
+{
+    _constran.constant += <span class="number">5</span>;
+    [<span class="keyword">self</span>.view updateConstraintsIfNeeded];
+}
+ 
+</pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2014-03-03T03:56:50.000Z"><a href="/2014/03/03/多参数函数/">Mar 3 2014</a></time>
       
       
@@ -454,37 +564,6 @@
 
 
   
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-09-22T11:16:57.000Z"><a href="/2013/09/22/1080后环境变量/">Sep 22 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/09/22/1080后环境变量/">10.8.0后环境变量</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p><br>MAC 在10.8.0后环境变量存在了/private/etc/paths里<br></p>
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
 
   <nav id="pagination">
   
@@ -524,7 +603,7 @@
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/IOS/">IOS</a><small>11</small></li>
+    <li><a href="/tags/IOS/">IOS</a><small>12</small></li>
   
   </ul>
 </div>
