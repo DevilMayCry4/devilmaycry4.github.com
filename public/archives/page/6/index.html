@@ -52,6 +52,47 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2013-04-22T06:39:00.000Z"><a href="/2013/04/22/2013-04-22-tong-guo-diao-yong-urltiao-zhuan-dao-xiang-ying-de-she-zhi-ye-mian/">Apr 22 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/22/2013-04-22-tong-guo-diao-yong-urltiao-zhuan-dao-xiang-ying-de-she-zhi-ye-mian/">通过调用url跳转到相应的设置页面</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>调用如下代码：</p><br><figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre> NSURL *url = [NSURL URLWithString:@<span class="string">"prefs:root=WIFI"</span>];
+ <span class="string">[[UIApplication sharedApplication] openURL:url];
+</pre></td></tr></table></figure><br><br><p>即可跳转到设置页面的对应项。</p>
+
+<p><p>相关的URL string：</p><br>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/04/22/2013-04-22-tong-guo-diao-yong-urltiao-zhuan-dao-xiang-ying-de-she-zhi-ye-mian/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2013-04-22T06:34:00.000Z"><a href="/2013/04/22/2013-04-22-nsuserdefaults-standarduserdefaultszhu-yi-shi-xiang/">Apr 22 2013</a></time>
       
       
@@ -606,84 +647,6 @@
 
 
   
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-04-22T03:26:00.000Z"><a href="/2013/04/22/2013-04-22-ioshuo-qu-dan-wen-jian-de-da-xiao/">Apr 22 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/04/22/2013-04-22-ioshuo-qu-dan-wen-jian-de-da-xiao/">IOS获取单文件的大小</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>c语言实现：</p><br><figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-</pre></td><td class="code"><pre><span class="preprocessor">#include "sys/stat.h"</span>
-- (<span class="keyword">long</span> <span class="keyword">long</span>) fileSizeAtPath:(<span class="built_in">NSString</span>*) filePath
-{  
-    <span class="keyword">struct</span> stat st;  
-    <span class="keyword">if</span>(lstat([filePath cStringUsingEncoding:NSUTF8StringEncoding], &amp;st) == <span class="number">0</span>)
-    {  
-        <span class="keyword">return</span> st<span class="variable">.st_size</span>;  
-    }  
-    <span class="keyword">return</span> <span class="number">0</span>;  
-}  
-
-</pre></td></tr></table></figure><br><br><br><p>object-c实现：</p>
-
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-</pre></td><td class="code"><pre>
--(long long) fileSizeAtPath:(NSString*) filePath
-{  
-  NSFileManager* manager = [NSFileManager defaultManager];  
-  <span class="keyword">if</span> ([manager fileExistsAtPath:filePath])
-  {  
-    <span class="keyword">return</span> <span class="string">[[manager attributesOfItemAtPath:filePath error:nil] fileSize];  
-  }  
-  return 0;  
-}  
-
-</pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
 
   <nav id="pagination">
   
@@ -725,7 +688,7 @@
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/IOS/">IOS</a><small>12</small></li>
+    <li><a href="/tags/IOS/">IOS</a><small>13</small></li>
   
   </ul>
 </div>

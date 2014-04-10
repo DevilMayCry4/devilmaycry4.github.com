@@ -48,6 +48,37 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2013-09-23T04:14:09.000Z"><a href="/2013/09/23/uiimageview不调用drawatrect/">Sep 23 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/09/23/uiimageview不调用drawatrect/">UIImageView不调用drawAtRect</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><br>UIImageView 不会调用drawAtRect这个函数、因为它是专门用来做图像显示的控件、苹果对这个控件做了最优显示。<br></p>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2013-09-22T11:16:57.000Z"><a href="/2013/09/22/1080后环境变量/">Sep 22 2013</a></time>
       
       
@@ -468,78 +499,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-06-20T07:55:00.000Z"><a href="/2013/06/20/2013-06-20-block/">Jun 20 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/06/20/2013-06-20-block/">Block</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p><br>IOS4后苹果开始使用block作为回调函数来取代传统的delegate。这种闭包函数可以是代码的逻辑更加清晰。精简大量的代码，但是由于block会隐藏式地retain在block中使用的变量 ，而没有注意这种情况的情况下，程序很容易出现内存泄露。<br></p>
-
-<p><br>假设我们有一个controller，有个view是加到这个controller的view上面，当view中的某些功能完成的时候，view回调原来设置好的block。但是你会发现这个controller和这个view都无法调用到dealloc了。<br></p>
-
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-</pre></td><td class="code"><pre>
-- (<span class="keyword">void</span>)viewDidLoad
-{
-   [<span class="keyword">super</span> viewDidLoad];
-   View *view = [View alloc]initWithFrame:CGRectMake(<span class="number">0</span>,<span class="number">0</span>,<span class="number">100</span>,<span class="number">100</span>)];
-   view.OnComplete= ^{
-   [self print];
-   };
-}
-
-<span class="javadoc">/************/</span>
-typedef <span class="keyword">void</span>(^Block) block;
-
-<span class="annotation">@property</span>(noautomatic,copy)block OnComplete;
-
-
- 
-</pre></td></tr></table></figure>
-
-
-<p>上例中，view的语法块中访问self，所以view  retian self一次，所以但view没有调用[_OnComplete  release];之前，controller是不会被dealloc的，而view是在controller的view上面。如果controller不释放，view也不会被释放，这样就进入retain circle了。<br></p>
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
 
 <nav id="pagination">
   
@@ -580,7 +539,7 @@ typedef <span class="keyword">void</span>(^Block) block;
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/IOS/">IOS</a><small>12</small></li>
+    <li><a href="/tags/IOS/">IOS</a><small>13</small></li>
   
   </ul>
 </div>
