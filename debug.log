@@ -1,4 +1,4 @@
-date: 2013-10-22 15:30:20.650
+date: 2014-04-23 16:48:31.190
 argv: node /usr/local/bin/hexo generate
 os: Darwin 12.4.0 darwin x64
 version:
@@ -13,14 +13,44 @@ version:
   openssl: 1.0.1e
 ---
 
-[debug] 15:30:20.329 Configuration file load successfully
-[debug] 15:30:20.331 Version info checked successfully
-[debug] 15:30:20.332 Loading the database...
-[debug] 15:30:20.524 Theme layout loaded
-[debug] 15:30:20.592 Theme source loaded
-[debug] 15:30:20.609 Theme configuration loaded
-[debug] 15:30:20.616 Theme i18n loaded
-[error] 15:30:20.639 { rawMessage: 'Unable to parse.',
+[debug] 16:48:30.717 Configuration file load successfully
+[debug] 16:48:30.719 Version info checked successfully
+[debug] 16:48:30.719 Loading the database...
+[debug] 16:48:30.968 Theme layout loaded
+[debug] 16:48:31.014 Theme configuration loaded
+[debug] 16:48:31.065 Theme source loaded
+[debug] 16:48:31.152 Processed: img/openfire1.png
+[debug] 16:48:31.153 Processed: img/pdf1.png
+[debug] 16:48:31.153 Processed: img/pdf2.png
+[debug] 16:48:31.154 Processed: img/pdf3.png
+[debug] 16:48:31.155 Processed: img/2048/favicon.ico
+[debug] 16:48:31.155 Processed: img/2048/js/animframe_polyfill.js
+[debug] 16:48:31.157 Processed: img/2048/js/application.js
+[debug] 16:48:31.157 Processed: img/2048/js/game_manager.js
+[debug] 16:48:31.158 Processed: img/2048/js/grid.js
+[debug] 16:48:31.158 Processed: img/2048/js/html_actuator.js
+[debug] 16:48:31.161 Processed: img/2048/js/keyboard_input_manager.js
+[debug] 16:48:31.161 Processed: img/2048/js/local_score_manager.js
+[debug] 16:48:31.162 Processed: img/2048/js/tile.js
+[debug] 16:48:31.163 Processed: img/2048/meta/apple-touch-icon.png
+[debug] 16:48:31.164 Processed: img/2048/style/1024.jpg
+[debug] 16:48:31.164 Processed: img/2048/style/2048.jpg
+[debug] 16:48:31.165 Processed: img/2048/style/main.css
+[debug] 16:48:31.166 Processed: img/2048/full/favicon.ico
+[debug] 16:48:31.167 Processed: img/2048/full/js/animframe_polyfill.js
+[debug] 16:48:31.167 Processed: img/2048/full/js/application.js
+[debug] 16:48:31.168 Processed: img/2048/full/js/game_manager.js
+[debug] 16:48:31.169 Processed: img/2048/full/js/grid.js
+[debug] 16:48:31.170 Processed: img/2048/full/js/html_actuator.js
+[debug] 16:48:31.170 Processed: img/2048/full/js/keyboard_input_manager.js
+[debug] 16:48:31.171 Processed: img/2048/full/js/local_score_manager.js
+[debug] 16:48:31.171 Processed: img/2048/full/js/tile.js
+[debug] 16:48:31.172 Processed: img/2048/full/meta/apple-touch-icon.png
+[debug] 16:48:31.172 Processed: img/2048/full/style/131072.jpg
+[debug] 16:48:31.173 Processed: img/2048/full/style/65536.jpg
+[debug] 16:48:31.174 Processed: img/2048/full/style/main.css
+[debug] 16:48:31.175 Theme i18n loaded
+[error] 16:48:31.185 { rawMessage: 'Unable to parse.',
   parsedLine: 3,
   snippet: 'tags:IOS',
   parsedFile: null,

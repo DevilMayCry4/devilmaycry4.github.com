@@ -52,6 +52,102 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2013-10-17T07:11:47.000Z"><a href="/2013/10/17/添加字体/">Oct 17 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/10/17/添加字体/">添加字体</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><br>3.2以后添加新的字体库只要在info.plist中添加UIAppFonts属性，然后添加库名。使用[UIFont fontWithName:size] 方法是可以的。<br></p>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-10-09T09:31:15.000Z"><a href="/2013/10/09/block-内存/">Oct 9 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/10/09/block-内存/">Block 内存</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><p><br>block调用自身在前面添加__block关键字<br></p></p>
+<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="code"><pre>- (IBAction)grabURLInBackground:(id)sender
+{
+   NSURL <span class="variable">*url</span> = [NSURL URLWithString:<span class="variable">@"</span>http:<span class="comment">//allseeing-i.com"];</span>
+   __block ASIHTTPRequest <span class="variable">*request</span> = [ASIHTTPRequest requestWithURL:url];
+   [request setCompletionBlock:^{
+      <span class="comment">// Use when fetching text data</span>
+      NSString <span class="variable">*responseString</span> = [request responseString];
+ 
+      <span class="comment">// Use when fetching binary data</span>
+      NSData <span class="variable">*responseData</span> = [request responseData];
+   }];
+   [request setFailedBlock:^{
+      NSError <span class="variable">*error</span> = [request <span class="keyword">error</span>];
+   }];
+   [request startAsynchronous];
+}
+</pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2013-09-23T04:14:09.000Z"><a href="/2013/09/23/uiimageview不调用drawatrect/">Sep 23 2013</a></time>
       
       
@@ -423,86 +519,6 @@
 
 
   
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-06-25T01:53:00.000Z"><a href="/2013/06/25/2013-06-25-test-install/">Jun 25 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/06/25/2013-06-25-test-install/">Test Install</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p><a href="itms-services://?action=download-manifest&url=http://devilmaycry4.github.io/images/yun.plist">Install App</a></p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-06-20T08:24:00.000Z"><a href="/2013/06/20/2013-06-20-yin-ying-xiao-lu/">Jun 20 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/06/20/2013-06-20-yin-ying-xiao-lu/">阴影效率</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p><br>UIView 如果没有设置阴影的边框会导致、在旋转屏幕或者滑动的时候，界面卡顿，因为设置了阴影的view会不断地重新绘制。解决的方法:<br></p>
-
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-</pre></td><td class="code"><pre>        <span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.shadowColor</span> = [<span class="built_in">UIColor</span> blackColor]<span class="variable">.CGColor</span>;
-        <span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.shadowOffset</span> = CGSizeMake(<span class="number">0</span>, <span class="number">3</span>);
-        <span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.shadowOpacity</span> = <span class="number">0.6</span>;
-        <span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.masksToBounds</span> = <span class="literal">NO</span>;
-        <span class="comment">/*********
-           self.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.bounds].CGPath;
-           *********/</span>
-</pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
 
   <nav id="pagination">
   
@@ -544,7 +560,7 @@
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/IOS/">IOS</a><small>13</small></li>
+    <li><a href="/tags/IOS/">IOS</a><small>15</small></li>
   
   </ul>
 </div>

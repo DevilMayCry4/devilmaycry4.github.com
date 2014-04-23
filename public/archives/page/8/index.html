@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2014/4 | 無限大な夢</title>
+  <title>Page 8 | Archives | 無限大な夢</title>
   <meta name="author" content="virgil">
   
   
@@ -42,7 +42,7 @@
 <div class="clearfix"></div></header>
   <div id="content" class="inner">
     <div id="main-col" class="alignleft"><div id="wrapper">
-<h2 class="archive-title">2014/4</h2>
+<h2 class="archive-title">Archives</h2>
 
 
   
@@ -52,73 +52,32 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2014-04-10T06:32:55.000Z"><a href="/2014/04/10/runtime/">Apr 10 2014</a></time>
+        <time datetime="2013-04-21T02:22:00.000Z"><a href="/2013/04/21/2013-04-21-ios-diao-yong-di-san-fang-appda-kai-wen-jian/">Apr 21 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2014/04/10/runtime/">runtime</a></h1>
+    <h1 class="title"><a href="/2013/04/21/2013-04-21-ios-diao-yong-di-san-fang-appda-kai-wen-jian/">IOS 调用第三方App打开文件</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p><p><br>关联对象<br></p></p>
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+        <figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
 2
 3
 4
 5
 6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-</pre></td><td class="code"><pre><span class="keyword">static</span> <span class="keyword">void</span> *alertKey = <span class="string">"alertKey"</span>;
-typedef <span class="keyword">void</span> (^Block)(<span class="keyword">int</span>);
-
-UIAlertView *alert = [[UIAlertView alloc] initWithTitle:<span class="string">@""</span> message:<span class="string">@"test"</span> <span class="keyword">delegate</span>:self cancelButtonTitle:<span class="string">@"取消"</span> otherButtonTitles:<span class="string">@"确定"</span>, nil];
-  
-    
-      Block block  = ^(NSInteger index ){
-        <span class="keyword">if</span> (index == <span class="number">0</span>)
-        {
-          NSLog(<span class="string">@"1"</span>);
-        }
-        <span class="keyword">else</span>
-        {
-            NSLog(<span class="string">@"2"</span>);
-        }
-    };
-
-    objc_setAssociatedObject(alert, alertKey, block, OBJC_ASSOCIATION_COPY);
-    [alert show];
-    
-    
+</pre></td><td class="code"><pre>NSString  *filePath =<span class="string">[[NSBundlemainBundle]pathForResource:@"1"ofType:@"docx"];
+UIDocumentInteractionController  *documentController=[UIDocumentInteractionControllerinteractionControllerWithURL:[NSURLfileURLWithPath:filePath]]</span>;
+documentController.UTI= @<span class="string">"com.microsoft.word.doc"</span>;
+[documentController presentOpenInMenuFromRect:CGRectZero
+                    		    	 inView:self.view
+                                     animated:YES];
 </pre></td></tr></table></figure>
 
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-</pre></td><td class="code"><pre><span class="pp">- <span class="params">(void)</span>alertView:<span class="params">(<span class="variable">UIAlertView</span> *)</span>alertView clickedButtonAtIndex:<span class="params">(<span class="variable">NSInteger</span>)</span>buttonIndex
-{
-     Block block = objc_getAssociatedObject<span class="params">(alert<span class="variable">View</span>, alert<span class="variable">Key</span>)</span>;
-    block<span class="params">(button<span class="variable">Index</span>)</span>;
-}
-</pre></td></tr></table></figure>
 
+<p><a href="https://developer.apple.com/library/ios/#documentation/Miscellaneous/Reference/UTIRef/Articles/System-DeclaredUniformTypeIdentifiers.html#//apple_ref/doc/uid/TP40009259-SW1" target="_blank">UTI 列表</a></p>
       
     </div>
     <footer>
@@ -135,6 +94,8 @@ UIAlertView *alert = [[UIAlertView alloc] initWithTitle:<span class="string">@""
   
 
   <nav id="pagination">
+  
+    <a href="/archives/page/7/" class="alignleft prev">Prev</a>
   
   
   <div class="clearfix"></div>
@@ -170,7 +131,7 @@ UIAlertView *alert = [[UIAlertView alloc] initWithTitle:<span class="string">@""
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/IOS/">IOS</a><small>13</small></li>
+    <li><a href="/tags/IOS/">IOS</a><small>15</small></li>
   
   </ul>
 </div>
