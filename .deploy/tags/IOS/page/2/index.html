@@ -1,0 +1,319 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Page 2 | IOS | 無限大な夢</title>
+  <meta name="author" content="virgil">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="無限大な夢"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="無限大な夢" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">無限大な夢</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title tag">IOS</h2>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-10-21T05:56:35.000Z"><a href="/2013/10/21/IOS/ios7-tips/">Oct 21 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/10/21/IOS/ios7-tips/">ios7 tips</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>当以navigation的方式pushcontroller的时候，如果plist表的View controller-based status bar appearance = yes时、状态栏的显示隐藏由navgtion里的viewcontrollers自己控制、状态栏的风格由navigation自己控制<br></p><br><p><br>ios7如果某个item左右两边的items不相等，即使左右各放置一个UIBarButtonSystemItemFlexibleSpace也是没法使这个item居中的、可以放置一些隐藏的item使两边相等。<br></p>
+
+<p></p><p><br>调整viewcontroller适配ios7状态栏<br></p><p></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> ([[[UIDevice currentDevice] systemVersion] floatValue] &gt;= <span class="number">7</span>) </div><div class="line">{</div><div class="line">        <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.bounds</span> = CGRectMake(<span class="number">0</span>, -<span class="number">20</span>, <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span>, <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span> );</div><div class="line">    }</div><div class="line"> </div></pre></td></tr></table></figure>
+
+<p> </p><p><br> 参考：<a href="http://www.ifun.cc/blog/2013/09/28/gua-pei-ios7kai-fa/" target="_blank" rel="external">http://www.ifun.cc/blog/2013/09/28/gua-pei-ios7kai-fa/</a><br> </p><p></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-10-17T07:11:47.000Z"><a href="/2013/10/17/IOS/添加字体/">Oct 17 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/10/17/IOS/添加字体/">添加字体</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><br>3.2以后添加新的字体库只要在info.plist中添加UIAppFonts属性，然后添加库名。使用[UIFont fontWithName:size] 方法是可以的。<br></p>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-10-09T09:31:15.000Z"><a href="/2013/10/09/IOS/block-内存/">Oct 9 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/10/09/IOS/block-内存/">Block 内存</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p></p><p><br>block调用自身在前面添加__block关键字<br></p><p></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">IBAction</span>)grabURLInBackground:(<span class="keyword">id</span>)sender</div><div class="line">{</div><div class="line">   <span class="built_in">NSURL</span> *url = [<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://allseeing-i.com"</span>];</div><div class="line">   __block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];</div><div class="line">   [request setCompletionBlock:^{</div><div class="line">      <span class="comment">// Use when fetching text data</span></div><div class="line">      <span class="built_in">NSString</span> *responseString = [request responseString];</div><div class="line"> </div><div class="line">      <span class="comment">// Use when fetching binary data</span></div><div class="line">      NSData *responseData = [request responseData];</div><div class="line">   }];</div><div class="line">   [request setFailedBlock:^{</div><div class="line">      <span class="built_in">NSError</span> *error = [request error];</div><div class="line">   }];</div><div class="line">   [request startAsynchronous];</div><div class="line">}</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-09-23T04:14:09.000Z"><a href="/2013/09/23/IOS/uiimageview不调用drawatrect/">Sep 23 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/09/23/IOS/uiimageview不调用drawatrect/">UIImageView不调用drawAtRect</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><br>UIImageView 不会调用drawAtRect这个函数、因为它是专门用来做图像显示的控件、苹果对这个控件做了最优显示。<br></p>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-09-22T11:16:57.000Z"><a href="/2013/09/22/IOS/1080后环境变量/">Sep 22 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/09/22/IOS/1080后环境变量/">10.8.0后环境变量</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><br>MAC 在10.8.0后环境变量存在了/private/etc/paths里<br></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-09-17T06:59:08.000Z"><a href="/2013/09/17/IOS/nscoding/">Sep 17 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/09/17/IOS/nscoding/">NSCoding</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><br>实现序列化自定义对象。只要让该对象实现NSCoding协议。并用NSKeyedArchiver和NSKeyedUnarchiver序列化和反序列化。<br></p>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+
+  <nav id="pagination">
+  
+    <a href="/tags/IOS/" class="alignleft prev">Prev</a>
+  
+  
+  <div class="clearfix"></div>
+</nav>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/IOS/">IOS</a><small>44</small></li>
+  
+    <li><a href="/categories/OSX/">OSX</a><small>1</small></li>
+  
+    <li><a href="/categories/Other/">Other</a><small>4</small></li>
+  
+    <li><a href="/categories/windowsphone/">windowsphone</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/IOS/">IOS</a><small>16</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 virgil
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

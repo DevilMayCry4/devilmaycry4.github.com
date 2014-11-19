@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
+
 </head>
 
 
@@ -48,11 +49,49 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-10-17T07:11:47.000Z"><a href="/2013/10/17/添加字体/">Oct 17 2013</a></time>
+        <time datetime="2013-10-21T05:56:35.000Z"><a href="/2013/10/21/IOS/ios7-tips/">Oct 21 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/10/17/添加字体/">添加字体</a></h1>
+    <h1 class="title"><a href="/2013/10/21/IOS/ios7-tips/">ios7 tips</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>当以navigation的方式pushcontroller的时候，如果plist表的View controller-based status bar appearance = yes时、状态栏的显示隐藏由navgtion里的viewcontrollers自己控制、状态栏的风格由navigation自己控制<br></p><br><p><br>ios7如果某个item左右两边的items不相等，即使左右各放置一个UIBarButtonSystemItemFlexibleSpace也是没法使这个item居中的、可以放置一些隐藏的item使两边相等。<br></p>
+
+<p></p><p><br>调整viewcontroller适配ios7状态栏<br></p><p></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> ([[[UIDevice currentDevice] systemVersion] floatValue] &gt;= <span class="number">7</span>) </div><div class="line">{</div><div class="line">        <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.bounds</span> = CGRectMake(<span class="number">0</span>, -<span class="number">20</span>, <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span>, <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span> );</div><div class="line">    }</div><div class="line"> </div></pre></td></tr></table></figure>
+
+<p> </p><p><br> 参考：<a href="http://www.ifun.cc/blog/2013/09/28/gua-pei-ios7kai-fa/" target="_blank" rel="external">http://www.ifun.cc/blog/2013/09/28/gua-pei-ios7kai-fa/</a><br> </p><p></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-10-17T07:11:47.000Z"><a href="/2013/10/17/IOS/添加字体/">Oct 17 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/10/17/IOS/添加字体/">添加字体</a></h1>
   
 
     </header>
@@ -73,57 +112,25 @@
 
 
 
+
   <article class="post">
   
   <div class="post-content">
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-10-09T09:31:15.000Z"><a href="/2013/10/09/block-内存/">Oct 9 2013</a></time>
+        <time datetime="2013-10-09T09:31:15.000Z"><a href="/2013/10/09/IOS/block-内存/">Oct 9 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/10/09/block-内存/">Block 内存</a></h1>
+    <h1 class="title"><a href="/2013/10/09/IOS/block-内存/">Block 内存</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p><p><br>block调用自身在前面添加__block关键字<br></p></p>
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-</pre></td><td class="code"><pre>- (IBAction)grabURLInBackground:(id)sender
-{
-   NSURL <span class="variable">*url</span> = [NSURL URLWithString:<span class="variable">@"</span>http:<span class="comment">//allseeing-i.com"];</span>
-   __block ASIHTTPRequest <span class="variable">*request</span> = [ASIHTTPRequest requestWithURL:url];
-   [request setCompletionBlock:^{
-      <span class="comment">// Use when fetching text data</span>
-      NSString <span class="variable">*responseString</span> = [request responseString];
- 
-      <span class="comment">// Use when fetching binary data</span>
-      NSData <span class="variable">*responseData</span> = [request responseData];
-   }];
-   [request setFailedBlock:^{
-      NSError <span class="variable">*error</span> = [request <span class="keyword">error</span>];
-   }];
-   [request startAsynchronous];
-}
-</pre></td></tr></table></figure>
-
+        <p></p><p><br>block调用自身在前面添加__block关键字<br></p><p></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">IBAction</span>)grabURLInBackground:(<span class="keyword">id</span>)sender</div><div class="line">{</div><div class="line">   <span class="built_in">NSURL</span> *url = [<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://allseeing-i.com"</span>];</div><div class="line">   __block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];</div><div class="line">   [request setCompletionBlock:^{</div><div class="line">      <span class="comment">// Use when fetching text data</span></div><div class="line">      <span class="built_in">NSString</span> *responseString = [request responseString];</div><div class="line"> </div><div class="line">      <span class="comment">// Use when fetching binary data</span></div><div class="line">      NSData *responseData = [request responseData];</div><div class="line">   }];</div><div class="line">   [request setFailedBlock:^{</div><div class="line">      <span class="built_in">NSError</span> *error = [request error];</div><div class="line">   }];</div><div class="line">   [request startAsynchronous];</div><div class="line">}</div></pre></td></tr></table></figure>
       
     </div>
     <footer>
@@ -138,17 +145,18 @@
 
 
 
+
   <article class="post">
   
   <div class="post-content">
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-09-23T04:14:09.000Z"><a href="/2013/09/23/uiimageview不调用drawatrect/">Sep 23 2013</a></time>
+        <time datetime="2013-09-23T04:14:09.000Z"><a href="/2013/09/23/IOS/uiimageview不调用drawatrect/">Sep 23 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/09/23/uiimageview不调用drawatrect/">UIImageView不调用drawAtRect</a></h1>
+    <h1 class="title"><a href="/2013/09/23/IOS/uiimageview不调用drawatrect/">UIImageView不调用drawAtRect</a></h1>
   
 
     </header>
@@ -169,23 +177,25 @@
 
 
 
+
   <article class="post">
   
   <div class="post-content">
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-09-22T11:16:57.000Z"><a href="/2013/09/22/1080后环境变量/">Sep 22 2013</a></time>
+        <time datetime="2013-09-22T11:16:57.000Z"><a href="/2013/09/22/IOS/1080后环境变量/">Sep 22 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/09/22/1080后环境变量/">10.8.0后环境变量</a></h1>
+    <h1 class="title"><a href="/2013/09/22/IOS/1080后环境变量/">10.8.0后环境变量</a></h1>
   
 
     </header>
     <div class="entry">
       
         <p><br>MAC 在10.8.0后环境变量存在了/private/etc/paths里<br></p>
+
       
     </div>
     <footer>
@@ -200,17 +210,18 @@
 
 
 
+
   <article class="post">
   
   <div class="post-content">
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-09-17T06:59:08.000Z"><a href="/2013/09/17/nscoding/">Sep 17 2013</a></time>
+        <time datetime="2013-09-17T06:59:08.000Z"><a href="/2013/09/17/IOS/nscoding/">Sep 17 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/09/17/nscoding/">NSCoding</a></h1>
+    <h1 class="title"><a href="/2013/09/17/IOS/nscoding/">NSCoding</a></h1>
   
 
     </header>
@@ -231,61 +242,56 @@
 
 
 
+
   <article class="post">
   
   <div class="post-content">
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-07-25T01:39:00.000Z"><a href="/2013/07/25/2013-07-25-gei-mu-lu-xia-de-suo-you-wen-jian-tian-jia-qian-zhui/">Jul 25 2013</a></time>
+        <time datetime="2013-07-25T01:39:00.000Z"><a href="/2013/07/25/IOS/2013-07-25-gei-mu-lu-xia-de-suo-you-wen-jian-tian-jia-qian-zhui/">Jul 25 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/07/25/2013-07-25-gei-mu-lu-xia-de-suo-you-wen-jian-tian-jia-qian-zhui/">给目录下的所有文件添加前缀</a></h1>
+    <h1 class="title"><a href="/2013/07/25/IOS/2013-07-25-gei-mu-lu-xia-de-suo-you-wen-jian-tian-jia-qian-zhui/">给目录下的所有文件添加前缀</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <figure class="highlight lang-python"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-</pre></td><td class="code"><pre><span class="keyword">import</span> os
-<span class="function"><span class="keyword">def</span> <span class="title">rename</span><span class="params">()</span>:</span>
-    path = input(<span class="string">"给目录下的文件添加前缀"</span>)
-    print(path)
-    Prefix = <span class="string">"PRE_"</span>
-    <span class="keyword">for</span> (path, dirs, files) <span class="keyword">in</span> os.walk(path):<span class="comment">#遍历目录树</span>
-        <span class="keyword">for</span> filename <span class="keyword">in</span> files:
-            ext = os.path.splitext(filename)[<span class="number">1</span>]
-            all = os.path.normpath(filename)
-            oldpath = path + <span class="string">"/"</span> + filename
-            newpath = path + <span class="string">"/"</span> + Prefix + filename
-            os.rename(oldpath, newpath)
+        <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">rename</span><span class="params">()</span>:</span></div><div class="line">    path = input(<span class="string">"给目录下的文件添加前缀"</span>)</div><div class="line">    print(path)</div><div class="line">    Prefix = <span class="string">"PRE_"</span></div><div class="line">    <span class="keyword">for</span> (path, dirs, files) <span class="keyword">in</span> os.walk(path):<span class="comment">#遍历目录树</span></div><div class="line">        <span class="keyword">for</span> filename <span class="keyword">in</span> files:</div><div class="line">            ext = os.path.splitext(filename)[<span class="number">1</span>]</div><div class="line">            all = os.path.normpath(filename)</div><div class="line">            oldpath = path + <span class="string">"/"</span> + filename</div><div class="line">            newpath = path + <span class="string">"/"</span> + Prefix + filename</div><div class="line">            os.rename(oldpath, newpath)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    print(<span class="string">"给png文件添加@2x"</span>)</div><div class="line">    rename()</div><div class="line">    print(<span class="string">"finish"</span>)</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
 
 
 
-<span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:
-    print(<span class="string">"给png文件添加@2x"</span>)
-    rename()
-    print(<span class="string">"finish"</span>)
-</pre></td></tr></table></figure>
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-07-05T01:14:00.000Z"><a href="/2013/07/05/IOS/2013-07-05-dian-ji-ding-bu-zhuang-tai-lan-,-gun-dong-dao-ding-bu/">Jul 5 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/07/05/IOS/2013-07-05-dian-ji-ding-bu-zhuang-tai-lan-,-gun-dong-dao-ding-bu/">点击顶部状态栏、滚动到顶部</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p></p><p><br>将UIScrollView的scrollToTop属性设成YES的时候、点击顶部状态栏，scrollview会自己滚动到顶部。但是如果同时有两个scrollview的scrollToTop属性都是YES的时候，两个scrollview都不会滚动。<br></p>
 
       
     </div>
@@ -301,24 +307,24 @@
 
 
 
+
   <article class="post">
   
   <div class="post-content">
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-07-05T01:14:00.000Z"><a href="/2013/07/05/2013-07-05-dian-ji-ding-bu-zhuang-tai-lan--gun-dong-dao-ding-bu/">Jul 5 2013</a></time>
+        <time datetime="2013-07-04T09:34:00.000Z"><a href="/2013/07/04/IOS/2013-07-04-http-code/">Jul 4 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/07/05/2013-07-05-dian-ji-ding-bu-zhuang-tai-lan--gun-dong-dao-ding-bu/">点击顶部状态栏、滚动到顶部</a></h1>
+    <h1 class="title"><a href="/2013/07/04/IOS/2013-07-04-http-code/">Http Code</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p><p><br>将UIScrollView的scrollToTop属性设成YES的时候、点击顶部状态栏，scrollview会自己滚动到顶部。但是如果同时有两个scrollview的scrollToTop属性都是YES的时候，两个scrollview都不会滚动。<br></p]></p>
-
+         <img src="/images/Project/httpcode.png">
       
     </div>
     <footer>
@@ -333,23 +339,24 @@
 
 
 
+
   <article class="post">
   
   <div class="post-content">
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-07-04T09:34:00.000Z"><a href="/2013/07/04/2013-07-04-http-code/">Jul 4 2013</a></time>
+        <time datetime="2013-07-01T01:43:00.000Z"><a href="/2013/07/01/IOS/2013-07-01-xcode-debug/">Jul 1 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/07/04/2013-07-04-http-code/">Http Code</a></h1>
+    <h1 class="title"><a href="/2013/07/01/IOS/2013-07-01-xcode-debug/">Xcode Debug</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <img src="/images/Project/httpcode.png">
+        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#ifdef DEBUG</span></div><div class="line"><span class="preprocessor">#   define NSSLog(fmt, ...) {NSLog((@<span class="title">"%s [Line %d] "</span> fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);}</span></div><div class="line"><span class="preprocessor">#else</span></div><div class="line"><span class="preprocessor">#   define NSSLog(...)</span></div><div class="line"><span class="preprocessor">#endif</span></div></pre></td></tr></table></figure>
 
       
     </div>
@@ -363,155 +370,6 @@
   </div>
 </article>
 
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-07-01T01:43:00.000Z"><a href="/2013/07/01/2013-07-01-xcode-debug/">Jul 1 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/07/01/2013-07-01-xcode-debug/">Xcode Debug</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-</pre></td><td class="code"><pre><span class="preprocessor">#ifdef DEBUG</span>
-<span class="preprocessor">#   define NSSLog(fmt, ...) {NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);}</span>
-<span class="preprocessor">#else</span>
-<span class="preprocessor">#   define NSSLog(...)</span>
-<span class="preprocessor">#endif</span>
-</pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-06-26T02:50:00.000Z"><a href="/2013/06/26/2013-06-26-catalogtian-jia-shu-xing/">Jun 26 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/06/26/2013-06-26-catalogtian-jia-shu-xing/">Catalog添加属性</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p><br>Category是Objective-C中常用的语法特性，通过它可以很方便的为已有的类来添加函数。但是Category不允许为已有的类添加新的属性或者成员变量。<br>一种常见的办法是通过runtime.h中objc_getAssociatedObject / objc_setAssociatedObject来访问和生成关联对象。通过这种方法来模拟生成属性。<br></p><br><figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-</pre></td><td class="code"><pre><span class="comment">//NSObject+IndieBandName.h</span>
-@<span class="class"><span class="keyword">interface</span> <span class="title">NSObject</span> (<span class="title">IndieBandName</span>)
-@<span class="title">property</span> (<span class="title">nonatomic</span>, <span class="title">strong</span>) <span class="title">NSString</span> *<span class="title">indieBandName</span>;
-@<span class="title">end</span>
-
-// <span class="title">NSObject</span>+<span class="title">IndieBandName</span>.<span class="title">m</span>   
- #<span class="title">import</span> "<span class="title">NSObject</span>+<span class="title">Extension</span>.<span class="title">h</span>"
- #<span class="title">import</span> &lt;<span class="title">objc</span>/<span class="title">runtime</span>.<span class="title">h</span>&gt;
-<span class="title">static</span> <span class="title">const</span> <span class="title">void</span> *<span class="title">IndieBandNameKey</span> = &amp;<span class="title">IndieBandNameKey</span>;   
-@<span class="title">implementation</span> <span class="title">NSObject</span> (<span class="title">IndieBandName</span>)
-@<span class="title">dynamic</span> <span class="title">indieBandName</span>;
-
-- (<span class="title">NSString</span> *)<span class="title">indieBandName</span> {</span>
-    <span class="keyword">return</span> objc_getAssociatedObject(self, IndieBandNameKey);
-}
-
-- (<span class="keyword">void</span>)setIndieBandName:(NSString *)indieBandName{
-    objc_setAssociatedObject(self, IndieBandNameKey, indieBandName, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-@end DLIntrospection
-
-</pre></td></tr></table></figure><br><br><br><br><p><br>这个和Category无关，但是也是runtime.h的一种应用。DLIntrospection，是 一个NSObject Category。它为NSObject提供了一系列扩展函数：<br></p>
-
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-</pre></td><td class="code"><pre>@<span class="class"><span class="keyword">interface</span> <span class="title">NSObject</span> (<span class="title">DLIntrospection</span>)
-
-+ (<span class="title">NSArray</span> *)<span class="title">classes</span>;
-+ (<span class="title">NSArray</span> *)<span class="title">properties</span>;
-+ (<span class="title">NSArray</span> *)<span class="title">instanceVariables</span>;
-+ (<span class="title">NSArray</span> *)<span class="title">classMethods</span>;
-+ (<span class="title">NSArray</span> *)<span class="title">instanceMethods</span>;
-
-+ (<span class="title">NSArray</span> *)<span class="title">protocols</span>;
-+ (<span class="title">NSDictionary</span> *)<span class="title">descriptionForProtocol</span>:(<span class="title">Protocol</span> *)<span class="title">proto</span>;
-
-
-+ (<span class="title">NSString</span> *)<span class="title">parentClassHierarchy</span>;
-@<span class="title">end</span>
-</pre></td></tr></table></figure>
-
-
-<p><br>通过这些函数，你可以在调试时（通过po命令）或者运行时获得对象的各种信息。<br></p>
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
 
 
 
@@ -555,7 +413,7 @@
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/IOS/">IOS</a><small>15</small></li>
+    <li><a href="/tags/IOS/">IOS</a><small>16</small></li>
   
   </ul>
 </div>

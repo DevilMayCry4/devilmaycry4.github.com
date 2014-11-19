@@ -6,202 +6,7 @@
   <title>google 地图的路线获取和解析 | 無限大な夢</title>
   <meta name="author" content="virgil">
   
-  <meta name="description" content="头文件和宏定义1
-2
-3
-4
-5
-6
-7
-8
-9
-
-#import &lt;MapKit/MapKit.h&gt;
-#import &quot;RegexKitLite.h&quot;
-#import &quot;JSONKit.h&quot;
-
-#define Mode_Walk    @&quot;walking&quot;
-#define Mode_Drive   @&quot;driving&quot;
-#define Mode_Bycle   @&quot;bicycling&quot;
-#define Mode_Transit @&quot;transit&quot;
-获取两个点之间的路线1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-- (NSArray *)calculateRoutesFrom:(CLLocationCoordinate2D)f to:(CLLocationCoordinate2D)t mode:(NSString *)mode
-{
-    NSString    *saddr = [NSString stringWithFormat:@&quot;%f,%f&quot;, f.latitude, f.longitude];
-    NSString    *daddr = [NSString stringWithFormat:@&quot;%f,%f&quot;, t.latitude, t.longitude];
-
-    NSString    *apiUrlStr = [NSString stringWithFormat:@&quot;http://maps.google.com/maps/api/directions/json?origin=%@&amp;destination=%@&amp;sensor=false&amp;mode=%@&quot;, saddr, daddr,mode];
-   
-    NSURL       *apiUrl = [NSURL URLWithString:apiUrlStr];
-    NSString    *apiResponse = [NSString stringWithContentsOfURL:apiUrl encoding:NSASCIIStringEncoding error:nil];
-    NSDictionary *dictionaryFromJson = [apiResponse  objectFromJSONString];
-    if([[dictionaryFromJson objectForKey:@&quot;status&quot;] isEqualToString:@&quot;OK&quot;])
-    {
-        NSDictionary  *dict = [[[[dictionaryFromJson objectForKey:@&quot;routes&quot;] objectAtIndex:0] objectForKey:@&quot;legs&quot;] objectAtIndex:0];
-        NSArray *legArray = [dict objectForKey:@&quot;steps&quot;];
-        
-        NSMutableArray *stepArray = [NSMutableArray array];
-        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-        for (id step in legArray)
-        {
-            id start = [step objectForKey:@&quot;start_location&quot;];
-            
-            CLLocation  *loc0 = [[[CLLocation alloc] initWithLatitude:[[start objectForKey:@&quot;lat&quot;] doubleValue]
-                                                            longitude:[[start objectForKey:@&quot;lng&quot;] doubleValue]] autorelease];
-            
-            [stepArray addObject:loc0];
-            
-            NSString *polyline = [[step objectForKey:@&quot;polyline&quot;] objectForKey:@&quot;points&quot;];
-            NSArray *polylineArrary = [self decodePolyLine:[[polyline mutableCopy] autorelease]];
-            [stepArray addObjectsFromArray:polylineArrary];
-            
-            id end = [step objectForKey:@&quot;end_location&quot;];
-            
-            CLLocation  *loc1 = [[[CLLocation alloc] initWithLatitude:[[end objectForKey:@&quot;lat&quot;] floatValue]
-                                                            longitude:[[end objectForKey:@&quot;lng&quot;] floatValue]] autorelease];
-            [stepArray addObject:loc1];
-            
-            
-        }
-        [pool drain];
-        return stepArray;
-  
-    }
-    else
-    {
-        NSString *tipString = nil;
-        if ([[dictionaryFromJson objectForKey:@&quot;status&quot;] isEqualToString:@&quot;NOT_FOUND&quot;])
-        {
-             tipString = @&quot;请求的起点、终点或路标中指定的至少一个位置无法进行地理编码&quot;;
-        }
-        else if ([[dictionaryFromJson objectForKey:@&quot;status&quot;] isEqualToString:@&quot;ZERO_RESULTS&quot;])
-        {
-            tipString = @&quot;起点和终点之间找不到路线&quot;;
-        }
-        else if ([[dictionaryFromJson objectForKey:@&quot;status&quot;] isEqualToString:@&quot;MAX_WAYPOINTS_EXCEEDED&quot;])
-        {
-            tipString = @&quot;请求中提供的 waypoints 过多&quot;;
-        }
-        else if ([[dictionaryFromJson objectForKey:@&quot;status&quot;] isEqualToString:@&quot;INVALID_REQUEST&quot;])
-        {
-            tipString = @&quot;提供的请求无效&quot;;
-        }
-        else if([[dictionaryFromJson objectForKey:@&quot;status&quot;] isEqualToString:@&quot;OVER_QUERY_LIMIT&quot;])
-        {
-            tipString = @&quot;该服务在允许的时间段内从您的应用收到的请求过多&quot;;
-        }
-        else if([[dictionaryFromJson objectForKey:@&quot;status&quot;] isEqualToString:@&quot;REQUEST_DENIED&quot;])
-        {
-             tipString = @&quot;该服务已拒绝您的应用使用路线服务&quot;;
-        }
-        else if([[dictionaryFromJson objectForKey:@&quot;status&quot;] isEqualToString:@&quot;OVER_QUERY_LIMIT&quot;])
-        {
-            tipString = @&quot;路线请求因服务器出错而无法得到处理。如果您重试一次，该请求可能就会成功&quot;;
-            
-        }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@&quot;提示&quot;
-                                                                message:tipString
-                                                               delegate:nil
-                                                      cancelButtonTitle:@&quot;OK&quot;
-                                                      otherButtonTitles:nil, nil];
-            [alertView show];
-            [alertView release];
-        });
-       
-        
-        return nil;
-    }
-
-}">
+  <meta name="description" content="头文件和宏定义123456789#import &amp;lt;MapKit/MapKit.h&amp;gt;#import &quot;RegexKitLite.h&quot;#import &quot;JSONKit.h&quot;#define Mode_Walk    @&quot;walking&quot;#define Mode_Drive   @&quot;driving&quot;#define Mode_Bycle   @&quot;bicycling&quot;#define Mode_Transit @&quot;transit&quot;获取两个点之间的路线1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889- (NSArray *)calculateRoutesFrom:(CLLocationCoordinate2D)f to:(CLLocationCoordinate2D)t mode:(NSString *)mode{    NSString    *saddr = [NSString stringWithFormat:@&quot;%f,%f&quot;, f.latitude, f.longitude];    NSString    *daddr = [NSString stringWithFormat:@&quot;%f,%f&quot;, t.latitude, t.longitude];    NSString    *apiUrlStr = [NSString stringWithFormat:@&quot;http://maps.google.com/maps/api/directions/json?origin=%@&amp;amp;destination=%@&amp;amp;sensor=false&amp;amp;mode=%@&quot;, saddr, daddr,mode];       NSURL       *apiUrl = [NSURL URLWithString:apiUrlStr];    NSString    *apiResponse = [NSString stringWithContentsOfURL:apiUrl encoding:NSASCIIStringEncoding error:nil];    NSDictionary *dictionaryFromJson = [apiResponse  objectFromJSONString];    if([[dictionaryFromJson objectForKey:@&quot;status&quot;] isEqualToString:@&quot;OK&quot;])    {        NSDictionary  *dict = [[[[dictionaryFromJson objectForKey:@&quot;routes&quot;] objectAtIndex:0] objectForKey:@&quot;legs&quot;] objectAtIndex:0];        NSArray *legArray = [dict objectForKey:@&quot;steps&quot;];                NSMutableArray *stepArray = [NSMutableArray array];        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];        for (id step in legArray)        {            id start = [step objectForKey:@&quot;start_location&quot;];                        CLLocation  *loc0 = [[[CLLocation alloc] initWithLatitude:[[start objectForKey:@&quot;lat&quot;] doubleValue]                                                            longitude:[[start objectForKey:@&quot;lng&quot;] doubleValue]] autorelease];                        [stepArray addObject:loc0];                        NSString *polyline = [[step objectForKey:@&quot;polyline&quot;] objectForKey:@&quot;points&quot;];            NSArray *polylineArrary = [self decodePolyLine:[[polyline mutableCopy] autorelease]];            [stepArray addObjectsFromArray:polylineArrary];                        id end = [step objectForKey:@&quot;end_location&quot;];                        CLLocation  *loc1 = [[[CLLocation alloc] initWithLatitude:[[end objectForKey:@&quot;lat&quot;] floatValue]                                                            longitude:[[end objectForKey:@&quot;lng&quot;] floatValue]] autorelease];            [stepArray addObject:loc1];                                }        [pool drain];        return stepArray;      }    else    {        NSString *tipString = nil;        if ([[dictionaryFromJson objectForKey:@&quot;status&quot;] isEqualToString:@&quot;NOT_FOUND&quot;])        {             tipString = @&quot;请求的起点、终点或路标中指定的至少一个位置无法进行地理编码&quot;;        }        else if ([[dictionaryFromJson objectForKey:@&quot;status&quot;] isEqualToString:@&quot;ZERO_RESULTS&quot;])        {            tipString = @&quot;起点和终点之间找不到路线&quot;;        }        else if ([[dictionaryFromJson objectForKey:@&quot;status&quot;] isEqualToString:@&quot;MAX_WAYPOINTS_EXCEEDED&quot;])        {            tipString = @&quot;请求中提供的 waypoints 过多&quot;;        }        else if ([[dictionaryFromJson objectForKey:@&quot;status&quot;] isEqualToString:@&quot;INVALID_REQUEST&quot;])        {            tipString = @&quot;提供的请求无效&quot;;        }        else if([[dictionaryFromJson objectForKey:@&quot;status&quot;] isEqualToString:@&quot;OVER_QUERY_LIMIT&quot;])        {            tipString = @&quot;该服务在允许的时间段内从您的应用收到的请求过多&quot;;        }        else if([[dictionaryFromJson objectForKey:@&quot;status&quot;] isEqualToString:@&quot;REQUEST_DENIED&quot;])        {             tipString = @&quot;该服务已拒绝您的应用使用路线服务&quot;;        }        else if([[dictionaryFromJson objectForKey:@&quot;status&quot;] isEqualToString:@&quot;OVER_QUERY_LIMIT&quot;])        {            tipString = @&quot;路线请求因服务器出错而无法得到处理。如果您重试一次，该请求可能就会成功&quot;;                    }        dispatch_async(dispatch_get_main_queue(), ^{            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@&quot;提示&quot;                                                                message:tipString                                                               delegate:nil                                                      cancelButtonTitle:@&quot;OK&quot;                                                      otherButtonTitles:nil, nil];            [alertView show];            [alertView release];        });                       return nil;    }}">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -218,6 +23,7 @@
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
+
 </head>
 
 
@@ -254,361 +60,8 @@
     </header>
     <div class="entry">
       
-        <p>头文件和宏定义</p><br><figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td><td class="code"><pre>
-<span class="preprocessor">#import &lt;MapKit/MapKit.h&gt;</span>
-<span class="preprocessor">#import "RegexKitLite.h"</span>
-<span class="preprocessor">#import "JSONKit.h"</span>
+        <p>头文件和宏定义</p><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="preprocessor">#import <span class="title">&lt;MapKit/MapKit.h&gt;</span></span></div><div class="line"><span class="preprocessor">#import <span class="title">"RegexKitLite.h"</span></span></div><div class="line"><span class="preprocessor">#import <span class="title">"JSONKit.h"</span></span></div><div class="line"></div><div class="line"><span class="preprocessor">#define Mode_Walk    @<span class="title">"walking"</span></span></div><div class="line"><span class="preprocessor">#define Mode_Drive   @<span class="title">"driving"</span></span></div><div class="line"><span class="preprocessor">#define Mode_Bycle   @<span class="title">"bicycling"</span></span></div><div class="line"><span class="preprocessor">#define Mode_Transit @<span class="title">"transit"</span></span></div></pre></td></tr></table></figure><br><p>获取两个点之间的路线</p><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div></pre></td><td class="code"><pre><div class="line">- (<span class="built_in">NSArray</span> *)calculateRoutesFrom:(CLLocationCoordinate2D)f to:(CLLocationCoordinate2D)t mode:(<span class="built_in">NSString</span> *)mode</div><div class="line">{</div><div class="line">    <span class="built_in">NSString</span>    *saddr = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%f,%f"</span>, f<span class="variable">.latitude</span>, f<span class="variable">.longitude</span>];</div><div class="line">    <span class="built_in">NSString</span>    *daddr = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%f,%f"</span>, t<span class="variable">.latitude</span>, t<span class="variable">.longitude</span>];</div><div class="line"></div><div class="line">    <span class="built_in">NSString</span>    *apiUrlStr = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"http://maps.google.com/maps/api/directions/json?origin=%@&amp;destination=%@&amp;sensor=false&amp;mode=%@"</span>, saddr, daddr,mode];</div><div class="line">   </div><div class="line">    <span class="built_in">NSURL</span>       *apiUrl = [<span class="built_in">NSURL</span> URLWithString:apiUrlStr];</div><div class="line">    <span class="built_in">NSString</span>    *apiResponse = [<span class="built_in">NSString</span> stringWithContentsOfURL:apiUrl encoding:NSASCIIStringEncoding error:<span class="literal">nil</span>];</div><div class="line">    <span class="built_in">NSDictionary</span> *dictionaryFromJson = [apiResponse  objectFromJSONString];</div><div class="line">    <span class="keyword">if</span>([[dictionaryFromJson objectForKey:<span class="string">@"status"</span>] isEqualToString:<span class="string">@"OK"</span>])</div><div class="line">    {</div><div class="line">        <span class="built_in">NSDictionary</span>  *dict = [[[[dictionaryFromJson objectForKey:<span class="string">@"routes"</span>] objectAtIndex:<span class="number">0</span>] objectForKey:<span class="string">@"legs"</span>] objectAtIndex:<span class="number">0</span>];</div><div class="line">        <span class="built_in">NSArray</span> *legArray = [dict objectForKey:<span class="string">@"steps"</span>];</div><div class="line">        </div><div class="line">        <span class="built_in">NSMutableArray</span> *stepArray = [<span class="built_in">NSMutableArray</span> array];</div><div class="line">        <span class="built_in">NSAutoreleasePool</span> *pool = [[<span class="built_in">NSAutoreleasePool</span> alloc] init];</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">id</span> step <span class="keyword">in</span> legArray)</div><div class="line">        {</div><div class="line">            <span class="keyword">id</span> start = [step objectForKey:<span class="string">@"start_location"</span>];</div><div class="line">            </div><div class="line">            CLLocation  *loc0 = [[[CLLocation alloc] initWithLatitude:[[start objectForKey:<span class="string">@"lat"</span>] doubleValue]</div><div class="line">                                                            longitude:[[start objectForKey:<span class="string">@"lng"</span>] doubleValue]] autorelease];</div><div class="line">            </div><div class="line">            [stepArray addObject:loc0];</div><div class="line">            </div><div class="line">            <span class="built_in">NSString</span> *polyline = [[step objectForKey:<span class="string">@"polyline"</span>] objectForKey:<span class="string">@"points"</span>];</div><div class="line">            <span class="built_in">NSArray</span> *polylineArrary = [<span class="keyword">self</span> decodePolyLine:[[polyline mutableCopy] autorelease]];</div><div class="line">            [stepArray addObjectsFromArray:polylineArrary];</div><div class="line">            </div><div class="line">            <span class="keyword">id</span> end = [step objectForKey:<span class="string">@"end_location"</span>];</div><div class="line">            </div><div class="line">            CLLocation  *loc1 = [[[CLLocation alloc] initWithLatitude:[[end objectForKey:<span class="string">@"lat"</span>] floatValue]</div><div class="line">                                                            longitude:[[end objectForKey:<span class="string">@"lng"</span>] floatValue]] autorelease];</div><div class="line">            [stepArray addObject:loc1];</div><div class="line">            </div><div class="line">            </div><div class="line">        }</div><div class="line">        [pool drain];</div><div class="line">        <span class="keyword">return</span> stepArray;</div><div class="line">  </div><div class="line">    }</div><div class="line">    <span class="keyword">else</span></div><div class="line">    {</div><div class="line">        <span class="built_in">NSString</span> *tipString = <span class="literal">nil</span>;</div><div class="line">        <span class="keyword">if</span> ([[dictionaryFromJson objectForKey:<span class="string">@"status"</span>] isEqualToString:<span class="string">@"NOT_FOUND"</span>])</div><div class="line">        {</div><div class="line">             tipString = <span class="string">@"请求的起点、终点或路标中指定的至少一个位置无法进行地理编码"</span>;</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span> ([[dictionaryFromJson objectForKey:<span class="string">@"status"</span>] isEqualToString:<span class="string">@"ZERO_RESULTS"</span>])</div><div class="line">        {</div><div class="line">            tipString = <span class="string">@"起点和终点之间找不到路线"</span>;</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span> ([[dictionaryFromJson objectForKey:<span class="string">@"status"</span>] isEqualToString:<span class="string">@"MAX_WAYPOINTS_EXCEEDED"</span>])</div><div class="line">        {</div><div class="line">            tipString = <span class="string">@"请求中提供的 waypoints 过多"</span>;</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span> ([[dictionaryFromJson objectForKey:<span class="string">@"status"</span>] isEqualToString:<span class="string">@"INVALID_REQUEST"</span>])</div><div class="line">        {</div><div class="line">            tipString = <span class="string">@"提供的请求无效"</span>;</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>([[dictionaryFromJson objectForKey:<span class="string">@"status"</span>] isEqualToString:<span class="string">@"OVER_QUERY_LIMIT"</span>])</div><div class="line">        {</div><div class="line">            tipString = <span class="string">@"该服务在允许的时间段内从您的应用收到的请求过多"</span>;</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>([[dictionaryFromJson objectForKey:<span class="string">@"status"</span>] isEqualToString:<span class="string">@"REQUEST_DENIED"</span>])</div><div class="line">        {</div><div class="line">             tipString = <span class="string">@"该服务已拒绝您的应用使用路线服务"</span>;</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>([[dictionaryFromJson objectForKey:<span class="string">@"status"</span>] isEqualToString:<span class="string">@"OVER_QUERY_LIMIT"</span>])</div><div class="line">        {</div><div class="line">            tipString = <span class="string">@"路线请求因服务器出错而无法得到处理。如果您重试一次，该请求可能就会成功"</span>;</div><div class="line">            </div><div class="line">        }</div><div class="line">        <span class="built_in">dispatch_async</span>(dispatch_get_main_queue(), ^{</div><div class="line">            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:<span class="string">@"提示"</span></div><div class="line">                                                                message:tipString</div><div class="line">                                                               delegate:<span class="literal">nil</span></div><div class="line">                                                      cancelButtonTitle:<span class="string">@"OK"</span></div><div class="line">                                                      otherButtonTitles:<span class="literal">nil</span>, <span class="literal">nil</span>];</div><div class="line">            [alertView show];</div><div class="line">            [alertView release];</div><div class="line">        });</div><div class="line">       </div><div class="line">        </div><div class="line">        <span class="keyword">return</span> <span class="literal">nil</span>;</div><div class="line">    }</div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure><br><a id="more"></a><br><p>解析两个点之间路线点的函数:</p><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">- (<span class="built_in">NSMutableArray</span> *)decodePolyLine:(<span class="built_in">NSMutableString</span> *)encoded</div><div class="line">{</div><div class="line">    [encoded replaceOccurrencesOfString:<span class="string">@"\\\\"</span> withString:<span class="string">@"\\"</span></div><div class="line">    options :NSLiteralSearch</div><div class="line">    range   :NSMakeRange(<span class="number">0</span>, [encoded length])];</div><div class="line">    <span class="built_in">NSInteger</span>       len = [encoded length];</div><div class="line">    <span class="built_in">NSInteger</span>       index = <span class="number">0</span>;</div><div class="line">    <span class="built_in">NSMutableArray</span>  *array = [[[<span class="built_in">NSMutableArray</span> alloc] init] autorelease];</div><div class="line">    <span class="built_in">NSInteger</span>       lat = <span class="number">0</span>;</div><div class="line">    <span class="built_in">NSInteger</span>       lng = <span class="number">0</span>;</div><div class="line">    <span class="built_in">NSAutoreleasePool</span> *pool = [[<span class="built_in">NSAutoreleasePool</span> alloc] init];</div><div class="line">    <span class="keyword">while</span> (index &lt; len)</div><div class="line">    {</div><div class="line">        <span class="built_in">NSInteger</span>   b;</div><div class="line">        <span class="built_in">NSInteger</span>   shift = <span class="number">0</span>;</div><div class="line">        <span class="built_in">NSInteger</span>   result = <span class="number">0</span>;</div><div class="line">        <span class="keyword">do</span></div><div class="line">        {</div><div class="line">            b = [encoded characterAtIndex:index++] - <span class="number">63</span>;</div><div class="line">            result |= (b &amp; <span class="number">0x1f</span>) &lt;&lt; shift;</div><div class="line">            shift += <span class="number">5</span>;</div><div class="line">        }</div><div class="line">        <span class="keyword">while</span> (b &gt;= <span class="number">0x20</span>);</div><div class="line">        <span class="built_in">NSInteger</span> dlat = ((result &amp; <span class="number">1</span>) ? ~(result &gt;&gt; <span class="number">1</span>) : (result &gt;&gt; <span class="number">1</span>));</div><div class="line">        lat += dlat;</div><div class="line">        shift = <span class="number">0</span>;</div><div class="line">        result = <span class="number">0</span>;</div><div class="line">        <span class="keyword">do</span></div><div class="line">        {</div><div class="line">            b = [encoded characterAtIndex:index++] - <span class="number">63</span>;</div><div class="line">            result |= (b &amp; <span class="number">0x1f</span>) &lt;&lt; shift;</div><div class="line">            shift += <span class="number">5</span>;</div><div class="line">        }</div><div class="line">        <span class="keyword">while</span> (b &gt;= <span class="number">0x20</span>);</div><div class="line">        <span class="built_in">NSInteger</span> dlng = ((result &amp; <span class="number">1</span>) ? ~(result &gt;&gt; <span class="number">1</span>) : (result &gt;&gt; <span class="number">1</span>));</div><div class="line">        lng += dlng;</div><div class="line">        <span class="built_in">NSNumber</span>    *latitude = [[[<span class="built_in">NSNumber</span> alloc] initWithFloat:lat * <span class="number">1e-5</span>] autorelease];</div><div class="line">        <span class="built_in">NSNumber</span>    *longitude = [[[<span class="built_in">NSNumber</span> alloc] initWithFloat:lng * <span class="number">1e-5</span>] autorelease];</div><div class="line">        CLLocation  *loc = [[[CLLocation alloc] initWithLatitude:[latitude floatValue] longitude:[longitude floatValue]] autorelease];</div><div class="line">        [array addObject:loc];</div><div class="line">    }</div><div class="line">    [pool drain];</div><div class="line">    <span class="keyword">return</span> array;</div><div class="line">}</div></pre></td></tr></table></figure><br><br><p>绘制函数:</p><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">- (void)drawFrom:(CLLocationCoordinate2D)from to:(CLLocationCoordinate2D)destination mode:(NSString *)mode</div><div class="line">{</div><div class="line">    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{</div><div class="line">        NSArray *array =  [self calculateRoutesFrom:from to:destination mode:mode];</div><div class="line">        dispatch_async(dispatch_get_main_queue(), ^{</div><div class="line">            [self drawLineWithLocationArray:array];</div><div class="line">        });</div><div class="line">    });</div><div class="line">}</div><div class="line">&lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;</div><div class="line"></div><div class="line">&lt;p&gt;&lt;pre&gt;&lt;code&gt;- (void)drawLineWithLocationArray:(NSArray *)locationArray</div><div class="line">{</div><div class="line">    int                     pointCount = [locationArray count];</div><div class="line">    CLLocationCoordinate2D  *coordinateArray = (CLLocationCoordinate2D *)malloc(pointCount * sizeof(CLLocationCoordinate2D));</div><div class="line"></div><div class="line">    for (int i = 0; i &lt; pointCount; ++i)</div><div class="line">    {</div><div class="line">        CLLocation *location = [locationArray objectAtIndex:i];</div><div class="line">        coordinateArray[i] = [location coordinate];</div><div class="line">    }</div><div class="line"></div><div class="line">    self.routeLine = [MKPolyline polylineWithCoordinates:coordinateArray count:pointCount];</div><div class="line">    [self.googleView setVisibleMapRect:[self.routeLine boundingMapRect]];</div><div class="line">    [self.googleView addOverlay:self.routeLine];</div><div class="line"></div><div class="line">    free(coordinateArray);</div><div class="line">    coordinateArray = NULL;</div><div class="line">}</div></pre></td></tr></table></figure><br><br><p>调用示例:<br><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)drawTestLine</div><div class="line">{</div><div class="line">    CLLocationCoordinate2D  cll0 = CLLocationCoordinate2DMake(<span class="number">23.132901</span>, <span class="number">113.357223</span>);</div><div class="line">    CLLocationCoordinate2D  cll1 = CLLocationCoordinate2DMake(<span class="number">23.051757</span>, <span class="number">113.392832</span>);</div><div class="line">    [<span class="keyword">self</span> drawFrom:cll0 to:cll1 mode:Mode_Drive];</div><div class="line">}</div></pre></td></tr></table></figure><br></p><p>参考资料</p><br><p><a href="https://developers.google.com/maps/documentation/directions/?hl=zh-CN#Limits" target="_blank" rel="external">谷歌说明文档</a></p><br><p><a href="https://developers.google.com/maps/documentation/utilities/polylinealgorithm?hl=zh-CN" target="_blank" rel="external">路线解码算法</a></p>
 
-<span class="preprocessor">#define Mode_Walk    @"walking"</span>
-<span class="preprocessor">#define Mode_Drive   @"driving"</span>
-<span class="preprocessor">#define Mode_Bycle   @"bicycling"</span>
-<span class="preprocessor">#define Mode_Transit @"transit"</span>
-</pre></td></tr></table></figure><br><br><p>获取两个点之间的路线</p><br><figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-</pre></td><td class="code"><pre>- (NSArray <span class="variable">*)</span>calculateRoutesFrom:(CLLocationCoordinate2D)f to:(CLLocationCoordinate2D)t mode:(NSString <span class="variable">*)</span>mode
-{
-    NSString    <span class="variable">*saddr</span> = [NSString stringWithFormat:<span class="variable">@"</span><span class="variable">%f</span>,<span class="variable">%f</span><span class="string">", f.latitude, f.longitude];
-    NSString    <span class="variable">*daddr</span> = [NSString stringWithFormat:<span class="variable">@"</span><span class="variable">%f</span>,<span class="variable">%f</span>"</span>, t.latitude, t.longitude];
-
-    NSString    <span class="variable">*apiUrlStr</span> = [NSString stringWithFormat:<span class="variable">@"</span>http:<span class="regexp">//maps</span>.google.com/maps/api/directions/json?origin=<span class="variable">%@</span>&amp;destination=<span class="variable">%@</span>&amp;sensor=false&amp;mode=<span class="variable">%@</span><span class="string">", saddr, daddr,mode];
-   
-    NSURL       <span class="variable">*apiUrl</span> = [NSURL URLWithString:apiUrlStr];
-    NSString    <span class="variable">*apiResponse</span> = [NSString stringWithContentsOfURL:apiUrl encoding:NSASCIIStringEncoding error:nil];
-    NSDictionary <span class="variable">*dictionaryFromJson</span> = [apiResponse  objectFromJSONString];
-    if([[dictionaryFromJson objectForKey:<span class="variable">@"</span>status"</span>] isEqualToString:<span class="variable">@"</span>OK<span class="string">"])
-    {
-        NSDictionary  <span class="variable">*dict</span> = [[[[dictionaryFromJson objectForKey:<span class="variable">@"</span>routes"</span>] objectAtIndex:<span class="number">0</span>] objectForKey:<span class="variable">@"</span>legs<span class="string">"] objectAtIndex:0];
-        NSArray <span class="variable">*legArray</span> = [dict objectForKey:<span class="variable">@"</span>steps"</span>];
-        
-        NSMutableArray <span class="variable">*stepArray</span> = [NSMutableArray array];
-        NSAutoreleasePool <span class="variable">*pool</span> = [[NSAutoreleasePool alloc] init];
-        <span class="keyword">for</span> (id step in legArray)
-        {
-            id start = [step objectForKey:<span class="variable">@"</span>start_location<span class="string">"];
-            
-            CLLocation  <span class="variable">*loc0</span> = [[[CLLocation alloc] initWithLatitude:[[start objectForKey:<span class="variable">@"</span>lat"</span>] doubleValue]
-                                                            longitude:[[start objectForKey:<span class="variable">@"</span>lng<span class="string">"] doubleValue]] autorelease];
-            
-            [stepArray addObject:loc0];
-            
-            NSString <span class="variable">*polyline</span> = [[step objectForKey:<span class="variable">@"</span>polyline"</span>] objectForKey:<span class="variable">@"</span>points<span class="string">"];
-            NSArray <span class="variable">*polylineArrary</span> = [self decodePolyLine:[[polyline mutableCopy] autorelease]];
-            [stepArray addObjectsFromArray:polylineArrary];
-            
-            id end = [step objectForKey:<span class="variable">@"</span>end_location"</span>];
-            
-            CLLocation  <span class="variable">*loc1</span> = [[[CLLocation alloc] initWithLatitude:[[end objectForKey:<span class="variable">@"</span>lat<span class="string">"] floatValue]
-                                                            longitude:[[end objectForKey:<span class="variable">@"</span>lng"</span>] floatValue]] autorelease];
-            [stepArray addObject:loc1];
-            
-            
-        }
-        [pool drain];
-        <span class="keyword">return</span> stepArray;
-  
-    }
-    <span class="keyword">else</span>
-    {
-        NSString <span class="variable">*tipString</span> = nil;
-        <span class="keyword">if</span> ([[dictionaryFromJson objectForKey:<span class="variable">@"</span>status<span class="string">"] isEqualToString:<span class="variable">@"</span>NOT_FOUND"</span>])
-        {
-             tipString = <span class="variable">@"</span>请求的起点、终点或路标中指定的至少一个位置无法进行地理编码<span class="string">";
-        }
-        else if ([[dictionaryFromJson objectForKey:<span class="variable">@"</span>status"</span>] isEqualToString:<span class="variable">@"</span>ZERO_RESULTS<span class="string">"])
-        {
-            tipString = <span class="variable">@"</span>起点和终点之间找不到路线"</span>;
-        }
-        <span class="keyword">else</span> <span class="keyword">if</span> ([[dictionaryFromJson objectForKey:<span class="variable">@"</span>status<span class="string">"] isEqualToString:<span class="variable">@"</span>MAX_WAYPOINTS_EXCEEDED"</span>])
-        {
-            tipString = <span class="variable">@"</span>请求中提供的 waypoints 过多<span class="string">";
-        }
-        else if ([[dictionaryFromJson objectForKey:<span class="variable">@"</span>status"</span>] isEqualToString:<span class="variable">@"</span>INVALID_REQUEST<span class="string">"])
-        {
-            tipString = <span class="variable">@"</span>提供的请求无效"</span>;
-        }
-        <span class="keyword">else</span> <span class="keyword">if</span>([[dictionaryFromJson objectForKey:<span class="variable">@"</span>status<span class="string">"] isEqualToString:<span class="variable">@"</span>OVER_QUERY_LIMIT"</span>])
-        {
-            tipString = <span class="variable">@"</span>该服务在允许的时间段内从您的应用收到的请求过多<span class="string">";
-        }
-        else if([[dictionaryFromJson objectForKey:<span class="variable">@"</span>status"</span>] isEqualToString:<span class="variable">@"</span>REQUEST_DENIED<span class="string">"])
-        {
-             tipString = <span class="variable">@"</span>该服务已拒绝您的应用使用路线服务"</span>;
-        }
-        <span class="keyword">else</span> <span class="keyword">if</span>([[dictionaryFromJson objectForKey:<span class="variable">@"</span>status<span class="string">"] isEqualToString:<span class="variable">@"</span>OVER_QUERY_LIMIT"</span>])
-        {
-            tipString = <span class="variable">@"</span>路线请求因服务器出错而无法得到处理。如果您重试一次，该请求可能就会成功<span class="string">";
-            
-        }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            UIAlertView <span class="variable">*alertView</span> = [[UIAlertView alloc] initWithTitle:<span class="variable">@"</span>提示"</span>
-                                                                message:tipString
-                                                               delegate:nil
-                                                      cancelButtonTitle:<span class="variable">@"</span>OK<span class="string">"
-                                                      otherButtonTitles:nil, nil];
-            [alertView show];
-            [alertView release];
-        });
-       
-        
-        return nil;
-    }
-
-}
-</pre></td></tr></table></figure><br><br><a id="more"></a><br><p>解析两个点之间路线点的函数:</p><br><figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-</pre></td><td class="code"><pre>- (NSMutableArray *)decodePolyLine:(NSMutableString *)encoded
-{
-    [encoded replaceOccurrencesOfString:@<span class="string">"\\\\"</span> withString:@<span class="string">"\\"</span>
-    options :NSLiteralSearch
-    range   :NSMakeRange(<span class="number">0</span>, [encoded length])]<span class="comment">;</span>
-    NSInteger       len = [encoded length]<span class="comment">;</span>
-    NSInteger       index = <span class="number">0</span><span class="comment">;</span>
-    NSMutableArray  *array = [[[NSMutableArray alloc] init] autorelease]<span class="comment">;</span>
-    NSInteger       lat = <span class="number">0</span><span class="comment">;</span>
-    NSInteger       lng = <span class="number">0</span><span class="comment">;</span>
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]<span class="comment">;</span>
-    while (index &lt; len)
-    {
-        NSInteger   b<span class="comment">;</span>
-        NSInteger   shift = <span class="number">0</span><span class="comment">;</span>
-        NSInteger   result = <span class="number">0</span><span class="comment">;</span>
-        do
-        {
-            b = [encoded characterAtIndex:index++] - <span class="number">63</span><span class="comment">;</span>
-            result |= (b &amp; <span class="number">0x1f</span>) &lt;&lt; shift<span class="comment">;</span>
-            shift += <span class="number">5</span><span class="comment">;</span>
-        }
-        while (b &gt;= <span class="number">0x20</span>)<span class="comment">;</span>
-        NSInteger dlat = ((result &amp; <span class="number">1</span>) ? ~(result &gt;&gt; <span class="number">1</span>) : (result &gt;&gt; <span class="number">1</span>))<span class="comment">;</span>
-        lat += dlat<span class="comment">;</span>
-        shift = <span class="number">0</span><span class="comment">;</span>
-        result = <span class="number">0</span><span class="comment">;</span>
-        do
-        {
-            b = [encoded characterAtIndex:index++] - <span class="number">63</span><span class="comment">;</span>
-            result |= (b &amp; <span class="number">0x1f</span>) &lt;&lt; shift<span class="comment">;</span>
-            shift += <span class="number">5</span><span class="comment">;</span>
-        }
-        while (b &gt;= <span class="number">0x20</span>)<span class="comment">;</span>
-        NSInteger dlng = ((result &amp; <span class="number">1</span>) ? ~(result &gt;&gt; <span class="number">1</span>) : (result &gt;&gt; <span class="number">1</span>))<span class="comment">;</span>
-        lng += dlng<span class="comment">;</span>
-        NSNumber    *latitude = [[[NSNumber alloc] initWithFloat:lat * <span class="number">1e-5</span>] autorelease]<span class="comment">;</span>
-        NSNumber    *longitude = [[[NSNumber alloc] initWithFloat:lng * <span class="number">1e-5</span>] autorelease]<span class="comment">;</span>
-        CLLocation  *loc = [[[CLLocation alloc] initWithLatitude:[latitude floatValue] longitude:[longitude floatValue]] autorelease]<span class="comment">;</span>
-        [array addObject:loc]<span class="comment">;</span>
-    }
-    [pool drain]<span class="comment">;</span>
-    return array<span class="comment">;</span>
-}
-</pre></td></tr></table></figure><br><br><br><p>绘制函数:</p><br><figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-</pre></td><td class="code"><pre>- (void)drawFrom:(CLLocationCoordinate2D)from to:(CLLocationCoordinate2D)destination mode:(NSString *)mode
-{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSArray *array =  [self calculateRoutesFrom:from to:destination mode:mode];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self drawLineWithLocationArray:array];
-        });
-    });
-}
-<span class="tag">&lt;/<span class="title">code</span>&gt;</span><span class="tag">&lt;/<span class="title">pre</span>&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span>
-
-<span class="tag">&lt;<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">pre</span>&gt;</span><span class="tag">&lt;<span class="title">code</span>&gt;</span>- (void)drawLineWithLocationArray:(NSArray *)locationArray
-{
-    int                     pointCount = [locationArray count];
-    CLLocationCoordinate2D  *coordinateArray = (CLLocationCoordinate2D *)malloc(pointCount * sizeof(CLLocationCoordinate2D));
-
-    for (int i = 0; i <span class="tag">&lt; <span class="attribute">pointCount</span>; ++<span class="attribute">i</span>)
-    {
-        <span class="attribute">CLLocation</span> *<span class="attribute">location</span> = [<span class="attribute">locationArray</span> <span class="attribute">objectAtIndex:i</span>];
-        <span class="attribute">coordinateArray</span>[<span class="attribute">i</span>] = [<span class="attribute">location</span> <span class="attribute">coordinate</span>];
-    }
-
-    <span class="attribute">self.routeLine</span> = [<span class="attribute">MKPolyline</span> <span class="attribute">polylineWithCoordinates:coordinateArray</span> <span class="attribute">count:pointCount</span>];
-    [<span class="attribute">self.googleView</span> <span class="attribute">setVisibleMapRect:</span>[<span class="attribute">self.routeLine</span> <span class="attribute">boundingMapRect</span>]];
-    [<span class="attribute">self.googleView</span> <span class="attribute">addOverlay:self.routeLine</span>];
-
-    <span class="attribute">free</span>(<span class="attribute">coordinateArray</span>);
-    <span class="attribute">coordinateArray</span> = <span class="attribute">NULL</span>;
-}
-</pre></td></tr></table></figure><br><br><br><p>调用示例:<br><br><figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre>- (void)drawTestLine
-{
-    <span class="class">CLLocationCoordinate2D</span>  cll0 = <span class="class">CLLocationCoordinate2DMake</span>(<span class="number">23.132901</span>, <span class="number">113.357223</span>);
-    <span class="class">CLLocationCoordinate2D</span>  cll1 = <span class="class">CLLocationCoordinate2DMake</span>(<span class="number">23.051757</span>, <span class="number">113.392832</span>);
-    [<span class="keyword">self</span> <span class="method">drawFrom:</span>cll0 <span class="method">to:</span>cll1 <span class="method">mode:</span><span class="class">Mode_Drive</span>];
-}
-</pre></td></tr></table></figure><br><br><p>参考资料</p><br><p><a href="https://developers.google.com/maps/documentation/directions/?hl=zh-CN#Limits" target="_blank">谷歌说明文档</a></p><br><p><a href="https://developers.google.com/maps/documentation/utilities/polylinealgorithm?hl=zh-CN" target="_blank">路线解码算法</a></p>
       
     </div>
     <footer>
@@ -644,6 +97,27 @@
   </div>
 </article>
 
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2013/04/21/IOS/2013-04-21-google-di-tu-de-lu-xian-huo-qu-he-jie-xi/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
@@ -675,7 +149,7 @@
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/IOS/">IOS</a><small>8</small></li>
+    <li><a href="/tags/IOS/">IOS</a><small>16</small></li>
   
   </ul>
 </div>
@@ -685,7 +159,7 @@
   </div>
   <footer id="footer" class="inner"><div class="alignleft">
   
-  &copy; 2013 virgil
+  &copy; 2014 virgil
   
 </div>
 <div class="clearfix"></div></footer>

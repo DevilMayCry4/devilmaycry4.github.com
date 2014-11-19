@@ -8,24 +8,7 @@
   
   <meta name="description" content="A PDF describes the content and appearance of one or more pages. The exact size of that page is not as straightforward as you might think. There can be up to 5 different descriptions in a PDF that relate to its size. These are called the page boxes:
 
-1
-2
-3
-4
-5
-6
-7
-8
-enum CGPDFBox {
-   kCGPDFMediaBox = 0,
-   kCGPDFCropBox = 1,
-   kCGPDFBleedBox = 2,
-   kCGPDFTrimBox = 3,
-   kCGPDFArtBox = 4
-};
-typedef enum CGPDFBox CGPDFBox;
-
-
+12345678enum CGPDFBox {   kCGPDFMediaBox = 0,   kCGPDFCropBox = 1,   kCGPDFBleedBox = 2,   kCGPDFTrimBox = 3,   kCGPDFArtBox = 4};typedef enum CGPDFBox CGPDFBox;
 
 KCGPDFMediaBox
 The MediaBox is used to specify the width and height of the page. For the average user, this probably equals the actual page size. For prepress use, this is not the case as we prefer our pages to be defined slightly oversized so that we can see the bleed (Images or other elements touching an outer edge of a printed page need to extend beyond the edge of the paper to compensate for inaccuracies in trimming the page), the crop marks and useful information such as the file name or the date and time when the file was created. This means that PDF files used in graphic arts usually have a MediaBox which is larger then the trimmed page size. The MediaBox is the largest page box in a PDF. The other page boxes can equal the size of the MediaBox but they cannot be larger.
@@ -48,6 +31,7 @@ The CropBox defines the region to which the page contents are to be clipped. Acr
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
+
 </head>
 
 
@@ -86,58 +70,41 @@ The CropBox defines the region to which the page contents are to be clipped. Acr
       
         <p>A PDF describes the content and appearance of one or more pages. The exact size of that page is not as straightforward as you might think. There can be up to 5 different descriptions in a PDF that relate to its size. These are called the page boxes:</p>
 
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-</pre></td><td class="code"><pre><span class="title">enum</span> CGPDFBox {
-   <span class="title">kCGPDFMediaBox</span> = <span class="number">0</span>,
-   kCGPDFCropBox = <span class="number">1</span>,
-   kCGPDFBleedBox = <span class="number">2</span>,
-   kCGPDFTrimBox = <span class="number">3</span>,
-   kCGPDFArtBox = <span class="number">4</span>
-};
-<span class="title">typedef</span> enum CGPDFBox CGPDFBox;
-</pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">enum</span> CGPDFBox {</div><div class="line">   kCGPDFMediaBox = <span class="number">0</span>,</div><div class="line">   kCGPDFCropBox = <span class="number">1</span>,</div><div class="line">   kCGPDFBleedBox = <span class="number">2</span>,</div><div class="line">   kCGPDFTrimBox = <span class="number">3</span>,</div><div class="line">   kCGPDFArtBox = <span class="number">4</span></div><div class="line">};</div><div class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span> CGPDFBox CGPDFBox;</div></pre></td></tr></table></figure>
 
-
-<h5>KCGPDFMediaBox</h5>
+<h5 id="KCGPDFMediaBox">KCGPDFMediaBox</h5>
 <p><br>The MediaBox is used to specify the width and height of the page. For the average user, this probably equals the actual page size. For prepress use, this is not the case as we prefer our pages to be defined slightly oversized so that we can see the bleed (Images or other elements touching an outer edge of a printed page need to extend beyond the edge of the paper to compensate for inaccuracies in trimming the page), the crop marks and useful information such as the file name or the date and time when the file was created. This means that PDF files used in graphic arts usually have a MediaBox which is larger then the trimmed page size. The MediaBox is the largest page box in a PDF. The other page boxes can equal the size of the MediaBox but they cannot be larger.<br></p>
 
-<h5>kCGPDFCropBox</h5>
+<h5 id="kCGPDFCropBox">kCGPDFCropBox</h5>
 <p><br>The CropBox defines the region to which the page contents are to be clipped. Acrobat uses this size for screen display and printing. For prepress use, the CropBox is pretty irrelevant. The GWG industry association recommends not to use the CropBox at all.<br></p>
 
  <a id="more"></a>
 
-<h5>kCGPDFBleedBox</h5>
+<h5 id="kCGPDFBleedBox">kCGPDFBleedBox</h5>
 <p><br>determines the region to which the page contents needs to be clipped when output in a production environment. Usually the BleedBox is 3 to 5 millimetres larger than the TrimBox. It is nice to know the size of the BleedBox but it isn’t that important in graphic arts. Most prepress systems allow you to define the amount of bleed yourself and ignore the BleedBox. By default the BleedBox equals the CropBox.<br></p> 
 
-<h5>KCGPDFTrimeBox</h5>
+<h5 id="KCGPDFTrimeBox">KCGPDFTrimeBox</h5>
 <p><br>The TrimBox defines the intended dimensions of the finished page. Contrary to the CropBox, the TrimBox is very important because it defines the actual page size. The imposition programs and workflows that I know all use the TrimBox as the basis for positioning pages on a press sheet. By default the TrimBox equals the CropBox. When creating PDFs that are PDF/X-1a or PDF/X-3 compliant it is a requirement that the MediaBox, TrimBox and BleedBox are properly defined in the PDF.<br></p>
 
-<h5>KCGPDFArtBox</h5>
+<h5 id="KCGPDFArtBox">KCGPDFArtBox</h5>
 <p><br>is a bit of a special case. It can define a region within a page that is of special interest. It is rarely used by applications. One way in which it can be used is to handle ads: on a PDF of a page on which there is an advertisement, the ArtBox can define the size of that ad. This allows you to place that PDF on another page but only use the ad from that PDF.<br></p>
 
-<h5>How to see the presence and/or size of the page boxes</h5>
+<h5 id="How_to_see_the_presence_and/or_size_of_the_page_boxes">How to see the presence and/or size of the page boxes</h5>
 <p><br>A PDF always has a MediaBox definition. All the other page boxes do not necessarily have to be present within the file.<br><br>If you crop pages in Adobe Acrobat 6 and later, the window that is shown displays the size of the various box sizes. Another option is to use the Preflight function in Acrobat Professional (version 6 and later). The pages boxes are shown in the Page information section.<br><br>There are a number of plug-ins that are a bit more user friendly than the Acrobat functions. I personally love the DocuBox plug-in which is a part of Agfa’s Apogee Prepress workflow.<br></p>
 
 
-<h5>How to change page boxes</h5>
+<h5 id="How_to_change_page_boxes">How to change page boxes</h5>
 <p><br>You can use the Crop Pages tool in Acrobat Professional to change the page boxes. A number of plug-ins offer more sophisticated control. Enfocus PitStop isn’t too bad but again I prefer the Agfa DocuBox plug-in. If you know about a good plug-in, add a comment to this page!<br></p>
 
 
-<h5>Do I even need to worry about all these boxes?</h5>
+<h5 id="Do_I_even_need_to_worry_about_all_these_boxes?">Do I even need to worry about all these boxes?</h5>
 <p><br>In the past: YES. Older applications did not define the trim box properly, forcing most prepress operators to center pages and hope everything worked out fine (which it usually did, by the way).<br><br>Nowadays applications are PDF-aware enough to get things right from the start. Take Adobe InDesign for example:<br><br>BleedBox information is sourced from the bleed settings in the marks &amp; bleeds section of the print dialog box.<br>The TrimBox is taken from the document setup.<br>The MediaBox size is defined by the media size to which you print. If the “paper”-size width and height are set to automatic, the MediaBox size will be equal to the BleedBox size.<br>The CropBox size is set to be the same as the Media size.<br></p>
 
 
-<h5>I want to see the finished trim size of a PDF</h5>
+<h5 id="I_want_to_see_the_finished_trim_size_of_a_PDF">I want to see the finished trim size of a PDF</h5>
 <p><br>To view a PDF at it’s finished (trim) size, set the CropBox to match the TrimBox. Some systems do this by default. This has users who are not familiar with PDF worry if there is any bleed in the document. They do not realise that there may be information available which simply isn’t visible on-screen. Acrobat plug-ins such as Enfocus PitStop allow you to alternate the PDF view between TrimBox and MediaBox.<br></p>
 
-<h5>Errors referring to the BBox</h5>
+<h5 id="Errors_referring_to_the_BBox">Errors referring to the BBox</h5>
 <p><br>To view a PDF at it’s finished (trim) size, set the CropBox to match the TrimBox. Some systems do this by default. This has users who are not familiar with PDF worry if there is any bleed in the document. They do not realise that there may be information available which simply isn’t visible on-screen. Acrobat plug-ins such as Enfocus PitStop allow you to alternate the PDF view between TrimBox and MediaBox.<br></p>
       
     </div>
@@ -174,6 +141,27 @@ The CropBox defines the region to which the page contents are to be clipped. Acr
   </div>
 </article>
 
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2013/04/24/IOS/2013-04-24-cgpdfbox/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
@@ -205,7 +193,7 @@ The CropBox defines the region to which the page contents are to be clipped. Acr
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/IOS/">IOS</a><small>8</small></li>
+    <li><a href="/tags/IOS/">IOS</a><small>16</small></li>
   
   </ul>
 </div>
@@ -215,7 +203,7 @@ The CropBox defines the region to which the page contents are to be clipped. Acr
   </div>
   <footer id="footer" class="inner"><div class="alignleft">
   
-  &copy; 2013 virgil
+  &copy; 2014 virgil
   
 </div>
 <div class="clearfix"></div></footer>

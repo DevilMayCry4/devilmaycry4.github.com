@@ -1,0 +1,476 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Page 4 | IOS | 無限大な夢</title>
+  <meta name="author" content="virgil">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="無限大な夢"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="無限大な夢" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">無限大な夢</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title category">IOS</h2>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-22T05:46:00.000Z"><a href="/2013/04/22/IOS/2013-04-22-grand-central-dispatch/">Apr 22 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/22/IOS/2013-04-22-grand-central-dispatch/">Grand Central Dispatch </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><br>Grand Central Dispatch (GCD)是Apple开发的一个多核编程的解决方法。该方法在Mac OS X 10.6雪豹中首次推出，并随后被引入到了iOS4.0中。GCD是一个替代诸如NSThread, NSOperationQueue, NSInvocationOperation等技术的很高效和强大的技术，它看起来象就其它语言的闭包(Closure)一样，但苹果把它叫做blocks<br></p>
+
+<p><br>应用举例<br>让我们来看一个编程场景。我们要在iphone上做一个下载网页的功能，该功能非常简单，就是在iphone上放置一个按钮，点击该按钮时，显示一个转动的圆圈，表示正在进行下载，下载完成之后，将内容加载到界面上的一个文本控件中。不用GCD前<br>虽然功能简单，但是我们必须把下载过程放到后台线程中，否则会阻塞UI线程显示。所以，如果不用GCD, 我们需要写如下3个方法：<font color="red">someClick</font> 方法是点击按钮后的代码，可以看到我们用NSInvocationOperation建了一个后台线程，并且放到NSOperationQueue中。后台线程执行<font color="red">download</font>方法。<br><font color="red">download</font> 方法处理下载网页的逻辑。下载完成后用<font color="red">performSelectorOnMainThread</font>执行<font color="red">download_completed</font> 方法。<br><font color="red">download_completed</font> 进行clear up的工作，并把下载的内容显示到文本控件中。<br><br>这3个方法的代码如下:<br></p>
+
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">-(<span class="keyword">IBAction</span>)someClick:(<span class="keyword">id</span>)sender</div><div class="line">{ </div><div class="line">  <span class="keyword">self</span><span class="variable">.indicator</span><span class="variable">.hidden</span> = <span class="literal">NO</span>; </div><div class="line">  [<span class="keyword">self</span><span class="variable">.indicatorstart</span>  Animating];</div><div class="line">  queue = [[NSOperationQueue  alloc]init];</div><div class="line">  NSInvocationOperation *op = [[[NSInvocationOperation alloc]initWithTarget:<span class="keyword">self</span> </div><div class="line">                                                                   selector:<span class="keyword">@selector</span>(download) </div><div class="line">                                                                     object:<span class="literal">nil</span>]autorelease];    </div><div class="line">  [queueaddOperation:op];</div><div class="line"> }</div></pre></td></tr></table></figure><br>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/04/22/IOS/2013-04-22-grand-central-dispatch/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-22T05:42:00.000Z"><a href="/2013/04/22/IOS/2013-04-22-intxing-zhuan-hua-wei-nsdata/">Apr 22 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/22/IOS/2013-04-22-intxing-zhuan-hua-wei-nsdata/">int型和NSdata型互相转化</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>int转化成NSdata</p><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> i =<span class="number">1</span>;</div><div class="line">NSData *data =[NSDatadataWithBytes:&amp;i length:<span class="keyword">sizeof</span>(i)];</div></pre></td></tr></table></figure><br><br><p>NSdata转化成int</p>
+
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> i = [data getBytes:&amp;i length:<span class="keyword">sizeof</span>(i)];</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-22T04:20:00.000Z"><a href="/2013/04/22/IOS/2013-04-22-zheng-que-chu-li-memory-waring/">Apr 22 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/22/IOS/2013-04-22-zheng-que-chu-li-memory-waring/">正确处理Memory Waring</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>  IPhone下每个app可用的内存是被限制的，如果一个app使用的内存超过20M，则系统会向该app发送Memory Warning消息。收到此消息后，app必须正确处理，否则可能出错或者出现内存泄露。</p>
+
+
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-22T04:10:00.000Z"><a href="/2013/04/22/IOS/2013-04-22-iosshe-bei-huo-qu-ben-ji-ipdi-zhi/">Apr 22 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/22/IOS/2013-04-22-iosshe-bei-huo-qu-ben-ji-ipdi-zhi/">IOS设备获取本机IP地址</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#include <span class="title">&lt;ifaddrs.h&gt;</span></span></div><div class="line"><span class="preprocessor">#include <span class="title">&lt;arpa/inet.h&gt;</span></span></div><div class="line">- (<span class="built_in">NSString</span>*)getIPAddress</div><div class="line">{</div><div class="line">   <span class="built_in">NSString</span>*address = <span class="string">@"error"</span>;</div><div class="line">   structifaddrs*interfaces = <span class="literal">NULL</span>;</div><div class="line">   structifaddrs*temp_addr = <span class="literal">NULL</span>;</div><div class="line">   intsuccess = <span class="number">0</span>;</div><div class="line">    </div><div class="line">   <span class="comment">// retrieve the current interfaces - returns 0 on success</span></div><div class="line">   success = getifaddrs(&amp;interfaces);</div><div class="line">   <span class="keyword">if</span>(success == <span class="number">0</span>)</div><div class="line">     {</div><div class="line">   <span class="comment">// Loop through linked list of interfaces</span></div><div class="line">        temp_addr = interfaces;</div><div class="line">        <span class="keyword">while</span>(temp_addr != <span class="literal">NULL</span>) </div><div class="line">        {</div><div class="line">            <span class="keyword">if</span>( temp_addr-&gt;ifa_addr-&gt;sa_family== AF_INET) </div><div class="line">            {</div><div class="line">   <span class="comment">// Check if interface is en0 which is the wifi connection on the iPhone</span></div><div class="line">                 <span class="keyword">if</span>([[NSStringstringWithUTF8String:temp_addr-&gt;ifa_name] isEqualToString:<span class="string">@"en0"</span>])</div><div class="line">                {</div><div class="line">  <span class="comment">// Get NSString from C String</span></div><div class="line">                   address = [NSStringstringWithUTF8String:inet_ntoa(((structsockaddr_in*)temp_addr-&gt;ifa_addr)-&gt;sin_addr)];</div><div class="line">                }</div><div class="line">            }</div><div class="line">            </div><div class="line">            temp_addr = temp_addr-&gt;ifa_next;</div><div class="line">        }</div><div class="line">    }</div><div class="line">    </div><div class="line">    <span class="comment">// Free memory    </span></div><div class="line">    freeifaddrs(interfaces);</div><div class="line">    returnaddress;</div><div class="line">}</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-22T04:03:00.000Z"><a href="/2013/04/22/IOS/2013-04-22-uiviewcontroller-zai-uinavigationcontroller-zhong-,dang-uinavigationbarchu-xian-hou-de-bian-hua/">Apr 22 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/22/IOS/2013-04-22-uiviewcontroller-zai-uinavigationcontroller-zhong-,dang-uinavigationbarchu-xian-hou-de-bian-hua/">UIViewController 在UINavigationController 中，当UINavigationBar出现后的变化</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>如果UIViewController 是在导航控制器中<br>在navigationbar 出现后self.view 的高度减少了44。如：<br>在viewDidLoad 中 </p>
+
+<p><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"self height %f"</span>,<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.heigt</span>);  </div></pre></td></tr></table></figure><br> </p><p><br>在viewDidAppear 中 </p><p></p>
+<p><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"self height %f"</span>,<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.heigt</span>);  </div></pre></td></tr></table></figure> </p>
+<p> 两个结果相差 44。</p>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-22T03:38:00.000Z"><a href="/2013/04/22/IOS/2013-04-22-chang-yong-dai-ma/">Apr 22 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/22/IOS/2013-04-22-chang-yong-dai-ma/">常用代码</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p></p><p>1.判断邮箱格式是否正确的代码</p><p></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">-(<span class="built_in">BOOL</span>)isValidateEmail:(<span class="built_in">NSString</span> *)email</div><div class="line">{</div><div class="line">  <span class="built_in">NSString</span> *emailRegex = <span class="string">@"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"</span>;</div><div class="line">  NSPredicate *emailTest = [NSPredicate predicateWithFormat:<span class="string">@"SELF MATCHES%@"</span>,emailRegex];</div><div class="line">  <span class="keyword">return</span> [emailTest evaluateWithObject:email];</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p></p><p>2.图片压缩</p><p></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">- (<span class="built_in">UIImage</span>*)imageWithImageSimple:(<span class="built_in">UIImage</span>*)image scaledToSize:(<span class="built_in">CGSize</span>)newSize</div><div class="line">{</div><div class="line"><span class="comment">// Create a graphics image context</span></div><div class="line">   UIGraphicsBeginImageContext(newSize);</div><div class="line"><span class="comment">// Tell the old image to draw in this newcontext, with the desired</span></div><div class="line"><span class="comment">// new size</span></div><div class="line">   [image drawInRect:CGRectMake(<span class="number">0</span>,<span class="number">0</span>,newSize<span class="variable">.width</span>,newSize<span class="variable">.height</span>)];</div><div class="line"><span class="comment">// Get the new image from the context</span></div><div class="line">   <span class="built_in">UIImage</span>* newImage = UIGraphicsGetImageFromCurrentImageContext();</div><div class="line"><span class="comment">// End the context</span></div><div class="line">   UIGraphicsEndImageContext();</div><div class="line"><span class="comment">// Return the new image.</span></div><div class="line">   <span class="keyword">return</span> newImage;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p></p><p>3.亲测可用的图片上传代码</p><p></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">IBAction</span>)uploadButton:(<span class="keyword">id</span>)sender </div><div class="line">{</div><div class="line">   <span class="built_in">UIImage</span> *image = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"1.jpg"</span>]; <span class="comment">//图片名</span></div><div class="line">   NSData *imageData = UIImageJPEGRepresentation(image,<span class="number">0.5</span>);<span class="comment">//压缩比例</span></div><div class="line">   <span class="built_in">NSLog</span>(<span class="string">@"字节数:%i"</span>,[imageData length]);</div><div class="line"><span class="comment">// post url</span></div><div class="line">   <span class="built_in">NSString</span> *urlString = <span class="string">@"http://192.168.1.113:8090/text/UploadServlet"</span>;</div><div class="line"><span class="comment">//服务器地址</span></div><div class="line"><span class="comment">// setting up the request object now</span></div><div class="line">   NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init] ;</div><div class="line">   [request setURL:[<span class="built_in">NSURL</span> URLWithString:urlString]];</div><div class="line">   [request setHTTPMethod:<span class="string">@"POST"</span>];</div><div class="line"><span class="comment">//</span></div><div class="line">   <span class="built_in">NSString</span> *boundary = [<span class="built_in">NSString</span> stringWithString:<span class="string">@"---------------------------14737809831466499882746641449"</span>];</div><div class="line">   <span class="built_in">NSString</span> *contentType = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"multipart/form-data;boundary=%@"</span>,boundary];</div><div class="line">   [request addValue:contentType forHTTPHeaderField: <span class="string">@"Content-Type"</span>];</div><div class="line"><span class="comment">//</span></div><div class="line">   NSMutableData *body = [NSMutableData data];</div><div class="line">   [body appendData:[[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"\r\n--%@\r\n"</span>,boundary] dataUsingEncoding:NSUTF8StringEncoding]];</div><div class="line">   [body appendData:[[<span class="built_in">NSString</span> stringWithString:<span class="string">@"Content-Disposition:form-data; name=\"userfile\"; filename=\"2.png\"\r\n"</span>] dataUsingEncoding:NSUTF8StringEncoding]]; <span class="comment">//上传上去的图片名字</span></div><div class="line">   [body appendData:[[<span class="built_in">NSString</span> stringWithString:<span class="string">@"Content-Type: application/octet-stream\r\n\r\n"</span>] dataUsingEncoding:NSUTF8StringEncoding]];</div><div class="line">   [body appendData:[NSData dataWithData:imageData]];</div><div class="line">   [body appendData:[[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"\r\n--%@--\r\n"</span>,boundary] dataUsingEncoding:NSUTF8StringEncoding]];</div><div class="line">   [request setHTTPBody:body];</div><div class="line"><span class="comment">// NSLog(@"1-body:%@",body);</span></div><div class="line">   <span class="built_in">NSLog</span>(<span class="string">@"2-request:%@"</span>,request);</div><div class="line">   NSData *returnData = [<span class="built_in">NSURLConnection</span> sendSynchronousRequest:request returningResponse:<span class="literal">nil</span> error:<span class="literal">nil</span>];</div><div class="line">   <span class="built_in">NSString</span> *returnString = [[<span class="built_in">NSString</span> alloc] initWithData:returnData encoding:NSUTF8StringEncoding];</div><div class="line">   <span class="built_in">NSLog</span>(<span class="string">@"3-测试输出：%@"</span>,returnString);</div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/04/22/IOS/2013-04-22-chang-yong-dai-ma/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-22T03:36:00.000Z"><a href="/2013/04/22/IOS/2013-04-22-she-uiimagewei-backgroundcolor/">Apr 22 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/22/IOS/2013-04-22-she-uiimagewei-backgroundcolor/">设UIImage为backgroundColor</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">+ (<span class="built_in">UIColor</span>*)colorWithPatternImage:(<span class="built_in">UIImage</span>*)image;</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-22T03:26:00.000Z"><a href="/2013/04/22/IOS/2013-04-22-ioshuo-qu-dan-wen-jian-de-da-xiao/">Apr 22 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/22/IOS/2013-04-22-ioshuo-qu-dan-wen-jian-de-da-xiao/">IOS获取单文件的大小</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>c语言实现：</p><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#include <span class="title">"sys/stat.h"</span></span></div><div class="line">- (<span class="keyword">long</span> <span class="keyword">long</span>) fileSizeAtPath:(<span class="built_in">NSString</span>*) filePath</div><div class="line">{  </div><div class="line">    <span class="keyword">struct</span> stat st;  </div><div class="line">    <span class="keyword">if</span>(lstat([filePath cStringUsingEncoding:NSUTF8StringEncoding], &amp;st) == <span class="number">0</span>)</div><div class="line">    {  </div><div class="line">        <span class="keyword">return</span> st<span class="variable">.st_size</span>;  </div><div class="line">    }  </div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;  </div><div class="line">}  </div></pre></td></tr></table></figure><br><br><p>object-c实现：</p>
+
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">-(<span class="keyword">long</span> <span class="keyword">long</span>) fileSizeAtPath:(<span class="built_in">NSString</span>*) filePath</div><div class="line">{  </div><div class="line">  <span class="built_in">NSFileManager</span>* manager = [<span class="built_in">NSFileManager</span> defaultManager];  </div><div class="line">  <span class="keyword">if</span> ([manager fileExistsAtPath:filePath])</div><div class="line">  {  </div><div class="line">    <span class="keyword">return</span> [[manager attributesOfItemAtPath:filePath error:<span class="literal">nil</span>] fileSize];  </div><div class="line">  }  </div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;  </div><div class="line">}  </div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-22T03:18:00.000Z"><a href="/2013/04/22/IOS/2013-04-22-svn-shang-chuan-dot-awen-jian/">Apr 22 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/22/IOS/2013-04-22-svn-shang-chuan-dot-awen-jian/">svn 上传.a文件</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>1. 在每个用户主文件夹下有一个名为.subversion的隐藏文件夹，打开里面的config文件。</p><br><p>2. 查找 [miscellany] 字段，即可看到下面有个 global-ignores 键名，默认为注释掉了的，这表示SVN已经将它们作为默认值了。</p><br><p>3. 取消注释，把 <em>.so </em>.so.[0-9]<em> </em>.a 去掉，当然你也可以根据需要增加或减少你的过滤选项。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-21T12:46:00.000Z"><a href="/2013/04/21/IOS/2013-04-21-ios-jian-ce-er-ji-cha-ru/">Apr 21 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/21/IOS/2013-04-21-ios-jian-ce-er-ji-cha-ru/">IOS 检测耳机插入</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <pre><code><span class="tag">&lt;<span class="title">hexoescape</span>&gt;</span>0<span class="tag">&lt;/<span class="title">hexoescape</span>&gt;</span>
+</code></pre>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+
+  <nav id="pagination">
+  
+    <a href="/categories/IOS/page/3/" class="alignleft prev">Prev</a>
+  
+  
+    <a href="/categories/IOS/page/5/" class="alignright next">Next</a>
+  
+  <div class="clearfix"></div>
+</nav>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/IOS/">IOS</a><small>44</small></li>
+  
+    <li><a href="/categories/OSX/">OSX</a><small>1</small></li>
+  
+    <li><a href="/categories/Other/">Other</a><small>4</small></li>
+  
+    <li><a href="/categories/windowsphone/">windowsphone</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/IOS/">IOS</a><small>16</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 virgil
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

@@ -6,17 +6,7 @@
   <title>NSTimer的使用 | 無限大な夢</title>
   <meta name="author" content="virgil">
   
-  <meta name="description" content="NSTimer 定时器，在编程的时候是十分常用的，但是其实很多时候都没有用对，我们经常都在Controller里创建NStimer,而期待在controller dealloc的时候，去停止定时器：1
-2
-3
-4
-5
-6
-7
-8
-- (void)dealloc
-{
-   if(_timer != n">
+  <meta name="description" content="NSTimer 定时器，在编程的时候是十分常用的，但是其实很多时候都没有用对，我们经常都在Controller里创建NStimer,而期待在controller dealloc的时候，去停止定时器：12345678- (void)dealloc{   if(_timer != nil)   {   ">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -33,6 +23,7 @@
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
+
 </head>
 
 
@@ -69,23 +60,7 @@
     </header>
     <div class="entry">
       
-        <p><br>NSTimer 定时器，在编程的时候是十分常用的，但是其实很多时候都没有用对，我们经常都在Controller里创建NStimer,而期待在controller dealloc的时候，去停止定时器：<br></p><br><figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-</pre></td><td class="code"><pre>- (<span class="keyword">void</span>)dealloc
-{
-   <span class="keyword">if</span>(_timer != <span class="literal">nil</span>)
-   {
-     [_timer invalidate];
-   }
-   [<span class="keyword">super</span> dealloc];
-}
-</pre></td></tr></table></figure><br><br><p><br>但实际上contoller永远都不会调用dealloc，因为_timer会retaincontroller一次。<br>在NSTimer创建的时候、NSRunloop会retian NSTimer一次、已保证NSTimer在执行完之前NSTimer不会被dealloc。而且一般NSTimer创建的时候会有个回调的target、而为了保证回调的正常、NSTimer会<br>retian target一次、而我们经常使用controller作为target，这样controller就从来都不会释放了。造成内存泄露。<br></p>
+        <p><br>NSTimer 定时器，在编程的时候是十分常用的，但是其实很多时候都没有用对，我们经常都在Controller里创建NStimer,而期待在controller dealloc的时候，去停止定时器：<br></p><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)dealloc</div><div class="line">{</div><div class="line">   <span class="keyword">if</span>(_timer != <span class="literal">nil</span>)</div><div class="line">   {</div><div class="line">     [_timer invalidate];</div><div class="line">   }</div><div class="line">   [<span class="keyword">super</span> dealloc];</div><div class="line">}</div></pre></td></tr></table></figure><br><p><br>但实际上contoller永远都不会调用dealloc，因为_timer会retaincontroller一次。<br>在NSTimer创建的时候、NSRunloop会retian NSTimer一次、已保证NSTimer在执行完之前NSTimer不会被dealloc。而且一般NSTimer创建的时候会有个回调的target、而为了保证回调的正常、NSTimer会<br>retian target一次、而我们经常使用controller作为target，这样controller就从来都不会释放了。造成内存泄露。<br></p>
       
     </div>
     <footer>
@@ -121,6 +96,27 @@
   </div>
 </article>
 
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2013/06/17/IOS/2013-06-17-nstimerde-shi-yong/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
@@ -152,7 +148,7 @@
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/IOS/">IOS</a><small>8</small></li>
+    <li><a href="/tags/IOS/">IOS</a><small>16</small></li>
   
   </ul>
 </div>
@@ -162,7 +158,7 @@
   </div>
   <footer id="footer" class="inner"><div class="alignleft">
   
-  &copy; 2013 virgil
+  &copy; 2014 virgil
   
 </div>
 <div class="clearfix"></div></footer>

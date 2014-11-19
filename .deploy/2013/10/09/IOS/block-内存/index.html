@@ -7,25 +7,7 @@
   <meta name="author" content="virgil">
   
   <meta name="description" content="block调用自身在前面添加__block关键字
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-- (IBAction)grabURLInBackground:(id)sender
-{
-   NSURL *url = [NSURL URLWithString:@&quot;ht">
+12345678910111213141516- (IBAction)grabURLInBackground:(id)sender{   NSURL *url = [NSURL URLWithString:@&quot;http://allseeing-i.c">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -42,6 +24,7 @@
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
+
 </head>
 
 
@@ -78,41 +61,8 @@
     </header>
     <div class="entry">
       
-        <p><p><br>block调用自身在前面添加__block关键字<br></p></p>
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-</pre></td><td class="code"><pre>- (IBAction)grabURLInBackground:(id)sender
-{
-   NSURL <span class="variable">*url</span> = [NSURL URLWithString:<span class="variable">@"</span>http:<span class="comment">//allseeing-i.com"];</span>
-   __block ASIHTTPRequest <span class="variable">*request</span> = [ASIHTTPRequest requestWithURL:url];
-   [request setCompletionBlock:^{
-      <span class="comment">// Use when fetching text data</span>
-      NSString <span class="variable">*responseString</span> = [request responseString];
- 
-      <span class="comment">// Use when fetching binary data</span>
-      NSData <span class="variable">*responseData</span> = [request responseData];
-   }];
-   [request setFailedBlock:^{
-      NSError <span class="variable">*error</span> = [request <span class="keyword">error</span>];
-   }];
-   [request startAsynchronous];
-}
-</pre></td></tr></table></figure>
-
+        <p></p><p><br>block调用自身在前面添加__block关键字<br></p><p></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">IBAction</span>)grabURLInBackground:(<span class="keyword">id</span>)sender</div><div class="line">{</div><div class="line">   <span class="built_in">NSURL</span> *url = [<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://allseeing-i.com"</span>];</div><div class="line">   __block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];</div><div class="line">   [request setCompletionBlock:^{</div><div class="line">      <span class="comment">// Use when fetching text data</span></div><div class="line">      <span class="built_in">NSString</span> *responseString = [request responseString];</div><div class="line"> </div><div class="line">      <span class="comment">// Use when fetching binary data</span></div><div class="line">      NSData *responseData = [request responseData];</div><div class="line">   }];</div><div class="line">   [request setFailedBlock:^{</div><div class="line">      <span class="built_in">NSError</span> *error = [request error];</div><div class="line">   }];</div><div class="line">   [request startAsynchronous];</div><div class="line">}</div></pre></td></tr></table></figure>
       
     </div>
     <footer>
@@ -148,6 +98,27 @@
   </div>
 </article>
 
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2013/10/09/IOS/block-内存/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
@@ -179,11 +150,7 @@
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-<<<<<<< HEAD:.deploy/2013/10/09/block-内存/index.html
-    <li><a href="/tags/IOS/">IOS</a><small>7</small></li>
-=======
-    <li><a href="/tags/IOS/">IOS</a><small>8</small></li>
->>>>>>> 2f6763fb70d4976cdc1e0a43476dc82a84dac3ff:public/2013/10/09/IOS/block-内存/index.html
+    <li><a href="/tags/IOS/">IOS</a><small>16</small></li>
   
   </ul>
 </div>
@@ -193,7 +160,7 @@
   </div>
   <footer id="footer" class="inner"><div class="alignleft">
   
-  &copy; 2013 virgil
+  &copy; 2014 virgil
   
 </div>
 <div class="clearfix"></div></footer>

@@ -8,12 +8,9 @@
   
   <meta name="description" content="NSUserDefaults standardUserDefaults一种便利的序列化方式、当使用
 
-1
-[[NSUserDefaults  standardUserDefaults] setObject:object textforKey:key];
+1[[NSUserDefaults  standardUserDefaults] setObject:object textforKey:key];
 
-
-
-这时候该对象只是写在内存中。要真正保存到">
+这时候该对象只是写在内存中。要真正保存到磁盘、">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -30,6 +27,7 @@
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
+
 </head>
 
 
@@ -68,16 +66,12 @@
       
         <p>NSUserDefaults standardUserDefaults一种便利的序列化方式、当使用</p>
 
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="string">[[NSUserDefaults  standardUserDefaults] setObject:object textforKey:key];
-</pre></td></tr></table></figure>
-
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[[<span class="built_in">NSUserDefaults</span>  standardUserDefaults] setObject:object textforKey:key];</div></pre></td></tr></table></figure>
 
 <p>这时候该对象只是写在内存中。要真正保存到磁盘、应该还要调用</p>
 
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="string">[[NSUserDefaults  standardUserDefaults] synchronize];
-</pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[[<span class="built_in">NSUserDefaults</span>  standardUserDefaults] synchronize];</div></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -114,6 +108,27 @@
   </div>
 </article>
 
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2013/04/22/IOS/2013-04-22-nsuserdefaults-standarduserdefaultszhu-yi-shi-xiang/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
@@ -145,7 +160,7 @@
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/IOS/">IOS</a><small>8</small></li>
+    <li><a href="/tags/IOS/">IOS</a><small>16</small></li>
   
   </ul>
 </div>
@@ -155,7 +170,7 @@
   </div>
   <footer id="footer" class="inner"><div class="alignleft">
   
-  &copy; 2013 virgil
+  &copy; 2014 virgil
   
 </div>
 <div class="clearfix"></div></footer>

@@ -6,25 +6,7 @@
   <title>UIImag Scale | 無限大な夢</title>
   <meta name="author" content="virgil">
   
-  <meta name="description" content="1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-- (UIImage*)scaleToSize:(CGSize)size {
-    UIGraphicsBeginImageContext(size);
-    
-    CGContextRef context = UIGr">
+  <meta name="description" content="123456789101112131415- (UIImage*)scaleToSize:(CGSize)size {    UIGraphicsBeginImageContext(size);        CGContextRef context = UIGraphicsGetCurrentCo">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -41,6 +23,7 @@
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
+
 </head>
 
 
@@ -77,37 +60,7 @@
     </header>
     <div class="entry">
       
-        <figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-</pre></td><td class="code"><pre>- (UIImage*)scaleToSize:(CGSize)size {
-    UIGraphicsBeginImageContext(size)<span class="comment">;</span>
-    
-    CGContextRef context = UIGraphicsGetCurrentContext()<span class="comment">;</span>
-    CGContextTranslateCTM(context, <span class="number">0.0</span>, size<span class="preprocessor">.height</span>)<span class="comment">;</span>
-    CGContextScaleCTM(context, <span class="number">1.0</span>, -<span class="number">1.0</span>)<span class="comment">;</span>
-    
-    CGContextDrawImage(context, CGRectMake(<span class="number">0.0</span>f, <span class="number">0.0</span>f, size<span class="preprocessor">.width</span>, size<span class="preprocessor">.height</span> - <span class="number">4.5</span>), self<span class="preprocessor">.CGImage</span>)<span class="comment">;</span>
-    
-    UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext()<span class="comment">;</span>
-    
-    UIGraphicsEndImageContext()<span class="comment">;</span>
-    
-    return scaledImage<span class="comment">;</span>
-}
-</pre></td></tr></table></figure>
+        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">- (<span class="built_in">UIImage</span>*)scaleToSize:(<span class="built_in">CGSize</span>)size {</div><div class="line">    UIGraphicsBeginImageContext(size);</div><div class="line">    </div><div class="line">    CGContextRef context = UIGraphicsGetCurrentContext();</div><div class="line">    CGContextTranslateCTM(context, <span class="number">0.0</span>, size<span class="variable">.height</span>);</div><div class="line">    CGContextScaleCTM(context, <span class="number">1.0</span>, -<span class="number">1.0</span>);</div><div class="line">    </div><div class="line">    CGContextDrawImage(context, CGRectMake(<span class="number">0.0</span>f, <span class="number">0.0</span>f, size<span class="variable">.width</span>, size<span class="variable">.height</span> - <span class="number">4.5</span>), <span class="keyword">self</span><span class="variable">.CGImage</span>);</div><div class="line">    </div><div class="line">    <span class="built_in">UIImage</span>* scaledImage = UIGraphicsGetImageFromCurrentImageContext();</div><div class="line">    </div><div class="line">    UIGraphicsEndImageContext();</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> scaledImage;</div><div class="line">}</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -144,6 +97,27 @@
   </div>
 </article>
 
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2013/06/07/IOS/2013-06-07-uiimag-scale/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
@@ -175,7 +149,7 @@
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/IOS/">IOS</a><small>8</small></li>
+    <li><a href="/tags/IOS/">IOS</a><small>16</small></li>
   
   </ul>
 </div>
@@ -185,7 +159,7 @@
   </div>
   <footer id="footer" class="inner"><div class="alignleft">
   
-  &copy; 2013 virgil
+  &copy; 2014 virgil
   
 </div>
 <div class="clearfix"></div></footer>
