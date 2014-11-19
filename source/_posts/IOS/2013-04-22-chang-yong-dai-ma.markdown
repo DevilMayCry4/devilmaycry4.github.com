@@ -6,17 +6,17 @@ comments: true
 categories: IOS
 ---
 <p>1.判断邮箱格式是否正确的代码</p>
-{% codeblock lang:objc %}
+{{% blockquote %}
 -(BOOL)isValidateEmail:(NSString *)email
 {
   NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
   NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES%@",emailRegex];
   return [emailTest evaluateWithObject:email];
 }
-{% endcodeblock %}
+{% blockquote %}
 
 <p>2.图片压缩</p>
-{% codeblock lang:objc %}
+{% blockquote   %}
 - (UIImage*)imageWithImageSimple:(UIImage*)image scaledToSize:(CGSize)newSize
 {
 // Create a graphics image context
@@ -31,7 +31,7 @@ categories: IOS
 // Return the new image.
    return newImage;
 }
-{% endcodeblock %}
+{% blockquote %}
 
 <p>3.亲测可用的图片上传代码</p>
 {% codeblock lang:objc %}

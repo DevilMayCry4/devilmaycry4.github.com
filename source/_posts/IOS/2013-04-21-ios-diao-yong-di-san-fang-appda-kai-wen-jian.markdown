@@ -5,7 +5,7 @@ date: 2013-04-21 10:22
 comments: true
 categories: IOS
 ---
-{% blockquote lang:objc %}
+{% blockquote %}
 NSString  *filePath =[[NSBundlemainBundle]pathForResource:@"1"ofType:@"docx"];
 UIDocumentInteractionController  *documentController=[UIDocumentInteractionControllerinteractionControllerWithURL:[NSURLfileURLWithPath:filePath]];
 documentController.UTI= @"com.microsoft.word.doc";
