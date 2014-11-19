@@ -99,9 +99,16 @@
     </header>
     <div class="entry">
       
-        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSString</span>  *filePath =[[NSBundlemainBundle]pathForResource:<span class="string">@"1"</span>ofType:<span class="string">@"docx"</span>];</div><div class="line">UIDocumentInteractionController  *documentController=[UIDocumentInteractionControllerinteractionControllerWithURL:[NSURLfileURLWithPath:filePath]];</div><div class="line">documentController<span class="variable">.UTI</span>= <span class="string">@"com.microsoft.word.doc"</span>;</div><div class="line">[documentController presentOpenInMenuFromRect:CGRectZero</div><div class="line">                    		    	 inView:<span class="keyword">self</span><span class="variable">.view</span></div><div class="line">                                     animated:<span class="literal">YES</span>];</div></pre></td></tr></table></figure>
+        <blockquote>
 
+<p>NSString  <em>filePath =[[NSBundlemainBundle]pathForResource:@”1”ofType:@”docx”];<br>UIDocumentInteractionController  </em>documentController=[UIDocumentInteractionControllerinteractionControllerWithURL:[NSURLfileURLWithPath:filePath]];<br>documentController.UTI= @”com.microsoft.word.doc”;<br>[documentController presentOpenInMenuFromRect:CGRectZero<br>                                     inView:self.view<br>                                     animated:YES];<blockquote></blockquote></p>
 <p><a href="https://developer.apple.com/library/ios/#documentation/Miscellaneous/Reference/UTIRef/Articles/System-DeclaredUniformTypeIdentifiers.html#//apple_ref/doc/uid/TP40009259-SW1" target="_blank" rel="external">UTI 列表</a></p>
+
+</blockquote>
+
+
+<footer><strong>lang:objc</strong></footer>
+
       
     </div>
     <footer>
