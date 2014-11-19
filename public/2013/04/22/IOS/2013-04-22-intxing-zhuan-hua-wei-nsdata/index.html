@@ -6,14 +6,9 @@
   <title>int型和NSdata型互相转化 | 無限大な夢</title>
   <meta name="author" content="virgil">
   
-  <meta name="description" content="int转化成NSdata1
-2
-int i =1;
-NSData *data =[NSDatadataWithBytes:&amp;i length:sizeof(i)];
-NSdata转化成int
+  <meta name="description" content="int转化成NSdata12int i =1;NSData *data =[NSDatadataWithBytes:&amp;amp;i length:sizeof(i)];NSdata转化成int
 
-1
-int i = [data getBytes:&amp;i length:sizeof(i)]">
+1int i = [data getBytes:&amp;amp;i length:sizeof(i)];">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -30,6 +25,7 @@ int i = [data getBytes:&amp;i length:sizeof(i)]">
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
+
 </head>
 
 
@@ -66,15 +62,9 @@ int i = [data getBytes:&amp;i length:sizeof(i)]">
     </header>
     <div class="entry">
       
-        <p>int转化成NSdata</p><br><figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre><span class="title">int</span> i =<span class="number">1</span>;
-<span class="type">NSData</span> *<span class="typedef"><span class="keyword">data</span> =[<span class="type">NSDatadataWithBytes</span>:&amp;i length:sizeof<span class="container">(<span class="title">i</span>)</span>];</span>
-</pre></td></tr></table></figure><br><br><br><p>NSdata转化成int</p>
+        <p>int转化成NSdata</p><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> i =<span class="number">1</span>;</div><div class="line">NSData *data =[NSDatadataWithBytes:&amp;i length:<span class="keyword">sizeof</span>(i)];</div></pre></td></tr></table></figure><br><br><p>NSdata转化成int</p>
 
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="title">int</span> i = [<span class="typedef"><span class="keyword">data</span> getBytes:&amp;i length:sizeof<span class="container">(<span class="title">i</span>)</span>];</span>
-</pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> i = [data getBytes:&amp;i length:<span class="keyword">sizeof</span>(i)];</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -111,6 +101,27 @@ int i = [data getBytes:&amp;i length:sizeof(i)]">
   </div>
 </article>
 
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2013/04/22/IOS/2013-04-22-intxing-zhuan-hua-wei-nsdata/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
@@ -142,7 +153,7 @@ int i = [data getBytes:&amp;i length:sizeof(i)]">
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/IOS/">IOS</a><small>8</small></li>
+    <li><a href="/tags/IOS/">IOS</a><small>16</small></li>
   
   </ul>
 </div>
@@ -152,7 +163,7 @@ int i = [data getBytes:&amp;i length:sizeof(i)]">
   </div>
   <footer id="footer" class="inner"><div class="alignleft">
   
-  &copy; 2013 virgil
+  &copy; 2014 virgil
   
 </div>
 <div class="clearfix"></div></footer>

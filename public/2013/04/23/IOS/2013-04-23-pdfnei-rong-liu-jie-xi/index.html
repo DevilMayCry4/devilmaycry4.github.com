@@ -7,54 +7,17 @@
   <meta name="author" content="virgil">
   
   <meta name="description" content="PDF Document Parsing
-Quartz提供了让你检查PDF文档结构和内容流的方法。通过这些方法，你可以获取文档目录的条目和与每个条目相关的内容。一个PDF的内容流（contentstream）正如其名字所暗示的—一个连续的数据流 例如‘BT 12 /F71 Tf (draw thistext) Tj . . . ’此处PDF操作符以及他们的描述符都混有实际的PDF内容。检查内容流,你需要按顺序访问它。
+Quartz提供了让你检查PDF文档结构和内容流的方法。通过这些方法，你可以获取文档目录的条目和与每个条目相关的内容。一个PDF的内容流（contentstream）正如其名字所暗示的—一个连续的数据流 例如’BT 12 /F71 Tf (draw thistext) Tj . . . ‘此处PDF操作符以及他们的描述符都混有实际的PDF内容。检查内容流,你需要按顺序访问它。
 
 PDF操作符
 1). General graphics state(普通图形状态操作符)
-1
-2
-3
-4
-5
-6
-7
-8
- w: 设置线的宽度
- J: 设置线端点风格. Butt/Round/Projecting square 
- j: 设置线交叉风格. Miter/Round/Bevel
- M: 设置Miter Limit
- d: 设置虚线风格.
- ri: 设置Rendering Intent(呈色意向)
- i: 设置平面化容忍度.
- gs: 设置图形状态参数.
-
-
+12345678w: 设置线的宽度J: 设置线端点风格. Butt/Round/Projecting square j: 设置线交叉风格. Miter/Round/BevelM: 设置Miter Limitd: 设置虚线风格.ri: 设置Rendering Intent(呈色意向)i: 设置平面化容忍度.gs: 设置图形状态参数.
 
 2). Special graphics state(特殊图形状态操作符)
-1
-2
-3
- q: 保存当前图形状态
- Q：回复图形状态.
- cm：设置当前装换矩阵.
-
-
+123q: 保存当前图形状态Q：回复图形状态.cm：设置当前装换矩阵.
 
 3). Path construction(路径构建操作符)
-1
-2
-3
-4
-5
-6
-7
- m: 移动当前指针到指定位置.
- l: 添加一条连接当前指针到指定位置的线段.
- c: 添加一条Bezier曲线， 有2个控制点，2个端点.
- v: 添加一条Bezier曲线， 2个控制点重合.
- y: 添加一条Bezier曲线， 第二个控制点和第二个端点重合.
- h: 闭合路径
- re: 添加一个矩形.">
+1234567m: 移动当前指针到指定位置.l: 添加一条连接当前指针到指定位置的线段.c: 添加一条Bezier曲线， 有2个控制点，2个端点.v: 添加一条Bezier曲线， 2个控制点重合.y: 添加一条Bezier曲线， 第二个控制点和第二个端点重合.h: 闭合路径re: 添加一个矩形.">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -71,6 +34,7 @@ PDF操作符
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
+
 </head>
 
 
@@ -107,228 +71,62 @@ PDF操作符
     </header>
     <div class="entry">
       
-        <h3>PDF Document Parsing</h3>
-<p>Quartz提供了让你检查PDF文档结构和内容流的方法。通过这些方法，你可以获取文档目录的条目和与每个条目相关的内容。一个PDF的内容流（contentstream）正如其名字所暗示的—一个连续的数据流 例如‘BT 12 /F71 Tf (draw thistext) Tj . . . ’此处PDF操作符以及他们的描述符都混有实际的PDF内容。检查内容流,你需要按顺序访问它。</p>
+        <h3 id="PDF_Document_Parsing">PDF Document Parsing</h3>
+<p>Quartz提供了让你检查PDF文档结构和内容流的方法。通过这些方法，你可以获取文档目录的条目和与每个条目相关的内容。一个PDF的内容流（contentstream）正如其名字所暗示的—一个连续的数据流 例如’BT 12 /F71 Tf (draw thistext) Tj . . . ‘此处PDF操作符以及他们的描述符都混有实际的PDF内容。检查内容流,你需要按顺序访问它。</p>
 
-<h3>PDF操作符</h3>
-<p><p>1). General graphics state(普通图形状态操作符)</p></p>
-<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-</pre></td><td class="code"><pre> <span class="attribute">w</span>: <span class="string">设置线的宽度</span>
- <span class="attribute">J</span>: <span class="string">设置线端点风格. Butt/Round/Projecting square </span>
- <span class="attribute">j</span>: <span class="string">设置线交叉风格. Miter/Round/Bevel</span>
- <span class="attribute">M</span>: <span class="string">设置Miter Limit</span>
- <span class="attribute">d</span>: <span class="string">设置虚线风格.</span>
- <span class="attribute">ri</span>: <span class="string">设置Rendering Intent(呈色意向)</span>
- <span class="attribute">i</span>: <span class="string">设置平面化容忍度.</span>
- <span class="attribute">gs</span>: <span class="string">设置图形状态参数.</span>
-</pre></td></tr></table></figure>
+<h3 id="PDF操作符">PDF操作符</h3>
+<p></p><p>1). General graphics state(普通图形状态操作符)</p><p></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">w: 设置线的宽度</div><div class="line">J: 设置线端点风格. Butt/Round/Projecting square </div><div class="line">j: 设置线交叉风格. Miter/Round/Bevel</div><div class="line">M: 设置Miter Limit</div><div class="line">d: 设置虚线风格.</div><div class="line">ri: 设置Rendering Intent(呈色意向)</div><div class="line">i: 设置平面化容忍度.</div><div class="line">gs: 设置图形状态参数.</div></pre></td></tr></table></figure>
+
+<p></p><p>2). Special graphics state(特殊图形状态操作符)</p><p></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">q: 保存当前图形状态</div><div class="line">Q：回复图形状态.</div><div class="line">cm：设置当前装换矩阵.</div></pre></td></tr></table></figure>
+
+<p></p><p>3). Path construction(路径构建操作符)</p><p></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">m: 移动当前指针到指定位置.</div><div class="line">l: 添加一条连接当前指针到指定位置的线段.</div><div class="line">c: 添加一条Bezier曲线， 有<span class="number">2</span>个控制点，<span class="number">2</span>个端点.</div><div class="line">v: 添加一条Bezier曲线， <span class="number">2</span>个控制点重合.</div><div class="line">y: 添加一条Bezier曲线， 第二个控制点和第二个端点重合.</div><div class="line">h: 闭合路径</div><div class="line">re: 添加一个矩形.</div></pre></td></tr></table></figure><br><a id="more"></a><br><br><p>4). Path painting(路径绘制操作符)</p><br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">S: 描绘路径.</div><div class="line">s: 闭合路径并描绘路径.</div><div class="line">f: 填充路径，使用非零回转数规则确定区域，路径在填充之前闭合.</div><div class="line">F: 等同f，为了兼容.</div><div class="line">f*: 填充路径，使用奇偶规则确定区域.</div><div class="line">B: 填充路径，使用非零回转数规则确定区域， 并描绘路径.</div><div class="line">B*: 填充路径，使用奇偶规则确定区域， 并描绘路径.</div><div class="line">b: 闭合路径, 填充路径，使用非零回转数规则确定区域， 并描绘路径.</div><div class="line">b*: 闭合路径，使用奇偶规则确定区域， 并描绘路径.</div><div class="line">n: 结束路径，不做任何描绘和填充.</div></pre></td></tr></table></figure>
 
 
-<p><p>2). Special graphics state(特殊图形状态操作符)</p></p>
-<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre> <span class="method">q:</span> 保存当前图形状态
- <span class="class">Q</span>：回复图形状态.
- cm：设置当前装换矩阵.
-</pre></td></tr></table></figure>
+<p></p><p>5). Clipping paths(路径修剪操作符)</p><p></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">W: 将当前修剪区域和当前路径做交，使用非零回转数规则.</div><div class="line">W*: 将当前修剪区域和当前路径做交，使用奇偶规则.</div></pre></td></tr></table></figure>
 
 
-<p><p>3). Path construction(路径构建操作符)</p></p>
-<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-</pre></td><td class="code"><pre> <span class="attribute">m</span>: <span class="string">移动当前指针到指定位置.</span>
- <span class="attribute">l</span>: <span class="string">添加一条连接当前指针到指定位置的线段.</span>
- <span class="attribute">c</span>: <span class="string">添加一条Bezier曲线， 有2个控制点，2个端点.</span>
- <span class="attribute">v</span>: <span class="string">添加一条Bezier曲线， 2个控制点重合.</span>
- <span class="attribute">y</span>: <span class="string">添加一条Bezier曲线， 第二个控制点和第二个端点重合.</span>
- <span class="attribute">h</span>: <span class="string">闭合路径</span>
- <span class="attribute">re</span>: <span class="string">添加一个矩形.</span>
-</pre></td></tr></table></figure>
-
-<a id="more"></a>
-
-<p><p>4). Path painting(路径绘制操作符)</p></p>
-<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td><td class="code"><pre> <span class="attribute">S</span>: <span class="string">描绘路径.</span>
- <span class="attribute">s</span>: <span class="string">闭合路径并描绘路径.</span>
- <span class="attribute">f</span>: <span class="string">填充路径，使用非零回转数规则确定区域，路径在填充之前闭合.</span>
- <span class="attribute">F</span>: <span class="string">等同f，为了兼容.</span>
- <span class="attribute">f*</span>: <span class="string">填充路径，使用奇偶规则确定区域.</span>
- <span class="attribute">B</span>: <span class="string">填充路径，使用非零回转数规则确定区域， 并描绘路径.</span>
- <span class="attribute">B*</span>: <span class="string">填充路径，使用奇偶规则确定区域， 并描绘路径.</span>
- <span class="attribute">b</span>: <span class="string">闭合路径, 填充路径，使用非零回转数规则确定区域， 并描绘路径.</span>
- <span class="attribute">b*</span>: <span class="string">闭合路径，使用奇偶规则确定区域， 并描绘路径.</span>
- <span class="attribute">n</span>: <span class="string">结束路径，不做任何描绘和填充.</span>
-</pre></td></tr></table></figure>
+<p></p><p>6). Text  objects(文本对象操作符)</p><p></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">BT: 开始一个文本对象.</div><div class="line">ET: 结束一个文本对象.</div></pre></td></tr></table></figure>
 
 
-
-<p><p>5). Clipping paths(路径修剪操作符)</p></p>
-<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre> <span class="attribute">W</span>: <span class="string">将当前修剪区域和当前路径做交，使用非零回转数规则.</span>
- <span class="attribute">W*</span>: <span class="string">将当前修剪区域和当前路径做交，使用奇偶规则.</span>
-</pre></td></tr></table></figure>
+<p></p><p>7). Text  state(文本状态操作符)</p><p></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Tc: 设置字符间隔.</div><div class="line">Tw: 设置单词间隔.</div><div class="line">Tz: 设置水平缩放.</div><div class="line">TL: 设置Leading.</div><div class="line">Tf: 设置文本字体.</div><div class="line">Tr: 设置Render(渲染)模式.</div><div class="line">Ts: 设置Rise</div></pre></td></tr></table></figure>
 
 
-
-<p><p>6). Text  objects(文本对象操作符)</p></p>
-<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre> <span class="attribute">BT</span>: <span class="string">开始一个文本对象.</span>
- <span class="attribute">ET</span>: <span class="string">结束一个文本对象.</span>
-</pre></td></tr></table></figure>
+<p></p><p>8). Text  positioning(文本位置操作符)</p><p></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Td: 移动到下一行的开始，通过偏移(tx,ty).</div><div class="line">TD: 移动到下一行的开始，通过偏移(tx,ty). 同时设置Leading为-ty.</div><div class="line">Tm: 设置文本矩阵和文本线矩阵.</div><div class="line">T*: 移动到下一行的开始位置. 和<span class="number">0</span> Tl Td相同.</div></pre></td></tr></table></figure>
 
 
-
-<p><p>7). Text  state(文本状态操作符)</p></p>
-<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-</pre></td><td class="code"><pre> <span class="attribute">Tc</span>: <span class="string">设置字符间隔.</span>
- <span class="attribute">Tw</span>: <span class="string">设置单词间隔.</span>
- <span class="attribute">Tz</span>: <span class="string">设置水平缩放.</span>
- <span class="attribute">TL</span>: <span class="string">设置Leading.</span>
- <span class="attribute">Tf</span>: <span class="string">设置文本字体.</span>
- <span class="attribute">Tr</span>: <span class="string">设置Render(渲染)模式.</span>
- <span class="attribute">Ts</span>: <span class="string">设置Rise</span>
-</pre></td></tr></table></figure>
+<p></p><p>9). Text  showing(文本显示操作符)</p><p></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Tj: 显示一个文本字符串.</div><div class="line">TJ: 显示一个或者多个文本字符串，允许独立的制定各个字型的位置.</div><div class="line">': 移动到下一行并显示一个文本字符串.</div><div class="line">": 移动到下一行并显示一个文本字符串. 并指定字符间距为ac, 单词间距为aw.</div></pre></td></tr></table></figure>
 
 
-
-<p><p>8). Text  positioning(文本位置操作符)</p></p>
-<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre> <span class="attribute">Td</span>: <span class="string">移动到下一行的开始，通过偏移(tx,ty).</span>
- <span class="attribute">TD</span>: <span class="string">移动到下一行的开始，通过偏移(tx,ty). 同时设置Leading为-ty.</span>
- <span class="attribute">Tm</span>: <span class="string">设置文本矩阵和文本线矩阵.</span>
- <span class="attribute">T*</span>: <span class="string">移动到下一行的开始位置. 和0 Tl Td相同.</span>
-</pre></td></tr></table></figure>
+<p></p><p>10). Type3 fonts(type3字体操作符)</p><p></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">d0:  设置字型的宽度.</div><div class="line">d1: 设置字型的宽度及自行的bounding box(边界矩形).</div></pre></td></tr></table></figure>
 
 
+<p></p><p>11). Color(颜色操作符)</p><p></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">CS: 设置描绘颜色空间.</div><div class="line">cs: 设置非描绘颜色空间.</div><div class="line">SC: 设置描绘颜色值，针对一般颜色空间.</div><div class="line">SCN: 设置描绘颜色值，允许特殊颜色空间.</div><div class="line">sc: 设置非描绘颜色值，针对一般颜色空间.</div><div class="line">scn: 设置非描绘颜色值，允许特殊颜色空间.</div><div class="line">G: 设置描绘颜色空间为DeviceGray，并设置颜色值.</div><div class="line">g: 设置非描绘颜色空间为DeviceGray, 并设置颜色值.</div><div class="line">RG: 设置描绘颜色空间为DeviceRGB，并设置颜色值.</div><div class="line">rg: 设置非描绘样色空间为DeviceRGB，并设置颜色值.</div><div class="line">K: 设置描绘颜色空间为DeviceCMYK，并设置颜色值.</div><div class="line">k: 设置非描绘颜色空间为DeviceCMYK，并设置颜色值.</div></pre></td></tr></table></figure>
 
-<p><p>9). Text  showing(文本显示操作符)</p></p>
-<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre> Tj: 显示一个文本字符串.
- TJ: 显示一个或者多个文本字符串，允许独立的制定各个字型的位置.
- <span class="comment">': 移动到下一行并显示一个文本字符串.</span>
- <span class="string">": 移动到下一行并显示一个文本字符串. 并指定字符间距为ac, 单词间距为aw.
-</pre></td></tr></table></figure>
+<p></p><p>12). Shading patterns(渐变样式操作符)</p><p></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sh: 输出一个shading对象.</div></pre></td></tr></table></figure>
 
+<p></p><p>13). Inline images(内联图像操作符)</p><p></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">BI: 开始一个内联图像.</div><div class="line">ID: 开始内联图像数据.</div><div class="line">EI: 结束一个内敛图像.</div></pre></td></tr></table></figure>
 
+<p></p><p>14). XObjects(外部对象操作符)</p><p></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Do: 输出一个外部对象.</div></pre></td></tr></table></figure>
 
-<p><p>10). Type3 fonts(type3字体操作符)</p></p>
-<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre> <span class="attribute">d0</span>: <span class="string"> 设置字型的宽度.</span>
- <span class="attribute">d1</span>: <span class="string">设置字型的宽度及自行的bounding box(边界矩形).</span>
-</pre></td></tr></table></figure>
+<p></p><p>15). Marked content(标记内容操作符)</p><p></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">MP: 定义一个标记内容点.</div><div class="line">DP: 定义一个带属性列表的标记内容点.</div><div class="line">BMC: 开始一个标记内容序列.</div><div class="line">BDC: 开始一个带属性列表的标记内容序列.</div><div class="line">EMC: 结束一个标记内容序列.</div></pre></td></tr></table></figure>
 
 
-
-<p><p>11). Color(颜色操作符)</p></p>
-<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-</pre></td><td class="code"><pre> <span class="attribute">CS</span>: <span class="string">设置描绘颜色空间.</span>
- <span class="attribute">cs</span>: <span class="string">设置非描绘颜色空间.</span>
- <span class="attribute">SC</span>: <span class="string">设置描绘颜色值，针对一般颜色空间.</span>
- <span class="attribute">SCN</span>: <span class="string">设置描绘颜色值，允许特殊颜色空间.</span>
- <span class="attribute">sc</span>: <span class="string">设置非描绘颜色值，针对一般颜色空间.</span>
- <span class="attribute">scn</span>: <span class="string">设置非描绘颜色值，允许特殊颜色空间.</span>
- <span class="attribute">G</span>: <span class="string">设置描绘颜色空间为DeviceGray，并设置颜色值.</span>
- <span class="attribute">g</span>: <span class="string">设置非描绘颜色空间为DeviceGray, 并设置颜色值.</span>
- <span class="attribute">RG</span>: <span class="string">设置描绘颜色空间为DeviceRGB，并设置颜色值.</span>
- <span class="attribute">rg</span>: <span class="string">设置非描绘样色空间为DeviceRGB，并设置颜色值.</span>
- <span class="attribute">K</span>: <span class="string">设置描绘颜色空间为DeviceCMYK，并设置颜色值.</span>
- <span class="attribute">k</span>: <span class="string">设置非描绘颜色空间为DeviceCMYK，并设置颜色值.</span>
-</pre></td></tr></table></figure>
-
-
-<p><p>12). Shading patterns(渐变样式操作符)</p></p>
-<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre> <span class="attribute">sh</span>: <span class="string">输出一个shading对象.</span>
-</pre></td></tr></table></figure>
-
-
-<p><p>13). Inline images(内联图像操作符)</p></p>
-<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre> <span class="attribute">BI</span>: <span class="string">开始一个内联图像.</span>
- <span class="attribute">ID</span>: <span class="string">开始内联图像数据.</span>
- <span class="attribute">EI</span>: <span class="string">结束一个内敛图像.</span>
-</pre></td></tr></table></figure>
-
-
-<p><p>14). XObjects(外部对象操作符)</p></p>
-<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre> <span class="attribute">Do</span>: <span class="string">输出一个外部对象.</span>
-</pre></td></tr></table></figure>
-
-
-<p><p>15). Marked content(标记内容操作符)</p></p>
-<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-</pre></td><td class="code"><pre> <span class="attribute">MP</span>: <span class="string">定义一个标记内容点.</span>
- <span class="attribute">DP</span>: <span class="string">定义一个带属性列表的标记内容点.</span>
- <span class="attribute">BMC</span>: <span class="string">开始一个标记内容序列.</span>
- <span class="attribute">BDC</span>: <span class="string">开始一个带属性列表的标记内容序列.</span>
- <span class="attribute">EMC</span>: <span class="string">结束一个标记内容序列.</span>
-</pre></td></tr></table></figure>
-
-
-
-<p><p>16). Compatibility(兼容性操作符)</p></p>
-<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre> <span class="attribute">BX</span>: <span class="string">开始一个兼容段.</span>
- <span class="attribute">EX</span>: <span class="string">结束一个兼容段.</span>
-</pre></td></tr></table></figure>
-
+<p></p><p>16). Compatibility(兼容性操作符)</p><p></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">BX: 开始一个兼容段.</div><div class="line">EX: 结束一个兼容段.</div></pre></td></tr></table></figure>
       
     </div>
     <footer>
@@ -364,6 +162,27 @@ PDF操作符
   </div>
 </article>
 
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2013/04/23/IOS/2013-04-23-pdfnei-rong-liu-jie-xi/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
@@ -395,7 +214,7 @@ PDF操作符
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/IOS/">IOS</a><small>8</small></li>
+    <li><a href="/tags/IOS/">IOS</a><small>16</small></li>
   
   </ul>
 </div>
@@ -405,7 +224,7 @@ PDF操作符
   </div>
   <footer id="footer" class="inner"><div class="alignleft">
   
-  &copy; 2013 virgil
+  &copy; 2014 virgil
   
 </div>
 <div class="clearfix"></div></footer>

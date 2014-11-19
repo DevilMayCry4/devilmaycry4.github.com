@@ -8,18 +8,7 @@
   
   <meta name="description" content="IOS FTP获取文件列表信息后。kCFFTPResourceType 对应的是文件类型。这个在 sys/dirent.h 头文件中有定义。
 
-1
-2
-3
-4
-5
-6
-7
-8
-9
-#define	DT_UNKNOWN	 0
-#define	DT_FIFO		 1
-#define	DT_CHR		 2">
+123456789#define	DT_UNKNOWN	 0#define	DT_FIFO		 1#define	DT_CHR		 2#define	DT_">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -36,6 +25,7 @@
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
+
 </head>
 
 
@@ -74,55 +64,10 @@
       
         <p><br>IOS FTP获取文件列表信息后。kCFFTPResourceType 对应的是文件类型。这个在 sys/dirent.h 头文件中有定义。<br></p>
 
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td><td class="code"><pre><span class="preprocessor">#<span class="keyword">define</span>	DT_UNKNOWN	 0</span>
-<span class="preprocessor">#<span class="keyword">define</span>	DT_FIFO		 1</span>
-<span class="preprocessor">#<span class="keyword">define</span>	DT_CHR		 2</span>
-<span class="preprocessor">#<span class="keyword">define</span>	DT_DIR		 4</span>
-<span class="preprocessor">#<span class="keyword">define</span>	DT_BLK		 6</span>
-<span class="preprocessor">#<span class="keyword">define</span>	DT_REG		 8</span>
-<span class="preprocessor">#<span class="keyword">define</span>	DT_LNK		10</span>
-<span class="preprocessor">#<span class="keyword">define</span>	DT_SOCK		12</span>
-<span class="preprocessor">#<span class="keyword">define</span>	DT_WHT		14</span>
-</pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#define	DT_UNKNOWN	 0</span></div><div class="line"><span class="preprocessor">#define	DT_FIFO		 1</span></div><div class="line"><span class="preprocessor">#define	DT_CHR		 2</span></div><div class="line"><span class="preprocessor">#define	DT_DIR		 4</span></div><div class="line"><span class="preprocessor">#define	DT_BLK		 6</span></div><div class="line"><span class="preprocessor">#define	DT_REG		 8</span></div><div class="line"><span class="preprocessor">#define	DT_LNK		10</span></div><div class="line"><span class="preprocessor">#define	DT_SOCK		12</span></div><div class="line"><span class="preprocessor">#define	DT_WHT		14</span></div></pre></td></tr></table></figure>
 
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-</pre></td><td class="code"><pre>
-<span class="title">DT_UNKNOWN</span>    未知类型
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">DT_UNKNOWN    未知类型</div><div class="line"></div><div class="line">DT_RET        普通文件</div><div class="line"></div><div class="line">DT_DIR        目录文件</div><div class="line"></div><div class="line">DT_FIFO       命名管道</div><div class="line"></div><div class="line">DT_SOCK       本地套接口</div><div class="line"></div><div class="line">DT_CHR        字符设备文件</div><div class="line"></div><div class="line">DT_BLK        块设备文件</div></pre></td></tr></table></figure>
 
-DT_RET        普通文件
-
-DT_DIR        目录文件
-
-DT_FIFO       命名管道
-
-DT_SOCK       本地套接口
-
-DT_CHR        字符设备文件
-
-DT_BLK        块设备文件
-</pre></td></tr></table></figure>
 
       
     </div>
@@ -159,6 +104,27 @@ DT_BLK        块设备文件
   </div>
 </article>
 
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2013/05/22/IOS/2013-05-22-ftpwen-jian-lei-xing/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
@@ -190,7 +156,7 @@ DT_BLK        块设备文件
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/IOS/">IOS</a><small>8</small></li>
+    <li><a href="/tags/IOS/">IOS</a><small>16</small></li>
   
   </ul>
 </div>
@@ -200,7 +166,7 @@ DT_BLK        块设备文件
   </div>
   <footer id="footer" class="inner"><div class="alignleft">
   
-  &copy; 2013 virgil
+  &copy; 2014 virgil
   
 </div>
 <div class="clearfix"></div></footer>

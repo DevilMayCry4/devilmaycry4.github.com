@@ -1,64 +1,30 @@
-date: 2014-04-23 16:48:31.190
+date: "2014-11-19 13:22:57.294"
 argv: node /usr/local/bin/hexo generate
-os: Darwin 12.4.0 darwin x64
-version:
-  hexo: 2.1.0
-  http_parser: 1.0
-  node: 0.10.18
+os: Darwin 13.3.0 darwin x64
+versions:
+  http_parser: "1.0"
+  node: 0.10.33
   v8: 3.14.5.9
   ares: 1.9.0-DEV
-  uv: 0.10.15
+  uv: 0.10.29
   zlib: 1.2.3
-  modules: 11
-  openssl: 1.0.1e
+  modules: "11"
+  openssl: 1.0.1j
+  hexo: 2.8.3
 ---
-
-[debug] 16:48:30.717 Configuration file load successfully
-[debug] 16:48:30.719 Version info checked successfully
-[debug] 16:48:30.719 Loading the database...
-[debug] 16:48:30.968 Theme layout loaded
-[debug] 16:48:31.014 Theme configuration loaded
-[debug] 16:48:31.065 Theme source loaded
-[debug] 16:48:31.152 Processed: img/openfire1.png
-[debug] 16:48:31.153 Processed: img/pdf1.png
-[debug] 16:48:31.153 Processed: img/pdf2.png
-[debug] 16:48:31.154 Processed: img/pdf3.png
-[debug] 16:48:31.155 Processed: img/2048/favicon.ico
-[debug] 16:48:31.155 Processed: img/2048/js/animframe_polyfill.js
-[debug] 16:48:31.157 Processed: img/2048/js/application.js
-[debug] 16:48:31.157 Processed: img/2048/js/game_manager.js
-[debug] 16:48:31.158 Processed: img/2048/js/grid.js
-[debug] 16:48:31.158 Processed: img/2048/js/html_actuator.js
-[debug] 16:48:31.161 Processed: img/2048/js/keyboard_input_manager.js
-[debug] 16:48:31.161 Processed: img/2048/js/local_score_manager.js
-[debug] 16:48:31.162 Processed: img/2048/js/tile.js
-[debug] 16:48:31.163 Processed: img/2048/meta/apple-touch-icon.png
-[debug] 16:48:31.164 Processed: img/2048/style/1024.jpg
-[debug] 16:48:31.164 Processed: img/2048/style/2048.jpg
-[debug] 16:48:31.165 Processed: img/2048/style/main.css
-[debug] 16:48:31.166 Processed: img/2048/full/favicon.ico
-[debug] 16:48:31.167 Processed: img/2048/full/js/animframe_polyfill.js
-[debug] 16:48:31.167 Processed: img/2048/full/js/application.js
-[debug] 16:48:31.168 Processed: img/2048/full/js/game_manager.js
-[debug] 16:48:31.169 Processed: img/2048/full/js/grid.js
-[debug] 16:48:31.170 Processed: img/2048/full/js/html_actuator.js
-[debug] 16:48:31.170 Processed: img/2048/full/js/keyboard_input_manager.js
-[debug] 16:48:31.171 Processed: img/2048/full/js/local_score_manager.js
-[debug] 16:48:31.171 Processed: img/2048/full/js/tile.js
-[debug] 16:48:31.172 Processed: img/2048/full/meta/apple-touch-icon.png
-[debug] 16:48:31.172 Processed: img/2048/full/style/131072.jpg
-[debug] 16:48:31.173 Processed: img/2048/full/style/65536.jpg
-[debug] 16:48:31.174 Processed: img/2048/full/style/main.css
-[debug] 16:48:31.175 Theme i18n loaded
-[error] 16:48:31.185 { rawMessage: 'Unable to parse.',
-  parsedLine: 3,
-  snippet: 'tags:IOS',
-  parsedFile: null,
-  message: 'Unable to parse.',
+[debug] 13:22:57.178 Config file loaded from /Users/virgil/Documents/EditWebSite/_config.yml[debug] 13:22:57.180 Version info checked successfully[debug] 13:22:57.227 Processed: page.md (6ms)[debug] 13:22:57.227 Processed: photo.md (6ms)[debug] 13:22:57.228 Processed: post.md (2ms)[debug] 13:22:57.267 Processed: source/fancybox/blank.gif (1ms)[debug] 13:22:57.267 Processed: source/fancybox/fancybox_loading.gif (0ms)[debug] 13:22:57.267 Processed: source/fancybox/fancybox_loading@2x.gif (0ms)[debug] 13:22:57.267 Processed: source/fancybox/fancybox_overlay.png (0ms)[debug] 13:22:57.267 Processed: source/fancybox/fancybox_sprite.png (0ms)[debug] 13:22:57.267 Processed: source/fancybox/fancybox_sprite@2x.png (0ms)[debug] 13:22:57.268 Processed: source/fancybox/jquery.fancybox.css (1ms)[debug] 13:22:57.268 Processed: source/fancybox/jquery.fancybox.pack.js (0ms)[debug] 13:22:57.268 Processed: source/js/gallery.js (0ms)[debug] 13:22:57.268 Processed: source/js/jquery.imagesloaded.min.js (0ms)[debug] 13:22:57.268 Processed: source/css/style.styl (0ms)[debug] 13:22:57.268 Processed: source/css/_base/layout.styl (0ms)[debug] 13:22:57.268 Processed: source/css/_base/utils.styl (0ms)[debug] 13:22:57.268 Processed: source/css/_base/variable.styl (0ms)[debug] 13:22:57.268 Processed: source/css/_partial/archive.styl (0ms)[debug] 13:22:57.268 Processed: source/css/_partial/article.styl (0ms)[debug] 13:22:57.268 Processed: source/css/_partial/comment.styl (0ms)[debug] 13:22:57.268 Processed: source/css/_partial/footer.styl (0ms)[debug] 13:22:57.268 Processed: source/css/_partial/header.styl (0ms)[debug] 13:22:57.268 Processed: source/css/_partial/index.styl (0ms)[debug] 13:22:57.269 Processed: source/css/_partial/sidebar.styl (1ms)[debug] 13:22:57.269 Processed: source/css/_partial/syntax.styl (0ms)[debug] 13:22:57.269 Processed: source/css/font/fontawesome-webfont.eot (0ms)[debug] 13:22:57.269 Processed: source/css/font/fontawesome-webfont.svg (0ms)[debug] 13:22:57.269 Processed: source/css/font/fontawesome-webfont.ttf (0ms)[debug] 13:22:57.269 Processed: source/css/font/fontawesome-webfont.woff (0ms)[debug] 13:22:57.271 Processed: layout/archive.ejs (7ms)[debug] 13:22:57.271 Processed: layout/category.ejs (7ms)[debug] 13:22:57.271 Processed: layout/index.ejs (6ms)[debug] 13:22:57.271 Processed: layout/layout.ejs (6ms)[debug] 13:22:57.271 Processed: layout/page.ejs (6ms)[debug] 13:22:57.271 Processed: layout/post.ejs (6ms)[debug] 13:22:57.271 Processed: layout/tag.ejs (6ms)[debug] 13:22:57.271 Processed: layout/_widget/category.ejs (6ms)[debug] 13:22:57.271 Processed: layout/_widget/recent_posts.ejs (6ms)[debug] 13:22:57.271 Processed: layout/_widget/search.ejs (6ms)[debug] 13:22:57.271 Processed: layout/_widget/tag.ejs (6ms)[debug] 13:22:57.271 Processed: layout/_widget/tagcloud.ejs (6ms)[debug] 13:22:57.271 Processed: layout/_partial/after_footer.ejs (6ms)[debug] 13:22:57.271 Processed: layout/_partial/archive.ejs (6ms)[debug] 13:22:57.271 Processed: layout/_partial/article.ejs (6ms)[debug] 13:22:57.271 Processed: layout/_partial/comment.ejs (5ms)[debug] 13:22:57.271 Processed: layout/_partial/footer.ejs (5ms)[debug] 13:22:57.271 Processed: layout/_partial/google_analytics.ejs (5ms)[debug] 13:22:57.271 Processed: layout/_partial/head.ejs (5ms)[debug] 13:22:57.271 Processed: layout/_partial/header.ejs (5ms)[debug] 13:22:57.271 Processed: layout/_partial/pagination.ejs (5ms)[debug] 13:22:57.271 Processed: layout/_partial/sidebar.ejs (5ms)[debug] 13:22:57.271 Processed: layout/_partial/post/category.ejs (5ms)[debug] 13:22:57.271 Processed: layout/_partial/post/gallery.ejs (5ms)[debug] 13:22:57.271 Processed: layout/_partial/post/share.ejs (5ms)[debug] 13:22:57.271 Processed: layout/_partial/post/tag.ejs (5ms)[debug] 13:22:57.271 Processed: layout/_partial/post/title.ejs (5ms)[debug] 13:22:57.272 Theme config loaded[debug] 13:22:57.272 Processed: _config.yml (8ms)[debug] 13:22:57.272 Processed: languages/de.yml (8ms)[debug] 13:22:57.273 Processed: languages/default.yml (9ms)[debug] 13:22:57.278 Processed: img/openfire1.png (1ms)[debug] 13:22:57.278 Processed: img/openfire2.png (0ms)[debug] 13:22:57.278 Processed: img/pdf1.png (0ms)[debug] 13:22:57.278 Processed: img/pdf2.png (0ms)[debug] 13:22:57.278 Processed: img/pdf3.png (0ms)[debug] 13:22:57.278 Processed: img/2048/favicon.ico (0ms)[debug] 13:22:57.279 Processed: img/2048/js/animframe_polyfill.js (0ms)[debug] 13:22:57.279 Processed: img/2048/js/application.js (0ms)[debug] 13:22:57.279 Processed: img/2048/js/game_manager.js (0ms)[debug] 13:22:57.279 Processed: img/2048/js/grid.js (0ms)[debug] 13:22:57.279 Processed: img/2048/js/html_actuator.js (0ms)[debug] 13:22:57.279 Processed: img/2048/js/keyboard_input_manager.js (0ms)[debug] 13:22:57.280 Processed: img/2048/js/local_score_manager.js (1ms)[debug] 13:22:57.280 Processed: img/2048/js/tile.js (0ms)[debug] 13:22:57.280 Processed: img/2048/meta/apple-touch-icon.png (0ms)[debug] 13:22:57.280 Processed: img/2048/style/1024.jpg (0ms)[debug] 13:22:57.280 Processed: img/2048/style/2048.jpg (0ms)[debug] 13:22:57.280 Processed: img/2048/style/main.css (0ms)[debug] 13:22:57.281 Processed: img/2048/full/favicon.ico (1ms)[debug] 13:22:57.281 Processed: img/2048/full/js/animframe_polyfill.js (0ms)[debug] 13:22:57.281 Processed: img/2048/full/js/application.js (0ms)[debug] 13:22:57.281 Processed: img/2048/full/js/game_manager.js (0ms)[debug] 13:22:57.281 Processed: img/2048/full/js/grid.js (0ms)[debug] 13:22:57.281 Processed: img/2048/full/js/html_actuator.js (0ms)[debug] 13:22:57.281 Processed: img/2048/full/js/keyboard_input_manager.js (0ms)[debug] 13:22:57.282 Processed: img/2048/full/js/local_score_manager.js (1ms)[debug] 13:22:57.282 Processed: img/2048/full/js/tile.js (0ms)[debug] 13:22:57.282 Processed: img/2048/full/meta/apple-touch-icon.png (0ms)[debug] 13:22:57.282 Processed: img/2048/full/style/131072.jpg (0ms)[debug] 13:22:57.282 Processed: img/2048/full/style/65536.jpg (0ms)[debug] 13:22:57.282 Processed: img/2048/full/style/main.css (0ms)[error] 13:22:57.284 { name: 'HexoError',
+  reason: 'incomplete explicit mapping pair; a key node is missed',
+  mark: 
+   { name: null,
+     buffer: 'categories: Категории\nsearch: Поиск\ntags: Метки\ntagcloud: Облако меток\ntweets: Твиты\nprev: Назад\nnext: Вперед\ncomment: Комментарии\narchive_a: Архив\narchive_b: Архив: %s\npage: Страница %d\n\u0000',
+     position: 164,
+     line: 9,
+     column: 16 },
+  message: 'Process failed: languages/ru.yml',
   domain: 
    { domain: null,
      _events: { error: [Function] },
      _maxListeners: 10,
-     members: [],
-     _disposed: true },
-  domainThrown: true }
+     members: [ [Object] ] },
+  domainThrown: true,
+  stack: undefined }[debug] 13:22:57.290 Processed: languages/zh-CN.yml (26ms)[debug] 13:22:57.291 Processed: languages/zh-TW.yml (27ms)[debug] 13:22:57.314 Processed: img/2048/index.html (36ms)[debug] 13:22:57.319 Processed: img/2048/full/index.html (38ms)

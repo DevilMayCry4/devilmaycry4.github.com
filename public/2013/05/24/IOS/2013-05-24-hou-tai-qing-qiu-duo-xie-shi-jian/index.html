@@ -6,32 +6,7 @@
   <title>后台请求多些时间 | 無限大な夢</title>
   <meta name="author" content="virgil">
   
-  <meta name="description" content="1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-   UIApplication *app = [UIApplication sharedApplication];
-    
-    //一个后台任务标识符
-    UIBackgro">
+  <meta name="description" content="12345678910111213141516171819202122UIApplication *app = [UIApplication sharedApplication];  //一个后台任务标识符 UIBackgroundTaskIdentifier taskID; taskID = [a">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -48,6 +23,7 @@
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
+
 </head>
 
 
@@ -84,51 +60,7 @@
     </header>
     <div class="entry">
       
-        <figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-</pre></td><td class="code"><pre>   <span class="built_in">UIApplication</span> *app = [<span class="built_in">UIApplication</span> sharedApplication];
-    
-    <span class="comment">//一个后台任务标识符</span>
-    UIBackgroundTaskIdentifier taskID;
-    taskID = [app beginBackgroundTaskWithExpirationHandler:^{
-        <span class="comment">//如果系统觉得我们还是运行了太久，将执行这个程序块，并停止运行应用程序</span>
-        [app endBackgroundTask:taskID];
-    }];
-    <span class="comment">//UIBackgroundTaskInvalid表示系统没有为我们提供额外的时候</span>
-    <span class="keyword">if</span> (taskID == UIBackgroundTaskInvalid) {
-        <span class="built_in">NSLog</span>(@<span class="string">"Failed to start background task!"</span>);
-        <span class="keyword">return</span>;
-    }
-    <span class="keyword">while</span> (app<span class="variable">.backgroundTimeRemaining</span> &gt;<span class="number">0.0</span>)
-    {
-        
-    }
-    <span class="built_in">NSLog</span>(@<span class="string">"Starting background task with %f seconds remaining"</span>, app<span class="variable">.backgroundTimeRemaining</span>);
-    [<span class="built_in">NSThread</span> sleepForTimeInterval:<span class="number">10</span>];
-    <span class="built_in">NSLog</span>(@<span class="string">"Finishing background task with %f seconds remaining"</span>,app<span class="variable">.backgroundTimeRemaining</span>);
-    <span class="comment">//告诉系统我们完成了</span>
-    [app endBackgroundTask:taskID];
-</pre></td></tr></table></figure>
+        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">UIApplication</span> *app = [<span class="built_in">UIApplication</span> sharedApplication];</div><div class="line"> </div><div class="line"> <span class="comment">//一个后台任务标识符</span></div><div class="line"> UIBackgroundTaskIdentifier taskID;</div><div class="line"> taskID = [app beginBackgroundTaskWithExpirationHandler:^{</div><div class="line">     <span class="comment">//如果系统觉得我们还是运行了太久，将执行这个程序块，并停止运行应用程序</span></div><div class="line">     [app endBackgroundTask:taskID];</div><div class="line"> }];</div><div class="line"> <span class="comment">//UIBackgroundTaskInvalid表示系统没有为我们提供额外的时候</span></div><div class="line"> <span class="keyword">if</span> (taskID == UIBackgroundTaskInvalid) {</div><div class="line">     <span class="built_in">NSLog</span>(<span class="string">@"Failed to start background task!"</span>);</div><div class="line">     <span class="keyword">return</span>;</div><div class="line"> }</div><div class="line"> <span class="keyword">while</span> (app<span class="variable">.backgroundTimeRemaining</span> &gt;<span class="number">0.0</span>)</div><div class="line"> {</div><div class="line">     </div><div class="line"> }</div><div class="line"> <span class="built_in">NSLog</span>(<span class="string">@"Starting background task with %f seconds remaining"</span>, app<span class="variable">.backgroundTimeRemaining</span>);</div><div class="line"> [<span class="built_in">NSThread</span> sleepForTimeInterval:<span class="number">10</span>];</div><div class="line"> <span class="built_in">NSLog</span>(<span class="string">@"Finishing background task with %f seconds remaining"</span>,app<span class="variable">.backgroundTimeRemaining</span>);</div><div class="line"> <span class="comment">//告诉系统我们完成了</span></div><div class="line"> [app endBackgroundTask:taskID];</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -165,6 +97,27 @@
   </div>
 </article>
 
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2013/05/24/IOS/2013-05-24-hou-tai-qing-qiu-duo-xie-shi-jian/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
@@ -196,7 +149,7 @@
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/IOS/">IOS</a><small>8</small></li>
+    <li><a href="/tags/IOS/">IOS</a><small>16</small></li>
   
   </ul>
 </div>
@@ -206,7 +159,7 @@
   </div>
   <footer id="footer" class="inner"><div class="alignleft">
   
-  &copy; 2013 virgil
+  &copy; 2014 virgil
   
 </div>
 <div class="clearfix"></div></footer>

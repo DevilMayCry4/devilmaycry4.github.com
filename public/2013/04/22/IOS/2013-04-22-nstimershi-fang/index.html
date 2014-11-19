@@ -6,18 +6,6 @@
   <title>NSTimer释放 | 無限大な夢</title>
   <meta name="author" content="virgil">
   
-  <meta name="description" content="IOS
-NSTimer 是一个比较麻烦的东东，理解不清楚的时候释放它、很可能会出现crash。NSTimer的创建一般使用俩种方式：1， 类方法直接创建：
-
-1
-2
-3
-4
-5
-6
-7
-+ (NSTimer*)timerWithTimeInterval:(NSTimeInterval)ti invo">
-  
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -33,6 +21,7 @@ NSTimer 是一个比较麻烦的东东，理解不清楚的时候释放它、很
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
+
 </head>
 
 
@@ -69,31 +58,7 @@ NSTimer 是一个比较麻烦的东东，理解不清楚的时候释放它、很
     </header>
     <div class="entry">
       
-        <p>IOS</p>
-<p>NSTimer 是一个比较麻烦的东东，理解不清楚的时候释放它、很可能会出现crash。<br>NSTimer的创建一般使用俩种方式：</p><br><p>1， 类方法直接创建：</p>
-
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-</pre></td><td class="code"><pre>+ (<span class="tag">NSTimer</span>*)<span class="tag">timerWithTimeInterval</span><span class="pseudo">:(NSTimeInterval)ti</span> <span class="tag">invocation</span><span class="pseudo">:(NSInvocation</span>*)<span class="tag">invocation</span> <span class="tag">repeats</span><span class="pseudo">:(BOOL)yesOrNo</span>;
-
-+ (<span class="tag">NSTimer</span>*)<span class="tag">scheduledTimerWithTimeInterval</span><span class="pseudo">:(NSTimeInterval)ti</span> <span class="tag">invocation</span><span class="pseudo">:(NSInvocation</span>*)<span class="tag">invocation</span> <span class="tag">repeats</span><span class="pseudo">:(BOOL)yesOrNo</span>;
-
-+ (<span class="tag">NSTimer</span>*)<span class="tag">timerWithTimeInterval</span><span class="pseudo">:(NSTimeInterval)ti</span> <span class="tag">target</span><span class="pseudo">:(id)aTarget</span> <span class="tag">selector</span><span class="pseudo">:(SEL)aSelector</span> <span class="tag">userInfo</span><span class="pseudo">:(id)userInfo</span> <span class="tag">repeats</span><span class="pseudo">:(BOOL)yesOrNo</span>;
-
-+ (<span class="tag">NSTimer</span>*)<span class="tag">scheduledTimerWithTimeInterval</span><span class="pseudo">:(NSTimeInterval)ti</span> <span class="tag">target</span><span class="pseudo">:(id)aTarget</span> <span class="tag">selector</span><span class="pseudo">:(SEL)aSelector</span> <span class="tag">userInfo</span><span class="pseudo">:(id)userInfo</span> <span class="tag">repeats</span><span class="pseudo">:(BOOL)yesOrNo</span>;
-</pre></td></tr></table></figure>
-
-<p><p>由这些方法所创建的NSTimer的retain count是由NSRunloop保持、所以我们不需要对这个对象进行release的操作。但是如果我们想要在某个具体的地方<br>停止这个计数器的时候。如果repeats参数是YES的时候我们不需要增加这个对象的retain count。就可以在其他地方引用这个对象了。如果repeats参数shi是NO的时候、我们就应该手动增加、再release。如果不retain它、如果在你引用这个对象的时候、定时器的时间还没到，方法还没执行。NSRunloop<br>还保留这retain count。这时候是没问题的、但是如果方法已经执行完了、NSRunloop释放了NSTimer这个对象。这个时候就会crash了。&lt;/p&gt;</p>
-<p><p>2、直接创建：</p]></p>
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="pp">- <span class="params">(id)</span>initWithFireDate:<span class="params">(<span class="variable">NSDate</span>*)</span>date interval:<span class="params">(<span class="variable">NSTimeInterval</span>)</span>ti target:<span class="params">(id)</span>t selector:<span class="params">(<span class="variable">SEL</span>)</span>s userInfo:<span class="params">(id)</span>ui repeats:<span class="params">(<span class="variable">BOOL</span>)</span>rep;
-</pre></td></tr></table></figure>
-
+        
       
     </div>
     <footer>
@@ -123,6 +88,27 @@ NSTimer 是一个比较麻烦的东东，理解不清楚的时候释放它、很
     </footer>
   </div>
 </article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2013/04/22/IOS/2013-04-22-nstimershi-fang/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
 
 </div></div>
     <aside id="sidebar" class="alignright">
@@ -155,7 +141,7 @@ NSTimer 是一个比较麻烦的东东，理解不清楚的时候释放它、很
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/IOS/">IOS</a><small>8</small></li>
+    <li><a href="/tags/IOS/">IOS</a><small>16</small></li>
   
   </ul>
 </div>
@@ -165,7 +151,7 @@ NSTimer 是一个比较麻烦的东东，理解不清楚的时候释放它、很
   </div>
   <footer id="footer" class="inner"><div class="alignleft">
   
-  &copy; 2013 virgil
+  &copy; 2014 virgil
   
 </div>
 <div class="clearfix"></div></footer>

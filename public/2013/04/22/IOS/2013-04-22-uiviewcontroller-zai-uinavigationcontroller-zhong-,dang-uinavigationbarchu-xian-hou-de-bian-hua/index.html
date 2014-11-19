@@ -8,11 +8,7 @@
   
   <meta name="description" content="如果UIViewController 是在导航控制器中在navigationbar 出现后self.view 的高度减少了44。如：在viewDidLoad 中 
 
-1
-NSLog(@&quot;self height %f&quot;,self.view.frame.size.heigt);  
-
-
- 在viewDi">
+1NSLog(@&quot;self height %f&quot;,self.view.frame.size.heigt);   在viewDidApp">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -29,6 +25,7 @@ NSLog(@&quot;self height %f&quot;,self.view.frame.size.heigt);
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
+
 </head>
 
 
@@ -67,13 +64,9 @@ NSLog(@&quot;self height %f&quot;,self.view.frame.size.heigt);
       
         <p>如果UIViewController 是在导航控制器中<br>在navigationbar 出现后self.view 的高度减少了44。如：<br>在viewDidLoad 中 </p>
 
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="built_in">NSLog</span>(@<span class="string">"self height %f"</span>,<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.heigt</span>);  
-</pre></td></tr></table></figure>
-
- <p><br>在viewDidAppear 中 </p><br><figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="built_in">NSLog</span>(@<span class="string">"self height %f"</span>,<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.heigt</span>);  
-</pre></td></tr></table></figure><br><br><p> 两个结果相差 44。</p>
+<p><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"self height %f"</span>,<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.heigt</span>);  </div></pre></td></tr></table></figure><br> </p><p><br>在viewDidAppear 中 </p><p></p>
+<p><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"self height %f"</span>,<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.heigt</span>);  </div></pre></td></tr></table></figure> </p>
+<p> 两个结果相差 44。</p>
       
     </div>
     <footer>
@@ -109,6 +102,27 @@ NSLog(@&quot;self height %f&quot;,self.view.frame.size.heigt);
   </div>
 </article>
 
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2013/04/22/IOS/2013-04-22-uiviewcontroller-zai-uinavigationcontroller-zhong-,dang-uinavigationbarchu-xian-hou-de-bian-hua/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
@@ -140,7 +154,7 @@ NSLog(@&quot;self height %f&quot;,self.view.frame.size.heigt);
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/IOS/">IOS</a><small>8</small></li>
+    <li><a href="/tags/IOS/">IOS</a><small>16</small></li>
   
   </ul>
 </div>
@@ -150,7 +164,7 @@ NSLog(@&quot;self height %f&quot;,self.view.frame.size.heigt);
   </div>
   <footer id="footer" class="inner"><div class="alignleft">
   
-  &copy; 2013 virgil
+  &copy; 2014 virgil
   
 </div>
 <div class="clearfix"></div></footer>

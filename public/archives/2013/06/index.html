@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
+
 </head>
 
 
@@ -52,92 +53,19 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-06-26T02:50:00.000Z"><a href="/2013/06/26/2013-06-26-catalogtian-jia-shu-xing/">Jun 26 2013</a></time>
+        <time datetime="2013-06-26T02:50:00.000Z"><a href="/2013/06/26/IOS/2013-06-26-catalogtian-jia-shu-xing/">Jun 26 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/06/26/2013-06-26-catalogtian-jia-shu-xing/">Catalog添加属性</a></h1>
+    <h1 class="title"><a href="/2013/06/26/IOS/2013-06-26-catalogtian-jia-shu-xing/">Catalog添加属性</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p><br>Category是Objective-C中常用的语法特性，通过它可以很方便的为已有的类来添加函数。但是Category不允许为已有的类添加新的属性或者成员变量。<br>一种常见的办法是通过runtime.h中objc_getAssociatedObject / objc_setAssociatedObject来访问和生成关联对象。通过这种方法来模拟生成属性。<br></p><br><figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-</pre></td><td class="code"><pre><span class="comment">//NSObject+IndieBandName.h</span>
-@<span class="class"><span class="keyword">interface</span> <span class="title">NSObject</span> (<span class="title">IndieBandName</span>)
-@<span class="title">property</span> (<span class="title">nonatomic</span>, <span class="title">strong</span>) <span class="title">NSString</span> *<span class="title">indieBandName</span>;
-@<span class="title">end</span>
+        <p><br>Category是Objective-C中常用的语法特性，通过它可以很方便的为已有的类来添加函数。但是Category不允许为已有的类添加新的属性或者成员变量。<br>一种常见的办法是通过runtime.h中objc_getAssociatedObject / objc_setAssociatedObject来访问和生成关联对象。通过这种方法来模拟生成属性。<br></p><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//NSObject+IndieBandName.h</span></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSObject</span> (<span class="title">IndieBandName</span>)</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSString</span> *indieBandName;</div><div class="line"><span class="keyword">@end</span></div><div class="line"></div><div class="line"><span class="comment">// NSObject+IndieBandName.m   </span></div><div class="line"> <span class="preprocessor">#import <span class="title">"NSObject+Extension.h"</span></span></div><div class="line"> <span class="preprocessor">#import <span class="title">&lt;objc/runtime.h&gt;</span></span></div><div class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">void</span> *IndieBandNameKey = &amp;IndieBandNameKey;   </div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSObject</span> (<span class="title">IndieBandName</span>)</span></div><div class="line"><span class="keyword">@dynamic</span> indieBandName;</div><div class="line"></div><div class="line">- (<span class="built_in">NSString</span> *)indieBandName {</div><div class="line">    <span class="keyword">return</span> objc_getAssociatedObject(<span class="keyword">self</span>, IndieBandNameKey);</div><div class="line">}</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)setIndieBandName:(<span class="built_in">NSString</span> *)indieBandName{</div><div class="line">    objc_setAssociatedObject(<span class="keyword">self</span>, IndieBandNameKey, indieBandName, OBJC_ASSOCIATION_RETAIN_NONATOMIC);</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">@end</span> DLIntrospection</div></pre></td></tr></table></figure><br><br><br><p><br>这个和Category无关，但是也是runtime.h的一种应用。DLIntrospection，是 一个NSObject Category。它为NSObject提供了一系列扩展函数：<br></p>
 
-// <span class="title">NSObject</span>+<span class="title">IndieBandName</span>.<span class="title">m</span>   
- #<span class="title">import</span> "<span class="title">NSObject</span>+<span class="title">Extension</span>.<span class="title">h</span>"
- #<span class="title">import</span> &lt;<span class="title">objc</span>/<span class="title">runtime</span>.<span class="title">h</span>&gt;
-<span class="title">static</span> <span class="title">const</span> <span class="title">void</span> *<span class="title">IndieBandNameKey</span> = &amp;<span class="title">IndieBandNameKey</span>;   
-@<span class="title">implementation</span> <span class="title">NSObject</span> (<span class="title">IndieBandName</span>)
-@<span class="title">dynamic</span> <span class="title">indieBandName</span>;
-
-- (<span class="title">NSString</span> *)<span class="title">indieBandName</span> {</span>
-    <span class="keyword">return</span> objc_getAssociatedObject(self, IndieBandNameKey);
-}
-
-- (<span class="keyword">void</span>)setIndieBandName:(NSString *)indieBandName{
-    objc_setAssociatedObject(self, IndieBandNameKey, indieBandName, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-@end DLIntrospection
-
-</pre></td></tr></table></figure><br><br><br><br><p><br>这个和Category无关，但是也是runtime.h的一种应用。DLIntrospection，是 一个NSObject Category。它为NSObject提供了一系列扩展函数：<br></p>
-
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-</pre></td><td class="code"><pre>@<span class="class"><span class="keyword">interface</span> <span class="title">NSObject</span> (<span class="title">DLIntrospection</span>)
-
-+ (<span class="title">NSArray</span> *)<span class="title">classes</span>;
-+ (<span class="title">NSArray</span> *)<span class="title">properties</span>;
-+ (<span class="title">NSArray</span> *)<span class="title">instanceVariables</span>;
-+ (<span class="title">NSArray</span> *)<span class="title">classMethods</span>;
-+ (<span class="title">NSArray</span> *)<span class="title">instanceMethods</span>;
-
-+ (<span class="title">NSArray</span> *)<span class="title">protocols</span>;
-+ (<span class="title">NSDictionary</span> *)<span class="title">descriptionForProtocol</span>:(<span class="title">Protocol</span> *)<span class="title">proto</span>;
-
-
-+ (<span class="title">NSString</span> *)<span class="title">parentClassHierarchy</span>;
-@<span class="title">end</span>
-</pre></td></tr></table></figure>
-
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSObject</span> (<span class="title">DLIntrospection</span>)</span></div><div class="line"></div><div class="line">+ (<span class="built_in">NSArray</span> *)classes;</div><div class="line">+ (<span class="built_in">NSArray</span> *)properties;</div><div class="line">+ (<span class="built_in">NSArray</span> *)instanceVariables;</div><div class="line">+ (<span class="built_in">NSArray</span> *)classMethods;</div><div class="line">+ (<span class="built_in">NSArray</span> *)instanceMethods;</div><div class="line"></div><div class="line">+ (<span class="built_in">NSArray</span> *)protocols;</div><div class="line">+ (<span class="built_in">NSDictionary</span> *)descriptionForProtocol:(Protocol *)proto;</div><div class="line"></div><div class="line"></div><div class="line">+ (<span class="built_in">NSString</span> *)parentClassHierarchy;</div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
 
 <p><br>通过这些函数，你可以在调试时（通过po命令）或者运行时获得对象的各种信息。<br></p>
       
@@ -153,6 +81,7 @@
 </article>
 
 
+
   
     <article class="post">
   
@@ -160,17 +89,17 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-06-25T01:53:00.000Z"><a href="/2013/06/25/2013-06-25-test-install/">Jun 25 2013</a></time>
+        <time datetime="2013-06-25T01:53:00.000Z"><a href="/2013/06/25/IOS/2013-06-25-test-install/">Jun 25 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/06/25/2013-06-25-test-install/">Test Install</a></h1>
+    <h1 class="title"><a href="/2013/06/25/IOS/2013-06-25-test-install/">Test Install</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p><a href="itms-services://?action=download-manifest&url=http://devilmaycry4.github.io/images/yun.plist">Install App</a></p>
+        <p><a href="itms-services://?action=download-manifest&url=http://devilmaycry4.github.io/images/yun.plist" target="_blank" rel="external">Install App</a></p>
 
       
     </div>
@@ -185,6 +114,7 @@
 </article>
 
 
+
   
     <article class="post">
   
@@ -192,11 +122,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-06-20T08:24:00.000Z"><a href="/2013/06/20/2013-06-20-yin-ying-xiao-lu/">Jun 20 2013</a></time>
+        <time datetime="2013-06-20T08:24:00.000Z"><a href="/2013/06/20/IOS/2013-06-20-yin-ying-xiao-lu/">Jun 20 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/06/20/2013-06-20-yin-ying-xiao-lu/">阴影效率</a></h1>
+    <h1 class="title"><a href="/2013/06/20/IOS/2013-06-20-yin-ying-xiao-lu/">阴影效率</a></h1>
   
 
     </header>
@@ -204,22 +134,7 @@
       
         <p><br>UIView 如果没有设置阴影的边框会导致、在旋转屏幕或者滑动的时候，界面卡顿，因为设置了阴影的view会不断地重新绘制。解决的方法:<br></p>
 
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-</pre></td><td class="code"><pre>        <span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.shadowColor</span> = [<span class="built_in">UIColor</span> blackColor]<span class="variable">.CGColor</span>;
-        <span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.shadowOffset</span> = CGSizeMake(<span class="number">0</span>, <span class="number">3</span>);
-        <span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.shadowOpacity</span> = <span class="number">0.6</span>;
-        <span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.masksToBounds</span> = <span class="literal">NO</span>;
-        <span class="comment">/*********
-           self.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.bounds].CGPath;
-           *********/</span>
-</pre></td></tr></table></figure>
-
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.shadowColor</span> = [<span class="built_in">UIColor</span> blackColor]<span class="variable">.CGColor</span>;</div><div class="line"><span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.shadowOffset</span> = CGSizeMake(<span class="number">0</span>, <span class="number">3</span>);</div><div class="line"><span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.shadowOpacity</span> = <span class="number">0.6</span>;</div><div class="line"><span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.masksToBounds</span> = <span class="literal">NO</span>;</div><div class="line"><span class="comment">/*********</span></div><div class="line">   self.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.bounds].CGPath;</div><div class="line">   *********/</div></pre></td></tr></table></figure>
       
     </div>
     <footer>
@@ -233,6 +148,7 @@
 </article>
 
 
+
   
     <article class="post">
   
@@ -240,11 +156,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-06-20T07:55:00.000Z"><a href="/2013/06/20/2013-06-20-block/">Jun 20 2013</a></time>
+        <time datetime="2013-06-20T07:55:00.000Z"><a href="/2013/06/20/IOS/2013-06-20-block/">Jun 20 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/06/20/2013-06-20-block/">Block</a></h1>
+    <h1 class="title"><a href="/2013/06/20/IOS/2013-06-20-block/">Block</a></h1>
   
 
     </header>
@@ -254,42 +170,7 @@
 
 <p><br>假设我们有一个controller，有个view是加到这个controller的view上面，当view中的某些功能完成的时候，view回调原来设置好的block。但是你会发现这个controller和这个view都无法调用到dealloc了。<br></p>
 
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-</pre></td><td class="code"><pre>
-- (<span class="keyword">void</span>)viewDidLoad
-{
-   [<span class="keyword">super</span> viewDidLoad];
-   View *view = [View alloc]initWithFrame:CGRectMake(<span class="number">0</span>,<span class="number">0</span>,<span class="number">100</span>,<span class="number">100</span>)];
-   view.OnComplete= ^{
-   [self print];
-   };
-}
-
-<span class="javadoc">/************/</span>
-typedef <span class="keyword">void</span>(^Block) block;
-
-<span class="annotation">@property</span>(noautomatic,copy)block OnComplete;
-
-
- 
-</pre></td></tr></table></figure>
-
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">- (<span class="keyword">void</span>)viewDidLoad</div><div class="line">{</div><div class="line">   [<span class="keyword">super</span> viewDidLoad];</div><div class="line">   View *view = [View alloc]initWithFrame:CGRectMake(<span class="number">0</span>,<span class="number">0</span>,<span class="number">100</span>,<span class="number">100</span>)];</div><div class="line">   view<span class="variable">.OnComplete</span>= ^{</div><div class="line">   [<span class="keyword">self</span> print];</div><div class="line">   };</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">/************/</span></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">void</span>(^Block) block;</div><div class="line"></div><div class="line"><span class="keyword">@property</span>(noautomatic,<span class="keyword">copy</span>)block OnComplete;</div><div class="line"></div><div class="line"></div><div class="line"> </div></pre></td></tr></table></figure>
 
 <p>上例中，view的语法块中访问self，所以view  retian self一次，所以但view没有调用[_OnComplete  release];之前，controller是不会被dealloc的，而view是在controller的view上面。如果controller不释放，view也不会被释放，这样就进入retain circle了。<br></p>
       
@@ -305,6 +186,7 @@ typedef <span class="keyword">void</span>(^Block) block;
 </article>
 
 
+
   
     <article class="post">
   
@@ -312,17 +194,18 @@ typedef <span class="keyword">void</span>(^Block) block;
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-06-18T06:26:00.000Z"><a href="/2013/06/18/2013-06-18-wifi/">Jun 18 2013</a></time>
+        <time datetime="2013-06-18T06:26:00.000Z"><a href="/2013/06/18/Other/2013-06-18-wifi/">Jun 18 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/06/18/2013-06-18-wifi/">wifi</a></h1>
+    <h1 class="title"><a href="/2013/06/18/Other/2013-06-18-wifi/">wifi</a></h1>
   
 
     </header>
     <div class="entry">
       
         <p><br>netsh wlan set hostednexx ork mode=allow ssid=SoftAP key=99887766回车 netsh wlan start hosted<br></p>
+
       
     </div>
     <footer>
@@ -336,6 +219,7 @@ typedef <span class="keyword">void</span>(^Block) block;
 </article>
 
 
+
   
     <article class="post">
   
@@ -343,17 +227,18 @@ typedef <span class="keyword">void</span>(^Block) block;
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-06-18T01:08:00.000Z"><a href="/2013/06/18/2013-06-18-xcode-zhu-ti-wen-jian-jia/">Jun 18 2013</a></time>
+        <time datetime="2013-06-18T01:08:00.000Z"><a href="/2013/06/18/IOS/2013-06-18-xcode-zhu-ti-wen-jian-jia/">Jun 18 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/06/18/2013-06-18-xcode-zhu-ti-wen-jian-jia/">Xcode 主题文件夹</a></h1>
+    <h1 class="title"><a href="/2013/06/18/IOS/2013-06-18-xcode-zhu-ti-wen-jian-jia/">Xcode 主题文件夹</a></h1>
   
 
     </header>
     <div class="entry">
       
         <p><br>~/Library/Developer/Xcode/UserData/FontAndColorThemes<br></p>
+
       
     </div>
     <footer>
@@ -367,6 +252,7 @@ typedef <span class="keyword">void</span>(^Block) block;
 </article>
 
 
+
   
     <article class="post">
   
@@ -374,33 +260,17 @@ typedef <span class="keyword">void</span>(^Block) block;
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-06-17T01:37:00.000Z"><a href="/2013/06/17/2013-06-17-nstimerde-shi-yong/">Jun 17 2013</a></time>
+        <time datetime="2013-06-17T01:37:00.000Z"><a href="/2013/06/17/IOS/2013-06-17-nstimerde-shi-yong/">Jun 17 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/06/17/2013-06-17-nstimerde-shi-yong/">NSTimer的使用</a></h1>
+    <h1 class="title"><a href="/2013/06/17/IOS/2013-06-17-nstimerde-shi-yong/">NSTimer的使用</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p><br>NSTimer 定时器，在编程的时候是十分常用的，但是其实很多时候都没有用对，我们经常都在Controller里创建NStimer,而期待在controller dealloc的时候，去停止定时器：<br></p><br><figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-</pre></td><td class="code"><pre>- (<span class="keyword">void</span>)dealloc
-{
-   <span class="keyword">if</span>(_timer != <span class="literal">nil</span>)
-   {
-     [_timer invalidate];
-   }
-   [<span class="keyword">super</span> dealloc];
-}
-</pre></td></tr></table></figure><br><br><p><br>但实际上contoller永远都不会调用dealloc，因为_timer会retaincontroller一次。<br>在NSTimer创建的时候、NSRunloop会retian NSTimer一次、已保证NSTimer在执行完之前NSTimer不会被dealloc。而且一般NSTimer创建的时候会有个回调的target、而为了保证回调的正常、NSTimer会<br>retian target一次、而我们经常使用controller作为target，这样controller就从来都不会释放了。造成内存泄露。<br></p>
+        <p><br>NSTimer 定时器，在编程的时候是十分常用的，但是其实很多时候都没有用对，我们经常都在Controller里创建NStimer,而期待在controller dealloc的时候，去停止定时器：<br></p><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)dealloc</div><div class="line">{</div><div class="line">   <span class="keyword">if</span>(_timer != <span class="literal">nil</span>)</div><div class="line">   {</div><div class="line">     [_timer invalidate];</div><div class="line">   }</div><div class="line">   [<span class="keyword">super</span> dealloc];</div><div class="line">}</div></pre></td></tr></table></figure><br><p><br>但实际上contoller永远都不会调用dealloc，因为_timer会retaincontroller一次。<br>在NSTimer创建的时候、NSRunloop会retian NSTimer一次、已保证NSTimer在执行完之前NSTimer不会被dealloc。而且一般NSTimer创建的时候会有个回调的target、而为了保证回调的正常、NSTimer会<br>retian target一次、而我们经常使用controller作为target，这样controller就从来都不会释放了。造成内存泄露。<br></p>
       
     </div>
     <footer>
@@ -414,6 +284,7 @@ typedef <span class="keyword">void</span>(^Block) block;
 </article>
 
 
+
   
     <article class="post">
   
@@ -421,83 +292,17 @@ typedef <span class="keyword">void</span>(^Block) block;
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-06-17T01:19:00.000Z"><a href="/2013/06/17/2013-06-17-line-with-arrow/">Jun 17 2013</a></time>
+        <time datetime="2013-06-17T01:19:00.000Z"><a href="/2013/06/17/IOS/2013-06-17-line-with-arrow/">Jun 17 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/06/17/2013-06-17-line-with-arrow/">Line With Arrow</a></h1>
+    <h1 class="title"><a href="/2013/06/17/IOS/2013-06-17-line-with-arrow/">Line With Arrow</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-</pre></td><td class="code"><pre>- (<span class="keyword">void</span>)drawLine: (<span class="built_in">CGPoint</span>) from to: (<span class="built_in">CGPoint</span>) to singleArrow:(<span class="built_in">BOOL</span>)single
-{
-    <span class="built_in">CGFloat</span> radian = <span class="number">0.5</span>;
-    <span class="built_in">CGFloat</span> length = <span class="number">5</span>;
- 
-    
-    <span class="keyword">int</span> a = to<span class="variable">.x</span> &gt; from<span class="variable">.x</span>?-<span class="number">1</span>:<span class="number">1</span> ;
-    <span class="built_in">CGFloat</span>  x1 = to<span class="variable">.x</span> + a*length*cos(atan((to<span class="variable">.y</span> - from<span class="variable">.y</span>)/(to<span class="variable">.x</span> - from<span class="variable">.x</span>))- radian);
-    <span class="built_in">CGFloat</span>  y1 = to<span class="variable">.y</span> + a*length*sin(atan((to<span class="variable">.y</span> - from<span class="variable">.y</span>)/(to<span class="variable">.x</span> - from<span class="variable">.x</span>)) - radian);
-    
-   
-    a = to<span class="variable">.y</span> &gt; from<span class="variable">.y</span>? -<span class="number">1</span>:<span class="number">1</span>;
-    <span class="built_in">CGFloat</span>  x2 = to<span class="variable">.x</span> + a*length*sin(atan((to<span class="variable">.x</span> - from<span class="variable">.x</span>)/(to<span class="variable">.y</span> - from<span class="variable">.y</span>)) - radian);
-    <span class="built_in">CGFloat</span>  y2 = to<span class="variable">.y</span> + a*length*cos(atan((to<span class="variable">.x</span> - from<span class="variable">.x</span>)/(to<span class="variable">.y</span> - from<span class="variable">.y</span>)) - radian);
- 
- 
-       
-    <span class="keyword">if</span> (!single)
-    {
-
-        a = to<span class="variable">.y</span> &gt; from<span class="variable">.y</span>?  <span class="number">1</span>:-<span class="number">1</span>;
-        <span class="built_in">CGFloat</span>  x3 = from<span class="variable">.x</span> +  a*length*sin(atan((to<span class="variable">.x</span> - from<span class="variable">.x</span>)/(to<span class="variable">.y</span> - from<span class="variable">.y</span>)) - radian);
-        <span class="built_in">CGFloat</span>  y3 = from<span class="variable">.y</span> +  a*length*cos(atan((to<span class="variable">.x</span> - from<span class="variable">.x</span>)/(to<span class="variable">.y</span> - from<span class="variable">.y</span>)) - radian);
-        [_currentStroke<span class="variable">.path</span> addLineToPoint:CGPointMake(x3,y3)];
-        
-         
-         a = to<span class="variable">.x</span> &gt; from<span class="variable">.x</span>?<span class="number">1</span>:-<span class="number">1</span> ;
-        <span class="built_in">CGFloat</span>  x4 = from<span class="variable">.x</span> + a*length*cos(atan((to<span class="variable">.y</span> - from<span class="variable">.y</span>)/(to<span class="variable">.x</span> - from<span class="variable">.x</span>)) - radian);
-        <span class="built_in">CGFloat</span>  y4 = from<span class="variable">.y</span> + a*length*sin(atan((to<span class="variable">.y</span> - from<span class="variable">.y</span>)/(to<span class="variable">.x</span> - from<span class="variable">.x</span>)) - radian);
-        
-    }
-}
-
-</pre></td></tr></table></figure>
+        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)drawLine: (<span class="built_in">CGPoint</span>) from to: (<span class="built_in">CGPoint</span>) to singleArrow:(<span class="built_in">BOOL</span>)single</div><div class="line">{</div><div class="line">    <span class="built_in">CGFloat</span> radian = <span class="number">0.5</span>;</div><div class="line">    <span class="built_in">CGFloat</span> length = <span class="number">5</span>;</div><div class="line"> </div><div class="line">    </div><div class="line">    <span class="keyword">int</span> a = to<span class="variable">.x</span> &gt; from<span class="variable">.x</span>?-<span class="number">1</span>:<span class="number">1</span> ;</div><div class="line">    <span class="built_in">CGFloat</span>  x1 = to<span class="variable">.x</span> + a*length*cos(atan((to<span class="variable">.y</span> - from<span class="variable">.y</span>)/(to<span class="variable">.x</span> - from<span class="variable">.x</span>))- radian);</div><div class="line">    <span class="built_in">CGFloat</span>  y1 = to<span class="variable">.y</span> + a*length*sin(atan((to<span class="variable">.y</span> - from<span class="variable">.y</span>)/(to<span class="variable">.x</span> - from<span class="variable">.x</span>)) - radian);</div><div class="line">    </div><div class="line">   </div><div class="line">    a = to<span class="variable">.y</span> &gt; from<span class="variable">.y</span>? -<span class="number">1</span>:<span class="number">1</span>;</div><div class="line">    <span class="built_in">CGFloat</span>  x2 = to<span class="variable">.x</span> + a*length*sin(atan((to<span class="variable">.x</span> - from<span class="variable">.x</span>)/(to<span class="variable">.y</span> - from<span class="variable">.y</span>)) - radian);</div><div class="line">    <span class="built_in">CGFloat</span>  y2 = to<span class="variable">.y</span> + a*length*cos(atan((to<span class="variable">.x</span> - from<span class="variable">.x</span>)/(to<span class="variable">.y</span> - from<span class="variable">.y</span>)) - radian);</div><div class="line"> </div><div class="line"> </div><div class="line">       </div><div class="line">    <span class="keyword">if</span> (!single)</div><div class="line">    {</div><div class="line"></div><div class="line">        a = to<span class="variable">.y</span> &gt; from<span class="variable">.y</span>?  <span class="number">1</span>:-<span class="number">1</span>;</div><div class="line">        <span class="built_in">CGFloat</span>  x3 = from<span class="variable">.x</span> +  a*length*sin(atan((to<span class="variable">.x</span> - from<span class="variable">.x</span>)/(to<span class="variable">.y</span> - from<span class="variable">.y</span>)) - radian);</div><div class="line">        <span class="built_in">CGFloat</span>  y3 = from<span class="variable">.y</span> +  a*length*cos(atan((to<span class="variable">.x</span> - from<span class="variable">.x</span>)/(to<span class="variable">.y</span> - from<span class="variable">.y</span>)) - radian);</div><div class="line">        [_currentStroke<span class="variable">.path</span> addLineToPoint:CGPointMake(x3,y3)];</div><div class="line">        </div><div class="line">         </div><div class="line">         a = to<span class="variable">.x</span> &gt; from<span class="variable">.x</span>?<span class="number">1</span>:-<span class="number">1</span> ;</div><div class="line">        <span class="built_in">CGFloat</span>  x4 = from<span class="variable">.x</span> + a*length*cos(atan((to<span class="variable">.y</span> - from<span class="variable">.y</span>)/(to<span class="variable">.x</span> - from<span class="variable">.x</span>)) - radian);</div><div class="line">        <span class="built_in">CGFloat</span>  y4 = from<span class="variable">.y</span> + a*length*sin(atan((to<span class="variable">.y</span> - from<span class="variable">.y</span>)/(to<span class="variable">.x</span> - from<span class="variable">.x</span>)) - radian);</div><div class="line">        </div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -512,6 +317,7 @@ typedef <span class="keyword">void</span>(^Block) block;
 </article>
 
 
+
   
     <article class="post">
   
@@ -519,17 +325,18 @@ typedef <span class="keyword">void</span>(^Block) block;
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-06-07T08:00:00.000Z"><a href="/2013/06/07/2013-06-07-time-out-waiting-for-app-to-launch/">Jun 7 2013</a></time>
+        <time datetime="2013-06-07T08:00:00.000Z"><a href="/2013/06/07/IOS/2013-06-07-time-out-waiting-for-app-to-launch/">Jun 7 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/06/07/2013-06-07-time-out-waiting-for-app-to-launch/">time out waiting for app to launch</a></h1>
+    <h1 class="title"><a href="/2013/06/07/IOS/2013-06-07-time-out-waiting-for-app-to-launch/">time out waiting for app to launch</a></h1>
   
 
     </header>
     <div class="entry">
       
         <p><br>在真机器debug的时候不要使用企业证书。<br></p>
+
       
     </div>
     <footer>
@@ -541,6 +348,7 @@ typedef <span class="keyword">void</span>(^Block) block;
     </footer>
   </div>
 </article>
+
 
 
   
@@ -550,47 +358,17 @@ typedef <span class="keyword">void</span>(^Block) block;
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-06-07T05:34:00.000Z"><a href="/2013/06/07/2013-06-07-uiimag-scale/">Jun 7 2013</a></time>
+        <time datetime="2013-06-07T05:34:00.000Z"><a href="/2013/06/07/IOS/2013-06-07-uiimag-scale/">Jun 7 2013</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/06/07/2013-06-07-uiimag-scale/">UIImag Scale</a></h1>
+    <h1 class="title"><a href="/2013/06/07/IOS/2013-06-07-uiimag-scale/">UIImag Scale</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-</pre></td><td class="code"><pre>- (UIImage*)scaleToSize:(CGSize)size {
-    UIGraphicsBeginImageContext(size)<span class="comment">;</span>
-    
-    CGContextRef context = UIGraphicsGetCurrentContext()<span class="comment">;</span>
-    CGContextTranslateCTM(context, <span class="number">0.0</span>, size<span class="preprocessor">.height</span>)<span class="comment">;</span>
-    CGContextScaleCTM(context, <span class="number">1.0</span>, -<span class="number">1.0</span>)<span class="comment">;</span>
-    
-    CGContextDrawImage(context, CGRectMake(<span class="number">0.0</span>f, <span class="number">0.0</span>f, size<span class="preprocessor">.width</span>, size<span class="preprocessor">.height</span> - <span class="number">4.5</span>), self<span class="preprocessor">.CGImage</span>)<span class="comment">;</span>
-    
-    UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext()<span class="comment">;</span>
-    
-    UIGraphicsEndImageContext()<span class="comment">;</span>
-    
-    return scaledImage<span class="comment">;</span>
-}
-</pre></td></tr></table></figure>
+        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">- (<span class="built_in">UIImage</span>*)scaleToSize:(<span class="built_in">CGSize</span>)size {</div><div class="line">    UIGraphicsBeginImageContext(size);</div><div class="line">    </div><div class="line">    CGContextRef context = UIGraphicsGetCurrentContext();</div><div class="line">    CGContextTranslateCTM(context, <span class="number">0.0</span>, size<span class="variable">.height</span>);</div><div class="line">    CGContextScaleCTM(context, <span class="number">1.0</span>, -<span class="number">1.0</span>);</div><div class="line">    </div><div class="line">    CGContextDrawImage(context, CGRectMake(<span class="number">0.0</span>f, <span class="number">0.0</span>f, size<span class="variable">.width</span>, size<span class="variable">.height</span> - <span class="number">4.5</span>), <span class="keyword">self</span><span class="variable">.CGImage</span>);</div><div class="line">    </div><div class="line">    <span class="built_in">UIImage</span>* scaledImage = UIGraphicsGetImageFromCurrentImageContext();</div><div class="line">    </div><div class="line">    UIGraphicsEndImageContext();</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> scaledImage;</div><div class="line">}</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -603,6 +381,7 @@ typedef <span class="keyword">void</span>(^Block) block;
     </footer>
   </div>
 </article>
+
 
 
   
@@ -645,7 +424,7 @@ typedef <span class="keyword">void</span>(^Block) block;
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/IOS/">IOS</a><small>15</small></li>
+    <li><a href="/tags/IOS/">IOS</a><small>16</small></li>
   
   </ul>
 </div>

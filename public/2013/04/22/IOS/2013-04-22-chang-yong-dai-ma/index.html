@@ -7,112 +7,13 @@
   <meta name="author" content="virgil">
   
   <meta name="description" content="1.判断邮箱格式是否正确的代码
-1
-2
-3
-4
-5
-6
--(BOOL)isValidateEmail:(NSString *)email
-{
-  NSString *emailRegex = @&quot;[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}&quot;;
-  NSPredicate *emailTest = [NSPredicate predicateWithFormat:@&quot;SELF MATCHES%@&quot;,emailRegex];
-  return [emailTest evaluateWithObject:email];
-}
-
-
+123456-(BOOL)isValidateEmail:(NSString *)email{  NSString *emailRegex = @&quot;[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}&quot;;  NSPredicate *emailTest = [NSPredicate predicateWithFormat:@&quot;SELF MATCHES%@&quot;,emailRegex];  return [emailTest evaluateWithObject:email];}
 
 2.图片压缩
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-- (UIImage*)imageWithImageSimple:(UIImage*)image scaledToSize:(CGSize)newSize
-{
-// Create a graphics image context
-   UIGraphicsBeginImageContext(newSize);
-// Tell the old image to draw in this newcontext, with the desired
-// new size
-   [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
-// Get the new image from the context
-   UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-// End the context
-   UIGraphicsEndImageContext();
-// Return the new image.
-   return newImage;
-}
-
-
+1234567891011121314- (UIImage*)imageWithImageSimple:(UIImage*)image scaledToSize:(CGSize)newSize{// Create a graphics image context   UIGraphicsBeginImageContext(newSize);// Tell the old image to draw in this newcontext, with the desired// new size   [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];// Get the new image from the context   UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();// End the context   UIGraphicsEndImageContext();// Return the new image.   return newImage;}
 
 3.亲测可用的图片上传代码
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-- (IBAction)uploadButton:(id)sender 
-{
-   UIImage *image = [UIImage imageNamed:@&quot;1.jpg&quot;]; //图片名
-   NSData *imageData = UIImageJPEGRepresentation(image,0.5);//压缩比例
-   NSLog(@&quot;字节数:%i&quot;,[imageData length]);
-// post url
-   NSString *urlString = @&quot;http://192.168.1.113:8090/text/UploadServlet&quot;;
-//服务器地址
-// setting up the request object now
-   NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init] ;
-   [request setURL:[NSURL URLWithString:urlString]];
-   [request setHTTPMethod:@&quot;POST&quot;];
-//
-   NSString *boundary = [NSString stringWithString:@&quot;---------------------------14737809831466499882746641449&quot;];
-   NSString *contentType = [NSString stringWithFormat:@&quot;multipart/form-data;boundary=%@&quot;,boundary];
-   [request addValue:contentType forHTTPHeaderField: @&quot;Content-Type&quot;];
-//
-   NSMutableData *body = [NSMutableData data];
-   [body appendData:[[NSString stringWithFormat:@&quot;\r\n--%@\r\n&quot;,boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-   [body appendData:[[NSString stringWithString:@&quot;Content-Disposition:form-data; name=\&quot;userfile\&quot;; filename=\&quot;2.png\&quot;\r\n&quot;] dataUsingEncoding:NSUTF8StringEncoding]]; //上传上去的图片名字
-   [body appendData:[[NSString stringWithString:@&quot;Content-Type: application/octet-stream\r\n\r\n&quot;] dataUsingEncoding:NSUTF8StringEncoding]];
-   [body appendData:[NSData dataWithData:imageData]];
-   [body appendData:[[NSString stringWithFormat:@&quot;\r\n--%@--\r\n&quot;,boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-   [request setHTTPBody:body];
-// NSLog(@&quot;1-body:%@&quot;,body);
-   NSLog(@&quot;2-request:%@&quot;,request);
-   NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-   NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
-   NSLog(@&quot;3-测试输出：%@&quot;,returnString);">
+1234567891011121314151617181920212223242526272829- (IBAction)uploadButton:(id)sender {   UIImage *image = [UIImage imageNamed:@&quot;1.jpg&quot;]; //图片名   NSData *imageData = UIImageJPEGRepresentation(image,0.5);//压缩比例   NSLog(@&quot;字节数:%i&quot;,[imageData length]);// post url   NSString *urlString = @&quot;http://192.168.1.113:8090/text/UploadServlet&quot;;//服务器地址// setting up the request object now   NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init] ;   [request setURL:[NSURL URLWithString:urlString]];   [request setHTTPMethod:@&quot;POST&quot;];//   NSString *boundary = [NSString stringWithString:@&quot;---------------------------14737809831466499882746641449&quot;];   NSString *contentType = [NSString stringWithFormat:@&quot;multipart/form-data;boundary=%@&quot;,boundary];   [request addValue:contentType forHTTPHeaderField: @&quot;Content-Type&quot;];//   NSMutableData *body = [NSMutableData data];   [body appendData:[[NSString stringWithFormat:@&quot;\r\n--%@\r\n&quot;,boundary] dataUsingEncoding:NSUTF8StringEncoding]];   [body appendData:[[NSString stringWithString:@&quot;Content-Disposition:form-data; name=\&quot;userfile\&quot;; filename=\&quot;2.png\&quot;\r\n&quot;] dataUsingEncoding:NSUTF8StringEncoding]]; //上传上去的图片名字   [body appendData:[[NSString stringWithString:@&quot;Content-Type: application/octet-stream\r\n\r\n&quot;] dataUsingEncoding:NSUTF8StringEncoding]];   [body appendData:[NSData dataWithData:imageData]];   [body appendData:[[NSString stringWithFormat:@&quot;\r\n--%@--\r\n&quot;,boundary] dataUsingEncoding:NSUTF8StringEncoding]];   [request setHTTPBody:body];// NSLog(@&quot;1-body:%@&quot;,body);   NSLog(@&quot;2-request:%@&quot;,request);   NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];   NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];   NSLog(@&quot;3-测试输出：%@&quot;,returnString);">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -129,6 +30,7 @@
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
+
 </head>
 
 
@@ -165,416 +67,67 @@
     </header>
     <div class="entry">
       
-        <p><p>1.判断邮箱格式是否正确的代码</p></p>
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre>-(BOOL)isValidateEmail:(NSString <span class="variable">*)</span>email
-{
-  NSString <span class="variable">*emailRegex</span> = <span class="variable">@"</span>[A-Z<span class="number">0</span>-<span class="number">9</span>a-z.<span class="number">_</span><span class="variable">%+</span>-]+<span class="variable">@[</span>A-Za-z<span class="number">0</span>-<span class="number">9</span>.-]+\\.[A-Za-z]{<span class="number">2</span>,<span class="number">4</span>}<span class="string">";
-  NSPredicate <span class="variable">*emailTest</span> = [NSPredicate predicateWithFormat:<span class="variable">@"</span>SELF MATCHES<span class="variable">%@</span>"</span>,emailRegex];
-  <span class="keyword">return</span> [emailTest evaluateWithObject:email];
-}
-</pre></td></tr></table></figure>
+        <p></p><p>1.判断邮箱格式是否正确的代码</p><p></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">-(<span class="built_in">BOOL</span>)isValidateEmail:(<span class="built_in">NSString</span> *)email</div><div class="line">{</div><div class="line">  <span class="built_in">NSString</span> *emailRegex = <span class="string">@"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"</span>;</div><div class="line">  NSPredicate *emailTest = [NSPredicate predicateWithFormat:<span class="string">@"SELF MATCHES%@"</span>,emailRegex];</div><div class="line">  <span class="keyword">return</span> [emailTest evaluateWithObject:email];</div><div class="line">}</div></pre></td></tr></table></figure>
 
+<p></p><p>2.图片压缩</p><p></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">- (<span class="built_in">UIImage</span>*)imageWithImageSimple:(<span class="built_in">UIImage</span>*)image scaledToSize:(<span class="built_in">CGSize</span>)newSize</div><div class="line">{</div><div class="line"><span class="comment">// Create a graphics image context</span></div><div class="line">   UIGraphicsBeginImageContext(newSize);</div><div class="line"><span class="comment">// Tell the old image to draw in this newcontext, with the desired</span></div><div class="line"><span class="comment">// new size</span></div><div class="line">   [image drawInRect:CGRectMake(<span class="number">0</span>,<span class="number">0</span>,newSize<span class="variable">.width</span>,newSize<span class="variable">.height</span>)];</div><div class="line"><span class="comment">// Get the new image from the context</span></div><div class="line">   <span class="built_in">UIImage</span>* newImage = UIGraphicsGetImageFromCurrentImageContext();</div><div class="line"><span class="comment">// End the context</span></div><div class="line">   UIGraphicsEndImageContext();</div><div class="line"><span class="comment">// Return the new image.</span></div><div class="line">   <span class="keyword">return</span> newImage;</div><div class="line">}</div></pre></td></tr></table></figure>
 
-<p><p>2.图片压缩</p></p>
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-</pre></td><td class="code"><pre>- (<span class="built_in">UIImage</span>*)imageWithImageSimple:(<span class="built_in">UIImage</span>*)image scaledToSize:(<span class="built_in">CGSize</span>)newSize
-{
-<span class="comment">// Create a graphics image context</span>
-   UIGraphicsBeginImageContext(newSize);
-<span class="comment">// Tell the old image to draw in this newcontext, with the desired</span>
-<span class="comment">// new size</span>
-   [image drawInRect:CGRectMake(<span class="number">0</span>,<span class="number">0</span>,newSize<span class="variable">.width</span>,newSize<span class="variable">.height</span>)];
-<span class="comment">// Get the new image from the context</span>
-   <span class="built_in">UIImage</span>* newImage = UIGraphicsGetImageFromCurrentImageContext();
-<span class="comment">// End the context</span>
-   UIGraphicsEndImageContext();
-<span class="comment">// Return the new image.</span>
-   <span class="keyword">return</span> newImage;
-}
-</pre></td></tr></table></figure>
-
-
-<p><p>3.亲测可用的图片上传代码</p></p>
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-</pre></td><td class="code"><pre>- (IBAction)uploadButton:(id)sender 
-{
-   UIImage *image = [UIImage imageNamed:@<span class="string">"1.jpg"</span>]; //图片名
-   NSData *imageData = UIImageJPEGRepresentation(image,<span class="number">0.5</span>);//压缩比例
-   NSLog(@<span class="string">"字节数:%i"</span>,[imageData length]);
-// post url
-   NSString *urlString = @<span class="string">"http://192.168.1.113:8090/text/UploadServlet"</span>;
-//服务器地址
-// setting up the request object now
-   NSMutableURLRequest *request = <span class="string">[[NSMutableURLRequest alloc] init] ;
-   [request setURL:[NSURL URLWithString:urlString]]</span>;
-   [request setHTTPMethod:@<span class="string">"POST"</span>];
-//
-   NSString *boundary = [NSString stringWithString:@<span class="string">"---------------------------14737809831466499882746641449"</span>];
-   NSString *contentType = [NSString stringWithFormat:@<span class="string">"multipart/form-data;boundary=%@"</span>,boundary];
-   [request addValue:contentType forHTTPHeaderField: @<span class="string">"Content-Type"</span>];
-//
-   NSMutableData *body = [NSMutableData data];
-   [body appendData:<span class="string">[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]]</span>;
-   [body appendData:<span class="string">[[NSString stringWithString:@"Content-Disposition:form-data; name=\"userfile\"; filename=\"2.png\"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]]</span>; //上传上去的图片名字
-   [body appendData:<span class="string">[[NSString stringWithString:@"Content-Type: application/octet-stream\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]]</span>;
-   [body appendData:[NSData dataWithData:imageData]];
-   [body appendData:<span class="string">[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]]</span>;
-   [request setHTTPBody:body];
-// NSLog(@<span class="string">"1-body:%@"</span>,body);
-   NSLog(@<span class="string">"2-request:%@"</span>,request);
-   NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:<span class="keyword">nil</span> <span class="built_in">error</span>:<span class="keyword">nil</span>];
-   NSString *returnString = <span class="string">[[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
-   NSLog(@"3-测试输出：%@",returnString);
-</pre></td></tr></table></figure>
-
+<p></p><p>3.亲测可用的图片上传代码</p><p></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">IBAction</span>)uploadButton:(<span class="keyword">id</span>)sender </div><div class="line">{</div><div class="line">   <span class="built_in">UIImage</span> *image = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"1.jpg"</span>]; <span class="comment">//图片名</span></div><div class="line">   NSData *imageData = UIImageJPEGRepresentation(image,<span class="number">0.5</span>);<span class="comment">//压缩比例</span></div><div class="line">   <span class="built_in">NSLog</span>(<span class="string">@"字节数:%i"</span>,[imageData length]);</div><div class="line"><span class="comment">// post url</span></div><div class="line">   <span class="built_in">NSString</span> *urlString = <span class="string">@"http://192.168.1.113:8090/text/UploadServlet"</span>;</div><div class="line"><span class="comment">//服务器地址</span></div><div class="line"><span class="comment">// setting up the request object now</span></div><div class="line">   NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init] ;</div><div class="line">   [request setURL:[<span class="built_in">NSURL</span> URLWithString:urlString]];</div><div class="line">   [request setHTTPMethod:<span class="string">@"POST"</span>];</div><div class="line"><span class="comment">//</span></div><div class="line">   <span class="built_in">NSString</span> *boundary = [<span class="built_in">NSString</span> stringWithString:<span class="string">@"---------------------------14737809831466499882746641449"</span>];</div><div class="line">   <span class="built_in">NSString</span> *contentType = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"multipart/form-data;boundary=%@"</span>,boundary];</div><div class="line">   [request addValue:contentType forHTTPHeaderField: <span class="string">@"Content-Type"</span>];</div><div class="line"><span class="comment">//</span></div><div class="line">   NSMutableData *body = [NSMutableData data];</div><div class="line">   [body appendData:[[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"\r\n--%@\r\n"</span>,boundary] dataUsingEncoding:NSUTF8StringEncoding]];</div><div class="line">   [body appendData:[[<span class="built_in">NSString</span> stringWithString:<span class="string">@"Content-Disposition:form-data; name=\"userfile\"; filename=\"2.png\"\r\n"</span>] dataUsingEncoding:NSUTF8StringEncoding]]; <span class="comment">//上传上去的图片名字</span></div><div class="line">   [body appendData:[[<span class="built_in">NSString</span> stringWithString:<span class="string">@"Content-Type: application/octet-stream\r\n\r\n"</span>] dataUsingEncoding:NSUTF8StringEncoding]];</div><div class="line">   [body appendData:[NSData dataWithData:imageData]];</div><div class="line">   [body appendData:[[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"\r\n--%@--\r\n"</span>,boundary] dataUsingEncoding:NSUTF8StringEncoding]];</div><div class="line">   [request setHTTPBody:body];</div><div class="line"><span class="comment">// NSLog(@"1-body:%@",body);</span></div><div class="line">   <span class="built_in">NSLog</span>(<span class="string">@"2-request:%@"</span>,request);</div><div class="line">   NSData *returnData = [<span class="built_in">NSURLConnection</span> sendSynchronousRequest:request returningResponse:<span class="literal">nil</span> error:<span class="literal">nil</span>];</div><div class="line">   <span class="built_in">NSString</span> *returnString = [[<span class="built_in">NSString</span> alloc] initWithData:returnData encoding:NSUTF8StringEncoding];</div><div class="line">   <span class="built_in">NSLog</span>(<span class="string">@"3-测试输出：%@"</span>,returnString);</div></pre></td></tr></table></figure>
 
 <a id="more"></a>
 
-<p><p>4.给imageView加载图片</p></p>
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="class">UIImage</span> *myImage = [<span class="class">UIImage</span> <span class="method">imageNamed:</span>@<span class="comment">"1.jpg"</span>];
-[imageView <span class="method">setImage:</span>myImage];
-[<span class="keyword">self</span>.view <span class="method">addSubview:</span>imageView];
-</pre></td></tr></table></figure>
+<p></p><p>4.给imageView加载图片</p><p></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">UIImage</span> *myImage = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"1.jpg"</span>];</div><div class="line">[imageView setImage:myImage];</div><div class="line">[<span class="keyword">self</span><span class="variable">.view</span> addSubview:imageView];</div></pre></td></tr></table></figure>
+
+<p></p><p>5.对图库的操作</p><p></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">UIImagePickerControllerSourceTypesourceType=UIImagePickerControllerSourceTypeCamera;</div><div class="line"><span class="keyword">if</span> (![UIImagePickerControllerisSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) </div><div class="line">{</div><div class="line">sourceType=UIImagePickerControllerSourceTypePhotoLibrary;</div><div class="line">}</div><div class="line">UIImagePickerController * picker = [[UIImagePickerControlleralloc]init];</div><div class="line">picker<span class="variable">.delegate</span> = <span class="keyword">self</span>;</div><div class="line">picker<span class="variable">.allowsEditing</span>=<span class="literal">YES</span>;</div><div class="line">picker<span class="variable">.sourceType</span>=sourceType;</div><div class="line">[<span class="keyword">self</span> presentModalViewController:picker animated:<span class="literal">YES</span>];</div></pre></td></tr></table></figure>
+
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">-(<span class="keyword">void</span>)imagePickerController:(UIImagePickerController*)pickerdidFinishPickingMediaWithInfo:(<span class="built_in">NSDictionary</span> *)info</div><div class="line">{</div><div class="line"> [picker dismissModalViewControllerAnimated:<span class="literal">YES</span>];</div><div class="line"> <span class="built_in">UIImage</span> * image=[info objectForKey:UIImagePickerControllerEditedImage];</div><div class="line"> [<span class="keyword">self</span> performSelector:<span class="keyword">@selector</span>(selectPic:) withObject:imageafterDelay:<span class="number">0.1</span>];</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">-(<span class="keyword">void</span>)selectPic:(<span class="built_in">UIImage</span>*)image</div><div class="line">{</div><div class="line">   <span class="built_in">NSLog</span>(<span class="string">@"image%@"</span>,image);</div><div class="line">  imageView = [[<span class="built_in">UIImageView</span> alloc] initWithImage:image];</div><div class="line">  imageView<span class="variable">.frame</span> = CGRectMake(<span class="number">0</span>, <span class="number">0</span>, image<span class="variable">.size</span><span class="variable">.width</span>, image<span class="variable">.size</span><span class="variable">.height</span>);</div><div class="line">  [<span class="keyword">self</span><span class="variable">.viewaddSubview</span>:imageView];</div><div class="line">  [<span class="keyword">self</span> performSelectorInBackground:<span class="keyword">@selector</span>(detect:) withObject:<span class="literal">nil</span>];</div><div class="line">}</div></pre></td></tr></table></figure>
 
 
-<p><p>5.对图库的操作</p></p>
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td><td class="code"><pre>UIImagePickerControllerSourceTypesourceType=UIImagePickerControllerSourceTypeCamera;
-if (![UIImagePickerControllerisSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) 
-{
-sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
-}
-UIImagePickerController * picker = [[UIImagePickerControlleralloc]init];
-picker.<span class="class"><span class="keyword">delegate</span> = <span class="title">self</span>;
-<span class="title">picker</span>.<span class="title">allowsEditing</span>=<span class="title">YES</span>;
-<span class="title">picker</span>.<span class="title">sourceType</span>=<span class="title">sourceType</span>;
-[<span class="title">self</span> <span class="title">presentModalViewController</span>:<span class="title">picker</span> <span class="title">animated</span>:<span class="title">YES</span>];
-</pre></td></tr></table></figure>
-
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre>-(void)<span class="method">imagePickerController:</span>(<span class="class">UIImagePickerController</span>*)<span class="method">pickerdidFinishPickingMediaWithInfo:</span>(<span class="class">NSDictionary</span> *)info
-{
- [picker <span class="method">dismissModalViewControllerAnimated:</span><span class="class">YES</span>];
- <span class="class">UIImage</span> * image=[info <span class="method">objectForKey:</span><span class="class">UIImagePickerControllerEditedImage</span>];
- [<span class="keyword">self</span> <span class="method">performSelector:</span>@selector(<span class="method">selectPic:</span>) <span class="method">withObject:</span><span class="method">imageafterDelay:</span><span class="number">0.1</span>];
-}
-</pre></td></tr></table></figure>
-
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-</pre></td><td class="code"><pre>-(<span class="keyword">void</span>)selectPic:(<span class="built_in">UIImage</span>*)image
-{
-   <span class="built_in">NSLog</span>(@<span class="string">"image%@"</span>,image);
-  imageView = [[<span class="built_in">UIImageView</span> alloc] initWithImage:image];
-  imageView<span class="variable">.frame</span> = CGRectMake(<span class="number">0</span>, <span class="number">0</span>, image<span class="variable">.size</span><span class="variable">.width</span>, image<span class="variable">.size</span><span class="variable">.height</span>);
-  [<span class="keyword">self</span><span class="variable">.viewaddSubview</span>:imageView];
-  [<span class="keyword">self</span> performSelectorInBackground:@<span class="keyword">selector</span>(detect:) withObject:<span class="literal">nil</span>];
-}
-</pre></td></tr></table></figure>
-
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre><span class="pp">-<span class="params">(void)</span>imagePickerControllerDIdCancel:<span class="params">(<span class="variable">UIImagePickerController</span>*)</span>picker
-{
-  [picker dismissModalViewControllerAnimated:YES];
-}
-</pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-(<span class="keyword">void</span>)imagePickerControllerDIdCancel:(UIImagePickerController*)picker</div><div class="line">{</div><div class="line">  [picker dismissModalViewControllerAnimated:<span class="literal">YES</span>];</div><div class="line">}</div></pre></td></tr></table></figure>
 
 
 
+<p></p><p>6.跳到下个View</p><p></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">nextWebView = [[WEBViewController alloc] initWithNibName:<span class="string">@"WEBViewController"</span> bundle:<span class="literal">nil</span>];</div><div class="line">[<span class="keyword">self</span> presentModalViewController:nextWebView animated:<span class="literal">YES</span>];</div><div class="line"><span class="comment">//创建一个UIBarButtonItem右边按钮</span></div><div class="line"><span class="built_in">UIBarButtonItem</span> *rightButton = [[<span class="built_in">UIBarButtonItem</span> alloc] initWithTitle:<span class="string">@"右边"</span> style:UIBarButtonItemStyleDone target:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(clickRightButton)];</div><div class="line">[<span class="keyword">self</span><span class="variable">.navigationItem</span> setRightBarButtonItem:rightButton];</div><div class="line">设置navigationBar隐藏</div><div class="line"><span class="keyword">self</span><span class="variable">.navigationController</span><span class="variable">.navigationBarHidden</span> = <span class="literal">YES</span>;<span class="comment">//</span></div><div class="line">iOS开发之UIlabel多行文字自动换行 （自动折行）</div><div class="line"><span class="built_in">UIView</span> *footerView = [[<span class="built_in">UIView</span> alloc]initWithFrame:CGRectMake(<span class="number">10</span>, <span class="number">100</span>, <span class="number">300</span>, <span class="number">180</span>)];</div><div class="line"><span class="built_in">UILabel</span> *label = [[<span class="built_in">UILabel</span> alloc]initWithFrame:CGRectMake(<span class="number">10</span>, <span class="number">100</span>, <span class="number">300</span>, <span class="number">150</span>)];</div><div class="line">label<span class="variable">.text</span> = <span class="string">@"Hello world! Hello world!Hello world! Hello world! Hello world! Hello world! Hello world! Hello world!Hello world! Hello world! Hello world! Hello world! Hello world! Helloworld!"</span>;</div><div class="line"><span class="comment">//背景颜色为红色</span></div><div class="line">label<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> redColor];</div><div class="line"><span class="comment">//设置字体颜色为白色</span></div><div class="line">label<span class="variable">.textColor</span> = [<span class="built_in">UIColor</span> whiteColor];</div><div class="line"><span class="comment">//文字居中显示</span></div><div class="line">label<span class="variable">.textAlignment</span> = UITextAlignmentCenter;</div><div class="line"><span class="comment">//自动折行设置</span></div><div class="line">label<span class="variable">.lineBreakMode</span> = UILineBreakModeWordWrap;</div><div class="line">label<span class="variable">.numberOfLines</span> = <span class="number">0</span>;</div></pre></td></tr></table></figure>
 
-<p><p>6.跳到下个View</p></p>
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-</pre></td><td class="code"><pre>nextWebView = [[WEBViewController alloc] initWithNibName:@<span class="string">"WEBViewController"</span> bundle:<span class="literal">nil</span>];
-[<span class="keyword">self</span> presentModalViewController:nextWebView animated:<span class="literal">YES</span>];
-<span class="comment">//创建一个UIBarButtonItem右边按钮</span>
-<span class="built_in">UIBarButtonItem</span> *rightButton = [[<span class="built_in">UIBarButtonItem</span> alloc] initWithTitle:@<span class="string">"右边"</span> style:UIBarButtonItemStyleDone target:<span class="keyword">self</span> action:@<span class="keyword">selector</span>(clickRightButton)];
-[<span class="keyword">self</span><span class="variable">.navigationItem</span> setRightBarButtonItem:rightButton];
-设置navigationBar隐藏
-<span class="keyword">self</span><span class="variable">.navigationController</span><span class="variable">.navigationBarHidden</span> = <span class="literal">YES</span>;<span class="comment">//</span>
-iOS开发之UIlabel多行文字自动换行 （自动折行）
-<span class="built_in">UIView</span> *footerView = [[<span class="built_in">UIView</span> alloc]initWithFrame:CGRectMake(<span class="number">10</span>, <span class="number">100</span>, <span class="number">300</span>, <span class="number">180</span>)];
-<span class="built_in">UILabel</span> *label = [[<span class="built_in">UILabel</span> alloc]initWithFrame:CGRectMake(<span class="number">10</span>, <span class="number">100</span>, <span class="number">300</span>, <span class="number">150</span>)];
-label<span class="variable">.text</span> = @<span class="string">"Hello world! Hello world!Hello world! Hello world! Hello world! Hello world! Hello world! Hello world!Hello world! Hello world! Hello world! Hello world! Hello world! Helloworld!"</span>;
-<span class="comment">//背景颜色为红色</span>
-label<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> redColor];
-<span class="comment">//设置字体颜色为白色</span>
-label<span class="variable">.textColor</span> = [<span class="built_in">UIColor</span> whiteColor];
-<span class="comment">//文字居中显示</span>
-label<span class="variable">.textAlignment</span> = UITextAlignmentCenter;
-<span class="comment">//自动折行设置</span>
-label<span class="variable">.lineBreakMode</span> = UILineBreakModeWordWrap;
-label<span class="variable">.numberOfLines</span> = <span class="number">0</span>;
-</pre></td></tr></table></figure>
+<p></p><p>7.代码生成button</p><p></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">CGRect</span> frame = CGRectMake(<span class="number">0</span>, <span class="number">400</span>, <span class="number">72.0</span>, <span class="number">37.0</span>);</div><div class="line"><span class="built_in">UIButton</span> *button = [<span class="built_in">UIButton</span> buttonWithType:UIButtonTypeRoundedRect];</div><div class="line">button<span class="variable">.frame</span> = frame;</div><div class="line">[button setTitle:<span class="string">@"新添加的按钮"</span> forState: UIControlStateNormal];</div><div class="line">button<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> clearColor];</div><div class="line">button<span class="variable">.tag</span> = <span class="number">2000</span>;</div><div class="line">[button addTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];</div><div class="line">[<span class="keyword">self</span><span class="variable">.view</span> addSubview:button];</div></pre></td></tr></table></figure>
 
+<p></p><p>8.让某个控件在View的中心位置显示</p><p></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">label<span class="variable">.center</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span>;</div></pre></td></tr></table></figure>
 
-<p><p>7.代码生成button</p></p>
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-</pre></td><td class="code"><pre>CGRect frame = CGRectMake(<span class="number">0</span>, <span class="number">400</span>, <span class="number">72.0</span>, <span class="number">37.0</span>)<span class="comment">;</span>
-UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect]<span class="comment">;</span>
-button<span class="preprocessor">.frame</span> = frame<span class="comment">;</span>
-[button setTitle:@<span class="string">"新添加的按钮"</span> forState: UIControlStateNormal]<span class="comment">;</span>
-button<span class="preprocessor">.backgroundColor</span> = [UIColor clearColor]<span class="comment">;</span>
-button<span class="preprocessor">.tag</span> = <span class="number">2000</span><span class="comment">;</span>
-[button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside]<span class="comment">;</span>
-[self<span class="preprocessor">.view</span> addSubview:button]<span class="comment">;</span>
-</pre></td></tr></table></figure>
+<p></p><p>9.好看的文字处理</p><p></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">cell<span class="variable">.backgroundColor</span> = [UIColorscrollViewTexturedBackgroundColor];</div><div class="line"><span class="comment">//设置文字的字体</span></div><div class="line">cell<span class="variable">.textLabel</span><span class="variable">.font</span> = [<span class="built_in">UIFont</span> fontWithName:<span class="string">@"AmericanTypewriter"</span> size:<span class="number">100.0</span>f];</div><div class="line"><span class="comment">//设置文字的颜色</span></div><div class="line">cell<span class="variable">.textLabel</span><span class="variable">.textColor</span> = [<span class="built_in">UIColor</span> orangeColor];</div><div class="line"><span class="comment">//设置文字的背景颜色</span></div><div class="line">cell<span class="variable">.textLabel</span><span class="variable">.shadowColor</span> = [<span class="built_in">UIColor</span> whiteColor];</div><div class="line"><span class="comment">//设置文字的显示位置</span></div><div class="line">cell<span class="variable">.textLabel</span><span class="variable">.textAlignment</span> = UITextAlignmentCenter;</div></pre></td></tr></table></figure>
 
+<p></p><p>10.隐藏Status Bar</p><p></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-(<span class="keyword">void</span>)ViewDidLoad</div><div class="line">{</div><div class="line">  [[<span class="built_in">UIApplication</span> sharedApplication]setStatusBarHidden:<span class="literal">YES</span> animated:<span class="literal">NO</span>];</div><div class="line">}</div></pre></td></tr></table></figure>
 
-<p><p>8.让某个控件在View的中心位置显示</p></p>
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>label<span class="variable">.center</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span>;
-</pre></td></tr></table></figure>
+<p></p><p>11.更改AlertView背景</p><p></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">UIAlertView *theAlert = [[[UIAlertViewalloc] initWithTitle:<span class="string">@"Atention"</span></div><div class="line">message: <span class="string">@"I'm a Chinese!"</span></div><div class="line">delegate:<span class="literal">nil</span></div><div class="line">cancelButtonTitle:<span class="string">@"Cancel"</span></div><div class="line">otherButtonTitles:<span class="string">@"Okay"</span>,<span class="literal">nil</span>] autorelease];</div><div class="line">[theAlert show];</div><div class="line"><span class="built_in">UIImage</span> *theImage = [UIImageimageNamed:<span class="string">@"loveChina.png"</span>];</div><div class="line">theImage = [theImage stretchableImageWithLeftCapWidth:<span class="number">0</span>topCapHeight:<span class="number">0</span>];</div><div class="line"><span class="built_in">CGSize</span> theSize = [theAlert frame]<span class="variable">.size</span>;</div><div class="line">UIGraphicsBeginImageContext(theSize);</div><div class="line">[theImage drawInRect:CGRectMake(<span class="number">5</span>, <span class="number">5</span>, theSize<span class="variable">.width</span>-<span class="number">10</span>, theSize<span class="variable">.height</span>-<span class="number">20</span>)];<span class="comment">//这个地方的大小要自己调整，以适应alertview的背景颜色的大小。</span></div><div class="line">theImage = UIGraphicsGetImageFromCurrentImageContext();</div><div class="line">UIGraphicsEndImageContext();</div><div class="line">theAlert<span class="variable">.layer</span><span class="variable">.contents</span> = (<span class="keyword">id</span>)[theImage CGImage];</div></pre></td></tr></table></figure>
 
+<p></p><p>12.键盘透明</p><p></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">textField<span class="variable">.keyboardAppearance</span> = UIKeyboardAppearanceAlert;</div></pre></td></tr></table></figure>
 
-<p><p>9.好看的文字处理</p></p>
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td><td class="code"><pre>cell<span class="variable">.backgroundColor</span> = [UIColorscrollViewTexturedBackgroundColor];
-<span class="comment">//设置文字的字体</span>
-cell<span class="variable">.textLabel</span><span class="variable">.font</span> = [<span class="built_in">UIFont</span> fontWithName:@<span class="string">"AmericanTypewriter"</span> size:<span class="number">100.0</span>f];
-<span class="comment">//设置文字的颜色</span>
-cell<span class="variable">.textLabel</span><span class="variable">.textColor</span> = [<span class="built_in">UIColor</span> orangeColor];
-<span class="comment">//设置文字的背景颜色</span>
-cell<span class="variable">.textLabel</span><span class="variable">.shadowColor</span> = [<span class="built_in">UIColor</span> whiteColor];
-<span class="comment">//设置文字的显示位置</span>
-cell<span class="variable">.textLabel</span><span class="variable">.textAlignment</span> = UITextAlignmentCenter;
-</pre></td></tr></table></figure>
+<p></p><p>13.截取屏幕图片</p><p></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//创建一个基于位图的图形上下文并指定大小为CGSizeMake(200,400)</span></div><div class="line">UIGraphicsBeginImageContext(CGSizeMake(<span class="number">200</span>,<span class="number">400</span>));</div><div class="line"><span class="comment">//renderInContext 呈现接受者及其子范围到指定的上下文</span></div><div class="line">[<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.layer</span> renderInContext:UIGraphicsGetCurrentContext()];</div><div class="line"><span class="comment">//返回一个基于当前图形上下文的图片</span></div><div class="line"><span class="built_in">UIImage</span> *aImage = UIGraphicsGetImageFromCurrentImageContext();</div><div class="line"><span class="comment">//移除栈顶的基于当前位图的图形上下文</span></div><div class="line">UIGraphicsEndImageContext();</div><div class="line"><span class="comment">//以png格式返回指定图片的数据</span></div><div class="line">imageData = UIImagePNGRepresentation(aImage);</div></pre></td></tr></table></figure>
 
+<p></p><p>14.更改cell选中的背景</p><p></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">UIView</span> *myview = [[<span class="built_in">UIView</span> alloc] init];</div><div class="line">myview<span class="variable">.frame</span> = CGRectMake(<span class="number">0</span>, <span class="number">0</span>, <span class="number">320</span>, <span class="number">47</span>);</div><div class="line">myview<span class="variable">.backgroundColor</span> = [UIColorcolorWithPatternImage:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"0006.png"</span>]];</div><div class="line">cell<span class="variable">.selectedBackgroundView</span> = myview;</div></pre></td></tr></table></figure>
 
-<p><p>10.隐藏Status Bar</p></p>
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre>-(void)ViewDidLoad
-{
-  <span class="string">[[UIApplication sharedApplication]setStatusBarHidden:YES animated:NO];
-}
-</pre></td></tr></table></figure>
+<p></p><p>15.显示图像</p><p></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">CGRect</span> myImageRect = CGRectMake(<span class="number">0.0</span>f, <span class="number">0.0</span>f, <span class="number">320.0</span>f, <span class="number">109.0</span>f);</div><div class="line"><span class="built_in">UIImageView</span> *myImage = [[<span class="built_in">UIImageView</span> alloc] initWithFrame:myImageRect];</div><div class="line">[myImage setImage:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"myImage.png"</span>]];</div><div class="line">myImage<span class="variable">.opaque</span> = <span class="literal">YES</span>; <span class="comment">//opaque是否透明</span></div><div class="line">[<span class="keyword">self</span><span class="variable">.view</span> addSubview:myImage];</div></pre></td></tr></table></figure>
 
+<p></p><p>16.能让图片适应框的大小（没有确认）</p><p></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSString</span>*imagePath = [[<span class="built_in">NSBundle</span> mainBundle] pathForResource:<span class="string">@"XcodeCrash"</span>ofType:<span class="string">@"png"</span>];</div><div class="line"><span class="built_in">UIImage</span> *image = [[<span class="built_in">UIImage</span> alloc]initWithContentsOfFile:imagePath];</div><div class="line"><span class="built_in">UIImage</span> *newImage= [image transformWidth:<span class="number">80.</span>f height:<span class="number">240.</span>f];</div><div class="line"><span class="built_in">UIImageView</span> *imageView = [[<span class="built_in">UIImageView</span> alloc]initWithImage:newImage];</div><div class="line">[newImagerelease];</div><div class="line">[image release];</div><div class="line">[<span class="keyword">self</span><span class="variable">.view</span> addSubview:imageView];</div></pre></td></tr></table></figure>
 
-<p><p>11.更改AlertView背景</p></p>
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-</pre></td><td class="code"><pre>UIAlertView *theAlert = [[[UIAlertViewalloc] initWithTitle:@<span class="string">"Atention"</span>
-<span class="label">message:</span> @<span class="string">"I'm a Chinese!"</span>
-<span class="label">delegate:</span>nil
-<span class="label">cancelButtonTitle:</span>@<span class="string">"Cancel"</span>
-<span class="label">otherButtonTitles:</span>@<span class="string">"Okay"</span>,nil] autorelease]<span class="comment">;</span>
-[theAlert show]<span class="comment">;</span>
-UIImage *theImage = [UIImageimageNamed:@<span class="string">"loveChina.png"</span>]<span class="comment">;</span>
-theImage = [theImage stretchableImageWithLeftCapWidth:<span class="number">0</span>topCapHeight:<span class="number">0</span>]<span class="comment">;</span>
-CGSize theSize = [theAlert frame]<span class="preprocessor">.size</span><span class="comment">;</span>
-UIGraphicsBeginImageContext(theSize)<span class="comment">;</span>
-[theImage drawInRect:CGRectMake(<span class="number">5</span>, <span class="number">5</span>, theSize<span class="preprocessor">.width</span>-<span class="number">10</span>, theSize<span class="preprocessor">.height</span>-<span class="number">20</span>)]<span class="comment">;//这个地方的大小要自己调整，以适应alertview的背景颜色的大小。</span>
-theImage = UIGraphicsGetImageFromCurrentImageContext()<span class="comment">;</span>
-UIGraphicsEndImageContext()<span class="comment">;</span>
-theAlert<span class="preprocessor">.layer</span><span class="preprocessor">.contents</span> = (id)[theImage CGImage]<span class="comment">;</span>
-</pre></td></tr></table></figure>
-
-
-<p><p>12.键盘透明</p></p>
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>textField<span class="preprocessor">.keyboardAppearance</span> = UIKeyboardAppearanceAlert<span class="comment">;</span>
-</pre></td></tr></table></figure>
-
-
-<p><p>13.截取屏幕图片</p></p>
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td><td class="code"><pre><span class="comment">//创建一个基于位图的图形上下文并指定大小为CGSizeMake(200,400)</span>
-UIGraphicsBeginImageContext(CGSizeMake(<span class="number">200</span>,<span class="number">400</span>));
-<span class="comment">//renderInContext 呈现接受者及其子范围到指定的上下文</span>
-[<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.layer</span> renderInContext:UIGraphicsGetCurrentContext()];
-<span class="comment">//返回一个基于当前图形上下文的图片</span>
-<span class="built_in">UIImage</span> *aImage = UIGraphicsGetImageFromCurrentImageContext();
-<span class="comment">//移除栈顶的基于当前位图的图形上下文</span>
-UIGraphicsEndImageContext();
-<span class="comment">//以png格式返回指定图片的数据</span>
-imageData = UIImagePNGRepresentation(aImage);
-</pre></td></tr></table></figure>
-
-
-<p><p>14.更改cell选中的背景</p></p>
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre>UIView *myview = <span class="string">[[UIView alloc] init];
-myview.frame = CGRectMake(0, 0, 320, 47);
-myview.backgroundColor = [UIColorcolorWithPatternImage:[UIImage imageNamed:@"0006.png"]]</span>;
-cell.selectedBackgroundView = myview;
-</pre></td></tr></table></figure>
-
-
-<p><p>15.显示图像</p></p>
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-</pre></td><td class="code"><pre>CGRect myImageRect = CGRectMake(<span class="number">0.0</span>f, <span class="number">0.0</span>f, <span class="number">320.0</span>f, <span class="number">109.0</span>f);
-UIImageView *myImage = <span class="string">[[UIImageView alloc] initWithFrame:myImageRect];
-[myImage setImage:[UIImage imageNamed:@"myImage.png"]]</span>;
-myImage.opaque = YES; //opaque是否透明
-[self.view addSubview:myImage];
-</pre></td></tr></table></figure>
-
-
-<p><p>16.能让图片适应框的大小（没有确认）</p></p>
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-</pre></td><td class="code"><pre>NSString*imagePath = <span class="string">[[NSBundle mainBundle] pathForResource:@"XcodeCrash"ofType:@"png"];
-UIImage *image = [[UIImage alloc]initWithContentsOfFile:imagePath];
-UIImage *newImage= [image transformWidth:80.f height:240.f];
-UIImageView *imageView = [[UIImageView alloc]initWithImage:newImage];
-[newImagerelease];
-[image release];
-[self.view addSubview:imageView];
-</pre></td></tr></table></figure>
-
-
-<p><p>17.实现点击图片进行跳转的代码：生成一个带有背景图片的button，给button绑定想要的事件！</p></p>
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre>UIButton *imgButton=<span class="string">[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 120, 120)];
-[imgButton setBackgroundImage:(UIImage *)[self.imgArray objectAtIndex:indexPath.row] forState:UIControlStateNormal];
-imgButton.tag=[indexPath row];
-[imgButton addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-</pre></td></tr></table></figure>
+<p></p><p>17.实现点击图片进行跳转的代码：生成一个带有背景图片的button，给button绑定想要的事件！</p><p></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">UIButton</span> *imgButton=[[<span class="built_in">UIButton</span> alloc]initWithFrame:CGRectMake(<span class="number">0</span>, <span class="number">0</span>, <span class="number">120</span>, <span class="number">120</span>)];</div><div class="line">[imgButton setBackgroundImage:(<span class="built_in">UIImage</span> *)[<span class="keyword">self</span><span class="variable">.imgArray</span> objectAtIndex:indexPath<span class="variable">.row</span>] forState:UIControlStateNormal];</div><div class="line">imgButton<span class="variable">.tag</span>=[indexPath row];</div><div class="line">[imgButton addTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(buttonClick:) forControlEvents:UIControlEventTouchUpInside];</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -611,6 +164,27 @@ imgButton.tag=[indexPath row];
   </div>
 </article>
 
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2013/04/22/IOS/2013-04-22-chang-yong-dai-ma/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
@@ -642,7 +216,7 @@ imgButton.tag=[indexPath row];
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/IOS/">IOS</a><small>8</small></li>
+    <li><a href="/tags/IOS/">IOS</a><small>16</small></li>
   
   </ul>
 </div>
@@ -652,7 +226,7 @@ imgButton.tag=[indexPath row];
   </div>
   <footer id="footer" class="inner"><div class="alignleft">
   
-  &copy; 2013 virgil
+  &copy; 2014 virgil
   
 </div>
 <div class="clearfix"></div></footer>

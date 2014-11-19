@@ -1,0 +1,254 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Page 5 | IOS | 無限大な夢</title>
+  <meta name="author" content="virgil">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="無限大な夢"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="無限大な夢" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">無限大な夢</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title category">IOS</h2>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-21T12:43:00.000Z"><a href="/2013/04/21/IOS/2013-04-21-libxml-slash-tree-dot-hnot-found/">Apr 21 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/21/IOS/2013-04-21-libxml-slash-tree-dot-hnot-found/">&#39;libxml/tree.h&#39;not found</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>在target 和 project 的 Header Search Paths zhong中加上/usr/include/libxml2 在 Other linker flags 中加上 -lxml2<br></p>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-21T12:37:00.000Z"><a href="/2013/04/21/IOS/2013-04-21-ios5-mo-ni-qi-bug-cfxpreferencessearchlistsource-trylock/">Apr 21 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/21/IOS/2013-04-21-ios5-mo-ni-qi-bug-cfxpreferencessearchlistsource-trylock/">IOS5 模拟器bug:CFXPreferencesSearchListSource tryLock</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>ios5 模拟器在程序弹出UIAlertview或者键盘之类的控件时，返回桌面就会出现[CFXPreferencesSearchListSource tryLock]。<br>是模拟器的bug。真机上不会出现,不用管。<br></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-21T12:18:00.000Z"><a href="/2013/04/21/IOS/2013-04-21-google-di-tu-de-lu-xian-huo-qu-he-jie-xi/">Apr 21 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/21/IOS/2013-04-21-google-di-tu-de-lu-xian-huo-qu-he-jie-xi/">google 地图的路线获取和解析</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>头文件和宏定义</p><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="preprocessor">#import <span class="title">&lt;MapKit/MapKit.h&gt;</span></span></div><div class="line"><span class="preprocessor">#import <span class="title">"RegexKitLite.h"</span></span></div><div class="line"><span class="preprocessor">#import <span class="title">"JSONKit.h"</span></span></div><div class="line"></div><div class="line"><span class="preprocessor">#define Mode_Walk    @<span class="title">"walking"</span></span></div><div class="line"><span class="preprocessor">#define Mode_Drive   @<span class="title">"driving"</span></span></div><div class="line"><span class="preprocessor">#define Mode_Bycle   @<span class="title">"bicycling"</span></span></div><div class="line"><span class="preprocessor">#define Mode_Transit @<span class="title">"transit"</span></span></div></pre></td></tr></table></figure><br><p>获取两个点之间的路线</p><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div></pre></td><td class="code"><pre><div class="line">- (<span class="built_in">NSArray</span> *)calculateRoutesFrom:(CLLocationCoordinate2D)f to:(CLLocationCoordinate2D)t mode:(<span class="built_in">NSString</span> *)mode</div><div class="line">{</div><div class="line">    <span class="built_in">NSString</span>    *saddr = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%f,%f"</span>, f<span class="variable">.latitude</span>, f<span class="variable">.longitude</span>];</div><div class="line">    <span class="built_in">NSString</span>    *daddr = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%f,%f"</span>, t<span class="variable">.latitude</span>, t<span class="variable">.longitude</span>];</div><div class="line"></div><div class="line">    <span class="built_in">NSString</span>    *apiUrlStr = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"http://maps.google.com/maps/api/directions/json?origin=%@&amp;destination=%@&amp;sensor=false&amp;mode=%@"</span>, saddr, daddr,mode];</div><div class="line">   </div><div class="line">    <span class="built_in">NSURL</span>       *apiUrl = [<span class="built_in">NSURL</span> URLWithString:apiUrlStr];</div><div class="line">    <span class="built_in">NSString</span>    *apiResponse = [<span class="built_in">NSString</span> stringWithContentsOfURL:apiUrl encoding:NSASCIIStringEncoding error:<span class="literal">nil</span>];</div><div class="line">    <span class="built_in">NSDictionary</span> *dictionaryFromJson = [apiResponse  objectFromJSONString];</div><div class="line">    <span class="keyword">if</span>([[dictionaryFromJson objectForKey:<span class="string">@"status"</span>] isEqualToString:<span class="string">@"OK"</span>])</div><div class="line">    {</div><div class="line">        <span class="built_in">NSDictionary</span>  *dict = [[[[dictionaryFromJson objectForKey:<span class="string">@"routes"</span>] objectAtIndex:<span class="number">0</span>] objectForKey:<span class="string">@"legs"</span>] objectAtIndex:<span class="number">0</span>];</div><div class="line">        <span class="built_in">NSArray</span> *legArray = [dict objectForKey:<span class="string">@"steps"</span>];</div><div class="line">        </div><div class="line">        <span class="built_in">NSMutableArray</span> *stepArray = [<span class="built_in">NSMutableArray</span> array];</div><div class="line">        <span class="built_in">NSAutoreleasePool</span> *pool = [[<span class="built_in">NSAutoreleasePool</span> alloc] init];</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">id</span> step <span class="keyword">in</span> legArray)</div><div class="line">        {</div><div class="line">            <span class="keyword">id</span> start = [step objectForKey:<span class="string">@"start_location"</span>];</div><div class="line">            </div><div class="line">            CLLocation  *loc0 = [[[CLLocation alloc] initWithLatitude:[[start objectForKey:<span class="string">@"lat"</span>] doubleValue]</div><div class="line">                                                            longitude:[[start objectForKey:<span class="string">@"lng"</span>] doubleValue]] autorelease];</div><div class="line">            </div><div class="line">            [stepArray addObject:loc0];</div><div class="line">            </div><div class="line">            <span class="built_in">NSString</span> *polyline = [[step objectForKey:<span class="string">@"polyline"</span>] objectForKey:<span class="string">@"points"</span>];</div><div class="line">            <span class="built_in">NSArray</span> *polylineArrary = [<span class="keyword">self</span> decodePolyLine:[[polyline mutableCopy] autorelease]];</div><div class="line">            [stepArray addObjectsFromArray:polylineArrary];</div><div class="line">            </div><div class="line">            <span class="keyword">id</span> end = [step objectForKey:<span class="string">@"end_location"</span>];</div><div class="line">            </div><div class="line">            CLLocation  *loc1 = [[[CLLocation alloc] initWithLatitude:[[end objectForKey:<span class="string">@"lat"</span>] floatValue]</div><div class="line">                                                            longitude:[[end objectForKey:<span class="string">@"lng"</span>] floatValue]] autorelease];</div><div class="line">            [stepArray addObject:loc1];</div><div class="line">            </div><div class="line">            </div><div class="line">        }</div><div class="line">        [pool drain];</div><div class="line">        <span class="keyword">return</span> stepArray;</div><div class="line">  </div><div class="line">    }</div><div class="line">    <span class="keyword">else</span></div><div class="line">    {</div><div class="line">        <span class="built_in">NSString</span> *tipString = <span class="literal">nil</span>;</div><div class="line">        <span class="keyword">if</span> ([[dictionaryFromJson objectForKey:<span class="string">@"status"</span>] isEqualToString:<span class="string">@"NOT_FOUND"</span>])</div><div class="line">        {</div><div class="line">             tipString = <span class="string">@"请求的起点、终点或路标中指定的至少一个位置无法进行地理编码"</span>;</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span> ([[dictionaryFromJson objectForKey:<span class="string">@"status"</span>] isEqualToString:<span class="string">@"ZERO_RESULTS"</span>])</div><div class="line">        {</div><div class="line">            tipString = <span class="string">@"起点和终点之间找不到路线"</span>;</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span> ([[dictionaryFromJson objectForKey:<span class="string">@"status"</span>] isEqualToString:<span class="string">@"MAX_WAYPOINTS_EXCEEDED"</span>])</div><div class="line">        {</div><div class="line">            tipString = <span class="string">@"请求中提供的 waypoints 过多"</span>;</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span> ([[dictionaryFromJson objectForKey:<span class="string">@"status"</span>] isEqualToString:<span class="string">@"INVALID_REQUEST"</span>])</div><div class="line">        {</div><div class="line">            tipString = <span class="string">@"提供的请求无效"</span>;</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>([[dictionaryFromJson objectForKey:<span class="string">@"status"</span>] isEqualToString:<span class="string">@"OVER_QUERY_LIMIT"</span>])</div><div class="line">        {</div><div class="line">            tipString = <span class="string">@"该服务在允许的时间段内从您的应用收到的请求过多"</span>;</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>([[dictionaryFromJson objectForKey:<span class="string">@"status"</span>] isEqualToString:<span class="string">@"REQUEST_DENIED"</span>])</div><div class="line">        {</div><div class="line">             tipString = <span class="string">@"该服务已拒绝您的应用使用路线服务"</span>;</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>([[dictionaryFromJson objectForKey:<span class="string">@"status"</span>] isEqualToString:<span class="string">@"OVER_QUERY_LIMIT"</span>])</div><div class="line">        {</div><div class="line">            tipString = <span class="string">@"路线请求因服务器出错而无法得到处理。如果您重试一次，该请求可能就会成功"</span>;</div><div class="line">            </div><div class="line">        }</div><div class="line">        <span class="built_in">dispatch_async</span>(dispatch_get_main_queue(), ^{</div><div class="line">            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:<span class="string">@"提示"</span></div><div class="line">                                                                message:tipString</div><div class="line">                                                               delegate:<span class="literal">nil</span></div><div class="line">                                                      cancelButtonTitle:<span class="string">@"OK"</span></div><div class="line">                                                      otherButtonTitles:<span class="literal">nil</span>, <span class="literal">nil</span>];</div><div class="line">            [alertView show];</div><div class="line">            [alertView release];</div><div class="line">        });</div><div class="line">       </div><div class="line">        </div><div class="line">        <span class="keyword">return</span> <span class="literal">nil</span>;</div><div class="line">    }</div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure><br>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/04/21/IOS/2013-04-21-google-di-tu-de-lu-xian-huo-qu-he-jie-xi/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-21T02:22:00.000Z"><a href="/2013/04/21/IOS/2013-04-21-ios-diao-yong-di-san-fang-appda-kai-wen-jian/">Apr 21 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/21/IOS/2013-04-21-ios-diao-yong-di-san-fang-appda-kai-wen-jian/">IOS 调用第三方App打开文件</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSString</span>  *filePath =[[NSBundlemainBundle]pathForResource:<span class="string">@"1"</span>ofType:<span class="string">@"docx"</span>];</div><div class="line">UIDocumentInteractionController  *documentController=[UIDocumentInteractionControllerinteractionControllerWithURL:[NSURLfileURLWithPath:filePath]];</div><div class="line">documentController<span class="variable">.UTI</span>= <span class="string">@"com.microsoft.word.doc"</span>;</div><div class="line">[documentController presentOpenInMenuFromRect:CGRectZero</div><div class="line">                    		    	 inView:<span class="keyword">self</span><span class="variable">.view</span></div><div class="line">                                     animated:<span class="literal">YES</span>];</div></pre></td></tr></table></figure>
+
+<p><a href="https://developer.apple.com/library/ios/#documentation/Miscellaneous/Reference/UTIRef/Articles/System-DeclaredUniformTypeIdentifiers.html#//apple_ref/doc/uid/TP40009259-SW1" target="_blank" rel="external">UTI 列表</a></p>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+
+  <nav id="pagination">
+  
+    <a href="/categories/IOS/page/4/" class="alignleft prev">Prev</a>
+  
+  
+  <div class="clearfix"></div>
+</nav>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/IOS/">IOS</a><small>44</small></li>
+  
+    <li><a href="/categories/OSX/">OSX</a><small>1</small></li>
+  
+    <li><a href="/categories/Other/">Other</a><small>4</small></li>
+  
+    <li><a href="/categories/windowsphone/">windowsphone</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/IOS/">IOS</a><small>16</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 virgil
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

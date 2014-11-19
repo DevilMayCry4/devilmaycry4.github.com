@@ -6,11 +6,7 @@
   <title>通过调用url跳转到相应的设置页面 | 無限大な夢</title>
   <meta name="author" content="virgil">
   
-  <meta name="description" content="调用如下代码：1
-2
- NSURL *url = [NSURL URLWithString:@&quot;prefs:root=WIFI&quot;];
- [[UIApplication sharedApplication] openURL:url];
-即可跳转到设置页面的对应项。
+  <meta name="description" content="调用如下代码：12NSURL *url = [NSURL URLWithString:@&quot;prefs:root=WIFI&quot;];[[UIApplication sharedApplication] openURL:url];即可跳转到设置页面的对应项。
 
 相关的URL string：">
   
@@ -29,6 +25,7 @@
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
+
 </head>
 
 
@@ -65,87 +62,10 @@
     </header>
     <div class="entry">
       
-        <p>调用如下代码：</p><br><figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre> NSURL *url = [NSURL URLWithString:@<span class="string">"prefs:root=WIFI"</span>];
- <span class="string">[[UIApplication sharedApplication] openURL:url];
-</pre></td></tr></table></figure><br><br><p>即可跳转到设置页面的对应项。</p>
+        <p>调用如下代码：</p><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSURL</span> *url = [<span class="built_in">NSURL</span> URLWithString:<span class="string">@"prefs:root=WIFI"</span>];</div><div class="line">[[<span class="built_in">UIApplication</span> sharedApplication] openURL:url];</div></pre></td></tr></table></figure><br><p>即可跳转到设置页面的对应项。</p>
 
-<p><p>相关的URL string：</p><br><a id="more"></a></p>
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-</pre></td><td class="code"><pre><span class="class">About</span> — <span class="method">prefs:</span>root=<span class="class">General</span>&amp;path=<span class="class">About</span>
-<span class="class">Accessibility</span> — <span class="method">prefs:</span>root=<span class="class">General</span>&amp;path=<span class="class">ACCESSIBILITY</span>
-<span class="class">Airplane</span> <span class="class">Mode</span> <span class="class">On</span> — <span class="method">prefs:</span>root=<span class="class">AIRPLANE_MODE</span>
-<span class="class">Auto</span>-<span class="class">Lock</span> — <span class="method">prefs:</span>root=<span class="class">General</span>&amp;path=<span class="class">AUTOLOCK</span>
-<span class="class">Brightness</span> — <span class="method">prefs:</span>root=<span class="class">Brightness</span>
-<span class="class">Bluetooth</span> — <span class="method">prefs:</span>root=<span class="class">General</span>&amp;path=<span class="class">Bluetooth</span>
-<span class="class">Date</span> &amp; <span class="class">Time</span> — <span class="method">prefs:</span>root=<span class="class">General</span>&amp;path=<span class="class">DATE_AND_TIME</span>
-<span class="class">FaceTime</span> — <span class="method">prefs:</span>root=<span class="class">FACETIME</span>
-<span class="class">General</span> — <span class="method">prefs:</span>root=<span class="class">General</span>
-<span class="class">Keyboard</span> — <span class="method">prefs:</span>root=<span class="class">General</span>&amp;path=<span class="class">Keyboard</span>
-iCloud — <span class="method">prefs:</span>root=<span class="class">CASTLE</span>
-iCloud <span class="class">Storage</span> &amp; <span class="class">Backup</span> — <span class="method">prefs:</span>root=<span class="class">CASTLE</span>&amp;path=<span class="class">STORAGE_AND_BACKUP</span>
-<span class="class">International</span> — <span class="method">prefs:</span>root=<span class="class">General</span>&amp;path=<span class="class">INTERNATIONAL</span>
-<span class="class">Location</span> <span class="class">Services</span> — <span class="method">prefs:</span>root=<span class="class">LOCATION_SERVICES</span>
-<span class="class">Music</span> — <span class="method">prefs:</span>root=<span class="class">MUSIC</span>
-<span class="class">Music</span> <span class="class">Equalizer</span> — <span class="method">prefs:</span>root=<span class="class">MUSIC</span>&amp;path=<span class="class">EQ</span>
-<span class="class">Music</span> <span class="class">Volume</span> <span class="class">Limit</span> — <span class="method">prefs:</span>root=<span class="class">MUSIC</span>&amp;path=<span class="class">VolumeLimit</span>
-<span class="class">Network</span> — <span class="method">prefs:</span>root=<span class="class">General</span>&amp;path=<span class="class">Network</span>
-<span class="class">Nike</span> + iPod — <span class="method">prefs:</span>root=<span class="class">NIKE_PLUS_IPOD</span>
-<span class="class">Notes</span> — <span class="method">prefs:</span>root=<span class="class">NOTES</span>
-<span class="class">Notification</span> — <span class="method">prefs:</span>root=<span class="class">NOTIFICATIONS_ID</span>
-<span class="class">Phone</span> — <span class="method">prefs:</span>root=<span class="class">Phone</span>
-<span class="class">Photos</span> — <span class="method">prefs:</span>root=<span class="class">Photos</span>
-<span class="class">Profile</span> — <span class="method">prefs:</span>root=<span class="class">General</span>&amp;path=<span class="class">ManagedConfigurationList</span>
-<span class="class">Reset</span> — <span class="method">prefs:</span>root=<span class="class">General</span>&amp;path=<span class="class">Reset</span>
-<span class="class">Safari</span> — <span class="method">prefs:</span>root=<span class="class">Safari</span>
-<span class="class">Siri</span> — <span class="method">prefs:</span>root=<span class="class">General</span>&amp;path=<span class="class">Assistant</span>
-<span class="class">Sounds</span> — <span class="method">prefs:</span>root=<span class="class">Sounds</span>
-<span class="class">Software</span> <span class="class">Update</span> — <span class="method">prefs:</span>root=<span class="class">General</span>&amp;path=<span class="class">SOFTWARE_UPDATE_LINK</span>
-<span class="class">Store</span> — <span class="method">prefs:</span>root=<span class="class">STORE</span>
-<span class="class">Twitter</span> — <span class="method">prefs:</span>root=<span class="class">TWITTER</span>
-<span class="class">Usage</span> — <span class="method">prefs:</span>root=<span class="class">General</span>&amp;path=<span class="class">USAGE</span>
-<span class="class">VPN</span> — <span class="method">prefs:</span>root=<span class="class">General</span>&amp;path=<span class="class">Network</span>/<span class="class">VPN</span>
-<span class="class">Wallpaper</span> — <span class="method">prefs:</span>root=<span class="class">Wallpaper</span>
-<span class="class">Wi</span>-<span class="class">Fi</span> — <span class="method">prefs:</span>root=<span class="class">WIFI</span>
-<span class="class">INTERNET_TETHERING</span> — <span class="method">prefs:</span>root=<span class="class">INTERNET_TETHERING</span>
-</pre></td></tr></table></figure>
-
+<p></p><p>相关的URL string：</p><br><a id="more"></a><p></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">About — prefs:root=General&amp;path=About</div><div class="line">Accessibility — prefs:root=General&amp;path=ACCESSIBILITY</div><div class="line">Airplane Mode On — prefs:root=AIRPLANE_MODE</div><div class="line">Auto-Lock — prefs:root=General&amp;path=AUTOLOCK</div><div class="line">Brightness — prefs:root=Brightness</div><div class="line">Bluetooth — prefs:root=General&amp;path=Bluetooth</div><div class="line">Date &amp; Time — prefs:root=General&amp;path=DATE_AND_TIME</div><div class="line">FaceTime — prefs:root=FACETIME</div><div class="line">General — prefs:root=General</div><div class="line">Keyboard — prefs:root=General&amp;path=Keyboard</div><div class="line">iCloud — prefs:root=CASTLE</div><div class="line">iCloud Storage &amp; Backup — prefs:root=CASTLE&amp;path=STORAGE_AND_BACKUP</div><div class="line">International — prefs:root=General&amp;path=INTERNATIONAL</div><div class="line">Location Services — prefs:root=LOCATION_SERVICES</div><div class="line">Music — prefs:root=MUSIC</div><div class="line">Music Equalizer — prefs:root=MUSIC&amp;path=EQ</div><div class="line">Music Volume Limit — prefs:root=MUSIC&amp;path=VolumeLimit</div><div class="line">Network — prefs:root=General&amp;path=Network</div><div class="line">Nike + iPod — prefs:root=NIKE_PLUS_IPOD</div><div class="line">Notes — prefs:root=NOTES</div><div class="line">Notification — prefs:root=NOTIFICATIONS_ID</div><div class="line">Phone — prefs:root=Phone</div><div class="line">Photos — prefs:root=Photos</div><div class="line">Profile — prefs:root=General&amp;path=ManagedConfigurationList</div><div class="line">Reset — prefs:root=General&amp;path=Reset</div><div class="line">Safari — prefs:root=Safari</div><div class="line">Siri — prefs:root=General&amp;path=Assistant</div><div class="line">Sounds — prefs:root=Sounds</div><div class="line">Software Update — prefs:root=General&amp;path=SOFTWARE_UPDATE_LINK</div><div class="line">Store — prefs:root=STORE</div><div class="line">Twitter — prefs:root=TWITTER</div><div class="line">Usage — prefs:root=General&amp;path=USAGE</div><div class="line">VPN — prefs:root=General&amp;path=Network/VPN</div><div class="line">Wallpaper — prefs:root=Wallpaper</div><div class="line">Wi-Fi — prefs:root=WIFI</div><div class="line">INTERNET_TETHERING — prefs:root=INTERNET_TETHERING</div></pre></td></tr></table></figure>
       
     </div>
     <footer>
@@ -181,6 +101,27 @@ iCloud <span class="class">Storage</span> &amp; <span class="class">Backup</span
   </div>
 </article>
 
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2013/04/22/IOS/2013-04-22-tong-guo-diao-yong-urltiao-zhuan-dao-xiang-ying-de-she-zhi-ye-mian/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
@@ -212,7 +153,7 @@ iCloud <span class="class">Storage</span> &amp; <span class="class">Backup</span
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/IOS/">IOS</a><small>8</small></li>
+    <li><a href="/tags/IOS/">IOS</a><small>16</small></li>
   
   </ul>
 </div>
@@ -222,7 +163,7 @@ iCloud <span class="class">Storage</span> &amp; <span class="class">Backup</span
   </div>
   <footer id="footer" class="inner"><div class="alignleft">
   
-  &copy; 2013 virgil
+  &copy; 2014 virgil
   
 </div>
 <div class="clearfix"></div></footer>

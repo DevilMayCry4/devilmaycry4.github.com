@@ -6,23 +6,7 @@
   <title>压缩视频 | 無限大な夢</title>
   <meta name="author" content="virgil">
   
-  <meta name="description" content="1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-- (void) lowQuailtyWithInputURL:(NSURL*)inputURL
-                                   outputURL:(NSURL*)outputURL
-     ">
+  <meta name="description" content="12345678910111213- (void) lowQuailtyWithInputURL:(NSURL*)inputURL                                   outputURL:(NSURL*)outputURL                       ">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -39,6 +23,7 @@
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
+
 </head>
 
 
@@ -75,64 +60,9 @@
     </header>
     <div class="entry">
       
-        <figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-</pre></td><td class="code"><pre>- (void) lowQuailtyWithInputURL:(NSURL*)inputURL
-                                   outputURL:(NSURL*)outputURL
-                                     blockHandler:(void (^)(AVAssetExportSession*))handler
-{
-    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:inputURL options:<span class="keyword">nil</span>];
-    AVAssetExportSession *session = <span class="string">[[AVAssetExportSession alloc] initWithAsset:asset     presetName:AVAssetExportPresetMediumQuality];
-    session.outputURL = outputURL;
-    session.outputFileType = AVFileTypeQuickTimeMovie;
-    [session exportAsynchronouslyWithCompletionHandler:^(void)
-     {
-         handler(session);
-     }];
-}
+        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>) lowQuailtyWithInputURL:(<span class="built_in">NSURL</span>*)inputURL</div><div class="line">                                   outputURL:(<span class="built_in">NSURL</span>*)outputURL</div><div class="line">                                     blockHandler:(<span class="keyword">void</span> (^)(AVAssetExportSession*))handler</div><div class="line">{</div><div class="line">    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:inputURL options:<span class="literal">nil</span>];</div><div class="line">    AVAssetExportSession *session = [[AVAssetExportSession alloc] initWithAsset:asset     presetName:AVAssetExportPresetMediumQuality];</div><div class="line">    session<span class="variable">.outputURL</span> = outputURL;</div><div class="line">    session<span class="variable">.outputFileType</span> = AVFileTypeQuickTimeMovie;</div><div class="line">    [session exportAsynchronouslyWithCompletionHandler:^(<span class="keyword">void</span>)</div><div class="line">     {</div><div class="line">         handler(session);</div><div class="line">     }];</div><div class="line">}</div></pre></td></tr></table></figure>
 
-</pre></td></tr></table></figure>
-
-<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-</pre></td><td class="code"><pre>[<span class="keyword">self</span> <span class="method">lowQuailtyWithInputURL:</span>video <span class="method">outputURL:</span>output <span class="method">blockHandler:</span>^(<span class="class">AVAssetExportSession</span> *session)
-{
-     if (session.status == <span class="class">AVAssetExportSessionStatusCompleted</span>)
-     {
-         
-     }
-     else
-     {
-         
-         
-     }
-}];
-
-</pre></td></tr></table></figure>
-
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">[<span class="keyword">self</span> lowQuailtyWithInputURL:video outputURL:output blockHandler:^(AVAssetExportSession *session)</div><div class="line">{</div><div class="line">     <span class="keyword">if</span> (session<span class="variable">.status</span> == AVAssetExportSessionStatusCompleted)</div><div class="line">     {</div><div class="line">         </div><div class="line">     }</div><div class="line">     <span class="keyword">else</span></div><div class="line">     {</div><div class="line">         </div><div class="line">         </div><div class="line">     }</div><div class="line">}];</div></pre></td></tr></table></figure>
 
 <p><br>在block里面检测成功，失败，或者是取消，然后释放session.<br><br>期间可以通过不断的查看session的progress属性来获取转换的进度。<br><br>可以设置这些压缩质量<br><br>AVF_EXPORT NSString <em>const AVAssetExportPresetLowQuality        NS_AVAILABLE_IOS(4_0);<br>AVF_EXPORT NSString </em>const AVAssetExportPresetMediumQuality     NS_AVAILABLE_IOS(4_0);<br>AVF_EXPORT NSString *const AVAssetExportPresetHighestQuality    NS_AVAILABLE_IOS(4_0);<br></p>
       
@@ -170,6 +100,27 @@
   </div>
 </article>
 
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2013/05/24/IOS/2013-05-24-ya-suo-shi-pin/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
@@ -201,7 +152,7 @@
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/IOS/">IOS</a><small>8</small></li>
+    <li><a href="/tags/IOS/">IOS</a><small>16</small></li>
   
   </ul>
 </div>
@@ -211,7 +162,7 @@
   </div>
   <footer id="footer" class="inner"><div class="alignleft">
   
-  &copy; 2013 virgil
+  &copy; 2014 virgil
   
 </div>
 <div class="clearfix"></div></footer>
