@@ -6,7 +6,12 @@
   <title>IOS 检测耳机插入 | 無限大な夢</title>
   <meta name="author" content="virgil">
   
-  <meta name="description" content="12345678910UInt32 dataSize;CFStringRef currentRoute;currentRoute = NULL;dataSize = sizeof(CFStringRef);AudioSessionInitialize(NULL, NULL, NULL, NULL);">
+  <meta name="description" content="UInt32 dataSize;
+CFStringRef currentRoute;
+currentRoute = NULL;
+dataSize = sizeof(CFStringRef);
+AudioSessionInitialize(NULL, NULL, NULL, NULL);
+AudioS">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -60,7 +65,17 @@
     </header>
     <div class="entry">
       
-           <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">UInt32 dataSize;</div><div class="line">CFStringRef currentRoute;</div><div class="line">currentRoute = <span class="literal">NULL</span>;</div><div class="line">dataSize = <span class="keyword">sizeof</span>(CFStringRef);</div><div class="line">AudioSessionInitialize(<span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</div><div class="line">AudioSessionGetProperty(kAudioSessionProperty_AudioRoute, &amp;dataSize, &amp;currentRoute);</div><div class="line"><span class="keyword">if</span>([(<span class="built_in">NSString</span> *) currentRoute hasPrefix: <span class="string">@"Headphone"</span>])</div><div class="line">{</div><div class="line">    <span class="comment">//插入耳机后想执行的操作</span></div><div class="line">}￿<span class="number">1</span>￿</div></pre></td></tr></table></figure>
+        <pre><code>UInt32 dataSize;
+CFStringRef currentRoute;
+currentRoute = <span class="literal">NULL</span>;
+dataSize = <span class="keyword">sizeof</span>(CFStringRef);
+AudioSessionInitialize(<span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>);
+AudioSessionGetProperty(kAudioSessionProperty_AudioRoute, &amp;dataSize, &amp;currentRoute);
+<span class="keyword">if</span>([(<span class="built_in">NSString</span> *) currentRoute hasPrefix: <span class="string">@"Headphone"</span>])
+{
+    <span class="comment">//插入耳机后想执行的操作</span>
+}
+</code></pre>
       
     </div>
     <footer>
