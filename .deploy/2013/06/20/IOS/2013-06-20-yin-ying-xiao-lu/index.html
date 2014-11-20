@@ -8,7 +8,9 @@
   
   <meta name="description" content="UIView 如果没有设置阴影的边框会导致、在旋转屏幕或者滑动的时候，界面卡顿，因为设置了阴影的view会不断地重新绘制。解决的方法:
 
-1234567self.layer.shadowColor = [UIColor blackColor].CGColor;self.layer.shadowOff">
+
+
+self.layer.shadowColor = [UIColor blackColor].CGColor;self.layer.shadowOffset =">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -64,7 +66,11 @@
       
         <p><br>UIView 如果没有设置阴影的边框会导致、在旋转屏幕或者滑动的时候，界面卡顿，因为设置了阴影的view会不断地重新绘制。解决的方法:<br></p>
 
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.shadowColor</span> = [<span class="built_in">UIColor</span> blackColor]<span class="variable">.CGColor</span>;</div><div class="line"><span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.shadowOffset</span> = CGSizeMake(<span class="number">0</span>, <span class="number">3</span>);</div><div class="line"><span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.shadowOpacity</span> = <span class="number">0.6</span>;</div><div class="line"><span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.masksToBounds</span> = <span class="literal">NO</span>;</div><div class="line"><span class="comment">/*********</span></div><div class="line">   self.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.bounds].CGPath;</div><div class="line">   *********/</div></pre></td></tr></table></figure>
+<blockquote>
+
+<p>self.layer.shadowColor = [UIColor blackColor].CGColor;<br>self.layer.shadowOffset = CGSizeMake(0, 3);<br>self.layer.shadowOpacity = 0.6;<br>self.layer.masksToBounds = NO;<br>/<strong><strong>*</strong></strong><br>   self.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.bounds].CGPath;<br>   <strong><strong>*</strong></strong>/</p>
+<footer><strong>lang:objc</strong></footer></blockquote>
+
       
     </div>
     <footer>

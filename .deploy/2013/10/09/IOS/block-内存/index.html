@@ -7,7 +7,10 @@
   <meta name="author" content="virgil">
   
   <meta name="description" content="block调用自身在前面添加__block关键字
-12345678910111213141516- (IBAction)grabURLInBackground:(id)sender{   NSURL *url = [NSURL URLWithString:@&quot;http://allseeing-i.c">
+
+
+
+(IBAction)grabURLInBackground:(id)sender{ NSURL url = [NSURL URLWithString:@”http://allseeing-i.com“]; __block ASIHTTPRequ">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -62,7 +65,22 @@
     <div class="entry">
       
         <p></p><p><br>block调用自身在前面添加__block关键字<br></p><p></p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">IBAction</span>)grabURLInBackground:(<span class="keyword">id</span>)sender</div><div class="line">{</div><div class="line">   <span class="built_in">NSURL</span> *url = [<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://allseeing-i.com"</span>];</div><div class="line">   __block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];</div><div class="line">   [request setCompletionBlock:^{</div><div class="line">      <span class="comment">// Use when fetching text data</span></div><div class="line">      <span class="built_in">NSString</span> *responseString = [request responseString];</div><div class="line"> </div><div class="line">      <span class="comment">// Use when fetching binary data</span></div><div class="line">      NSData *responseData = [request responseData];</div><div class="line">   }];</div><div class="line">   [request setFailedBlock:^{</div><div class="line">      <span class="built_in">NSError</span> *error = [request error];</div><div class="line">   }];</div><div class="line">   [request startAsynchronous];</div><div class="line">}</div></pre></td></tr></table></figure>
+<blockquote>
+
+<ul>
+<li><p>(IBAction)grabURLInBackground:(id)sender<br>{<br> NSURL <em>url = [NSURL URLWithString:@”<a href="http://allseeing-i.com" target="_blank" rel="external">http://allseeing-i.com</a>“];<br> __block ASIHTTPRequest </em>request = [ASIHTTPRequest requestWithURL:url];<br> [request setCompletionBlock:^{</p>
+<pre><code>// <span class="operator"><span class="keyword">Use</span> <span class="keyword">when</span> fetching <span class="built_in">text</span> <span class="keyword">data</span>
+NSString *responseString = [request responseString];</span>
+
+// <span class="operator"><span class="keyword">Use</span> <span class="keyword">when</span> fetching <span class="built_in">binary</span> <span class="keyword">data</span>
+NSData *responseData = [request responseData];</span>
+</code></pre><p> }];<br> [request setFailedBlock:^{</p>
+<pre><code><span class="title">NSError</span> *<span class="built_in">error</span> = [request <span class="built_in">error</span>];
+</code></pre><p> }];<br> [request startAsynchronous];<br>}</p>
+</li>
+</ul>
+<footer><strong>lang:objc</strong></footer></blockquote>
+
       
     </div>
     <footer>

@@ -294,7 +294,16 @@ create table 表名 (字段设定列表);</span></pre>
 
 <p>A nonatomic property setter might look like this:</p>
 
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> - (<span class="keyword">void</span>)setUserName:(<span class="built_in">NSString</span> *)userName {</div><div class="line">      <span class="keyword">if</span> (userName != _userName) {</div><div class="line">          [userName retain];</div><div class="line">          [_userName release];</div><div class="line">          _userName = userName;</div><div class="line">      }</div><div class="line">}</div></pre></td></tr></table></figure>
+<blockquote>
+
+<ul>
+<li>(void)setUserName:(NSString *)userName {<br>   if (userName != _userName) {<pre><code>   [userName retain];
+   [_userName <span class="operator"><span class="keyword">release</span>];</span>
+   _userName = userName;
+</code></pre>   }<br>}</li>
+</ul>
+<footer><strong>lang:objc</strong></footer></blockquote>
+
 
 <p>This is the variant with manual retain/release; however, the ARC-generated code looks similar. When we look at this code it&#8217;s obvious why this means trouble when <code>setUserName:</code> is called concurrently. We could end up releasing <code>_userName</code> twice, which can corrupt memory and lead to hard-to-find bugs.</p>
 
@@ -307,7 +316,34 @@ create table 表名 (字段设定列表);</span></pre>
 
 <p><code>objc_setProperty</code> calls down to following method:</p>
 
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"> </div><div class="line"><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">void</span> reallySetProperty(<span class="keyword">id</span> <span class="keyword">self</span>, SEL _cmd, <span class="keyword">id</span> newValue, </div><div class="line">  ptrdiff_t offset, <span class="keyword">bool</span> atomic, <span class="keyword">bool</span> <span class="keyword">copy</span>, <span class="keyword">bool</span> mutableCopy) </div><div class="line">{</div><div class="line">    <span class="keyword">id</span> oldValue;</div><div class="line">    <span class="keyword">id</span> *slot = (<span class="keyword">id</span>*) ((<span class="keyword">char</span>*)<span class="keyword">self</span> + offset);</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (<span class="keyword">copy</span>) {</div><div class="line">        newValue = [newValue copyWithZone:<span class="literal">NULL</span>];</div><div class="line">    } <span class="keyword">else</span> <span class="keyword">if</span> (mutableCopy) {</div><div class="line">        newValue = [newValue mutableCopyWithZone:<span class="literal">NULL</span>];</div><div class="line">    } <span class="keyword">else</span> {</div><div class="line">        <span class="keyword">if</span> (*slot == newValue) <span class="keyword">return</span>;</div><div class="line">        newValue = objc_retain(newValue);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (!atomic) {</div><div class="line">        oldValue = *slot;</div><div class="line">        *slot = newValue;</div><div class="line">    } <span class="keyword">else</span> {</div><div class="line">        spin_lock_t *slotlock = &amp;amp;PropertyLocks[GOODHASH(slot)];</div><div class="line">        _spin_lock(slotlock);</div><div class="line">        oldValue = *slot;</div><div class="line">        *slot = newValue;        </div><div class="line">        _spin_unlock(slotlock);</div><div class="line">    }</div><div class="line"></div><div class="line">    objc_release(oldValue);</div><div class="line">}</div></pre></td></tr></table></figure>
+<blockquote>
+
+
+<p>static inline void reallySetProperty(id self, SEL _cmd, id newValue,<br>  ptrdiff_t offset, bool atomic, bool copy, bool mutableCopy)<br>{<br>    id oldValue;<br>    id <em>slot = (id</em>) ((char*)self + offset);</p>
+<pre><code><span class="keyword">if</span> (copy) {
+    <span class="variable">newValue =</span> [newValue copyWithZone:NULL];
+} <span class="keyword">else</span> <span class="keyword">if</span> (mutableCopy) {
+    <span class="variable">newValue =</span> [newValue mutableCopyWithZone:NULL];
+} <span class="keyword">else</span> {
+    <span class="keyword">if</span> (*<span class="variable">slot =</span>= newValue) return;
+    <span class="variable">newValue =</span> objc_retain(newValue);
+}
+
+<span class="keyword">if</span> (!atomic) {
+    <span class="variable">oldValue =</span> *slot;
+    *<span class="variable">slot =</span> newValue;
+} <span class="keyword">else</span> {
+    spin_lock_t *<span class="variable">slotlock =</span> &amp;amp;PropertyLocks[GOODHASH(slot)];
+    _spin_lock(slotlock);
+    <span class="variable">oldValue =</span> *slot;
+    *<span class="variable">slot =</span> newValue;        
+    _spin_unlock(slotlock);
+}
+
+objc_release(oldValue);
+</code></pre><p>}</p>
+<footer><strong>lang:objc</strong></footer></blockquote>
+
 
 <p>Aside from the rather funny name, this method is actually fairly straightforward and uses one of the 128 available spinlocks in <code>PropertyLocks</code>. This is a pragmatic and fast approach &#8211; the worst case scenario is that a setter might have to wait for an unrelated setter to finish because of a hash collision.</p>
 
@@ -498,9 +534,33 @@ inline void pst_dispatch_sync_reentrant(dispatch_queue_t queue,
     <div class="entry">
       
         <p></p><p><br>关联对象<br></p><p></p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="keyword">void</span> *alertKey = <span class="string">"alertKey"</span>;</div><div class="line"><span class="keyword">typedef</span> <span class="keyword">void</span> (^Block)(<span class="keyword">int</span>);</div><div class="line"></div><div class="line">UIAlertView *alert = [[UIAlertView alloc] initWithTitle:<span class="string">@""</span> message:<span class="string">@"test"</span> delegate:<span class="keyword">self</span> cancelButtonTitle:<span class="string">@"取消"</span> otherButtonTitles:<span class="string">@"确定"</span>, <span class="literal">nil</span>];</div><div class="line">  </div><div class="line">    </div><div class="line">      Block block  = ^(<span class="built_in">NSInteger</span> index ){</div><div class="line">        <span class="keyword">if</span> (index == <span class="number">0</span>)</div><div class="line">        {</div><div class="line">          <span class="built_in">NSLog</span>(<span class="string">@"1"</span>);</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span></div><div class="line">        {</div><div class="line">            <span class="built_in">NSLog</span>(<span class="string">@"2"</span>);</div><div class="line">        }</div><div class="line">    };</div><div class="line"></div><div class="line">    objc_setAssociatedObject(alert, alertKey, block, OBJC_ASSOCIATION_COPY);</div><div class="line">    [alert show];</div><div class="line">    </div><div class="line">    </div></pre></td></tr></table></figure>
+<blockquote>
 
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(<span class="built_in">NSInteger</span>)buttonIndex</div><div class="line">{</div><div class="line">     Block block = objc_getAssociatedObject(alertView, alertKey);</div><div class="line">    block(buttonIndex);</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>static void *alertKey = “alertKey”;<br>typedef void (^Block)(int);</p>
+<p>UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@”” message:@”test” delegate:self cancelButtonTitle:@”取消” otherButtonTitles:@”确定”, nil];</p>
+<pre><code>  Block block  = ^(<span class="built_in">NSInteger</span> index ){
+    <span class="keyword">if</span> (index == <span class="number">0</span>)
+    {
+      <span class="built_in">NSLog</span>(<span class="string">@"1"</span>);
+    }
+    <span class="keyword">else</span>
+    {
+        <span class="built_in">NSLog</span>(<span class="string">@"2"</span>);
+    }
+};
+
+objc_setAssociatedObject(alert, alertKey, block, OBJC_ASSOCIATION_COPY);
+[alert show];
+</code></pre><footer><strong>lang:objc</strong></footer></blockquote>
+
+
+<blockquote>
+
+<ul>
+<li>(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex<br>{<br>   Block block = objc_getAssociatedObject(alertView, alertKey);<br>  block(buttonIndex);<br>}</li>
+</ul>
+<footer><strong>lang:objc</strong></footer></blockquote>
+
       
     </div>
     <footer>

@@ -6,7 +6,7 @@
   <title>IOS获取单文件的大小 | 無限大な夢</title>
   <meta name="author" content="virgil">
   
-  <meta name="description" content="c语言实现：12345678910#include &quot;sys/stat.h&quot;- (long long) fileSizeAtPath:(NSString*) filePath{      struct stat st;      if(lstat([filePath cStringUsingEnco">
+  <meta name="description" content="c语言实现：#include “sys/stat.h”- (long long) fileSizeAtPath:(NSString*) filePath{    struct stat st;    if(lstat([filePath cStringUsingEncoding:NSUTF8Stri">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -60,9 +60,14 @@
     </header>
     <div class="entry">
       
-        <p>c语言实现：</p><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#include <span class="title">"sys/stat.h"</span></span></div><div class="line">- (<span class="keyword">long</span> <span class="keyword">long</span>) fileSizeAtPath:(<span class="built_in">NSString</span>*) filePath</div><div class="line">{  </div><div class="line">    <span class="keyword">struct</span> stat st;  </div><div class="line">    <span class="keyword">if</span>(lstat([filePath cStringUsingEncoding:NSUTF8StringEncoding], &amp;st) == <span class="number">0</span>)</div><div class="line">    {  </div><div class="line">        <span class="keyword">return</span> st<span class="variable">.st_size</span>;  </div><div class="line">    }  </div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;  </div><div class="line">}  </div></pre></td></tr></table></figure><br><br><p>object-c实现：</p>
+        <p>c语言实现：</p><br><blockquote><br><br>#include “sys/stat.h”<br>- (long long) fileSizeAtPath:(NSString*) filePath<br>{<br>    struct stat st;<br>    if(lstat([filePath cStringUsingEncoding:NSUTF8StringEncoding], &amp;st) == 0)<br>    {<br>        return st.st_size;<br>    }<br>    return 0;<br>}<br><br><br><footer><strong>lang:objc</strong></footer></blockquote><br><br><br><p>object-c实现：</p>
 
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">-(<span class="keyword">long</span> <span class="keyword">long</span>) fileSizeAtPath:(<span class="built_in">NSString</span>*) filePath</div><div class="line">{  </div><div class="line">  <span class="built_in">NSFileManager</span>* manager = [<span class="built_in">NSFileManager</span> defaultManager];  </div><div class="line">  <span class="keyword">if</span> ([manager fileExistsAtPath:filePath])</div><div class="line">  {  </div><div class="line">    <span class="keyword">return</span> [[manager attributesOfItemAtPath:filePath error:<span class="literal">nil</span>] fileSize];  </div><div class="line">  }  </div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;  </div><div class="line">}  </div></pre></td></tr></table></figure>
+<blockquote>
+
+
+<p>-(long long) fileSizeAtPath:(NSString<em>) filePath<br>{<br>  NSFileManager</em> manager = [NSFileManager defaultManager];<br>  if ([manager fileExistsAtPath:filePath])<br>  {<br>    return [[manager attributesOfItemAtPath:filePath error:nil] fileSize];<br>  }<br>  return 0;<br>}  </p>
+<footer><strong>lang:objc</strong></footer></blockquote>
+
       
     </div>
     <footer>

@@ -6,7 +6,8 @@
   <title>压缩视频 | 無限大な夢</title>
   <meta name="author" content="virgil">
   
-  <meta name="description" content="12345678910111213- (void) lowQuailtyWithInputURL:(NSURL*)inputURL                                   outputURL:(NSURL*)outputURL                       ">
+  <meta name="description" content="(void) lowQuailtyWithInputURL:(NSURL*)inputURL                             outputURL:(NSURL*)outputURL
+                               blockHandler:(vo">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -60,9 +61,29 @@
     </header>
     <div class="entry">
       
-        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>) lowQuailtyWithInputURL:(<span class="built_in">NSURL</span>*)inputURL</div><div class="line">                                   outputURL:(<span class="built_in">NSURL</span>*)outputURL</div><div class="line">                                     blockHandler:(<span class="keyword">void</span> (^)(AVAssetExportSession*))handler</div><div class="line">{</div><div class="line">    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:inputURL options:<span class="literal">nil</span>];</div><div class="line">    AVAssetExportSession *session = [[AVAssetExportSession alloc] initWithAsset:asset     presetName:AVAssetExportPresetMediumQuality];</div><div class="line">    session<span class="variable">.outputURL</span> = outputURL;</div><div class="line">    session<span class="variable">.outputFileType</span> = AVFileTypeQuickTimeMovie;</div><div class="line">    [session exportAsynchronouslyWithCompletionHandler:^(<span class="keyword">void</span>)</div><div class="line">     {</div><div class="line">         handler(session);</div><div class="line">     }];</div><div class="line">}</div></pre></td></tr></table></figure>
+        <blockquote>
 
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">[<span class="keyword">self</span> lowQuailtyWithInputURL:video outputURL:output blockHandler:^(AVAssetExportSession *session)</div><div class="line">{</div><div class="line">     <span class="keyword">if</span> (session<span class="variable">.status</span> == AVAssetExportSessionStatusCompleted)</div><div class="line">     {</div><div class="line">         </div><div class="line">     }</div><div class="line">     <span class="keyword">else</span></div><div class="line">     {</div><div class="line">         </div><div class="line">         </div><div class="line">     }</div><div class="line">}];</div></pre></td></tr></table></figure>
+<ul>
+<li>(void) lowQuailtyWithInputURL:(NSURL*)inputURL<pre><code>                             <span class="tag">outputURL</span><span class="pseudo">:(NSURL</span>*)<span class="tag">outputURL</span>
+                               <span class="tag">blockHandler</span><span class="pseudo">:(void</span> (^)(<span class="tag">AVAssetExportSession</span>*))<span class="tag">handler</span>
+</code></pre>{<br>  AVURLAsset <em>asset = [AVURLAsset URLAssetWithURL:inputURL options:nil];<br>  AVAssetExportSession </em>session = [[AVAssetExportSession alloc] initWithAsset:asset     presetName:AVAssetExportPresetMediumQuality];<br>  session.outputURL = outputURL;<br>  session.outputFileType = AVFileTypeQuickTimeMovie;<br>  [session exportAsynchronouslyWithCompletionHandler:^(void)<br>   {<pre><code>   <span class="operator"><span class="keyword">handler</span>(<span class="keyword">session</span>);</span>
+</code></pre>   }];<br>}</li>
+</ul>
+<footer><strong>lang:objc</strong></footer></blockquote>
+
+
+<blockquote>
+
+<p>[self lowQuailtyWithInputURL:video outputURL:output blockHandler:^(AVAssetExportSession *session)<br>{<br>     if (session.status == AVAssetExportSessionStatusCompleted)<br>     {</p>
+<pre><code> }
+ <span class="keyword">else</span>
+ {
+
+
+ }
+</code></pre><p>}];</p>
+<footer><strong>lang:objc</strong></footer></blockquote>
+
 
 <p><br>在block里面检测成功，失败，或者是取消，然后释放session.<br><br>期间可以通过不断的查看session的progress属性来获取转换的进度。<br><br>可以设置这些压缩质量<br><br>AVF_EXPORT NSString <em>const AVAssetExportPresetLowQuality        NS_AVAILABLE_IOS(4_0);<br>AVF_EXPORT NSString </em>const AVAssetExportPresetMediumQuality     NS_AVAILABLE_IOS(4_0);<br>AVF_EXPORT NSString *const AVAssetExportPresetHighestQuality    NS_AVAILABLE_IOS(4_0);<br></p>
       

@@ -6,7 +6,8 @@
   <title>只运行一次的代码 | 無限大な夢</title>
   <meta name="author" content="virgil">
   
-  <meta name="description" content="1234static dispatch_once_t onceToken;      dispatch_once(&amp;amp;onceToken, ^{          &amp;lt;#code to be executed once#&amp;gt;      });">
+  <meta name="description" content="static dispatch_once_t onceToken;      dispatch_once(&amp;amp;onceToken, ^{          &amp;lt;#code to be executed once#&amp;gt;      });
+lang:objc">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -60,7 +61,11 @@
     </header>
     <div class="entry">
       
-        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;</div><div class="line">      <span class="built_in">dispatch_once</span>(&amp;onceToken, ^{</div><div class="line">          &lt;<span class="preprocessor">#code to be executed once#&gt;</span></div><div class="line">      });</div></pre></td></tr></table></figure>
+        <blockquote>
+
+<p>static dispatch_once_t onceToken;<br>      dispatch_once(&amp;onceToken, ^{<br>          &lt;#code to be executed once#&gt;<br>      });</p>
+<footer><strong>lang:objc</strong></footer></blockquote>
+
 
       
     </div>

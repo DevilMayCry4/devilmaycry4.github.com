@@ -7,7 +7,10 @@
   <meta name="author" content="virgil">
   
   <meta name="description" content="关联对象
-123456789101112131415161718192021static void *alertKey = &quot;alertKey&quot;;typedef void (^Block)(int);UIAlertView *alert = [[UIAlertView alloc] initWith">
+
+
+static void *alertKey = “alertKey”;typedef void (^Block)(int);
+UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@”” message:@”test” dele">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -62,9 +65,33 @@
     <div class="entry">
       
         <p></p><p><br>关联对象<br></p><p></p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="keyword">void</span> *alertKey = <span class="string">"alertKey"</span>;</div><div class="line"><span class="keyword">typedef</span> <span class="keyword">void</span> (^Block)(<span class="keyword">int</span>);</div><div class="line"></div><div class="line">UIAlertView *alert = [[UIAlertView alloc] initWithTitle:<span class="string">@""</span> message:<span class="string">@"test"</span> delegate:<span class="keyword">self</span> cancelButtonTitle:<span class="string">@"取消"</span> otherButtonTitles:<span class="string">@"确定"</span>, <span class="literal">nil</span>];</div><div class="line">  </div><div class="line">    </div><div class="line">      Block block  = ^(<span class="built_in">NSInteger</span> index ){</div><div class="line">        <span class="keyword">if</span> (index == <span class="number">0</span>)</div><div class="line">        {</div><div class="line">          <span class="built_in">NSLog</span>(<span class="string">@"1"</span>);</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span></div><div class="line">        {</div><div class="line">            <span class="built_in">NSLog</span>(<span class="string">@"2"</span>);</div><div class="line">        }</div><div class="line">    };</div><div class="line"></div><div class="line">    objc_setAssociatedObject(alert, alertKey, block, OBJC_ASSOCIATION_COPY);</div><div class="line">    [alert show];</div><div class="line">    </div><div class="line">    </div></pre></td></tr></table></figure>
+<blockquote>
 
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(<span class="built_in">NSInteger</span>)buttonIndex</div><div class="line">{</div><div class="line">     Block block = objc_getAssociatedObject(alertView, alertKey);</div><div class="line">    block(buttonIndex);</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>static void *alertKey = “alertKey”;<br>typedef void (^Block)(int);</p>
+<p>UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@”” message:@”test” delegate:self cancelButtonTitle:@”取消” otherButtonTitles:@”确定”, nil];</p>
+<pre><code>  Block block  = ^(<span class="built_in">NSInteger</span> index ){
+    <span class="keyword">if</span> (index == <span class="number">0</span>)
+    {
+      <span class="built_in">NSLog</span>(<span class="string">@"1"</span>);
+    }
+    <span class="keyword">else</span>
+    {
+        <span class="built_in">NSLog</span>(<span class="string">@"2"</span>);
+    }
+};
+
+objc_setAssociatedObject(alert, alertKey, block, OBJC_ASSOCIATION_COPY);
+[alert show];
+</code></pre><footer><strong>lang:objc</strong></footer></blockquote>
+
+
+<blockquote>
+
+<ul>
+<li>(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex<br>{<br>   Block block = objc_getAssociatedObject(alertView, alertKey);<br>  block(buttonIndex);<br>}</li>
+</ul>
+<footer><strong>lang:objc</strong></footer></blockquote>
+
       
     </div>
     <footer>

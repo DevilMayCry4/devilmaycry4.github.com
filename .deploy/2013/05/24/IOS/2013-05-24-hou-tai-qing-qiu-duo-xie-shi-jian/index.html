@@ -6,7 +6,8 @@
   <title>后台请求多些时间 | 無限大な夢</title>
   <meta name="author" content="virgil">
   
-  <meta name="description" content="12345678910111213141516171819202122UIApplication *app = [UIApplication sharedApplication];  //一个后台任务标识符 UIBackgroundTaskIdentifier taskID; taskID = [a">
+  <meta name="description" content="UIApplication *app = [UIApplication sharedApplication];
+ //一个后台任务标识符 UIBackgroundTaskIdentifier taskID; taskID = [app beginBackgroundTaskWithExpiratio">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -60,7 +61,13 @@
     </header>
     <div class="entry">
       
-        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">UIApplication</span> *app = [<span class="built_in">UIApplication</span> sharedApplication];</div><div class="line"> </div><div class="line"> <span class="comment">//一个后台任务标识符</span></div><div class="line"> UIBackgroundTaskIdentifier taskID;</div><div class="line"> taskID = [app beginBackgroundTaskWithExpirationHandler:^{</div><div class="line">     <span class="comment">//如果系统觉得我们还是运行了太久，将执行这个程序块，并停止运行应用程序</span></div><div class="line">     [app endBackgroundTask:taskID];</div><div class="line"> }];</div><div class="line"> <span class="comment">//UIBackgroundTaskInvalid表示系统没有为我们提供额外的时候</span></div><div class="line"> <span class="keyword">if</span> (taskID == UIBackgroundTaskInvalid) {</div><div class="line">     <span class="built_in">NSLog</span>(<span class="string">@"Failed to start background task!"</span>);</div><div class="line">     <span class="keyword">return</span>;</div><div class="line"> }</div><div class="line"> <span class="keyword">while</span> (app<span class="variable">.backgroundTimeRemaining</span> &gt;<span class="number">0.0</span>)</div><div class="line"> {</div><div class="line">     </div><div class="line"> }</div><div class="line"> <span class="built_in">NSLog</span>(<span class="string">@"Starting background task with %f seconds remaining"</span>, app<span class="variable">.backgroundTimeRemaining</span>);</div><div class="line"> [<span class="built_in">NSThread</span> sleepForTimeInterval:<span class="number">10</span>];</div><div class="line"> <span class="built_in">NSLog</span>(<span class="string">@"Finishing background task with %f seconds remaining"</span>,app<span class="variable">.backgroundTimeRemaining</span>);</div><div class="line"> <span class="comment">//告诉系统我们完成了</span></div><div class="line"> [app endBackgroundTask:taskID];</div></pre></td></tr></table></figure>
+        <blockquote>
+
+<p>UIApplication *app = [UIApplication sharedApplication];</p>
+<p> //一个后台任务标识符<br> UIBackgroundTaskIdentifier taskID;<br> taskID = [app beginBackgroundTaskWithExpirationHandler:^{<br>     //如果系统觉得我们还是运行了太久，将执行这个程序块，并停止运行应用程序<br>     [app endBackgroundTask:taskID];<br> }];<br> //UIBackgroundTaskInvalid表示系统没有为我们提供额外的时候<br> if (taskID == UIBackgroundTaskInvalid) {<br>     NSLog(@”Failed to start background task!”);<br>     return;<br> }<br> while (app.backgroundTimeRemaining &gt;0.0)<br> {</p>
+<p> }<br> NSLog(@”Starting background task with %f seconds remaining”, app.backgroundTimeRemaining);<br> [NSThread sleepForTimeInterval:10];<br> NSLog(@”Finishing background task with %f seconds remaining”,app.backgroundTimeRemaining);<br> //告诉系统我们完成了<br> [app endBackgroundTask:taskID];</p>
+<footer><strong>lang:objc</strong></footer></blockquote>
+
 
       
     </div>

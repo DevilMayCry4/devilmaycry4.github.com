@@ -66,7 +66,11 @@
         <p>当以navigation的方式pushcontroller的时候，如果plist表的View controller-based status bar appearance = yes时、状态栏的显示隐藏由navgtion里的viewcontrollers自己控制、状态栏的风格由navigation自己控制<br></p><br><p><br>ios7如果某个item左右两边的items不相等，即使左右各放置一个UIBarButtonSystemItemFlexibleSpace也是没法使这个item居中的、可以放置一些隐藏的item使两边相等。<br></p>
 
 <p></p><p><br>调整viewcontroller适配ios7状态栏<br></p><p></p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> ([[[UIDevice currentDevice] systemVersion] floatValue] &gt;= <span class="number">7</span>) </div><div class="line">{</div><div class="line">        <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.bounds</span> = CGRectMake(<span class="number">0</span>, -<span class="number">20</span>, <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span>, <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span> );</div><div class="line">    }</div><div class="line"> </div></pre></td></tr></table></figure>
+<blockquote>
+
+<p>if ([[[UIDevice currentDevice] systemVersion] floatValue] &gt;= 7)<br>{<br>        self.view.bounds = CGRectMake(0, -20, self.view.frame.size.width, self.view.frame.size.height );<br>    }</p>
+<footer><strong>lang:objc</strong></footer></blockquote>
+
 
 <p> </p><p><br> 参考：<a href="http://www.ifun.cc/blog/2013/09/28/gua-pei-ios7kai-fa/" target="_blank" rel="external">http://www.ifun.cc/blog/2013/09/28/gua-pei-ios7kai-fa/</a><br> </p><p></p>
 
@@ -134,7 +138,22 @@
     <div class="entry">
       
         <p></p><p><br>block调用自身在前面添加__block关键字<br></p><p></p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">IBAction</span>)grabURLInBackground:(<span class="keyword">id</span>)sender</div><div class="line">{</div><div class="line">   <span class="built_in">NSURL</span> *url = [<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://allseeing-i.com"</span>];</div><div class="line">   __block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];</div><div class="line">   [request setCompletionBlock:^{</div><div class="line">      <span class="comment">// Use when fetching text data</span></div><div class="line">      <span class="built_in">NSString</span> *responseString = [request responseString];</div><div class="line"> </div><div class="line">      <span class="comment">// Use when fetching binary data</span></div><div class="line">      NSData *responseData = [request responseData];</div><div class="line">   }];</div><div class="line">   [request setFailedBlock:^{</div><div class="line">      <span class="built_in">NSError</span> *error = [request error];</div><div class="line">   }];</div><div class="line">   [request startAsynchronous];</div><div class="line">}</div></pre></td></tr></table></figure>
+<blockquote>
+
+<ul>
+<li><p>(IBAction)grabURLInBackground:(id)sender<br>{<br> NSURL <em>url = [NSURL URLWithString:@”<a href="http://allseeing-i.com" target="_blank" rel="external">http://allseeing-i.com</a>“];<br> __block ASIHTTPRequest </em>request = [ASIHTTPRequest requestWithURL:url];<br> [request setCompletionBlock:^{</p>
+<pre><code>// <span class="operator"><span class="keyword">Use</span> <span class="keyword">when</span> fetching <span class="built_in">text</span> <span class="keyword">data</span>
+NSString *responseString = [request responseString];</span>
+
+// <span class="operator"><span class="keyword">Use</span> <span class="keyword">when</span> fetching <span class="built_in">binary</span> <span class="keyword">data</span>
+NSData *responseData = [request responseData];</span>
+</code></pre><p> }];<br> [request setFailedBlock:^{</p>
+<pre><code><span class="title">NSError</span> *<span class="built_in">error</span> = [request <span class="built_in">error</span>];
+</code></pre><p> }];<br> [request startAsynchronous];<br>}</p>
+</li>
+</ul>
+<footer><strong>lang:objc</strong></footer></blockquote>
+
       
     </div>
     <footer>

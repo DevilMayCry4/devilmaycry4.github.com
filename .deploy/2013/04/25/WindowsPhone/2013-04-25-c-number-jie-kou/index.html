@@ -8,9 +8,11 @@
   
   <meta name="description" content="定义接口，里面包含方法，但没有方法具体实现的代码，然后在继承该接口的类里面要实现接口的所有方法的代码。
 
-定义接口1234public interface IBark{    void Bark();}再定义一个类,继承于IBark,并且必需实现其中的Bark()方法。
+定义接口public interface IBark{    void Bark();}lang:csharp再定义一个类,继承于IBark,并且必需实现其中的Bark()方法。
 
-123456789publ">
+
+
+publ">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -66,9 +68,13 @@
       
         <p><br>定义接口，里面包含方法，但没有方法具体实现的代码，然后在继承该接口的类里面要实现接口的所有方法的代码。<br></p>
 
-<p>定义接口<br><br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">interface</span> IBark</div><div class="line">{</div><div class="line">    <span class="keyword">void</span> Bark();</div><div class="line">}</div></pre></td></tr></table></figure><br><br></p><p><br>再定义一个类,继承于IBark,并且必需实现其中的Bark()方法。<br></p>
+<p>定义接口<br><br><blockquote><br><br>public interface IBark<br>{<br>    void Bark();<br>}<br><br><footer><strong>lang:csharp</strong></footer></blockquote><br><br><br></p><p><br>再定义一个类,继承于IBark,并且必需实现其中的Bark()方法。<br></p>
 
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> Dog:IBark</div><div class="line">{</div><div class="line">    <span class="keyword">public</span> <span class="title">Dog</span>()</div><div class="line">    {}</div><div class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Bark</span>()</div><div class="line">    {</div><div class="line">       Consol.write(<span class="string">"汪汪"</span>);</div><div class="line">     }</div><div class="line">}</div></pre></td></tr></table></figure>
+<blockquote>
+
+<p>public class Dog:IBark<br>{<br>    public Dog()<br>    {}<br>    public void Bark()<br>    {<br>       Consol.write(“汪汪”);<br>     }<br>}</p>
+<footer><strong>lang:csharp</strong></footer></blockquote>
+
       
     </div>
     <footer>

@@ -11,25 +11,40 @@ virtual 关键字用于在基类中修饰方法。virtual的使用会有两种�
 
 1.只提供一些方法规约，不提供方法主体. 如:
 
-1234public interface IPerson{void getName();//不包含方法主体}
+
+
+public interface IPerson{void getName();//不包含方法主体}
+lang:csharp
+
 
 2.方法不能用public abstract等修饰,无字段变量，无构造函数。
 
 
 3.方法可包含参数。 如:
 
-1234 public interface IPerson{void getAge(string s);}
+
+
+ public interface IPerson{void getAge(string s);}
+lang:csharp
+
 
 
 一个例子(例1)：
 
-12345678public interface IPerson{IPerson(); //错误string name; //错误public void getIDcard();//错误void getName(); //rightvoid getAge(string s); //right}
+
+
+public interface IPerson{IPerson(); //错误string name; //错误public void getIDcard();//错误void getName(); //rightvoid getAge(string s); //right}
+lang:csharp
+
 
 
 实现interface的类1.与继承类的格式一致，如 public class Chinese:IPerson{}2.必须实现 interface 中的各个方法例2，继承例1
 
 
-123456public class Chinese:IPerson{public Chinese(){} //添加构造public void getName(){} //实现getName()public void getAge(string s){} //实现getAge()}">
+
+
+public class Chinese:IPerson{public Chinese(){} //添加构造public void getName(){} //实现getName()public void getAge(string s){} //实现getAge()}
+lang:csharp">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -88,36 +103,70 @@ virtual 关键字用于在基类中修饰方法。virtual的使用会有两种�
 
 <p><br>1.只提供一些方法规约，不提供方法主体. 如:<br></p>
 
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">interface</span> IPerson</div><div class="line">{</div><div class="line"><span class="keyword">void</span> getName();<span class="comment">//不包含方法主体</span></div><div class="line">}</div></pre></td></tr></table></figure>
+<blockquote>
+
+<p>public interface IPerson<br>{<br>void getName();//不包含方法主体<br>}</p>
+<footer><strong>lang:csharp</strong></footer></blockquote>
+
 
 <p><br>2.方法不能用public abstract等修饰,无字段变量，无构造函数。<br></p>
 
 
 <p><br>3.方法可包含参数。 如:<br></p>
 
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">public</span> <span class="keyword">interface</span> IPerson</div><div class="line">{</div><div class="line"><span class="keyword">void</span> getAge(<span class="keyword">string</span> s);</div><div class="line">}</div></pre></td></tr></table></figure>
+<blockquote>
+
+<p> public interface IPerson<br>{<br>void getAge(string s);<br>}</p>
+<footer><strong>lang:csharp</strong></footer></blockquote>
+
 
 
 <p><br>一个例子(例1)：<br></p>
 
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">interface</span> IPerson</div><div class="line">{</div><div class="line">IPerson(); <span class="comment">//错误</span></div><div class="line"><span class="keyword">string</span> name; <span class="comment">//错误</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getIDcard</span>();<span class="comment">//错误</span></div><div class="line"><span class="keyword">void</span> getName(); <span class="comment">//right</span></div><div class="line"><span class="keyword">void</span> getAge(<span class="keyword">string</span> s); <span class="comment">//right</span></div><div class="line">}</div></pre></td></tr></table></figure>
+<blockquote>
+
+<p>public interface IPerson<br>{<br>IPerson(); //错误<br>string name; //错误<br>public void getIDcard();//错误<br>void getName(); //right<br>void getAge(string s); //right<br>}</p>
+<footer><strong>lang:csharp</strong></footer></blockquote>
+
 
 
 <p><br>实现interface的类<br>1.与继承类的格式一致，如 public class Chinese:IPerson{}<br>2.必须实现 interface 中的各个方法<br>例2，继承例1<br></p>
 
 
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> Chinese:IPerson</div><div class="line">{</div><div class="line"><span class="keyword">public</span> <span class="title">Chinese</span>(){} <span class="comment">//添加构造</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getName</span>(){} <span class="comment">//实现getName()</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getAge</span>(<span class="keyword">string</span> s){} <span class="comment">//实现getAge()</span></div><div class="line">}</div></pre></td></tr></table></figure><br><a id="more"></a><br><br><p><br>abstract:声明抽象类、抽象方法<br></p><br><p><br>1.抽象方法所在类必须为抽象类<br></p><br><p><br>2.抽象类不能直接实例化，必须由其派生类实现。<br></p><br><p><br>3.抽象方法不包含方法主体，必须由派生类以override方式实现此方法,这点跟interface中的方法类似<br>如<br></p><br><br><br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> Book</div><div class="line">{</div><div class="line"><span class="keyword">public</span> <span class="title">Book</span>()</div><div class="line">{</div><div class="line">}</div><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">getPrice</span>(); <span class="comment">//抽象方法，不含主体</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">getName</span>() //虚方法，可覆盖</div><div class="line">{</div><div class="line">Console.WriteLine(<span class="string">"this is a test:virtual getName()"</span>);</div><div class="line">}</div><div class="line"><span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">getContent</span>() //虚方法，可覆盖</div><div class="line">{</div><div class="line">Console.WriteLine(<span class="string">"this is a test:virtual getContent()"</span>);</div><div class="line">}</div><div class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getDate</span>() //一般方法，若在派生类中重写，须使用<span class="keyword">new</span>关键字</div><div class="line">{</div><div class="line">Console.WriteLine(<span class="string">"this is a test: void getDate()"</span>);</div><div class="line">}</div><div class="line">}</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> JavaBook:Book</div><div class="line">{</div><div class="line"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">getPrice</span>() //实现抽象方法，必须实现</div><div class="line">{</div><div class="line">Console.WriteLine(<span class="string">"this is a test:JavaBook override abstract getPrice()"</span>);</div><div class="line">}</div><div class="line"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">getName</span>() //覆盖原方法，不是必须的</div><div class="line">{</div><div class="line">Console.WriteLine(<span class="string">"this is a test:JavaBook override virtual getName()"</span>);</div><div class="line">}</div><div class="line">}</div></pre></td></tr></table></figure>
+<blockquote>
+
+<p>public class Chinese:IPerson<br>{<br>public Chinese(){} //添加构造<br>public void getName(){} //实现getName()<br>public void getAge(string s){} //实现getAge()<br>}</p>
+<footer><strong>lang:csharp</strong></footer></blockquote>
+
+<a id="more"></a>
+
+<p><br>abstract:声明抽象类、抽象方法<br></p><br><p><br>1.抽象方法所在类必须为抽象类<br></p><br><p><br>2.抽象类不能直接实例化，必须由其派生类实现。<br></p><br><p><br>3.抽象方法不包含方法主体，必须由派生类以override方式实现此方法,这点跟interface中的方法类似<br>如<br></p>
+
+
+<blockquote>
+
+<p>public abstract class Book<br>{<br>public Book()<br>{<br>}<br>public abstract void getPrice(); //抽象方法，不含主体<br>public virtual void getName() //虚方法，可覆盖<br>{<br>Console.WriteLine(“this is a test:virtual getName()”);<br>}<br>public virtual void getContent() //虚方法，可覆盖<br>{<br>Console.WriteLine(“this is a test:virtual getContent()”);<br>}<br>public void getDate() //一般方法，若在派生类中重写，须使用new关键字<br>{<br>Console.WriteLine(“this is a test: void getDate()”);<br>}<br>}<br>public class JavaBook:Book<br>{<br>public override void getPrice() //实现抽象方法，必须实现<br>{<br>Console.WriteLine(“this is a test:JavaBook override abstract getPrice()”);<br>}<br>public override void getName() //覆盖原方法，不是必须的<br>{<br>Console.WriteLine(“this is a test:JavaBook override virtual getName()”);<br>}<br>}</p>
+<footer><strong>lang:csharp</strong></footer></blockquote>
+
 
 
 <p><br>测试如下：<br></p>
 
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> test</div><div class="line">{</div><div class="line"><span class="keyword">public</span> <span class="title">test</span>()</div><div class="line">{</div><div class="line">JavaBook jbook=<span class="keyword">new</span> JavaBook();</div><div class="line">jbook.getPrice(); <span class="comment">//将调用JavaBook中getPrice()</span></div><div class="line">jbook.getName(); <span class="comment">//将调用JavaBook中getName()</span></div><div class="line">jbook.getContent(); <span class="comment">//将调用Book中getContent()</span></div><div class="line">jbook.getDate(); <span class="comment">//将调用Book中getDate()</span></div><div class="line">}</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>()</div><div class="line">{</div><div class="line">test t=<span class="keyword">new</span> test();</div><div class="line">}</div><div class="line">}</div></pre></td></tr></table></figure>
+<blockquote>
+
+<p>public class test<br>{<br>public test()<br>{<br>JavaBook jbook=new JavaBook();<br>jbook.getPrice(); //将调用JavaBook中getPrice()<br>jbook.getName(); //将调用JavaBook中getName()<br>jbook.getContent(); //将调用Book中getContent()<br>jbook.getDate(); //将调用Book中getDate()<br>}<br>public static void Main()<br>{<br>test t=new test();<br>}<br>}</p>
+<footer><strong>lang:csharp</strong></footer></blockquote>
+
 
 
 <p><br>virtual:标记方法为虚方法<br>1.可在派生类中以override覆盖此方法<br>2.不覆盖也可由对象调用<br>3.无此标记的方法(也无其他标记)，重写时需用new隐藏原方法<br>abstract 与virtual : 方法重写时都使用 override 关键字<br>接口定义以大写字母I开头。方法只定义其名称,在C#中，方法默认是公有方法；用public修饰方法是不允许的,否则会出现编译错误；接口可以从别的接口继承，如果是继承多个接口，则父接口列表用逗号间隔。<br>接口可以通过类来实现，当类的基列表同时包含基类和接口时，列表中首先出现的是基类；类必须要实现其抽象方法；<br>接口使用：见代码（转）<br>interface使用<br>interface使用（实例一）<br></p>
 
 
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">using</span> System;</div><div class="line">namespace Dage.Interface</div><div class="line">{</div><div class="line"><span class="comment">//打印机接口</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">interface</span> IPrint</div><div class="line">{</div><div class="line"><span class="keyword">string</span> returnPrintName();</div><div class="line">}</div><div class="line">}</div><div class="line"><span class="comment">//--------------------------------------------</span></div><div class="line"><span class="keyword">using</span> System;</div><div class="line"><span class="keyword">using</span> Dage.Interface;</div><div class="line">namespace Dage.Print</div><div class="line">{</div><div class="line"><span class="comment">//HP牌打印机类</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> HP: IPrint</div><div class="line">{</div><div class="line"><span class="keyword">public</span> <span class="keyword">string</span> <span class="title">returnPrintName</span>()</div><div class="line">{</div><div class="line"><span class="keyword">return</span> <span class="string">"这是HP牌打印机"</span>;</div><div class="line">}</div><div class="line">}</div><div class="line">}</div><div class="line"><span class="comment">//--------------------------------------------</span></div><div class="line"><span class="keyword">using</span> System;</div><div class="line">namespace Dage.Print</div><div class="line">{</div><div class="line"><span class="comment">//Eps牌打印机类</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> Eps: IPrint</div><div class="line">{</div><div class="line"><span class="keyword">public</span> <span class="keyword">string</span> <span class="title">returnPrintName</span>()</div><div class="line">{</div><div class="line"><span class="keyword">return</span> <span class="string">"这是Eps牌打印机"</span>;</div><div class="line">}</div><div class="line">}</div><div class="line">}</div><div class="line"><span class="comment">//--------------------------------------------</span></div><div class="line"><span class="keyword">using</span> System;</div><div class="line"><span class="keyword">using</span> Dage.Interface;</div><div class="line">namespace Dage</div><div class="line">{</div><div class="line"><span class="comment">//打印类</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> Printer</div><div class="line">{</div><div class="line"><span class="keyword">public</span> <span class="title">Printer</span>()</div><div class="line">{}</div><div class="line"><span class="keyword">public</span> <span class="keyword">string</span> <span class="title">PrintName</span>(IPrint iPrint)</div><div class="line">{</div><div class="line"><span class="keyword">return</span> iPrint.returnPrintName();</div><div class="line">}</div><div class="line">}</div><div class="line">}</div><div class="line"><span class="comment">//--------------------------------------------</span></div><div class="line">--WinFrom中调用代码:</div><div class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">button1_Click</span>(<span class="keyword">object</span> sender, System.EventArgs e)</div><div class="line">{</div><div class="line">Printer p= <span class="keyword">new</span> Printer();</div><div class="line"><span class="keyword">switch</span> (<span class="keyword">this</span>.comboBox1.Text)</div><div class="line">{</div><div class="line"><span class="keyword">case</span> <span class="string">"HP"</span>:</div><div class="line">MessageBox.Show(p.PrintName(<span class="keyword">new</span> HP()));</div><div class="line"><span class="keyword">break</span>;</div><div class="line"><span class="keyword">case</span> <span class="string">"Eps"</span>:</div><div class="line">MessageBox.Show(p.PrintName(<span class="keyword">new</span> Eps()));</div><div class="line"><span class="keyword">break</span>;</div><div class="line"><span class="keyword">default</span>:</div><div class="line">MessageBox.Show(<span class="string">"没有发现这个品牌！"</span>);</div><div class="line"><span class="keyword">break</span>;</div><div class="line">}</div><div class="line">}</div></pre></td></tr></table></figure>
+<blockquote>
+
+<p>using System;<br>namespace Dage.Interface<br>{<br>//打印机接口<br>public interface IPrint<br>{<br>string returnPrintName();<br>}<br>}<br>//——————————————————————<br>using System;<br>using Dage.Interface;<br>namespace Dage.Print<br>{<br>//HP牌打印机类<br>public class HP: IPrint<br>{<br>public string returnPrintName()<br>{<br>return “这是HP牌打印机”;<br>}<br>}<br>}<br>//——————————————————————<br>using System;<br>namespace Dage.Print<br>{<br>//Eps牌打印机类<br>public class Eps: IPrint<br>{<br>public string returnPrintName()<br>{<br>return “这是Eps牌打印机”;<br>}<br>}<br>}<br>//——————————————————————<br>using System;<br>using Dage.Interface;<br>namespace Dage<br>{<br>//打印类<br>public class Printer<br>{<br>public Printer()<br>{}<br>public string PrintName(IPrint iPrint)<br>{<br>return iPrint.returnPrintName();<br>}<br>}<br>}<br>//——————————————————————<br>—WinFrom中调用代码:<br>private void button1_Click(object sender, System.EventArgs e)<br>{<br>Printer p= new Printer();<br>switch (this.comboBox1.Text)<br>{<br>case “HP”:<br>MessageBox.Show(p.PrintName(new HP()));<br>break;<br>case “Eps”:<br>MessageBox.Show(p.PrintName(new Eps()));<br>break;<br>default:<br>MessageBox.Show(“没有发现这个品牌！”);<br>break;<br>}<br>}</p>
+<footer><strong>lang:csharp</strong></footer></blockquote>
+
       
     </div>
     <footer>

@@ -6,7 +6,7 @@
   <title>NSTimer的使用 | 無限大な夢</title>
   <meta name="author" content="virgil">
   
-  <meta name="description" content="NSTimer 定时器，在编程的时候是十分常用的，但是其实很多时候都没有用对，我们经常都在Controller里创建NStimer,而期待在controller dealloc的时候，去停止定时器：12345678- (void)dealloc{   if(_timer != nil)   {   ">
+  <meta name="description" content="NSTimer 定时器，在编程的时候是十分常用的，但是其实很多时候都没有用对，我们经常都在Controller里创建NStimer,而期待在controller dealloc的时候，去停止定时器：- (void)dealloc{   if(_timer != nil)   {     [_time">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -60,7 +60,7 @@
     </header>
     <div class="entry">
       
-        <p><br>NSTimer 定时器，在编程的时候是十分常用的，但是其实很多时候都没有用对，我们经常都在Controller里创建NStimer,而期待在controller dealloc的时候，去停止定时器：<br></p><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)dealloc</div><div class="line">{</div><div class="line">   <span class="keyword">if</span>(_timer != <span class="literal">nil</span>)</div><div class="line">   {</div><div class="line">     [_timer invalidate];</div><div class="line">   }</div><div class="line">   [<span class="keyword">super</span> dealloc];</div><div class="line">}</div></pre></td></tr></table></figure><br><p><br>但实际上contoller永远都不会调用dealloc，因为_timer会retaincontroller一次。<br>在NSTimer创建的时候、NSRunloop会retian NSTimer一次、已保证NSTimer在执行完之前NSTimer不会被dealloc。而且一般NSTimer创建的时候会有个回调的target、而为了保证回调的正常、NSTimer会<br>retian target一次、而我们经常使用controller作为target，这样controller就从来都不会释放了。造成内存泄露。<br></p>
+        <p><br>NSTimer 定时器，在编程的时候是十分常用的，但是其实很多时候都没有用对，我们经常都在Controller里创建NStimer,而期待在controller dealloc的时候，去停止定时器：<br></p><br><blockquote><br><br>- (void)dealloc<br>{<br>   if(_timer != nil)<br>   {<br>     [_timer invalidate];<br>   }<br>   [super dealloc];<br>}<br><br><footer><strong>lang:objc</strong></footer></blockquote><br><br><p><br>但实际上contoller永远都不会调用dealloc，因为_timer会retaincontroller一次。<br>在NSTimer创建的时候、NSRunloop会retian NSTimer一次、已保证NSTimer在执行完之前NSTimer不会被dealloc。而且一般NSTimer创建的时候会有个回调的target、而为了保证回调的正常、NSTimer会<br>retian target一次、而我们经常使用controller作为target，这样controller就从来都不会释放了。造成内存泄露。<br></p>
       
     </div>
     <footer>

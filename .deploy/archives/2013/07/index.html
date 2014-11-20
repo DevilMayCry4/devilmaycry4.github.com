@@ -63,7 +63,12 @@
     </header>
     <div class="entry">
       
-        <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">rename</span><span class="params">()</span>:</span></div><div class="line">    path = input(<span class="string">"给目录下的文件添加前缀"</span>)</div><div class="line">    print(path)</div><div class="line">    Prefix = <span class="string">"PRE_"</span></div><div class="line">    <span class="keyword">for</span> (path, dirs, files) <span class="keyword">in</span> os.walk(path):<span class="comment">#遍历目录树</span></div><div class="line">        <span class="keyword">for</span> filename <span class="keyword">in</span> files:</div><div class="line">            ext = os.path.splitext(filename)[<span class="number">1</span>]</div><div class="line">            all = os.path.normpath(filename)</div><div class="line">            oldpath = path + <span class="string">"/"</span> + filename</div><div class="line">            newpath = path + <span class="string">"/"</span> + Prefix + filename</div><div class="line">            os.rename(oldpath, newpath)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    print(<span class="string">"给png文件添加@2x"</span>)</div><div class="line">    rename()</div><div class="line">    print(<span class="string">"finish"</span>)</div></pre></td></tr></table></figure>
+        <blockquote>
+
+<p>import os<br>def rename():<br>    path = input(“给目录下的文件添加前缀”)<br>    print(path)<br>    Prefix = “PRE_”<br>    for (path, dirs, files) in os.walk(path):#遍历目录树<br>        for filename in files:<br>            ext = os.path.splitext(filename)[1]<br>            all = os.path.normpath(filename)<br>            oldpath = path + “/“ + filename<br>            newpath = path + “/“ + Prefix + filename<br>            os.rename(oldpath, newpath)</p>
+<p>if <strong>name</strong> == ‘<strong>main</strong>‘:<br>    print(“给png文件添加@2x”)<br>    rename()<br>    print(“finish”)</p>
+<footer><strong>lang:python</strong></footer></blockquote>
+
       
     </div>
     <footer>
@@ -160,7 +165,15 @@
     </header>
     <div class="entry">
       
-        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#ifdef DEBUG</span></div><div class="line"><span class="preprocessor">#   define NSSLog(fmt, ...) {NSLog((@<span class="title">"%s [Line %d] "</span> fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);}</span></div><div class="line"><span class="preprocessor">#else</span></div><div class="line"><span class="preprocessor">#   define NSSLog(...)</span></div><div class="line"><span class="preprocessor">#endif</span></div></pre></td></tr></table></figure>
+        <blockquote>
+
+<h1 id="ifdef_DEBUG">ifdef DEBUG</h1>
+<h1 id="define_NSSLog(fmt,_…)_{NSLog((@”%s_[Line_%d]_“_fmt),_PRETTY_FUNCTION,_LINE,_##VA_ARGS);}">define NSSLog(fmt, …) {NSLog((@”%s [Line %d] “ fmt), <strong>PRETTY_FUNCTION</strong>, <strong>LINE</strong>, ##<strong>VA_ARGS</strong>);}</h1>
+<h1 id="else">else</h1>
+<h1 id="define_NSSLog(…)">define NSSLog(…)</h1>
+<h1 id="endif">endif</h1>
+<footer><strong>lang:objc</strong></footer></blockquote>
+
 
       
     </div>
