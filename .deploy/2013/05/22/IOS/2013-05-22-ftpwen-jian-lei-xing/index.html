@@ -8,11 +8,7 @@
   
   <meta name="description" content="IOS FTP获取文件列表信息后。kCFFTPResourceType 对应的是文件类型。这个在 sys/dirent.h 头文件中有定义。
 
-
-
-define    DT_UNKNOWN     0
-define    DT_FIFO         1
-define    DT_CHR     ">
+123456789#define	DT_UNKNOWN	 0#define	DT_FIFO		 1#define	DT_CHR		 2#define	DT_">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -68,32 +64,9 @@ define    DT_CHR     ">
       
         <p><br>IOS FTP获取文件列表信息后。kCFFTPResourceType 对应的是文件类型。这个在 sys/dirent.h 头文件中有定义。<br></p>
 
-<blockquote>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#define	DT_UNKNOWN	 0</span></div><div class="line"><span class="preprocessor">#define	DT_FIFO		 1</span></div><div class="line"><span class="preprocessor">#define	DT_CHR		 2</span></div><div class="line"><span class="preprocessor">#define	DT_DIR		 4</span></div><div class="line"><span class="preprocessor">#define	DT_BLK		 6</span></div><div class="line"><span class="preprocessor">#define	DT_REG		 8</span></div><div class="line"><span class="preprocessor">#define	DT_LNK		10</span></div><div class="line"><span class="preprocessor">#define	DT_SOCK		12</span></div><div class="line"><span class="preprocessor">#define	DT_WHT		14</span></div></pre></td></tr></table></figure>
 
-<h1 id="define_DT_UNKNOWN_0">define    DT_UNKNOWN     0</h1>
-<h1 id="define_DT_FIFO_1">define    DT_FIFO         1</h1>
-<h1 id="define_DT_CHR_2">define    DT_CHR         2</h1>
-<h1 id="define_DT_DIR_4">define    DT_DIR         4</h1>
-<h1 id="define_DT_BLK_6">define    DT_BLK         6</h1>
-<h1 id="define_DT_REG_8">define    DT_REG         8</h1>
-<h1 id="define_DT_LNK_10">define    DT_LNK        10</h1>
-<h1 id="define_DT_SOCK_12">define    DT_SOCK        12</h1>
-<h1 id="define_DT_WHT_14">define    DT_WHT        14</h1>
-<footer><strong>lang:objc</strong></footer></blockquote>
-
-
-<blockquote>
-
-
-<p>DT_UNKNOWN    未知类型</p>
-<p>DT_RET        普通文件</p>
-<p>DT_DIR        目录文件</p>
-<p>DT_FIFO       命名管道</p>
-<p>DT_SOCK       本地套接口</p>
-<p>DT_CHR        字符设备文件</p>
-<p>DT_BLK        块设备文件</p>
-<footer><strong>lang:objc</strong></footer></blockquote>
-
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">DT_UNKNOWN    未知类型</div><div class="line"></div><div class="line">DT_RET        普通文件</div><div class="line"></div><div class="line">DT_DIR        目录文件</div><div class="line"></div><div class="line">DT_FIFO       命名管道</div><div class="line"></div><div class="line">DT_SOCK       本地套接口</div><div class="line"></div><div class="line">DT_CHR        字符设备文件</div><div class="line"></div><div class="line">DT_BLK        块设备文件</div></pre></td></tr></table></figure>
 
 
       

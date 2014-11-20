@@ -6,11 +6,7 @@
   <title>IOS设备获取本机IP地址 | 無限大な夢</title>
   <meta name="author" content="virgil">
   
-  <meta name="description" content="include 
-include 
-
-(NSString)getIPAddress{ NSStringaddress = @”error”; structifaddrsinterfaces = NULL; structifaddrstemp_addr = NULL; intsuccess = 0;
-">
+  <meta name="description" content="1234567891011121314151617181920212223242526272829303132333435#include &amp;lt;ifaddrs.h&amp;gt;#include &amp;lt;arpa/inet.h&amp;gt;- (NSString*)getIPAddress{   NSStri">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -64,34 +60,7 @@ include
     </header>
     <div class="entry">
       
-        <blockquote>
-
-<h1 id="include_">include <ifaddrs.h></ifaddrs.h></h1>
-<h1 id="include_-1">include <arpa inet.h=""></arpa></h1>
-<ul>
-<li><p>(NSString<em>)getIPAddress<br>{<br> NSString</em>address = @”error”;<br> structifaddrs<em>interfaces = NULL;<br> structifaddrs</em>temp_addr = NULL;<br> intsuccess = 0;</p>
-<p> // retrieve the current interfaces - returns 0 on success<br> success = getifaddrs(&amp;interfaces);<br> if(success == 0)<br>   {<br> // Loop through linked list of interfaces</p>
-<pre><code>  temp_addr = interfaces;
-  <span class="keyword">while</span>(temp_addr != <span class="keyword">NULL</span>) 
-  {
-      <span class="keyword">if</span>( temp_addr<span class="variable">-&gt;ifa_addr</span><span class="variable">-&gt;sa_family</span>== AF_INET) 
-      {
-</code></pre><p> // Check if interface is en0 which is the wifi connection on the iPhone</p>
-<pre><code>           <span class="keyword">if</span>([[<span class="constant">NSStringstringWithUTF8String</span><span class="symbol">:temp_addr-&gt;ifa_name</span>] <span class="symbol">isEqualToString:</span>@<span class="string">"en0"</span>])
-          {
-</code></pre><p>// Get NSString from C String</p>
-<pre><code>             address = [<span class="attribute">NSStringstringWithUTF8String</span>:inet_ntoa<span class="function"><span class="params">(((structsockaddr_in*)temp_addr-&gt;ifa_addr)-&gt;sin_addr)</span>];
-          }
-      }
-
-      <span class="title">temp_addr</span> = <span class="title">temp_addr</span>-&gt;</span>ifa_next;
-  }
-</code></pre><p>  }</p>
-<p>  // Free memory<br>  freeifaddrs(interfaces);<br>  returnaddress;<br>}</p>
-</li>
-</ul>
-<footer><strong>lang:objc</strong></footer></blockquote>
-
+        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#include <span class="title">&lt;ifaddrs.h&gt;</span></span></div><div class="line"><span class="preprocessor">#include <span class="title">&lt;arpa/inet.h&gt;</span></span></div><div class="line">- (<span class="built_in">NSString</span>*)getIPAddress</div><div class="line">{</div><div class="line">   <span class="built_in">NSString</span>*address = <span class="string">@"error"</span>;</div><div class="line">   structifaddrs*interfaces = <span class="literal">NULL</span>;</div><div class="line">   structifaddrs*temp_addr = <span class="literal">NULL</span>;</div><div class="line">   intsuccess = <span class="number">0</span>;</div><div class="line">    </div><div class="line">   <span class="comment">// retrieve the current interfaces - returns 0 on success</span></div><div class="line">   success = getifaddrs(&amp;interfaces);</div><div class="line">   <span class="keyword">if</span>(success == <span class="number">0</span>)</div><div class="line">     {</div><div class="line">   <span class="comment">// Loop through linked list of interfaces</span></div><div class="line">        temp_addr = interfaces;</div><div class="line">        <span class="keyword">while</span>(temp_addr != <span class="literal">NULL</span>) </div><div class="line">        {</div><div class="line">            <span class="keyword">if</span>( temp_addr-&gt;ifa_addr-&gt;sa_family== AF_INET) </div><div class="line">            {</div><div class="line">   <span class="comment">// Check if interface is en0 which is the wifi connection on the iPhone</span></div><div class="line">                 <span class="keyword">if</span>([[NSStringstringWithUTF8String:temp_addr-&gt;ifa_name] isEqualToString:<span class="string">@"en0"</span>])</div><div class="line">                {</div><div class="line">  <span class="comment">// Get NSString from C String</span></div><div class="line">                   address = [NSStringstringWithUTF8String:inet_ntoa(((structsockaddr_in*)temp_addr-&gt;ifa_addr)-&gt;sin_addr)];</div><div class="line">                }</div><div class="line">            }</div><div class="line">            </div><div class="line">            temp_addr = temp_addr-&gt;ifa_next;</div><div class="line">        }</div><div class="line">    }</div><div class="line">    </div><div class="line">    <span class="comment">// Free memory    </span></div><div class="line">    freeifaddrs(interfaces);</div><div class="line">    returnaddress;</div><div class="line">}</div></pre></td></tr></table></figure>
       
     </div>
     <footer>

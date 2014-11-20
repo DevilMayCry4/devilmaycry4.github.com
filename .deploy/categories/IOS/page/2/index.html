@@ -96,19 +96,7 @@
     </header>
     <div class="entry">
       
-        <blockquote>
-
-<ul>
-<li><p>(UIImage*)scaleToSize:(CGSize)size {<br>  UIGraphicsBeginImageContext(size);</p>
-<p>  CGContextRef context = UIGraphicsGetCurrentContext();<br>  CGContextTranslateCTM(context, 0.0, size.height);<br>  CGContextScaleCTM(context, 1.0, -1.0);</p>
-<p>  CGContextDrawImage(context, CGRectMake(0.0f, 0.0f, size.width, size.height - 4.5), self.CGImage);</p>
-<p>  UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext();</p>
-<p>  UIGraphicsEndImageContext();</p>
-<p>  return scaledImage;<br>}</p>
-</li>
-</ul>
-<footer><strong>lang:objc</strong></footer></blockquote>
-
+        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">- (<span class="built_in">UIImage</span>*)scaleToSize:(<span class="built_in">CGSize</span>)size {</div><div class="line">    UIGraphicsBeginImageContext(size);</div><div class="line">    </div><div class="line">    CGContextRef context = UIGraphicsGetCurrentContext();</div><div class="line">    CGContextTranslateCTM(context, <span class="number">0.0</span>, size<span class="variable">.height</span>);</div><div class="line">    CGContextScaleCTM(context, <span class="number">1.0</span>, -<span class="number">1.0</span>);</div><div class="line">    </div><div class="line">    CGContextDrawImage(context, CGRectMake(<span class="number">0.0</span>f, <span class="number">0.0</span>f, size<span class="variable">.width</span>, size<span class="variable">.height</span> - <span class="number">4.5</span>), <span class="keyword">self</span><span class="variable">.CGImage</span>);</div><div class="line">    </div><div class="line">    <span class="built_in">UIImage</span>* scaledImage = UIGraphicsGetImageFromCurrentImageContext();</div><div class="line">    </div><div class="line">    UIGraphicsEndImageContext();</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> scaledImage;</div><div class="line">}</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -250,11 +238,7 @@
     </header>
     <div class="entry">
       
-        <blockquote>
-
-<p>static dispatch_once_t onceToken;<br>      dispatch_once(&amp;onceToken, ^{<br>          &lt;#code to be executed once#&gt;<br>      });</p>
-<footer><strong>lang:objc</strong></footer></blockquote>
-
+        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;</div><div class="line">      <span class="built_in">dispatch_once</span>(&amp;onceToken, ^{</div><div class="line">          &lt;<span class="preprocessor">#code to be executed once#&gt;</span></div><div class="line">      });</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -287,11 +271,7 @@
     </header>
     <div class="entry">
       
-        <blockquote>
-
-<p>sudo find /Users/user/Desktop/svn目录/ -name “.svn” -exec rm -r {} \;</p>
-<footer><strong>lang:c</strong></footer></blockquote>
-
+        <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo find /Users/user/Desktop/svn目录/ -name <span class="string">".svn"</span> -exec rm -r {} \;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -324,13 +304,7 @@
     </header>
     <div class="entry">
       
-        <blockquote>
-
-<p>UIApplication *app = [UIApplication sharedApplication];</p>
-<p> //一个后台任务标识符<br> UIBackgroundTaskIdentifier taskID;<br> taskID = [app beginBackgroundTaskWithExpirationHandler:^{<br>     //如果系统觉得我们还是运行了太久，将执行这个程序块，并停止运行应用程序<br>     [app endBackgroundTask:taskID];<br> }];<br> //UIBackgroundTaskInvalid表示系统没有为我们提供额外的时候<br> if (taskID == UIBackgroundTaskInvalid) {<br>     NSLog(@”Failed to start background task!”);<br>     return;<br> }<br> while (app.backgroundTimeRemaining &gt;0.0)<br> {</p>
-<p> }<br> NSLog(@”Starting background task with %f seconds remaining”, app.backgroundTimeRemaining);<br> [NSThread sleepForTimeInterval:10];<br> NSLog(@”Finishing background task with %f seconds remaining”,app.backgroundTimeRemaining);<br> //告诉系统我们完成了<br> [app endBackgroundTask:taskID];</p>
-<footer><strong>lang:objc</strong></footer></blockquote>
-
+        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">UIApplication</span> *app = [<span class="built_in">UIApplication</span> sharedApplication];</div><div class="line"> </div><div class="line"> <span class="comment">//一个后台任务标识符</span></div><div class="line"> UIBackgroundTaskIdentifier taskID;</div><div class="line"> taskID = [app beginBackgroundTaskWithExpirationHandler:^{</div><div class="line">     <span class="comment">//如果系统觉得我们还是运行了太久，将执行这个程序块，并停止运行应用程序</span></div><div class="line">     [app endBackgroundTask:taskID];</div><div class="line"> }];</div><div class="line"> <span class="comment">//UIBackgroundTaskInvalid表示系统没有为我们提供额外的时候</span></div><div class="line"> <span class="keyword">if</span> (taskID == UIBackgroundTaskInvalid) {</div><div class="line">     <span class="built_in">NSLog</span>(<span class="string">@"Failed to start background task!"</span>);</div><div class="line">     <span class="keyword">return</span>;</div><div class="line"> }</div><div class="line"> <span class="keyword">while</span> (app<span class="variable">.backgroundTimeRemaining</span> &gt;<span class="number">0.0</span>)</div><div class="line"> {</div><div class="line">     </div><div class="line"> }</div><div class="line"> <span class="built_in">NSLog</span>(<span class="string">@"Starting background task with %f seconds remaining"</span>, app<span class="variable">.backgroundTimeRemaining</span>);</div><div class="line"> [<span class="built_in">NSThread</span> sleepForTimeInterval:<span class="number">10</span>];</div><div class="line"> <span class="built_in">NSLog</span>(<span class="string">@"Finishing background task with %f seconds remaining"</span>,app<span class="variable">.backgroundTimeRemaining</span>);</div><div class="line"> <span class="comment">//告诉系统我们完成了</span></div><div class="line"> [app endBackgroundTask:taskID];</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -363,29 +337,9 @@
     </header>
     <div class="entry">
       
-        <blockquote>
+        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>) lowQuailtyWithInputURL:(<span class="built_in">NSURL</span>*)inputURL</div><div class="line">                                   outputURL:(<span class="built_in">NSURL</span>*)outputURL</div><div class="line">                                     blockHandler:(<span class="keyword">void</span> (^)(AVAssetExportSession*))handler</div><div class="line">{</div><div class="line">    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:inputURL options:<span class="literal">nil</span>];</div><div class="line">    AVAssetExportSession *session = [[AVAssetExportSession alloc] initWithAsset:asset     presetName:AVAssetExportPresetMediumQuality];</div><div class="line">    session<span class="variable">.outputURL</span> = outputURL;</div><div class="line">    session<span class="variable">.outputFileType</span> = AVFileTypeQuickTimeMovie;</div><div class="line">    [session exportAsynchronouslyWithCompletionHandler:^(<span class="keyword">void</span>)</div><div class="line">     {</div><div class="line">         handler(session);</div><div class="line">     }];</div><div class="line">}</div></pre></td></tr></table></figure>
 
-<ul>
-<li>(void) lowQuailtyWithInputURL:(NSURL*)inputURL<pre><code>                             <span class="tag">outputURL</span><span class="pseudo">:(NSURL</span>*)<span class="tag">outputURL</span>
-                               <span class="tag">blockHandler</span><span class="pseudo">:(void</span> (^)(<span class="tag">AVAssetExportSession</span>*))<span class="tag">handler</span>
-</code></pre>{<br>  AVURLAsset <em>asset = [AVURLAsset URLAssetWithURL:inputURL options:nil];<br>  AVAssetExportSession </em>session = [[AVAssetExportSession alloc] initWithAsset:asset     presetName:AVAssetExportPresetMediumQuality];<br>  session.outputURL = outputURL;<br>  session.outputFileType = AVFileTypeQuickTimeMovie;<br>  [session exportAsynchronouslyWithCompletionHandler:^(void)<br>   {<pre><code>   <span class="operator"><span class="keyword">handler</span>(<span class="keyword">session</span>);</span>
-</code></pre>   }];<br>}</li>
-</ul>
-<footer><strong>lang:objc</strong></footer></blockquote>
-
-
-<blockquote>
-
-<p>[self lowQuailtyWithInputURL:video outputURL:output blockHandler:^(AVAssetExportSession *session)<br>{<br>     if (session.status == AVAssetExportSessionStatusCompleted)<br>     {</p>
-<pre><code> }
- <span class="keyword">else</span>
- {
-
-
- }
-</code></pre><p>}];</p>
-<footer><strong>lang:objc</strong></footer></blockquote>
-
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">[<span class="keyword">self</span> lowQuailtyWithInputURL:video outputURL:output blockHandler:^(AVAssetExportSession *session)</div><div class="line">{</div><div class="line">     <span class="keyword">if</span> (session<span class="variable">.status</span> == AVAssetExportSessionStatusCompleted)</div><div class="line">     {</div><div class="line">         </div><div class="line">     }</div><div class="line">     <span class="keyword">else</span></div><div class="line">     {</div><div class="line">         </div><div class="line">         </div><div class="line">     }</div><div class="line">}];</div></pre></td></tr></table></figure>
 
 <p><br>在block里面检测成功，失败，或者是取消，然后释放session.<br><br>期间可以通过不断的查看session的progress属性来获取转换的进度。<br><br>可以设置这些压缩质量<br><br>AVF_EXPORT NSString <em>const AVAssetExportPresetLowQuality        NS_AVAILABLE_IOS(4_0);<br>AVF_EXPORT NSString </em>const AVAssetExportPresetMediumQuality     NS_AVAILABLE_IOS(4_0);<br>AVF_EXPORT NSString *const AVAssetExportPresetHighestQuality    NS_AVAILABLE_IOS(4_0);<br></p>
       
@@ -421,32 +375,9 @@
       
         <p><br>IOS FTP获取文件列表信息后。kCFFTPResourceType 对应的是文件类型。这个在 sys/dirent.h 头文件中有定义。<br></p>
 
-<blockquote>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#define	DT_UNKNOWN	 0</span></div><div class="line"><span class="preprocessor">#define	DT_FIFO		 1</span></div><div class="line"><span class="preprocessor">#define	DT_CHR		 2</span></div><div class="line"><span class="preprocessor">#define	DT_DIR		 4</span></div><div class="line"><span class="preprocessor">#define	DT_BLK		 6</span></div><div class="line"><span class="preprocessor">#define	DT_REG		 8</span></div><div class="line"><span class="preprocessor">#define	DT_LNK		10</span></div><div class="line"><span class="preprocessor">#define	DT_SOCK		12</span></div><div class="line"><span class="preprocessor">#define	DT_WHT		14</span></div></pre></td></tr></table></figure>
 
-<h1 id="define_DT_UNKNOWN_0">define    DT_UNKNOWN     0</h1>
-<h1 id="define_DT_FIFO_1">define    DT_FIFO         1</h1>
-<h1 id="define_DT_CHR_2">define    DT_CHR         2</h1>
-<h1 id="define_DT_DIR_4">define    DT_DIR         4</h1>
-<h1 id="define_DT_BLK_6">define    DT_BLK         6</h1>
-<h1 id="define_DT_REG_8">define    DT_REG         8</h1>
-<h1 id="define_DT_LNK_10">define    DT_LNK        10</h1>
-<h1 id="define_DT_SOCK_12">define    DT_SOCK        12</h1>
-<h1 id="define_DT_WHT_14">define    DT_WHT        14</h1>
-<footer><strong>lang:objc</strong></footer></blockquote>
-
-
-<blockquote>
-
-
-<p>DT_UNKNOWN    未知类型</p>
-<p>DT_RET        普通文件</p>
-<p>DT_DIR        目录文件</p>
-<p>DT_FIFO       命名管道</p>
-<p>DT_SOCK       本地套接口</p>
-<p>DT_CHR        字符设备文件</p>
-<p>DT_BLK        块设备文件</p>
-<footer><strong>lang:objc</strong></footer></blockquote>
-
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">DT_UNKNOWN    未知类型</div><div class="line"></div><div class="line">DT_RET        普通文件</div><div class="line"></div><div class="line">DT_DIR        目录文件</div><div class="line"></div><div class="line">DT_FIFO       命名管道</div><div class="line"></div><div class="line">DT_SOCK       本地套接口</div><div class="line"></div><div class="line">DT_CHR        字符设备文件</div><div class="line"></div><div class="line">DT_BLK        块设备文件</div></pre></td></tr></table></figure>
 
 
       

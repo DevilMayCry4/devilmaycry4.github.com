@@ -61,11 +61,7 @@
       
         <p>A PDF describes the content and appearance of one or more pages. The exact size of that page is not as straightforward as you might think. There can be up to 5 different descriptions in a PDF that relate to its size. These are called the page boxes:</p>
 
-<blockquote>
-
-<p>enum CGPDFBox {<br>   kCGPDFMediaBox = 0,<br>   kCGPDFCropBox = 1,<br>   kCGPDFBleedBox = 2,<br>   kCGPDFTrimBox = 3,<br>   kCGPDFArtBox = 4<br>};<br>typedef enum CGPDFBox CGPDFBox;</p>
-<footer><strong>lang:objc</strong></footer></blockquote>
-
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">enum</span> CGPDFBox {</div><div class="line">   kCGPDFMediaBox = <span class="number">0</span>,</div><div class="line">   kCGPDFCropBox = <span class="number">1</span>,</div><div class="line">   kCGPDFBleedBox = <span class="number">2</span>,</div><div class="line">   kCGPDFTrimBox = <span class="number">3</span>,</div><div class="line">   kCGPDFArtBox = <span class="number">4</span></div><div class="line">};</div><div class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span> CGPDFBox CGPDFBox;</div></pre></td></tr></table></figure>
 
 <h5 id="KCGPDFMediaBox">KCGPDFMediaBox</h5>
 <p><br>The MediaBox is used to specify the width and height of the page. For the average user, this probably equals the actual page size. For prepress use, this is not the case as we prefer our pages to be defined slightly oversized so that we can see the bleed (Images or other elements touching an outer edge of a printed page need to extend beyond the edge of the paper to compensate for inaccuracies in trimming the page), the crop marks and useful information such as the file name or the date and time when the file was created. This means that PDF files used in graphic arts usually have a MediaBox which is larger then the trimmed page size. The MediaBox is the largest page box in a PDF. The other page boxes can equal the size of the MediaBox but they cannot be larger.<br></p>
@@ -114,26 +110,13 @@
 
 <h3 id="PDF操作符">PDF操作符</h3>
 <p></p><p>1). General graphics state(普通图形状态操作符)</p><p></p>
-<blockquote>
-
-<p>w: 设置线的宽度<br>J: 设置线端点风格. Butt/Round/Projecting square<br>j: 设置线交叉风格. Miter/Round/Bevel<br>M: 设置Miter Limit<br>d: 设置虚线风格.<br>ri: 设置Rendering Intent(呈色意向)<br>i: 设置平面化容忍度.<br>gs: 设置图形状态参数.</p>
-<footer><strong>lang:c</strong></footer></blockquote>
-
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">w: 设置线的宽度</div><div class="line">J: 设置线端点风格. Butt/Round/Projecting square </div><div class="line">j: 设置线交叉风格. Miter/Round/Bevel</div><div class="line">M: 设置Miter Limit</div><div class="line">d: 设置虚线风格.</div><div class="line">ri: 设置Rendering Intent(呈色意向)</div><div class="line">i: 设置平面化容忍度.</div><div class="line">gs: 设置图形状态参数.</div></pre></td></tr></table></figure>
 
 <p></p><p>2). Special graphics state(特殊图形状态操作符)</p><p></p>
-<blockquote>
-
-<p>q: 保存当前图形状态<br>Q：回复图形状态.<br>cm：设置当前装换矩阵.</p>
-<footer><strong>lang:c</strong></footer></blockquote>
-
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">q: 保存当前图形状态</div><div class="line">Q：回复图形状态.</div><div class="line">cm：设置当前装换矩阵.</div></pre></td></tr></table></figure>
 
 <p></p><p>3). Path construction(路径构建操作符)</p><p></p>
-<blockquote>
-
-<p>m: 移动当前指针到指定位置.<br>l: 添加一条连接当前指针到指定位置的线段.<br>c: 添加一条Bezier曲线， 有2个控制点，2个端点.<br>v: 添加一条Bezier曲线， 2个控制点重合.<br>y: 添加一条Bezier曲线， 第二个控制点和第二个端点重合.<br>h: 闭合路径<br>re: 添加一个矩形.</p>
-<footer><strong>lang:c</strong></footer></blockquote>
-
-
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">m: 移动当前指针到指定位置.</div><div class="line">l: 添加一条连接当前指针到指定位置的线段.</div><div class="line">c: 添加一条Bezier曲线， 有<span class="number">2</span>个控制点，<span class="number">2</span>个端点.</div><div class="line">v: 添加一条Bezier曲线， <span class="number">2</span>个控制点重合.</div><div class="line">y: 添加一条Bezier曲线， 第二个控制点和第二个端点重合.</div><div class="line">h: 闭合路径</div><div class="line">re: 添加一个矩形.</div></pre></td></tr></table></figure><br>
       
     </div>
     <footer>
@@ -212,7 +195,7 @@
     </header>
     <div class="entry">
       
-        <p>调用如下代码：</p><br><blockquote><br><br>NSURL *url = [NSURL URLWithString:@”prefs:root=WIFI”];<br>[[UIApplication sharedApplication] openURL:url];<br><br><footer><strong>lang:objc</strong></footer></blockquote><br><br><p>即可跳转到设置页面的对应项。</p>
+        <p>调用如下代码：</p><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSURL</span> *url = [<span class="built_in">NSURL</span> URLWithString:<span class="string">@"prefs:root=WIFI"</span>];</div><div class="line">[[<span class="built_in">UIApplication</span> sharedApplication] openURL:url];</div></pre></td></tr></table></figure><br><p>即可跳转到设置页面的对应项。</p>
 
 <p></p><p>相关的URL string：</p><br>
       
@@ -252,19 +235,11 @@
       
         <p>NSUserDefaults standardUserDefaults一种便利的序列化方式、当使用</p>
 
-<blockquote>
-
-<p>[[NSUserDefaults  standardUserDefaults] setObject:object textforKey:key];</p>
-<footer><strong>lang:objc</strong></footer></blockquote>
-
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[[<span class="built_in">NSUserDefaults</span>  standardUserDefaults] setObject:object textforKey:key];</div></pre></td></tr></table></figure>
 
 <p>这时候该对象只是写在内存中。要真正保存到磁盘、应该还要调用</p>
 
-<blockquote>
-
-<p>[[NSUserDefaults  standardUserDefaults] synchronize];</p>
-<footer><strong>lang:objc</strong></footer></blockquote>
-
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[[<span class="built_in">NSUserDefaults</span>  standardUserDefaults] synchronize];</div></pre></td></tr></table></figure>
 
 
       
@@ -302,12 +277,7 @@
 
 <p><br>应用举例<br>让我们来看一个编程场景。我们要在iphone上做一个下载网页的功能，该功能非常简单，就是在iphone上放置一个按钮，点击该按钮时，显示一个转动的圆圈，表示正在进行下载，下载完成之后，将内容加载到界面上的一个文本控件中。不用GCD前<br>虽然功能简单，但是我们必须把下载过程放到后台线程中，否则会阻塞UI线程显示。所以，如果不用GCD, 我们需要写如下3个方法：<font color="red">someClick</font> 方法是点击按钮后的代码，可以看到我们用NSInvocationOperation建了一个后台线程，并且放到NSOperationQueue中。后台线程执行<font color="red">download</font>方法。<br><font color="red">download</font> 方法处理下载网页的逻辑。下载完成后用<font color="red">performSelectorOnMainThread</font>执行<font color="red">download_completed</font> 方法。<br><font color="red">download_completed</font> 进行clear up的工作，并把下载的内容显示到文本控件中。<br><br>这3个方法的代码如下:<br></p>
 
-<blockquote>
-
-<p>-(IBAction)someClick:(id)sender<br>{<br>  self.indicator.hidden = NO;<br>  [self.indicatorstart  Animating];<br>  queue = [[NSOperationQueue  alloc]init];<br>  NSInvocationOperation *op = [[[NSInvocationOperation alloc]initWithTarget:self<br>                                                                   selector:@selector(download)<br>                                                                     object:nil]autorelease];<br>  [queueaddOperation:op];<br> }</p>
-<footer><strong>lang:objc</strong></footer></blockquote>
-
-<p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">-(<span class="keyword">IBAction</span>)someClick:(<span class="keyword">id</span>)sender</div><div class="line">{ </div><div class="line">  <span class="keyword">self</span><span class="variable">.indicator</span><span class="variable">.hidden</span> = <span class="literal">NO</span>; </div><div class="line">  [<span class="keyword">self</span><span class="variable">.indicatorstart</span>  Animating];</div><div class="line">  queue = [[NSOperationQueue  alloc]init];</div><div class="line">  NSInvocationOperation *op = [[[NSInvocationOperation alloc]initWithTarget:<span class="keyword">self</span> </div><div class="line">                                                                   selector:<span class="keyword">@selector</span>(download) </div><div class="line">                                                                     object:<span class="literal">nil</span>]autorelease];    </div><div class="line">  [queueaddOperation:op];</div><div class="line"> }</div></pre></td></tr></table></figure><br>
       
     </div>
     <footer>
@@ -343,13 +313,9 @@
     </header>
     <div class="entry">
       
-        <p>int转化成NSdata</p><br><blockquote><br><br>int i =1;<br>NSData *data =[NSDatadataWithBytes:&amp;i length:sizeof(i)];<br><br><footer><strong>lang:objc</strong></footer></blockquote><br><br><br><p>NSdata转化成int</p>
+        <p>int转化成NSdata</p><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> i =<span class="number">1</span>;</div><div class="line">NSData *data =[NSDatadataWithBytes:&amp;i length:<span class="keyword">sizeof</span>(i)];</div></pre></td></tr></table></figure><br><br><p>NSdata转化成int</p>
 
-<blockquote>
-
-<p>int i = [data getBytes:&amp;i length:sizeof(i)];</p>
-<footer><strong>lang:objc</strong></footer></blockquote>
-
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> i = [data getBytes:&amp;i length:<span class="keyword">sizeof</span>(i)];</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -417,34 +383,7 @@
     </header>
     <div class="entry">
       
-        <blockquote>
-
-<h1 id="include_">include <ifaddrs.h></ifaddrs.h></h1>
-<h1 id="include_-1">include <arpa inet.h=""></arpa></h1>
-<ul>
-<li><p>(NSString<em>)getIPAddress<br>{<br> NSString</em>address = @”error”;<br> structifaddrs<em>interfaces = NULL;<br> structifaddrs</em>temp_addr = NULL;<br> intsuccess = 0;</p>
-<p> // retrieve the current interfaces - returns 0 on success<br> success = getifaddrs(&amp;interfaces);<br> if(success == 0)<br>   {<br> // Loop through linked list of interfaces</p>
-<pre><code>  temp_addr = interfaces;
-  <span class="keyword">while</span>(temp_addr != <span class="keyword">NULL</span>) 
-  {
-      <span class="keyword">if</span>( temp_addr<span class="variable">-&gt;ifa_addr</span><span class="variable">-&gt;sa_family</span>== AF_INET) 
-      {
-</code></pre><p> // Check if interface is en0 which is the wifi connection on the iPhone</p>
-<pre><code>           <span class="keyword">if</span>([[<span class="constant">NSStringstringWithUTF8String</span><span class="symbol">:temp_addr-&gt;ifa_name</span>] <span class="symbol">isEqualToString:</span>@<span class="string">"en0"</span>])
-          {
-</code></pre><p>// Get NSString from C String</p>
-<pre><code>             address = [<span class="attribute">NSStringstringWithUTF8String</span>:inet_ntoa<span class="function"><span class="params">(((structsockaddr_in*)temp_addr-&gt;ifa_addr)-&gt;sin_addr)</span>];
-          }
-      }
-
-      <span class="title">temp_addr</span> = <span class="title">temp_addr</span>-&gt;</span>ifa_next;
-  }
-</code></pre><p>  }</p>
-<p>  // Free memory<br>  freeifaddrs(interfaces);<br>  returnaddress;<br>}</p>
-</li>
-</ul>
-<footer><strong>lang:objc</strong></footer></blockquote>
-
+        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#include <span class="title">&lt;ifaddrs.h&gt;</span></span></div><div class="line"><span class="preprocessor">#include <span class="title">&lt;arpa/inet.h&gt;</span></span></div><div class="line">- (<span class="built_in">NSString</span>*)getIPAddress</div><div class="line">{</div><div class="line">   <span class="built_in">NSString</span>*address = <span class="string">@"error"</span>;</div><div class="line">   structifaddrs*interfaces = <span class="literal">NULL</span>;</div><div class="line">   structifaddrs*temp_addr = <span class="literal">NULL</span>;</div><div class="line">   intsuccess = <span class="number">0</span>;</div><div class="line">    </div><div class="line">   <span class="comment">// retrieve the current interfaces - returns 0 on success</span></div><div class="line">   success = getifaddrs(&amp;interfaces);</div><div class="line">   <span class="keyword">if</span>(success == <span class="number">0</span>)</div><div class="line">     {</div><div class="line">   <span class="comment">// Loop through linked list of interfaces</span></div><div class="line">        temp_addr = interfaces;</div><div class="line">        <span class="keyword">while</span>(temp_addr != <span class="literal">NULL</span>) </div><div class="line">        {</div><div class="line">            <span class="keyword">if</span>( temp_addr-&gt;ifa_addr-&gt;sa_family== AF_INET) </div><div class="line">            {</div><div class="line">   <span class="comment">// Check if interface is en0 which is the wifi connection on the iPhone</span></div><div class="line">                 <span class="keyword">if</span>([[NSStringstringWithUTF8String:temp_addr-&gt;ifa_name] isEqualToString:<span class="string">@"en0"</span>])</div><div class="line">                {</div><div class="line">  <span class="comment">// Get NSString from C String</span></div><div class="line">                   address = [NSStringstringWithUTF8String:inet_ntoa(((structsockaddr_in*)temp_addr-&gt;ifa_addr)-&gt;sin_addr)];</div><div class="line">                }</div><div class="line">            }</div><div class="line">            </div><div class="line">            temp_addr = temp_addr-&gt;ifa_next;</div><div class="line">        }</div><div class="line">    }</div><div class="line">    </div><div class="line">    <span class="comment">// Free memory    </span></div><div class="line">    freeifaddrs(interfaces);</div><div class="line">    returnaddress;</div><div class="line">}</div></pre></td></tr></table></figure>
       
     </div>
     <footer>
@@ -478,12 +417,9 @@
       
         <p>如果UIViewController 是在导航控制器中<br>在navigationbar 出现后self.view 的高度减少了44。如：<br>在viewDidLoad 中 </p>
 
-<blockquote>
-
-<p>NSLog(@”self height %f”,self.view.frame.size.heigt);  </p>
-<footer><strong>lang:objc</strong></footer></blockquote>
-
- <p><br>在viewDidAppear 中 </p><br><blockquote><br><br>NSLog(@”self height %f”,self.view.frame.size.heigt);<br><br><footer><strong>lang:objc</strong></footer></blockquote><br><br><p> 两个结果相差 44。</p>
+<p><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"self height %f"</span>,<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.heigt</span>);  </div></pre></td></tr></table></figure><br> </p><p><br>在viewDidAppear 中 </p><p></p>
+<p><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"self height %f"</span>,<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.heigt</span>);  </div></pre></td></tr></table></figure> </p>
+<p> 两个结果相差 44。</p>
       
     </div>
     <footer>

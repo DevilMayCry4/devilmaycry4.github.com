@@ -6,12 +6,7 @@
   <title>Xcode Debug | 無限大な夢</title>
   <meta name="author" content="virgil">
   
-  <meta name="description" content="ifdef DEBUG
-define NSSLog(fmt, …) {NSLog((@”%s [Line %d] “ fmt), PRETTY_FUNCTION, LINE, ##VA_ARGS);}
-else
-define NSSLog(…)
-endif
-lang:objc">
+  <meta name="description" content="12345#ifdef DEBUG#   define NSSLog(fmt, ...) {NSLog((@&quot;%s [Line %d] &quot; fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);}#else#   define NSSLog(...)">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -65,15 +60,7 @@ lang:objc">
     </header>
     <div class="entry">
       
-        <blockquote>
-
-<h1 id="ifdef_DEBUG">ifdef DEBUG</h1>
-<h1 id="define_NSSLog(fmt,_…)_{NSLog((@”%s_[Line_%d]_“_fmt),_PRETTY_FUNCTION,_LINE,_##VA_ARGS);}">define NSSLog(fmt, …) {NSLog((@”%s [Line %d] “ fmt), <strong>PRETTY_FUNCTION</strong>, <strong>LINE</strong>, ##<strong>VA_ARGS</strong>);}</h1>
-<h1 id="else">else</h1>
-<h1 id="define_NSSLog(…)">define NSSLog(…)</h1>
-<h1 id="endif">endif</h1>
-<footer><strong>lang:objc</strong></footer></blockquote>
-
+        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#ifdef DEBUG</span></div><div class="line"><span class="preprocessor">#   define NSSLog(fmt, ...) {NSLog((@<span class="title">"%s [Line %d] "</span> fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);}</span></div><div class="line"><span class="preprocessor">#else</span></div><div class="line"><span class="preprocessor">#   define NSSLog(...)</span></div><div class="line"><span class="preprocessor">#endif</span></div></pre></td></tr></table></figure>
 
       
     </div>

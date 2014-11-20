@@ -328,16 +328,7 @@ create table 表名 (字段设定列表);</span></pre>
 
 <p>A nonatomic property setter might look like this:</p>
 
-<blockquote>
-
-<ul>
-<li>(void)setUserName:(NSString *)userName {<br>   if (userName != _userName) {<pre><code>   [userName retain];
-   [_userName <span class="operator"><span class="keyword">release</span>];</span>
-   _userName = userName;
-</code></pre>   }<br>}</li>
-</ul>
-<footer><strong>lang:objc</strong></footer></blockquote>
-
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> - (<span class="keyword">void</span>)setUserName:(<span class="built_in">NSString</span> *)userName {</div><div class="line">      <span class="keyword">if</span> (userName != _userName) {</div><div class="line">          [userName retain];</div><div class="line">          [_userName release];</div><div class="line">          _userName = userName;</div><div class="line">      }</div><div class="line">}</div></pre></td></tr></table></figure>
 
 <p>This is the variant with manual retain/release; however, the ARC-generated code looks similar. When we look at this code it&#8217;s obvious why this means trouble when <code>setUserName:</code> is called concurrently. We could end up releasing <code>_userName</code> twice, which can corrupt memory and lead to hard-to-find bugs.</p>
 
@@ -350,34 +341,7 @@ create table 表名 (字段设定列表);</span></pre>
 
 <p><code>objc_setProperty</code> calls down to following method:</p>
 
-<blockquote>
-
-
-<p>static inline void reallySetProperty(id self, SEL _cmd, id newValue,<br>  ptrdiff_t offset, bool atomic, bool copy, bool mutableCopy)<br>{<br>    id oldValue;<br>    id <em>slot = (id</em>) ((char*)self + offset);</p>
-<pre><code><span class="keyword">if</span> (copy) {
-    <span class="variable">newValue =</span> [newValue copyWithZone:NULL];
-} <span class="keyword">else</span> <span class="keyword">if</span> (mutableCopy) {
-    <span class="variable">newValue =</span> [newValue mutableCopyWithZone:NULL];
-} <span class="keyword">else</span> {
-    <span class="keyword">if</span> (*<span class="variable">slot =</span>= newValue) return;
-    <span class="variable">newValue =</span> objc_retain(newValue);
-}
-
-<span class="keyword">if</span> (!atomic) {
-    <span class="variable">oldValue =</span> *slot;
-    *<span class="variable">slot =</span> newValue;
-} <span class="keyword">else</span> {
-    spin_lock_t *<span class="variable">slotlock =</span> &amp;amp;PropertyLocks[GOODHASH(slot)];
-    _spin_lock(slotlock);
-    <span class="variable">oldValue =</span> *slot;
-    *<span class="variable">slot =</span> newValue;        
-    _spin_unlock(slotlock);
-}
-
-objc_release(oldValue);
-</code></pre><p>}</p>
-<footer><strong>lang:objc</strong></footer></blockquote>
-
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"> </div><div class="line"><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">void</span> reallySetProperty(<span class="keyword">id</span> <span class="keyword">self</span>, SEL _cmd, <span class="keyword">id</span> newValue, </div><div class="line">  ptrdiff_t offset, <span class="keyword">bool</span> atomic, <span class="keyword">bool</span> <span class="keyword">copy</span>, <span class="keyword">bool</span> mutableCopy) </div><div class="line">{</div><div class="line">    <span class="keyword">id</span> oldValue;</div><div class="line">    <span class="keyword">id</span> *slot = (<span class="keyword">id</span>*) ((<span class="keyword">char</span>*)<span class="keyword">self</span> + offset);</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (<span class="keyword">copy</span>) {</div><div class="line">        newValue = [newValue copyWithZone:<span class="literal">NULL</span>];</div><div class="line">    } <span class="keyword">else</span> <span class="keyword">if</span> (mutableCopy) {</div><div class="line">        newValue = [newValue mutableCopyWithZone:<span class="literal">NULL</span>];</div><div class="line">    } <span class="keyword">else</span> {</div><div class="line">        <span class="keyword">if</span> (*slot == newValue) <span class="keyword">return</span>;</div><div class="line">        newValue = objc_retain(newValue);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (!atomic) {</div><div class="line">        oldValue = *slot;</div><div class="line">        *slot = newValue;</div><div class="line">    } <span class="keyword">else</span> {</div><div class="line">        spin_lock_t *slotlock = &amp;amp;PropertyLocks[GOODHASH(slot)];</div><div class="line">        _spin_lock(slotlock);</div><div class="line">        oldValue = *slot;</div><div class="line">        *slot = newValue;        </div><div class="line">        _spin_unlock(slotlock);</div><div class="line">    }</div><div class="line"></div><div class="line">    objc_release(oldValue);</div><div class="line">}</div></pre></td></tr></table></figure>
 
 <p>Aside from the rather funny name, this method is actually fairly straightforward and uses one of the 128 available spinlocks in <code>PropertyLocks</code>. This is a pragmatic and fast approach &#8211; the worst case scenario is that a setter might have to wait for an unrelated setter to finish because of a hash collision.</p>
 
@@ -568,33 +532,9 @@ inline void pst_dispatch_sync_reentrant(dispatch_queue_t queue,
     <div class="entry">
       
         <p></p><p><br>关联对象<br></p><p></p>
-<blockquote>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="keyword">void</span> *alertKey = <span class="string">"alertKey"</span>;</div><div class="line"><span class="keyword">typedef</span> <span class="keyword">void</span> (^Block)(<span class="keyword">int</span>);</div><div class="line"></div><div class="line">UIAlertView *alert = [[UIAlertView alloc] initWithTitle:<span class="string">@""</span> message:<span class="string">@"test"</span> delegate:<span class="keyword">self</span> cancelButtonTitle:<span class="string">@"取消"</span> otherButtonTitles:<span class="string">@"确定"</span>, <span class="literal">nil</span>];</div><div class="line">  </div><div class="line">    </div><div class="line">      Block block  = ^(<span class="built_in">NSInteger</span> index ){</div><div class="line">        <span class="keyword">if</span> (index == <span class="number">0</span>)</div><div class="line">        {</div><div class="line">          <span class="built_in">NSLog</span>(<span class="string">@"1"</span>);</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span></div><div class="line">        {</div><div class="line">            <span class="built_in">NSLog</span>(<span class="string">@"2"</span>);</div><div class="line">        }</div><div class="line">    };</div><div class="line"></div><div class="line">    objc_setAssociatedObject(alert, alertKey, block, OBJC_ASSOCIATION_COPY);</div><div class="line">    [alert show];</div><div class="line">    </div><div class="line">    </div></pre></td></tr></table></figure>
 
-<p>static void *alertKey = “alertKey”;<br>typedef void (^Block)(int);</p>
-<p>UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@”” message:@”test” delegate:self cancelButtonTitle:@”取消” otherButtonTitles:@”确定”, nil];</p>
-<pre><code>  Block block  = ^(<span class="built_in">NSInteger</span> index ){
-    <span class="keyword">if</span> (index == <span class="number">0</span>)
-    {
-      <span class="built_in">NSLog</span>(<span class="string">@"1"</span>);
-    }
-    <span class="keyword">else</span>
-    {
-        <span class="built_in">NSLog</span>(<span class="string">@"2"</span>);
-    }
-};
-
-objc_setAssociatedObject(alert, alertKey, block, OBJC_ASSOCIATION_COPY);
-[alert show];
-</code></pre><footer><strong>lang:objc</strong></footer></blockquote>
-
-
-<blockquote>
-
-<ul>
-<li>(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex<br>{<br>   Block block = objc_getAssociatedObject(alertView, alertKey);<br>  block(buttonIndex);<br>}</li>
-</ul>
-<footer><strong>lang:objc</strong></footer></blockquote>
-
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(<span class="built_in">NSInteger</span>)buttonIndex</div><div class="line">{</div><div class="line">     Block block = objc_getAssociatedObject(alertView, alertKey);</div><div class="line">    block(buttonIndex);</div><div class="line">}</div></pre></td></tr></table></figure>
       
     </div>
     <footer>
@@ -626,24 +566,7 @@ objc_setAssociatedObject(alert, alertKey, block, OBJC_ASSOCIATION_COPY);
     </header>
     <div class="entry">
       
-        <p></p><p><br>ios6之后开始使用自动约束布局NSLayoutConstraint，这个可以解决对于不同的ios设备、autoresizingMask的不足。<br></p><br> <blockquote><p></p>
-<ul>
-<li><p>(void)viewDidLoad<br>{<br>  [super viewDidLoad];<br>  _originV = [[UIView alloc] init];<br>  _originV.backgroundColor = [UIColor redColor];<br>  _originV.translatesAutoresizingMaskIntoConstraints = NO;<br>  [self.view addSubview:_originV];</p>
-<p>  [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_originV attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual  toItem:self.view attribute:NSLayoutAttributeWidth multiplier:1 constant:-40]];</p>
-<p>  [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_originV attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual  toItem:self.view attribute:NSLayoutAttributeHeight multiplier:1 constant:-40]];</p>
-<p>  [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_originV attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual  toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];</p>
-<p>  _constran = [NSLayoutConstraint constraintWithItem:_originV attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];</p>
-<p>  [self.view addConstraint:_constran];</p>
-<p>  _but = [UIButton buttonWithType:UIButtonTypeRoundedRect];<br>  _but.backgroundColor =[UIColor blueColor];<br>  _but.translatesAutoresizingMaskIntoConstraints = NO;<br>  [_but addTarget:self action:@selector(changeButton:) forControlEvents:UIControlEventTouchUpInside];<br>  [self.view addSubview:_but];</p>
-<p>  [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_but attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_originV attribute:NSLayoutAttributeLeft multiplier:1 constant:30]];</p>
-<pre><code>[self.view addConstraint:[NSLayoutConstraint constraintWithItem:_but <span class="keyword">attribute</span>:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_originV <span class="keyword">attribute</span>:NSLayoutAttributeTop multiplier:<span class="number">1</span> <span class="keyword">constant</span>:<span class="number">30</span>]];
-</code></pre><p>  [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_but attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:_originV attribute:NSLayoutAttributeRight multiplier:1 constant: -30]];</p>
-<p>  [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_but attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_originV attribute:NSLayoutAttributeBottom multiplier:1 constant:-30]];<br>}</p>
-</li>
-<li><p>(void)changeButton:(UIButton *)button<br>{<br>  _constran.constant += 5;<br>  [self.view updateConstraintsIfNeeded];<br>}</p>
-</li>
-</ul>
-<footer><strong>lang:objc</strong></footer></blockquote>
+        <p></p><p><br>ios6之后开始使用自动约束布局NSLayoutConstraint，这个可以解决对于不同的ios设备、autoresizingMask的不足。<br></p><br> <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)viewDidLoad</div><div class="line">{</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">    _originV = [[<span class="built_in">UIView</span> alloc] init];</div><div class="line">    _originV<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> redColor];</div><div class="line">    _originV<span class="variable">.translatesAutoresizingMaskIntoConstraints</span> = <span class="literal">NO</span>;</div><div class="line">    [<span class="keyword">self</span><span class="variable">.view</span> addSubview:_originV];</div><div class="line">    </div><div class="line">    [<span class="keyword">self</span><span class="variable">.view</span> addConstraint:[NSLayoutConstraint constraintWithItem:_originV attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual  toItem:<span class="keyword">self</span><span class="variable">.view</span> attribute:NSLayoutAttributeWidth multiplier:<span class="number">1</span> constant:-<span class="number">40</span>]];</div><div class="line">    </div><div class="line">    [<span class="keyword">self</span><span class="variable">.view</span> addConstraint:[NSLayoutConstraint constraintWithItem:_originV attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual  toItem:<span class="keyword">self</span><span class="variable">.view</span> attribute:NSLayoutAttributeHeight multiplier:<span class="number">1</span> constant:-<span class="number">40</span>]];</div><div class="line">    </div><div class="line">    [<span class="keyword">self</span><span class="variable">.view</span> addConstraint:[NSLayoutConstraint constraintWithItem:_originV attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual  toItem:<span class="keyword">self</span><span class="variable">.view</span> attribute:NSLayoutAttributeCenterY multiplier:<span class="number">1</span> constant:<span class="number">0</span>]];</div><div class="line">    </div><div class="line">    _constran = [NSLayoutConstraint constraintWithItem:_originV attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:<span class="keyword">self</span><span class="variable">.view</span> attribute:NSLayoutAttributeCenterX multiplier:<span class="number">1</span> constant:<span class="number">0</span>];</div><div class="line">  </div><div class="line">    [<span class="keyword">self</span><span class="variable">.view</span> addConstraint:_constran];</div><div class="line">    </div><div class="line">    _but = [<span class="built_in">UIButton</span> buttonWithType:UIButtonTypeRoundedRect];</div><div class="line">    _but<span class="variable">.backgroundColor</span> =[<span class="built_in">UIColor</span> blueColor];</div><div class="line">    _but<span class="variable">.translatesAutoresizingMaskIntoConstraints</span> = <span class="literal">NO</span>;</div><div class="line">    [_but addTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(changeButton:) forControlEvents:UIControlEventTouchUpInside];</div><div class="line">    [<span class="keyword">self</span><span class="variable">.view</span> addSubview:_but];</div><div class="line">   </div><div class="line">    [<span class="keyword">self</span><span class="variable">.view</span> addConstraint:[NSLayoutConstraint constraintWithItem:_but attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_originV attribute:NSLayoutAttributeLeft multiplier:<span class="number">1</span> constant:<span class="number">30</span>]];</div><div class="line">    </div><div class="line">      [<span class="keyword">self</span><span class="variable">.view</span> addConstraint:[NSLayoutConstraint constraintWithItem:_but attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_originV attribute:NSLayoutAttributeTop multiplier:<span class="number">1</span> constant:<span class="number">30</span>]];</div><div class="line">    </div><div class="line">    [<span class="keyword">self</span><span class="variable">.view</span> addConstraint:[NSLayoutConstraint constraintWithItem:_but attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:_originV attribute:NSLayoutAttributeRight multiplier:<span class="number">1</span> constant: -<span class="number">30</span>]];</div><div class="line">    </div><div class="line">    [<span class="keyword">self</span><span class="variable">.view</span> addConstraint:[NSLayoutConstraint constraintWithItem:_but attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_originV attribute:NSLayoutAttributeBottom multiplier:<span class="number">1</span> constant:-<span class="number">30</span>]];</div><div class="line">}</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)changeButton:(<span class="built_in">UIButton</span> *)button</div><div class="line">{</div><div class="line">    _constran<span class="variable">.constant</span> += <span class="number">5</span>;</div><div class="line">    [<span class="keyword">self</span><span class="variable">.view</span> updateConstraintsIfNeeded];</div><div class="line">}</div><div class="line"> </div></pre></td></tr></table></figure><p></p>
 
       
     </div>
@@ -676,22 +599,7 @@ objc_setAssociatedObject(alert, alertKey, block, OBJC_ASSOCIATION_COPY);
     </header>
     <div class="entry">
       
-        <blockquote>
-
-<ul>
-<li>(void)method:(NSString *)arg,…<br>{<br>  va_list list;<br>  va_start(list, arg);<br>  while (YES)<br>  {<pre><code>  NSString *<span class="keyword">value</span> = va_arg(list, NSString*);
-  <span class="keyword">if</span> (<span class="keyword">value</span>)
-  {
-      NSLog(<span class="string">@"value %@"</span>,<span class="keyword">value</span>);
-  }
-  <span class="keyword">else</span>
-  {
-      <span class="keyword">break</span>;
-  }
-</code></pre>  }<br>  va_end(list);<br>}</li>
-</ul>
-<footer><strong>lang:objc</strong></footer></blockquote>
-
+        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)method:(<span class="built_in">NSString</span> *)arg,...</div><div class="line">{</div><div class="line">    va_list list;</div><div class="line">    va_start(list, arg);</div><div class="line">    <span class="keyword">while</span> (<span class="literal">YES</span>)</div><div class="line">    {</div><div class="line">        <span class="built_in">NSString</span> *value = va_arg(list, <span class="built_in">NSString</span>*);</div><div class="line">        <span class="keyword">if</span> (value)</div><div class="line">        {</div><div class="line">            <span class="built_in">NSLog</span>(<span class="string">@"value %@"</span>,value);</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span></div><div class="line">        {</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        }</div><div class="line">    }</div><div class="line">    va_end(list);</div><div class="line">}</div></pre></td></tr></table></figure>
       
     </div>
     <footer>
@@ -756,21 +664,13 @@ objc_setAssociatedObject(alert, alertKey, block, OBJC_ASSOCIATION_COPY);
     </header>
     <div class="entry">
       
-        <p><br>设置item的标题颜色：<br></p><br><blockquote><br><br>[[UITabBarItem appearance] setTitleTextAttributes:@{ UITextAttributeTextColor : [UIColor grayColor] }<br>                                         forState:UIControlStateNormal];<br>[[UITabBarItem appearance] setTitleTextAttributes:@{ UITextAttributeTextColor : [UIColor redColor] }<br>                                         forState:UIControlStateSelected];<br><br><footer><strong>lang:objc</strong></footer></blockquote><br><br><br><p><br>设置选中和没有选中时候都图片：<br></p><br><blockquote><br><br>//for ios7 before<br>- (void)setFinishedSelectedImage:(UIImage <em>)selectedImage withFinishedUnselectedImage:(UIImage </em>)unselectedImage ;<br><br>//for ios7 and later<br>//tips:设置图片的时候要用<br>//[[UIImage imageNamed:@”ImageName”] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]<br>- (instancetype)initWithTitle:(NSString <em>)title image:(UIImage </em>)image selectedImage:(UIImage *)selectedImage;<br><br><br><footer><strong>lang:objc</strong></footer></blockquote><br><br><p><br>ios7 去掉默认都选中颜色<br></p>
+        <p><br>设置item的标题颜色：<br></p><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[[UITabBarItem appearance] setTitleTextAttributes:@{ UITextAttributeTextColor : [<span class="built_in">UIColor</span> grayColor] }</div><div class="line">                                         forState:UIControlStateNormal];</div><div class="line">[[UITabBarItem appearance] setTitleTextAttributes:@{ UITextAttributeTextColor : [<span class="built_in">UIColor</span> redColor] }</div><div class="line">                                         forState:UIControlStateSelected];</div></pre></td></tr></table></figure><br><br><p><br>设置选中和没有选中时候都图片：<br></p><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//for ios7 before</span></div><div class="line">- (<span class="keyword">void</span>)setFinishedSelectedImage:(<span class="built_in">UIImage</span> *)selectedImage withFinishedUnselectedImage:(<span class="built_in">UIImage</span> *)unselectedImage ;</div><div class="line"></div><div class="line"><span class="comment">//for ios7 and later</span></div><div class="line"><span class="comment">//tips:设置图片的时候要用</span></div><div class="line"><span class="comment">//[[UIImage imageNamed:@"ImageName"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]</span></div><div class="line">- (instancetype)initWithTitle:(<span class="built_in">NSString</span> *)title image:(<span class="built_in">UIImage</span> *)image selectedImage:(<span class="built_in">UIImage</span> *)selectedImage;</div></pre></td></tr></table></figure><br><p><br>ios7 去掉默认都选中颜色<br></p>
 
-<blockquote>
-
-<p>self.tabBar.tintColor = [UIColor clearColor];</p>
-<footer><strong>lang:objc</strong></footer></blockquote>
-
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">self</span><span class="variable">.tabBar</span><span class="variable">.tintColor</span> = [<span class="built_in">UIColor</span> clearColor];</div></pre></td></tr></table></figure>
 
 <p><br>ios7之前去掉选中的时候都mask方块<br></p>
 
-<blockquote>
-
-<p>//empty.png 是一张透明都png图<br>     self.tabBar.selectionIndicatorImage = [UIImage imageNamed:@”empty.png”];<br>     self.tabBar.selectedImageTintColor = [UIColor clearColor];</p>
-<footer><strong>lang:objc</strong></footer></blockquote>
-
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//empty.png 是一张透明都png图</span></div><div class="line">     <span class="keyword">self</span><span class="variable">.tabBar</span><span class="variable">.selectionIndicatorImage</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"empty.png"</span>];</div><div class="line">     <span class="keyword">self</span><span class="variable">.tabBar</span><span class="variable">.selectedImageTintColor</span> = [<span class="built_in">UIColor</span> clearColor];</div></pre></td></tr></table></figure>
       
     </div>
     <footer>

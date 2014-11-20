@@ -59,27 +59,9 @@
     </header>
     <div class="entry">
       
-        <p><br>Category是Objective-C中常用的语法特性，通过它可以很方便的为已有的类来添加函数。但是Category不允许为已有的类添加新的属性或者成员变量。<br>一种常见的办法是通过runtime.h中objc_getAssociatedObject / objc_setAssociatedObject来访问和生成关联对象。通过这种方法来模拟生成属性。<br></p><br><blockquote><br><br>//NSObject+IndieBandName.h<br>@interface NSObject (IndieBandName)<br>@property (nonatomic, strong) NSString <em>indieBandName;<br>@end<br><br>// NSObject+IndieBandName.m<br> #import “NSObject+Extension.h”<br> #import <objc runtime.h=""><br>static const void </objc></em>IndieBandNameKey = &IndieBandNameKey;<br>@implementation NSObject (IndieBandName)<br>@dynamic indieBandName;<br><br>- (NSString <em>)indieBandName {<br>    return objc_getAssociatedObject(self, IndieBandNameKey);<br>}<br><br>- (void)setIndieBandName:(NSString </em>)indieBandName{<br>    objc_setAssociatedObject(self, IndieBandNameKey, indieBandName, OBJC_ASSOCIATION_RETAIN_NONATOMIC);<br>}<br><br>@end DLIntrospection<br><br><br><footer><strong>lang:objc</strong></footer></blockquote><br><br><br><br><p><br>这个和Category无关，但是也是runtime.h的一种应用。DLIntrospection，是 一个NSObject Category。它为NSObject提供了一系列扩展函数：<br></p>
+        <p><br>Category是Objective-C中常用的语法特性，通过它可以很方便的为已有的类来添加函数。但是Category不允许为已有的类添加新的属性或者成员变量。<br>一种常见的办法是通过runtime.h中objc_getAssociatedObject / objc_setAssociatedObject来访问和生成关联对象。通过这种方法来模拟生成属性。<br></p><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//NSObject+IndieBandName.h</span></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSObject</span> (<span class="title">IndieBandName</span>)</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSString</span> *indieBandName;</div><div class="line"><span class="keyword">@end</span></div><div class="line"></div><div class="line"><span class="comment">// NSObject+IndieBandName.m   </span></div><div class="line"> <span class="preprocessor">#import <span class="title">"NSObject+Extension.h"</span></span></div><div class="line"> <span class="preprocessor">#import <span class="title">&lt;objc/runtime.h&gt;</span></span></div><div class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">void</span> *IndieBandNameKey = &amp;IndieBandNameKey;   </div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSObject</span> (<span class="title">IndieBandName</span>)</span></div><div class="line"><span class="keyword">@dynamic</span> indieBandName;</div><div class="line"></div><div class="line">- (<span class="built_in">NSString</span> *)indieBandName {</div><div class="line">    <span class="keyword">return</span> objc_getAssociatedObject(<span class="keyword">self</span>, IndieBandNameKey);</div><div class="line">}</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)setIndieBandName:(<span class="built_in">NSString</span> *)indieBandName{</div><div class="line">    objc_setAssociatedObject(<span class="keyword">self</span>, IndieBandNameKey, indieBandName, OBJC_ASSOCIATION_RETAIN_NONATOMIC);</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">@end</span> DLIntrospection</div></pre></td></tr></table></figure><br><br><br><p><br>这个和Category无关，但是也是runtime.h的一种应用。DLIntrospection，是 一个NSObject Category。它为NSObject提供了一系列扩展函数：<br></p>
 
-<blockquote>
-
-<p>@interface NSObject (DLIntrospection)</p>
-<ul>
-<li>(NSArray *)classes;</li>
-<li>(NSArray *)properties;</li>
-<li>(NSArray *)instanceVariables;</li>
-<li>(NSArray *)classMethods;</li>
-<li><p>(NSArray *)instanceMethods;</p>
-</li>
-<li><p>(NSArray *)protocols;</p>
-</li>
-<li>(NSDictionary <em>)descriptionForProtocol:(Protocol </em>)proto;</li>
-</ul>
-<ul>
-<li>(NSString *)parentClassHierarchy;<br>@end</li>
-</ul>
-<footer><strong>lang:objc</strong></footer></blockquote>
-
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSObject</span> (<span class="title">DLIntrospection</span>)</span></div><div class="line"></div><div class="line">+ (<span class="built_in">NSArray</span> *)classes;</div><div class="line">+ (<span class="built_in">NSArray</span> *)properties;</div><div class="line">+ (<span class="built_in">NSArray</span> *)instanceVariables;</div><div class="line">+ (<span class="built_in">NSArray</span> *)classMethods;</div><div class="line">+ (<span class="built_in">NSArray</span> *)instanceMethods;</div><div class="line"></div><div class="line">+ (<span class="built_in">NSArray</span> *)protocols;</div><div class="line">+ (<span class="built_in">NSDictionary</span> *)descriptionForProtocol:(Protocol *)proto;</div><div class="line"></div><div class="line"></div><div class="line">+ (<span class="built_in">NSString</span> *)parentClassHierarchy;</div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
 
 <p><br>通过这些函数，你可以在调试时（通过po命令）或者运行时获得对象的各种信息。<br></p>
       
@@ -148,11 +130,7 @@
       
         <p><br>UIView 如果没有设置阴影的边框会导致、在旋转屏幕或者滑动的时候，界面卡顿，因为设置了阴影的view会不断地重新绘制。解决的方法:<br></p>
 
-<blockquote>
-
-<p>self.layer.shadowColor = [UIColor blackColor].CGColor;<br>self.layer.shadowOffset = CGSizeMake(0, 3);<br>self.layer.shadowOpacity = 0.6;<br>self.layer.masksToBounds = NO;<br>/<strong><strong>*</strong></strong><br>   self.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.bounds].CGPath;<br>   <strong><strong>*</strong></strong>/</p>
-<footer><strong>lang:objc</strong></footer></blockquote>
-
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.shadowColor</span> = [<span class="built_in">UIColor</span> blackColor]<span class="variable">.CGColor</span>;</div><div class="line"><span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.shadowOffset</span> = CGSizeMake(<span class="number">0</span>, <span class="number">3</span>);</div><div class="line"><span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.shadowOpacity</span> = <span class="number">0.6</span>;</div><div class="line"><span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.masksToBounds</span> = <span class="literal">NO</span>;</div><div class="line"><span class="comment">/*********</span></div><div class="line">   self.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.bounds].CGPath;</div><div class="line">   *********/</div></pre></td></tr></table></figure>
       
     </div>
     <footer>
@@ -188,16 +166,7 @@
 
 <p><br>假设我们有一个controller，有个view是加到这个controller的view上面，当view中的某些功能完成的时候，view回调原来设置好的block。但是你会发现这个controller和这个view都无法调用到dealloc了。<br></p>
 
-<blockquote>
-
-
-<ul>
-<li>(void)viewDidLoad<br>{<br> [super viewDidLoad];<br> View *view = [View alloc]initWithFrame:CGRectMake(0,0,100,100)];<br> view.OnComplete= ^{<br> [self print];<br> };<br>}</li>
-</ul>
-<p>/<strong><strong><em>**</em></strong></strong>/<br>typedef void(^Block) block;</p>
-<p>@property(noautomatic,copy)block OnComplete;</p>
-<footer><strong>lang:objc</strong></footer></blockquote>
-
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">- (<span class="keyword">void</span>)viewDidLoad</div><div class="line">{</div><div class="line">   [<span class="keyword">super</span> viewDidLoad];</div><div class="line">   View *view = [View alloc]initWithFrame:CGRectMake(<span class="number">0</span>,<span class="number">0</span>,<span class="number">100</span>,<span class="number">100</span>)];</div><div class="line">   view<span class="variable">.OnComplete</span>= ^{</div><div class="line">   [<span class="keyword">self</span> print];</div><div class="line">   };</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">/************/</span></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">void</span>(^Block) block;</div><div class="line"></div><div class="line"><span class="keyword">@property</span>(noautomatic,<span class="keyword">copy</span>)block OnComplete;</div><div class="line"></div><div class="line"></div><div class="line"> </div></pre></td></tr></table></figure>
 
 <p>上例中，view的语法块中访问self，所以view  retian self一次，所以但view没有调用[_OnComplete  release];之前，controller是不会被dealloc的，而view是在controller的view上面。如果controller不释放，view也不会被释放，这样就进入retain circle了。<br></p>
       
@@ -297,7 +266,7 @@
     </header>
     <div class="entry">
       
-        <p><br>NSTimer 定时器，在编程的时候是十分常用的，但是其实很多时候都没有用对，我们经常都在Controller里创建NStimer,而期待在controller dealloc的时候，去停止定时器：<br></p><br><blockquote><br><br>- (void)dealloc<br>{<br>   if(_timer != nil)<br>   {<br>     [_timer invalidate];<br>   }<br>   [super dealloc];<br>}<br><br><footer><strong>lang:objc</strong></footer></blockquote><br><br><p><br>但实际上contoller永远都不会调用dealloc，因为_timer会retaincontroller一次。<br>在NSTimer创建的时候、NSRunloop会retian NSTimer一次、已保证NSTimer在执行完之前NSTimer不会被dealloc。而且一般NSTimer创建的时候会有个回调的target、而为了保证回调的正常、NSTimer会<br>retian target一次、而我们经常使用controller作为target，这样controller就从来都不会释放了。造成内存泄露。<br></p>
+        <p><br>NSTimer 定时器，在编程的时候是十分常用的，但是其实很多时候都没有用对，我们经常都在Controller里创建NStimer,而期待在controller dealloc的时候，去停止定时器：<br></p><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)dealloc</div><div class="line">{</div><div class="line">   <span class="keyword">if</span>(_timer != <span class="literal">nil</span>)</div><div class="line">   {</div><div class="line">     [_timer invalidate];</div><div class="line">   }</div><div class="line">   [<span class="keyword">super</span> dealloc];</div><div class="line">}</div></pre></td></tr></table></figure><br><p><br>但实际上contoller永远都不会调用dealloc，因为_timer会retaincontroller一次。<br>在NSTimer创建的时候、NSRunloop会retian NSTimer一次、已保证NSTimer在执行完之前NSTimer不会被dealloc。而且一般NSTimer创建的时候会有个回调的target、而为了保证回调的正常、NSTimer会<br>retian target一次、而我们经常使用controller作为target，这样controller就从来都不会释放了。造成内存泄露。<br></p>
       
     </div>
     <footer>
@@ -329,39 +298,7 @@
     </header>
     <div class="entry">
       
-        <blockquote>
-
-<ul>
-<li>(void)drawLine: (CGPoint) from to: (CGPoint) to singleArrow:(BOOL)single<br>{<br>  CGFloat radian = 0.5;<br>  CGFloat length = 5;</li>
-</ul>
-<pre><code>int a = <span class="keyword">to</span>.x &gt; <span class="keyword">from</span>.x?-<span class="number">1</span>:<span class="number">1</span> ;
-CGFloat  x1 = <span class="keyword">to</span>.x + a*<span class="property">length</span>*cos(atan((<span class="keyword">to</span>.y - <span class="keyword">from</span>.y)/(<span class="keyword">to</span>.x - <span class="keyword">from</span>.x))- radian);
-CGFloat  y1 = <span class="keyword">to</span>.y + a*<span class="property">length</span>*sin(atan((<span class="keyword">to</span>.y - <span class="keyword">from</span>.y)/(<span class="keyword">to</span>.x - <span class="keyword">from</span>.x)) - radian);
-
-
-a = <span class="keyword">to</span>.y &gt; <span class="keyword">from</span>.y? -<span class="number">1</span>:<span class="number">1</span>;
-CGFloat  x2 = <span class="keyword">to</span>.x + a*<span class="property">length</span>*sin(atan((<span class="keyword">to</span>.x - <span class="keyword">from</span>.x)/(<span class="keyword">to</span>.y - <span class="keyword">from</span>.y)) - radian);
-CGFloat  y2 = <span class="keyword">to</span>.y + a*<span class="property">length</span>*cos(atan((<span class="keyword">to</span>.x - <span class="keyword">from</span>.x)/(<span class="keyword">to</span>.y - <span class="keyword">from</span>.y)) - radian);
-
-
-
-<span class="keyword">if</span> (!single)
-{
-
-    a = <span class="keyword">to</span>.y &gt; <span class="keyword">from</span>.y?  <span class="number">1</span>:-<span class="number">1</span>;
-    CGFloat  x3 = <span class="keyword">from</span>.x +  a*<span class="property">length</span>*sin(atan((<span class="keyword">to</span>.x - <span class="keyword">from</span>.x)/(<span class="keyword">to</span>.y - <span class="keyword">from</span>.y)) - radian);
-    CGFloat  y3 = <span class="keyword">from</span>.y +  a*<span class="property">length</span>*cos(atan((<span class="keyword">to</span>.x - <span class="keyword">from</span>.x)/(<span class="keyword">to</span>.y - <span class="keyword">from</span>.y)) - radian);
-    [_currentStroke.path addLineToPoint:CGPointMake(x3,y3)];
-
-
-     a = <span class="keyword">to</span>.x &gt; <span class="keyword">from</span>.x?<span class="number">1</span>:-<span class="number">1</span> ;
-    CGFloat  x4 = <span class="keyword">from</span>.x + a*<span class="property">length</span>*cos(atan((<span class="keyword">to</span>.y - <span class="keyword">from</span>.y)/(<span class="keyword">to</span>.x - <span class="keyword">from</span>.x)) - radian);
-    CGFloat  y4 = <span class="keyword">from</span>.y + a*<span class="property">length</span>*sin(atan((<span class="keyword">to</span>.y - <span class="keyword">from</span>.y)/(<span class="keyword">to</span>.x - <span class="keyword">from</span>.x)) - radian);
-
-}
-</code></pre><p>}</p>
-<footer><strong>lang:objc</strong></footer></blockquote>
-
+        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)drawLine: (<span class="built_in">CGPoint</span>) from to: (<span class="built_in">CGPoint</span>) to singleArrow:(<span class="built_in">BOOL</span>)single</div><div class="line">{</div><div class="line">    <span class="built_in">CGFloat</span> radian = <span class="number">0.5</span>;</div><div class="line">    <span class="built_in">CGFloat</span> length = <span class="number">5</span>;</div><div class="line"> </div><div class="line">    </div><div class="line">    <span class="keyword">int</span> a = to<span class="variable">.x</span> &gt; from<span class="variable">.x</span>?-<span class="number">1</span>:<span class="number">1</span> ;</div><div class="line">    <span class="built_in">CGFloat</span>  x1 = to<span class="variable">.x</span> + a*length*cos(atan((to<span class="variable">.y</span> - from<span class="variable">.y</span>)/(to<span class="variable">.x</span> - from<span class="variable">.x</span>))- radian);</div><div class="line">    <span class="built_in">CGFloat</span>  y1 = to<span class="variable">.y</span> + a*length*sin(atan((to<span class="variable">.y</span> - from<span class="variable">.y</span>)/(to<span class="variable">.x</span> - from<span class="variable">.x</span>)) - radian);</div><div class="line">    </div><div class="line">   </div><div class="line">    a = to<span class="variable">.y</span> &gt; from<span class="variable">.y</span>? -<span class="number">1</span>:<span class="number">1</span>;</div><div class="line">    <span class="built_in">CGFloat</span>  x2 = to<span class="variable">.x</span> + a*length*sin(atan((to<span class="variable">.x</span> - from<span class="variable">.x</span>)/(to<span class="variable">.y</span> - from<span class="variable">.y</span>)) - radian);</div><div class="line">    <span class="built_in">CGFloat</span>  y2 = to<span class="variable">.y</span> + a*length*cos(atan((to<span class="variable">.x</span> - from<span class="variable">.x</span>)/(to<span class="variable">.y</span> - from<span class="variable">.y</span>)) - radian);</div><div class="line"> </div><div class="line"> </div><div class="line">       </div><div class="line">    <span class="keyword">if</span> (!single)</div><div class="line">    {</div><div class="line"></div><div class="line">        a = to<span class="variable">.y</span> &gt; from<span class="variable">.y</span>?  <span class="number">1</span>:-<span class="number">1</span>;</div><div class="line">        <span class="built_in">CGFloat</span>  x3 = from<span class="variable">.x</span> +  a*length*sin(atan((to<span class="variable">.x</span> - from<span class="variable">.x</span>)/(to<span class="variable">.y</span> - from<span class="variable">.y</span>)) - radian);</div><div class="line">        <span class="built_in">CGFloat</span>  y3 = from<span class="variable">.y</span> +  a*length*cos(atan((to<span class="variable">.x</span> - from<span class="variable">.x</span>)/(to<span class="variable">.y</span> - from<span class="variable">.y</span>)) - radian);</div><div class="line">        [_currentStroke<span class="variable">.path</span> addLineToPoint:CGPointMake(x3,y3)];</div><div class="line">        </div><div class="line">         </div><div class="line">         a = to<span class="variable">.x</span> &gt; from<span class="variable">.x</span>?<span class="number">1</span>:-<span class="number">1</span> ;</div><div class="line">        <span class="built_in">CGFloat</span>  x4 = from<span class="variable">.x</span> + a*length*cos(atan((to<span class="variable">.y</span> - from<span class="variable">.y</span>)/(to<span class="variable">.x</span> - from<span class="variable">.x</span>)) - radian);</div><div class="line">        <span class="built_in">CGFloat</span>  y4 = from<span class="variable">.y</span> + a*length*sin(atan((to<span class="variable">.y</span> - from<span class="variable">.y</span>)/(to<span class="variable">.x</span> - from<span class="variable">.x</span>)) - radian);</div><div class="line">        </div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -427,19 +364,7 @@ CGFloat  y2 = <span class="keyword">to</span>.y + a*<span class="property">lengt
     </header>
     <div class="entry">
       
-        <blockquote>
-
-<ul>
-<li><p>(UIImage*)scaleToSize:(CGSize)size {<br>  UIGraphicsBeginImageContext(size);</p>
-<p>  CGContextRef context = UIGraphicsGetCurrentContext();<br>  CGContextTranslateCTM(context, 0.0, size.height);<br>  CGContextScaleCTM(context, 1.0, -1.0);</p>
-<p>  CGContextDrawImage(context, CGRectMake(0.0f, 0.0f, size.width, size.height - 4.5), self.CGImage);</p>
-<p>  UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext();</p>
-<p>  UIGraphicsEndImageContext();</p>
-<p>  return scaledImage;<br>}</p>
-</li>
-</ul>
-<footer><strong>lang:objc</strong></footer></blockquote>
-
+        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">- (<span class="built_in">UIImage</span>*)scaleToSize:(<span class="built_in">CGSize</span>)size {</div><div class="line">    UIGraphicsBeginImageContext(size);</div><div class="line">    </div><div class="line">    CGContextRef context = UIGraphicsGetCurrentContext();</div><div class="line">    CGContextTranslateCTM(context, <span class="number">0.0</span>, size<span class="variable">.height</span>);</div><div class="line">    CGContextScaleCTM(context, <span class="number">1.0</span>, -<span class="number">1.0</span>);</div><div class="line">    </div><div class="line">    CGContextDrawImage(context, CGRectMake(<span class="number">0.0</span>f, <span class="number">0.0</span>f, size<span class="variable">.width</span>, size<span class="variable">.height</span> - <span class="number">4.5</span>), <span class="keyword">self</span><span class="variable">.CGImage</span>);</div><div class="line">    </div><div class="line">    <span class="built_in">UIImage</span>* scaledImage = UIGraphicsGetImageFromCurrentImageContext();</div><div class="line">    </div><div class="line">    UIGraphicsEndImageContext();</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> scaledImage;</div><div class="line">}</div></pre></td></tr></table></figure>
 
       
     </div>
