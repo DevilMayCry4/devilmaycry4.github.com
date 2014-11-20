@@ -168,7 +168,7 @@
     </header>
     <div class="entry">
       
-        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;</div><div class="line">      <span class="built_in">dispatch_once</span>(&amp;onceToken, ^{</div><div class="line">          &lt;<span class="preprocessor">#code to be executed once#&gt;</span></div><div class="line">      });</div></pre></td></tr></table></figure>
+        <p>  static dispatch_once_t onceToken;<br>        dispatch_once(&amp;onceToken, ^{<br>            &lt;#code to be executed once#&gt;<br>        });</p>
 
       
     </div>
@@ -234,7 +234,6 @@
     <div class="entry">
       
         <figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">rename</span><span class="params">()</span>:</span></div><div class="line">    path = input(<span class="string">"请输入要处理的文件夹路径"</span>)</div><div class="line">    print(path)</div><div class="line">    old_ext = <span class="string">"@2x.png"</span></div><div class="line">    new_ext = <span class="string">".png"</span></div><div class="line">    <span class="keyword">for</span> (path, dirs, files) <span class="keyword">in</span> os.walk(path):<span class="comment">#遍历目录树</span></div><div class="line">        <span class="keyword">for</span> filename <span class="keyword">in</span> files:</div><div class="line">            ext = os.path.splitext(filename)[<span class="number">1</span>]</div><div class="line">            all = os.path.normpath(filename)</div><div class="line">            a = all.find(old_ext)</div><div class="line">            <span class="keyword">if</span>(a != -<span class="number">1</span>):</div><div class="line">                newname = filename.replace(old_ext,new_ext)</div><div class="line">                oldpath = path + <span class="string">"/"</span> + filename</div><div class="line">                newpath = path + <span class="string">"/"</span> + newname</div><div class="line">                os.rename(oldpath, newpath)</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    print(<span class="string">"去掉png文件命中的@2x"</span>)</div><div class="line">    rename()</div><div class="line">    print(<span class="string">"finish"</span>)</div></pre></td></tr></table></figure>
-
       
     </div>
     <footer>
@@ -267,7 +266,6 @@
     <div class="entry">
       
         <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo find /Users/user/Desktop/svn目录/ -name <span class="string">".svn"</span> -exec rm -r {} \;</div></pre></td></tr></table></figure>
-
       
     </div>
     <footer>
@@ -299,8 +297,28 @@
     </header>
     <div class="entry">
       
-        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">UIApplication</span> *app = [<span class="built_in">UIApplication</span> sharedApplication];</div><div class="line"> </div><div class="line"> <span class="comment">//一个后台任务标识符</span></div><div class="line"> UIBackgroundTaskIdentifier taskID;</div><div class="line"> taskID = [app beginBackgroundTaskWithExpirationHandler:^{</div><div class="line">     <span class="comment">//如果系统觉得我们还是运行了太久，将执行这个程序块，并停止运行应用程序</span></div><div class="line">     [app endBackgroundTask:taskID];</div><div class="line"> }];</div><div class="line"> <span class="comment">//UIBackgroundTaskInvalid表示系统没有为我们提供额外的时候</span></div><div class="line"> <span class="keyword">if</span> (taskID == UIBackgroundTaskInvalid) {</div><div class="line">     <span class="built_in">NSLog</span>(<span class="string">@"Failed to start background task!"</span>);</div><div class="line">     <span class="keyword">return</span>;</div><div class="line"> }</div><div class="line"> <span class="keyword">while</span> (app<span class="variable">.backgroundTimeRemaining</span> &gt;<span class="number">0.0</span>)</div><div class="line"> {</div><div class="line">     </div><div class="line"> }</div><div class="line"> <span class="built_in">NSLog</span>(<span class="string">@"Starting background task with %f seconds remaining"</span>, app<span class="variable">.backgroundTimeRemaining</span>);</div><div class="line"> [<span class="built_in">NSThread</span> sleepForTimeInterval:<span class="number">10</span>];</div><div class="line"> <span class="built_in">NSLog</span>(<span class="string">@"Finishing background task with %f seconds remaining"</span>,app<span class="variable">.backgroundTimeRemaining</span>);</div><div class="line"> <span class="comment">//告诉系统我们完成了</span></div><div class="line"> [app endBackgroundTask:taskID];</div></pre></td></tr></table></figure>
+        <p>   UIApplication *app = [UIApplication sharedApplication];</p>
+<pre><code><span class="comment">//一个后台任务标识符</span>
+UIBackgroundTaskIdentifier taskID;
+taskID = [app beginBackgroundTaskWithExpirationHandler:^{
+    <span class="comment">//如果系统觉得我们还是运行了太久，将执行这个程序块，并停止运行应用程序</span>
+    [app endBackgroundTask:taskID];
+}];
+<span class="comment">//UIBackgroundTaskInvalid表示系统没有为我们提供额外的时候</span>
+<span class="keyword">if</span> (taskID == UIBackgroundTaskInvalid) {
+    <span class="built_in">NSLog</span>(<span class="string">@"Failed to start background task!"</span>);
+    <span class="keyword">return</span>;
+}
+<span class="keyword">while</span> (app<span class="variable">.backgroundTimeRemaining</span> &gt;<span class="number">0.0</span>)
+{
 
+}
+<span class="built_in">NSLog</span>(<span class="string">@"Starting background task with %f seconds remaining"</span>, app<span class="variable">.backgroundTimeRemaining</span>);
+[<span class="built_in">NSThread</span> sleepForTimeInterval:<span class="number">10</span>];
+<span class="built_in">NSLog</span>(<span class="string">@"Finishing background task with %f seconds remaining"</span>,app<span class="variable">.backgroundTimeRemaining</span>);
+<span class="comment">//告诉系统我们完成了</span>
+[app endBackgroundTask:taskID];
+</code></pre>
       
     </div>
     <footer>
@@ -332,10 +350,20 @@
     </header>
     <div class="entry">
       
-        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>) lowQuailtyWithInputURL:(<span class="built_in">NSURL</span>*)inputURL</div><div class="line">                                   outputURL:(<span class="built_in">NSURL</span>*)outputURL</div><div class="line">                                     blockHandler:(<span class="keyword">void</span> (^)(AVAssetExportSession*))handler</div><div class="line">{</div><div class="line">    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:inputURL options:<span class="literal">nil</span>];</div><div class="line">    AVAssetExportSession *session = [[AVAssetExportSession alloc] initWithAsset:asset     presetName:AVAssetExportPresetMediumQuality];</div><div class="line">    session<span class="variable">.outputURL</span> = outputURL;</div><div class="line">    session<span class="variable">.outputFileType</span> = AVFileTypeQuickTimeMovie;</div><div class="line">    [session exportAsynchronouslyWithCompletionHandler:^(<span class="keyword">void</span>)</div><div class="line">     {</div><div class="line">         handler(session);</div><div class="line">     }];</div><div class="line">}</div></pre></td></tr></table></figure>
+        <ul>
+<li>(void) lowQuailtyWithInputURL:(NSURL*)inputURL<pre><code>                             <span class="tag">outputURL</span><span class="pseudo">:(NSURL</span>*)<span class="tag">outputURL</span>
+                               <span class="tag">blockHandler</span><span class="pseudo">:(void</span> (^)(<span class="tag">AVAssetExportSession</span>*))<span class="tag">handler</span>
+</code></pre>{<br>  AVURLAsset <em>asset = [AVURLAsset URLAssetWithURL:inputURL options:nil];<br>  AVAssetExportSession </em>session = [[AVAssetExportSession alloc] initWithAsset:asset     presetName:AVAssetExportPresetMediumQuality];<br>  session.outputURL = outputURL;<br>  session.outputFileType = AVFileTypeQuickTimeMovie;<br>  [session exportAsynchronouslyWithCompletionHandler:^(void)<br>   {<pre><code>   <span class="operator"><span class="keyword">handler</span>(<span class="keyword">session</span>);</span>
+</code></pre>   }];<br>}</li>
+</ul>
+<p>[self lowQuailtyWithInputURL:video outputURL:output blockHandler:^(AVAssetExportSession *session)<br>{<br>     if (session.status == AVAssetExportSessionStatusCompleted)<br>     {</p>
+<pre><code> }
+ <span class="keyword">else</span>
+ {
 
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">[<span class="keyword">self</span> lowQuailtyWithInputURL:video outputURL:output blockHandler:^(AVAssetExportSession *session)</div><div class="line">{</div><div class="line">     <span class="keyword">if</span> (session<span class="variable">.status</span> == AVAssetExportSessionStatusCompleted)</div><div class="line">     {</div><div class="line">         </div><div class="line">     }</div><div class="line">     <span class="keyword">else</span></div><div class="line">     {</div><div class="line">         </div><div class="line">         </div><div class="line">     }</div><div class="line">}];</div></pre></td></tr></table></figure>
 
+ }
+</code></pre><p>}];</p>
 <p><br>在block里面检测成功，失败，或者是取消，然后释放session.<br><br>期间可以通过不断的查看session的progress属性来获取转换的进度。<br><br>可以设置这些压缩质量<br><br>AVF_EXPORT NSString <em>const AVAssetExportPresetLowQuality        NS_AVAILABLE_IOS(4_0);<br>AVF_EXPORT NSString </em>const AVAssetExportPresetMediumQuality     NS_AVAILABLE_IOS(4_0);<br>AVF_EXPORT NSString *const AVAssetExportPresetHighestQuality    NS_AVAILABLE_IOS(4_0);<br></p>
       
     </div>
@@ -370,10 +398,23 @@
       
         <p><br>IOS FTP获取文件列表信息后。kCFFTPResourceType 对应的是文件类型。这个在 sys/dirent.h 头文件中有定义。<br></p>
 
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#define	DT_UNKNOWN	 0</span></div><div class="line"><span class="preprocessor">#define	DT_FIFO		 1</span></div><div class="line"><span class="preprocessor">#define	DT_CHR		 2</span></div><div class="line"><span class="preprocessor">#define	DT_DIR		 4</span></div><div class="line"><span class="preprocessor">#define	DT_BLK		 6</span></div><div class="line"><span class="preprocessor">#define	DT_REG		 8</span></div><div class="line"><span class="preprocessor">#define	DT_LNK		10</span></div><div class="line"><span class="preprocessor">#define	DT_SOCK		12</span></div><div class="line"><span class="preprocessor">#define	DT_WHT		14</span></div></pre></td></tr></table></figure>
 
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">DT_UNKNOWN    未知类型</div><div class="line"></div><div class="line">DT_RET        普通文件</div><div class="line"></div><div class="line">DT_DIR        目录文件</div><div class="line"></div><div class="line">DT_FIFO       命名管道</div><div class="line"></div><div class="line">DT_SOCK       本地套接口</div><div class="line"></div><div class="line">DT_CHR        字符设备文件</div><div class="line"></div><div class="line">DT_BLK        块设备文件</div></pre></td></tr></table></figure>
-
+<h1 id="define_DT_UNKNOWN_0">define    DT_UNKNOWN     0</h1>
+<h1 id="define_DT_FIFO_1">define    DT_FIFO         1</h1>
+<h1 id="define_DT_CHR_2">define    DT_CHR         2</h1>
+<h1 id="define_DT_DIR_4">define    DT_DIR         4</h1>
+<h1 id="define_DT_BLK_6">define    DT_BLK         6</h1>
+<h1 id="define_DT_REG_8">define    DT_REG         8</h1>
+<h1 id="define_DT_LNK_10">define    DT_LNK        10</h1>
+<h1 id="define_DT_SOCK_12">define    DT_SOCK        12</h1>
+<h1 id="define_DT_WHT_14">define    DT_WHT        14</h1>
+<p>DT_UNKNOWN    未知类型</p>
+<p>DT_RET        普通文件</p>
+<p>DT_DIR        目录文件</p>
+<p>DT_FIFO       命名管道</p>
+<p>DT_SOCK       本地套接口</p>
+<p>DT_CHR        字符设备文件</p>
+<p>DT_BLK        块设备文件</p>
 
       
     </div>

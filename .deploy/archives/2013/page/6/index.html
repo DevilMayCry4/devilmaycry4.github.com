@@ -98,7 +98,31 @@
     </header>
     <div class="entry">
       
-        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#include <span class="title">&lt;ifaddrs.h&gt;</span></span></div><div class="line"><span class="preprocessor">#include <span class="title">&lt;arpa/inet.h&gt;</span></span></div><div class="line">- (<span class="built_in">NSString</span>*)getIPAddress</div><div class="line">{</div><div class="line">   <span class="built_in">NSString</span>*address = <span class="string">@"error"</span>;</div><div class="line">   structifaddrs*interfaces = <span class="literal">NULL</span>;</div><div class="line">   structifaddrs*temp_addr = <span class="literal">NULL</span>;</div><div class="line">   intsuccess = <span class="number">0</span>;</div><div class="line">    </div><div class="line">   <span class="comment">// retrieve the current interfaces - returns 0 on success</span></div><div class="line">   success = getifaddrs(&amp;interfaces);</div><div class="line">   <span class="keyword">if</span>(success == <span class="number">0</span>)</div><div class="line">     {</div><div class="line">   <span class="comment">// Loop through linked list of interfaces</span></div><div class="line">        temp_addr = interfaces;</div><div class="line">        <span class="keyword">while</span>(temp_addr != <span class="literal">NULL</span>) </div><div class="line">        {</div><div class="line">            <span class="keyword">if</span>( temp_addr-&gt;ifa_addr-&gt;sa_family== AF_INET) </div><div class="line">            {</div><div class="line">   <span class="comment">// Check if interface is en0 which is the wifi connection on the iPhone</span></div><div class="line">                 <span class="keyword">if</span>([[NSStringstringWithUTF8String:temp_addr-&gt;ifa_name] isEqualToString:<span class="string">@"en0"</span>])</div><div class="line">                {</div><div class="line">  <span class="comment">// Get NSString from C String</span></div><div class="line">                   address = [NSStringstringWithUTF8String:inet_ntoa(((structsockaddr_in*)temp_addr-&gt;ifa_addr)-&gt;sin_addr)];</div><div class="line">                }</div><div class="line">            }</div><div class="line">            </div><div class="line">            temp_addr = temp_addr-&gt;ifa_next;</div><div class="line">        }</div><div class="line">    }</div><div class="line">    </div><div class="line">    <span class="comment">// Free memory    </span></div><div class="line">    freeifaddrs(interfaces);</div><div class="line">    returnaddress;</div><div class="line">}</div></pre></td></tr></table></figure>
+        <h1 id="include_">include <ifaddrs.h></ifaddrs.h></h1>
+<h1 id="include_-1">include <arpa inet.h=""></arpa></h1>
+<ul>
+<li><p>(NSString<em>)getIPAddress<br>{<br> NSString</em>address = @”error”;<br> structifaddrs<em>interfaces = NULL;<br> structifaddrs</em>temp_addr = NULL;<br> intsuccess = 0;</p>
+<p> // retrieve the current interfaces - returns 0 on success<br> success = getifaddrs(&amp;interfaces);<br> if(success == 0)<br>   {<br> // Loop through linked list of interfaces</p>
+<pre><code>  temp_addr = interfaces;
+  <span class="keyword">while</span>(temp_addr != <span class="keyword">NULL</span>) 
+  {
+      <span class="keyword">if</span>( temp_addr<span class="variable">-&gt;ifa_addr</span><span class="variable">-&gt;sa_family</span>== AF_INET) 
+      {
+</code></pre><p> // Check if interface is en0 which is the wifi connection on the iPhone</p>
+<pre><code>           <span class="keyword">if</span>([[<span class="constant">NSStringstringWithUTF8String</span><span class="symbol">:temp_addr-&gt;ifa_name</span>] <span class="symbol">isEqualToString:</span>@<span class="string">"en0"</span>])
+          {
+</code></pre><p>// Get NSString from C String</p>
+<pre><code>             address = [<span class="attribute">NSStringstringWithUTF8String</span>:inet_ntoa<span class="function"><span class="params">(((structsockaddr_in*)temp_addr-&gt;ifa_addr)-&gt;sin_addr)</span>];
+          }
+      }
+
+      <span class="title">temp_addr</span> = <span class="title">temp_addr</span>-&gt;</span>ifa_next;
+  }
+</code></pre><p>  }</p>
+<p>  // Free memory<br>  freeifaddrs(interfaces);<br>  returnaddress;<br>}</p>
+</li>
+</ul>
+
       
     </div>
     <footer>
@@ -132,8 +156,11 @@
       
         <p>如果UIViewController 是在导航控制器中<br>在navigationbar 出现后self.view 的高度减少了44。如：<br>在viewDidLoad 中 </p>
 
-<p><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"self height %f"</span>,<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.heigt</span>);  </div></pre></td></tr></table></figure><br> </p><p><br>在viewDidAppear 中 </p><p></p>
-<p><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"self height %f"</span>,<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.heigt</span>);  </div></pre></td></tr></table></figure> </p>
+
+<p>NSLog(@”self height %f”,self.view.frame.size.heigt);  </p>
+ <p><br>在viewDidAppear 中 </p>
+
+<p>NSLog(@”self height %f”,self.view.frame.size.heigt);  </p>
 <p> 两个结果相差 44。</p>
       
     </div>
@@ -231,7 +258,10 @@
     </header>
     <div class="entry">
       
-        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">+ (<span class="built_in">UIColor</span>*)colorWithPatternImage:(<span class="built_in">UIImage</span>*)image;</div></pre></td></tr></table></figure>
+        <ul>
+<li>(UIColor<em>)colorWithPatternImage:(UIImage</em>)image;</li>
+</ul>
+
       
     </div>
     <footer>
@@ -263,9 +293,19 @@
     </header>
     <div class="entry">
       
-        <p>c语言实现：</p><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#include <span class="title">"sys/stat.h"</span></span></div><div class="line">- (<span class="keyword">long</span> <span class="keyword">long</span>) fileSizeAtPath:(<span class="built_in">NSString</span>*) filePath</div><div class="line">{  </div><div class="line">    <span class="keyword">struct</span> stat st;  </div><div class="line">    <span class="keyword">if</span>(lstat([filePath cStringUsingEncoding:NSUTF8StringEncoding], &amp;st) == <span class="number">0</span>)</div><div class="line">    {  </div><div class="line">        <span class="keyword">return</span> st<span class="variable">.st_size</span>;  </div><div class="line">    }  </div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;  </div><div class="line">}  </div></pre></td></tr></table></figure><br><br><p>object-c实现：</p>
+        <p>c语言实现：</p>
 
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">-(<span class="keyword">long</span> <span class="keyword">long</span>) fileSizeAtPath:(<span class="built_in">NSString</span>*) filePath</div><div class="line">{  </div><div class="line">  <span class="built_in">NSFileManager</span>* manager = [<span class="built_in">NSFileManager</span> defaultManager];  </div><div class="line">  <span class="keyword">if</span> ([manager fileExistsAtPath:filePath])</div><div class="line">  {  </div><div class="line">    <span class="keyword">return</span> [[manager attributesOfItemAtPath:filePath error:<span class="literal">nil</span>] fileSize];  </div><div class="line">  }  </div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;  </div><div class="line">}  </div></pre></td></tr></table></figure>
+<h1 id="include_“sys/stat-h”">include “sys/stat.h”</h1>
+<ul>
+<li>(long long) fileSizeAtPath:(NSString*) filePath<br>{<br>  struct stat st;<br>  if(lstat([filePath cStringUsingEncoding:NSUTF8StringEncoding], &amp;st) == 0)<br>  {  <pre><code>  <span class="keyword">return</span> <span class="keyword">st</span>.st_size;  
+</code></pre>  }<br>  return 0;<br>}  </li>
+</ul>
+<p>object-c实现：</p>
+
+
+
+<p>-(long long) fileSizeAtPath:(NSString<em>) filePath<br>{<br>  NSFileManager</em> manager = [NSFileManager defaultManager];<br>  if ([manager fileExistsAtPath:filePath])<br>  {<br>    return [[manager attributesOfItemAtPath:filePath error:nil] fileSize];<br>  }<br>  return 0;<br>}  </p>
+
       
     </div>
     <footer>

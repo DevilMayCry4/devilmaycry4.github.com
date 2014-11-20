@@ -6,7 +6,10 @@
   <title>UITabbarItem 定制 | 無限大な夢</title>
   <meta name="author" content="virgil">
   
-  <meta name="description" content="设置item的标题颜色：1234[[UITabBarItem appearance] setTitleTextAttributes:@{ UITextAttributeTextColor : [UIColor grayColor] }                                 ">
+  <meta name="description" content="设置item的标题颜色：
+
+    [[UITabBarItem appearance] setTitleTextAttributes:@{ UITextAttributeTextColor : [UIColor grayColor] }
+                              ">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -60,13 +63,31 @@
     </header>
     <div class="entry">
       
-        <p><br>设置item的标题颜色：<br></p><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[[UITabBarItem appearance] setTitleTextAttributes:@{ UITextAttributeTextColor : [<span class="built_in">UIColor</span> grayColor] }</div><div class="line">                                         forState:UIControlStateNormal];</div><div class="line">[[UITabBarItem appearance] setTitleTextAttributes:@{ UITextAttributeTextColor : [<span class="built_in">UIColor</span> redColor] }</div><div class="line">                                         forState:UIControlStateSelected];</div></pre></td></tr></table></figure><br><br><p><br>设置选中和没有选中时候都图片：<br></p><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//for ios7 before</span></div><div class="line">- (<span class="keyword">void</span>)setFinishedSelectedImage:(<span class="built_in">UIImage</span> *)selectedImage withFinishedUnselectedImage:(<span class="built_in">UIImage</span> *)unselectedImage ;</div><div class="line"></div><div class="line"><span class="comment">//for ios7 and later</span></div><div class="line"><span class="comment">//tips:设置图片的时候要用</span></div><div class="line"><span class="comment">//[[UIImage imageNamed:@"ImageName"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]</span></div><div class="line">- (instancetype)initWithTitle:(<span class="built_in">NSString</span> *)title image:(<span class="built_in">UIImage</span> *)image selectedImage:(<span class="built_in">UIImage</span> *)selectedImage;</div></pre></td></tr></table></figure><br><p><br>ios7 去掉默认都选中颜色<br></p>
+        <p><br>设置item的标题颜色：<br></p>
 
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">self</span><span class="variable">.tabBar</span><span class="variable">.tintColor</span> = [<span class="built_in">UIColor</span> clearColor];</div></pre></td></tr></table></figure>
+<pre><code>    <span class="attr_selector">[[UITabBarItem appearance]</span> <span class="tag">setTitleTextAttributes</span>:<span class="at_rule">@<span class="keyword">{</span> UITextAttributeTextColor : [UIColor grayColor] }
+                                             forState:UIControlStateNormal]</span>;
+    <span class="attr_selector">[[UITabBarItem appearance]</span> <span class="tag">setTitleTextAttributes</span>:<span class="at_rule">@<span class="keyword">{</span> UITextAttributeTextColor : [UIColor redColor] }
+                                             forState:UIControlStateSelected]</span>;
+</code></pre><p><br>设置选中和没有选中时候都图片：<br></p>
 
+<p>//for ios7 before</p>
+<ul>
+<li>(void)setFinishedSelectedImage:(UIImage <em>)selectedImage withFinishedUnselectedImage:(UIImage </em>)unselectedImage ;</li>
+</ul>
+<p>//for ios7 and later<br>//tips:设置图片的时候要用<br>//[[UIImage imageNamed:@”ImageName”] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]</p>
+<ul>
+<li>(instancetype)initWithTitle:(NSString <em>)title image:(UIImage </em>)image selectedImage:(UIImage *)selectedImage;</li>
+</ul>
+<p><br>ios7 去掉默认都选中颜色<br></p>
+
+
+<p>   self.tabBar.tintColor = [UIColor clearColor];</p>
 <p><br>ios7之前去掉选中的时候都mask方块<br></p>
 
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//empty.png 是一张透明都png图</span></div><div class="line">     <span class="keyword">self</span><span class="variable">.tabBar</span><span class="variable">.selectionIndicatorImage</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"empty.png"</span>];</div><div class="line">     <span class="keyword">self</span><span class="variable">.tabBar</span><span class="variable">.selectedImageTintColor</span> = [<span class="built_in">UIColor</span> clearColor];</div></pre></td></tr></table></figure>
+
+<p>//empty.png 是一张透明都png图<br>     self.tabBar.selectionIndicatorImage = [UIImage imageNamed:@”empty.png”];<br>     self.tabBar.selectedImageTintColor = [UIColor clearColor];</p>
+
       
     </div>
     <footer>

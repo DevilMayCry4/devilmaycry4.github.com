@@ -66,8 +66,13 @@
 
 <p><br>假设我们有一个controller，有个view是加到这个controller的view上面，当view中的某些功能完成的时候，view回调原来设置好的block。但是你会发现这个controller和这个view都无法调用到dealloc了。<br></p>
 
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">- (<span class="keyword">void</span>)viewDidLoad</div><div class="line">{</div><div class="line">   [<span class="keyword">super</span> viewDidLoad];</div><div class="line">   View *view = [View alloc]initWithFrame:CGRectMake(<span class="number">0</span>,<span class="number">0</span>,<span class="number">100</span>,<span class="number">100</span>)];</div><div class="line">   view<span class="variable">.OnComplete</span>= ^{</div><div class="line">   [<span class="keyword">self</span> print];</div><div class="line">   };</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">/************/</span></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">void</span>(^Block) block;</div><div class="line"></div><div class="line"><span class="keyword">@property</span>(noautomatic,<span class="keyword">copy</span>)block OnComplete;</div><div class="line"></div><div class="line"></div><div class="line"> </div></pre></td></tr></table></figure>
 
+
+<ul>
+<li>(void)viewDidLoad<br>{<br> [super viewDidLoad];<br> View *view = [View alloc]initWithFrame:CGRectMake(0,0,100,100)];<br> view.OnComplete= ^{<br> [self print];<br> };<br>}</li>
+</ul>
+<p>/<strong><strong><em>**</em></strong></strong>/<br>typedef void(^Block) block;</p>
+<p>@property(noautomatic,copy)block OnComplete;</p>
 <p>上例中，view的语法块中访问self，所以view  retian self一次，所以但view没有调用[_OnComplete  release];之前，controller是不会被dealloc的，而view是在controller的view上面。如果controller不释放，view也不会被释放，这样就进入retain circle了。<br></p>
       
     </div>

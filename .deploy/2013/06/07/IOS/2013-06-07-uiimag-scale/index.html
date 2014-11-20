@@ -6,7 +6,8 @@
   <title>UIImag Scale | 無限大な夢</title>
   <meta name="author" content="virgil">
   
-  <meta name="description" content="123456789101112131415- (UIImage*)scaleToSize:(CGSize)size {    UIGraphicsBeginImageContext(size);        CGContextRef context = UIGraphicsGetCurrentCo">
+  <meta name="description" content="(UIImage*)scaleToSize:(CGSize)size {  UIGraphicsBeginImageContext(size);
+  CGContextRef context = UIGraphicsGetCurrentContext();  CGContextTranslateCT">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -60,7 +61,15 @@
     </header>
     <div class="entry">
       
-        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">- (<span class="built_in">UIImage</span>*)scaleToSize:(<span class="built_in">CGSize</span>)size {</div><div class="line">    UIGraphicsBeginImageContext(size);</div><div class="line">    </div><div class="line">    CGContextRef context = UIGraphicsGetCurrentContext();</div><div class="line">    CGContextTranslateCTM(context, <span class="number">0.0</span>, size<span class="variable">.height</span>);</div><div class="line">    CGContextScaleCTM(context, <span class="number">1.0</span>, -<span class="number">1.0</span>);</div><div class="line">    </div><div class="line">    CGContextDrawImage(context, CGRectMake(<span class="number">0.0</span>f, <span class="number">0.0</span>f, size<span class="variable">.width</span>, size<span class="variable">.height</span> - <span class="number">4.5</span>), <span class="keyword">self</span><span class="variable">.CGImage</span>);</div><div class="line">    </div><div class="line">    <span class="built_in">UIImage</span>* scaledImage = UIGraphicsGetImageFromCurrentImageContext();</div><div class="line">    </div><div class="line">    UIGraphicsEndImageContext();</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> scaledImage;</div><div class="line">}</div></pre></td></tr></table></figure>
+        <ul>
+<li><p>(UIImage*)scaleToSize:(CGSize)size {<br>  UIGraphicsBeginImageContext(size);</p>
+<p>  CGContextRef context = UIGraphicsGetCurrentContext();<br>  CGContextTranslateCTM(context, 0.0, size.height);<br>  CGContextScaleCTM(context, 1.0, -1.0);</p>
+<p>  CGContextDrawImage(context, CGRectMake(0.0f, 0.0f, size.width, size.height - 4.5), self.CGImage);</p>
+<p>  UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext();</p>
+<p>  UIGraphicsEndImageContext();</p>
+<p>  return scaledImage;<br>}</p>
+</li>
+</ul>
 
       
     </div>

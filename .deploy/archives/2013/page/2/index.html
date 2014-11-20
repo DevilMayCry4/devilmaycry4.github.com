@@ -128,7 +128,11 @@
     </header>
     <div class="entry">
       
-        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#ifdef DEBUG</span></div><div class="line"><span class="preprocessor">#   define NSSLog(fmt, ...) {NSLog((@<span class="title">"%s [Line %d] "</span> fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);}</span></div><div class="line"><span class="preprocessor">#else</span></div><div class="line"><span class="preprocessor">#   define NSSLog(...)</span></div><div class="line"><span class="preprocessor">#endif</span></div></pre></td></tr></table></figure>
+        <h1 id="ifdef_DEBUG">ifdef DEBUG</h1>
+<h1 id="define_NSSLog(fmt,_…)_{NSLog((@”%s_[Line_%d]_“_fmt),_PRETTY_FUNCTION,_LINE,_##VA_ARGS);}">define NSSLog(fmt, …) {NSLog((@”%s [Line %d] “ fmt), <strong>PRETTY_FUNCTION</strong>, <strong>LINE</strong>, ##<strong>VA_ARGS</strong>);}</h1>
+<h1 id="else">else</h1>
+<h1 id="define_NSSLog(…)">define NSSLog(…)</h1>
+<h1 id="endif">endif</h1>
 
       
     </div>
@@ -161,10 +165,38 @@
     </header>
     <div class="entry">
       
-        <p><br>Category是Objective-C中常用的语法特性，通过它可以很方便的为已有的类来添加函数。但是Category不允许为已有的类添加新的属性或者成员变量。<br>一种常见的办法是通过runtime.h中objc_getAssociatedObject / objc_setAssociatedObject来访问和生成关联对象。通过这种方法来模拟生成属性。<br></p><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//NSObject+IndieBandName.h</span></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSObject</span> (<span class="title">IndieBandName</span>)</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSString</span> *indieBandName;</div><div class="line"><span class="keyword">@end</span></div><div class="line"></div><div class="line"><span class="comment">// NSObject+IndieBandName.m   </span></div><div class="line"> <span class="preprocessor">#import <span class="title">"NSObject+Extension.h"</span></span></div><div class="line"> <span class="preprocessor">#import <span class="title">&lt;objc/runtime.h&gt;</span></span></div><div class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">void</span> *IndieBandNameKey = &amp;IndieBandNameKey;   </div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSObject</span> (<span class="title">IndieBandName</span>)</span></div><div class="line"><span class="keyword">@dynamic</span> indieBandName;</div><div class="line"></div><div class="line">- (<span class="built_in">NSString</span> *)indieBandName {</div><div class="line">    <span class="keyword">return</span> objc_getAssociatedObject(<span class="keyword">self</span>, IndieBandNameKey);</div><div class="line">}</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)setIndieBandName:(<span class="built_in">NSString</span> *)indieBandName{</div><div class="line">    objc_setAssociatedObject(<span class="keyword">self</span>, IndieBandNameKey, indieBandName, OBJC_ASSOCIATION_RETAIN_NONATOMIC);</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">@end</span> DLIntrospection</div></pre></td></tr></table></figure><br><br><br><p><br>这个和Category无关，但是也是runtime.h的一种应用。DLIntrospection，是 一个NSObject Category。它为NSObject提供了一系列扩展函数：<br></p>
+        <p><br>Category是Objective-C中常用的语法特性，通过它可以很方便的为已有的类来添加函数。但是Category不允许为已有的类添加新的属性或者成员变量。<br>一种常见的办法是通过runtime.h中objc_getAssociatedObject / objc_setAssociatedObject来访问和生成关联对象。通过这种方法来模拟生成属性。<br></p>
 
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSObject</span> (<span class="title">DLIntrospection</span>)</span></div><div class="line"></div><div class="line">+ (<span class="built_in">NSArray</span> *)classes;</div><div class="line">+ (<span class="built_in">NSArray</span> *)properties;</div><div class="line">+ (<span class="built_in">NSArray</span> *)instanceVariables;</div><div class="line">+ (<span class="built_in">NSArray</span> *)classMethods;</div><div class="line">+ (<span class="built_in">NSArray</span> *)instanceMethods;</div><div class="line"></div><div class="line">+ (<span class="built_in">NSArray</span> *)protocols;</div><div class="line">+ (<span class="built_in">NSDictionary</span> *)descriptionForProtocol:(Protocol *)proto;</div><div class="line"></div><div class="line"></div><div class="line">+ (<span class="built_in">NSString</span> *)parentClassHierarchy;</div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+<p>//NSObject+IndieBandName.h<br>@interface NSObject (IndieBandName)<br>@property (nonatomic, strong) NSString *indieBandName;<br>@end</p>
+<p>// NSObject+IndieBandName.m   </p>
+<h1 id="import_“NSObject+Extension-h”">import “NSObject+Extension.h”</h1>
+<h1 id="import_">import <objc runtime.h=""></objc></h1>
+<p>static const void *IndieBandNameKey = &IndieBandNameKey;<br>@implementation NSObject (IndieBandName)<br>@dynamic indieBandName;</p>
+<ul>
+<li><p>(NSString *)indieBandName {<br>  return objc_getAssociatedObject(self, IndieBandNameKey);<br>}</p>
+</li>
+<li><p>(void)setIndieBandName:(NSString *)indieBandName{<br>  objc_setAssociatedObject(self, IndieBandNameKey, indieBandName, OBJC_ASSOCIATION_RETAIN_NONATOMIC);<br>}</p>
+</li>
+</ul>
+<p>@end DLIntrospection</p>
+<p><br>这个和Category无关，但是也是runtime.h的一种应用。DLIntrospection，是 一个NSObject Category。它为NSObject提供了一系列扩展函数：<br></p>
 
+
+<p>@interface NSObject (DLIntrospection)</p>
+<ul>
+<li>(NSArray *)classes;</li>
+<li>(NSArray *)properties;</li>
+<li>(NSArray *)instanceVariables;</li>
+<li>(NSArray *)classMethods;</li>
+<li><p>(NSArray *)instanceMethods;</p>
+</li>
+<li><p>(NSArray *)protocols;</p>
+</li>
+<li>(NSDictionary <em>)descriptionForProtocol:(Protocol </em>)proto;</li>
+</ul>
+<ul>
+<li>(NSString *)parentClassHierarchy;<br>@end</li>
+</ul>
 <p><br>通过这些函数，你可以在调试时（通过po命令）或者运行时获得对象的各种信息。<br></p>
       
     </div>
@@ -232,7 +264,15 @@
       
         <p><br>UIView 如果没有设置阴影的边框会导致、在旋转屏幕或者滑动的时候，界面卡顿，因为设置了阴影的view会不断地重新绘制。解决的方法:<br></p>
 
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.shadowColor</span> = [<span class="built_in">UIColor</span> blackColor]<span class="variable">.CGColor</span>;</div><div class="line"><span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.shadowOffset</span> = CGSizeMake(<span class="number">0</span>, <span class="number">3</span>);</div><div class="line"><span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.shadowOpacity</span> = <span class="number">0.6</span>;</div><div class="line"><span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.masksToBounds</span> = <span class="literal">NO</span>;</div><div class="line"><span class="comment">/*********</span></div><div class="line">   self.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.bounds].CGPath;</div><div class="line">   *********/</div></pre></td></tr></table></figure>
+
+<pre><code>    self.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.layer.shadowOffset = CGSizeMake(0, 3);
+    self.layer.shadowOpacity = 0.6;
+    self.layer.masksToBounds = NO;
+    /<span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>
+       self.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.bounds].CGPath;
+       <span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>/
+</code></pre>
       
     </div>
     <footer>
@@ -268,8 +308,13 @@
 
 <p><br>假设我们有一个controller，有个view是加到这个controller的view上面，当view中的某些功能完成的时候，view回调原来设置好的block。但是你会发现这个controller和这个view都无法调用到dealloc了。<br></p>
 
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">- (<span class="keyword">void</span>)viewDidLoad</div><div class="line">{</div><div class="line">   [<span class="keyword">super</span> viewDidLoad];</div><div class="line">   View *view = [View alloc]initWithFrame:CGRectMake(<span class="number">0</span>,<span class="number">0</span>,<span class="number">100</span>,<span class="number">100</span>)];</div><div class="line">   view<span class="variable">.OnComplete</span>= ^{</div><div class="line">   [<span class="keyword">self</span> print];</div><div class="line">   };</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">/************/</span></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">void</span>(^Block) block;</div><div class="line"></div><div class="line"><span class="keyword">@property</span>(noautomatic,<span class="keyword">copy</span>)block OnComplete;</div><div class="line"></div><div class="line"></div><div class="line"> </div></pre></td></tr></table></figure>
 
+
+<ul>
+<li>(void)viewDidLoad<br>{<br> [super viewDidLoad];<br> View *view = [View alloc]initWithFrame:CGRectMake(0,0,100,100)];<br> view.OnComplete= ^{<br> [self print];<br> };<br>}</li>
+</ul>
+<p>/<strong><strong><em>**</em></strong></strong>/<br>typedef void(^Block) block;</p>
+<p>@property(noautomatic,copy)block OnComplete;</p>
 <p>上例中，view的语法块中访问self，所以view  retian self一次，所以但view没有调用[_OnComplete  release];之前，controller是不会被dealloc的，而view是在controller的view上面。如果controller不释放，view也不会被释放，这样就进入retain circle了。<br></p>
       
     </div>
@@ -368,7 +413,12 @@
     </header>
     <div class="entry">
       
-        <p><br>NSTimer 定时器，在编程的时候是十分常用的，但是其实很多时候都没有用对，我们经常都在Controller里创建NStimer,而期待在controller dealloc的时候，去停止定时器：<br></p><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)dealloc</div><div class="line">{</div><div class="line">   <span class="keyword">if</span>(_timer != <span class="literal">nil</span>)</div><div class="line">   {</div><div class="line">     [_timer invalidate];</div><div class="line">   }</div><div class="line">   [<span class="keyword">super</span> dealloc];</div><div class="line">}</div></pre></td></tr></table></figure><br><p><br>但实际上contoller永远都不会调用dealloc，因为_timer会retaincontroller一次。<br>在NSTimer创建的时候、NSRunloop会retian NSTimer一次、已保证NSTimer在执行完之前NSTimer不会被dealloc。而且一般NSTimer创建的时候会有个回调的target、而为了保证回调的正常、NSTimer会<br>retian target一次、而我们经常使用controller作为target，这样controller就从来都不会释放了。造成内存泄露。<br></p>
+        <p><br>NSTimer 定时器，在编程的时候是十分常用的，但是其实很多时候都没有用对，我们经常都在Controller里创建NStimer,而期待在controller dealloc的时候，去停止定时器：<br></p>
+
+<ul>
+<li>(void)dealloc<br>{<br> if(_timer != nil)<br> {<br>   [_timer invalidate];<br> }<br> [super dealloc];<br>}</li>
+</ul>
+<p><br>但实际上contoller永远都不会调用dealloc，因为_timer会retaincontroller一次。<br>在NSTimer创建的时候、NSRunloop会retian NSTimer一次、已保证NSTimer在执行完之前NSTimer不会被dealloc。而且一般NSTimer创建的时候会有个回调的target、而为了保证回调的正常、NSTimer会<br>retian target一次、而我们经常使用controller作为target，这样controller就从来都不会释放了。造成内存泄露。<br></p>
       
     </div>
     <footer>

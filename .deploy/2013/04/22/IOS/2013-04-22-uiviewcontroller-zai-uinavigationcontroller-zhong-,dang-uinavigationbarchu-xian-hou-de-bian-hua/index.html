@@ -8,7 +8,9 @@
   
   <meta name="description" content="如果UIViewController 是在导航控制器中在navigationbar 出现后self.view 的高度减少了44。如：在viewDidLoad 中 
 
-1NSLog(@&quot;self height %f&quot;,self.view.frame.size.heigt);   在viewDidApp">
+
+NSLog(@”self height %f”,self.view.frame.size.heigt);  
+ 在viewDidAp">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -64,8 +66,11 @@
       
         <p>如果UIViewController 是在导航控制器中<br>在navigationbar 出现后self.view 的高度减少了44。如：<br>在viewDidLoad 中 </p>
 
-<p><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"self height %f"</span>,<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.heigt</span>);  </div></pre></td></tr></table></figure><br> </p><p><br>在viewDidAppear 中 </p><p></p>
-<p><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"self height %f"</span>,<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.heigt</span>);  </div></pre></td></tr></table></figure> </p>
+
+<p>NSLog(@”self height %f”,self.view.frame.size.heigt);  </p>
+ <p><br>在viewDidAppear 中 </p>
+
+<p>NSLog(@”self height %f”,self.view.frame.size.heigt);  </p>
 <p> 两个结果相差 44。</p>
       
     </div>

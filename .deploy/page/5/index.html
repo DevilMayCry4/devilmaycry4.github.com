@@ -63,8 +63,8 @@
 
 <p><br>用vim直接打开工程的Info.plist文件，在文件中增加如下内容即可：<br></p>
 
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;key&gt;CFBundleLocalizations&lt;/key&gt;</div><div class="line">   &lt;array&gt;</div><div class="line">           &lt;string&gt;zh_CN&lt;/string&gt;</div><div class="line">           &lt;string&gt;en&lt;/string&gt;</div><div class="line">   &lt;/array&gt;</div></pre></td></tr></table></figure>
 
+<p><key>CFBundleLocalizations</key><br>   <array><br>           <string>zh_CN</string><br>           <string>en</string><br>   </array></p>
 <p>from:<br><a href="http://blog.devtang.com/blog/2013/01/23/set-ios-system-ui-language/" target="_blank" rel="external"><br>http://blog.devtang.com/blog/2013/01/23/set-ios-system-ui-language/<br></a><br></p>
 
       
@@ -270,7 +270,12 @@
       
         <p>Air Print</p>
 
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)drawPageAtIndex:(<span class="built_in">NSInteger</span>)pageIndex inRect:(<span class="built_in">CGRect</span>)printableRect</div><div class="line">{</div><div class="line">    <span class="built_in">CGRect</span> pageRect = CGPDFPageGetBoxRect([_item openPage:pageIndex +<span class="number">1</span>], kCGPDFMediaBox);</div><div class="line">    CGContextRef context = UIGraphicsGetCurrentContext();</div><div class="line">    CGContextSetRGBFillColor(context, <span class="number">1.0</span>,<span class="number">1.0</span>,<span class="number">1.0</span>,<span class="number">1.0</span>);</div><div class="line">    CGContextFillRect(context,printableRect);</div><div class="line">    CGContextTranslateCTM(context, <span class="number">0.0</span>, printableRect<span class="variable">.size</span><span class="variable">.height</span>);</div><div class="line">    CGContextTranslateCTM(context, printableRect<span class="variable">.origin</span><span class="variable">.x</span>, printableRect<span class="variable">.origin</span><span class="variable">.y</span>);</div><div class="line">    CGContextScaleCTM(context, printableRect<span class="variable">.size</span><span class="variable">.width</span>/pageRect<span class="variable">.size</span><span class="variable">.width</span>, -printableRect<span class="variable">.size</span><span class="variable">.height</span>/pageRect<span class="variable">.size</span><span class="variable">.height</span>);</div><div class="line">    CGContextSaveGState(context);</div><div class="line">    CGContextDrawPDFPage(context, [_item openPage:pageIndex + <span class="number">1</span>]);</div><div class="line">    CGContextRestoreGState(context);</div><div class="line"></div><div class="line"></div><div class="line">} </div></pre></td></tr></table></figure>
+
+<ul>
+<li>(void)drawPageAtIndex:(NSInteger)pageIndex inRect:(CGRect)printableRect<br>{<br>  CGRect pageRect = CGPDFPageGetBoxRect([_item openPage:pageIndex +1], kCGPDFMediaBox);<br>  CGContextRef context = UIGraphicsGetCurrentContext();<br>  CGContextSetRGBFillColor(context, 1.0,1.0,1.0,1.0);<br>  CGContextFillRect(context,printableRect);<br>  CGContextTranslateCTM(context, 0.0, printableRect.size.height);<br>  CGContextTranslateCTM(context, printableRect.origin.x, printableRect.origin.y);<br>  CGContextScaleCTM(context, printableRect.size.width/pageRect.size.width, -printableRect.size.height/pageRect.size.height);<br>  CGContextSaveGState(context);<br>  CGContextDrawPDFPage(context, [_item openPage:pageIndex + 1]);<br>  CGContextRestoreGState(context);</li>
+</ul>
+<p>} </p>
+
       
     </div>
     <footer>
