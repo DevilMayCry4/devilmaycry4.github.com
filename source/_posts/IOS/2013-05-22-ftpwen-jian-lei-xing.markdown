@@ -9,7 +9,7 @@ categories: IOS
 IOS FTP获取文件列表信息后。kCFFTPResourceType 对应的是文件类型。这个在 sys/dirent.h 头文件中有定义。
 </p>
 
-{% codeblock lang:objc %}
+
 #define	DT_UNKNOWN	 0
 #define	DT_FIFO		 1
 #define	DT_CHR		 2
@@ -19,9 +19,9 @@ IOS FTP获取文件列表信息后。kCFFTPResourceType 对应的是文件类型
 #define	DT_LNK		10
 #define	DT_SOCK		12
 #define	DT_WHT		14
-{% endcodeblock %}
 
-{% codeblock lang:objc %}
+
+
 
 DT_UNKNOWN    未知类型
 
@@ -36,5 +36,5 @@ DT_SOCK       本地套接口
 DT_CHR        字符设备文件
 
 DT_BLK        块设备文件
-{% endcodeblock %}
+
 

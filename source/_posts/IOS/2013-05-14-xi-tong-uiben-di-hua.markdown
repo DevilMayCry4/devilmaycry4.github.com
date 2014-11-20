@@ -19,13 +19,13 @@ categories: IOS
 用vim直接打开工程的Info.plist文件，在文件中增加如下内容即可：
 </p>
 
-{% codeblock lang:objc %}
+
 <key>CFBundleLocalizations</key>
    <array>
            <string>zh_CN</string>
            <string>en</string>
    </array>
-{% endcodeblock %}
+
 
 <p>from:
 <a href="http://blog.devtang.com/blog/2013/01/23/set-ios-system-ui-language/">

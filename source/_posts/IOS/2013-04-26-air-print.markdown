@@ -7,7 +7,7 @@ categories: IOS
 ---
 <p>Air Print</p>
 
-{% codeblock lang:objc %}
+
 - (void)drawPageAtIndex:(NSInteger)pageIndex inRect:(CGRect)printableRect
 {
     CGRect pageRect = CGPDFPageGetBoxRect([_item openPage:pageIndex +1], kCGPDFMediaBox);
@@ -23,4 +23,4 @@ categories: IOS
 
 
 } 
-{%  endcodeblock %}
+ 

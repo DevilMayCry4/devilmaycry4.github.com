@@ -10,12 +10,12 @@ categories: IOS
 在navigationbar 出现后self.view 的高度减少了44。如：
 在viewDidLoad 中 </p>
 
-{% codeblock lang:objc %}
+
 NSLog(@"self height %f",self.view.frame.size.heigt);  
-{% endcodeblock %} 
+ 
  <p>
 在viewDidAppear 中 </p>
-{% codeblock lang:objc %}
+
 NSLog(@"self height %f",self.view.frame.size.heigt);  
-{% endcodeblock %} 
+ 
 <p> 两个结果相差 44。</p>

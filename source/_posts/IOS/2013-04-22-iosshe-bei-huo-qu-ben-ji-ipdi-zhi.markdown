@@ -5,7 +5,7 @@ date: 2013-04-22 12:10
 comments: true
 categories: IOS
 ---
-{% codeblock lang:objc %}
+
 #include <ifaddrs.h>
 #include <arpa/inet.h>
 - (NSString*)getIPAddress
@@ -43,4 +43,3 @@ categories: IOS
 }
 
 
-{% endcodeblock %}

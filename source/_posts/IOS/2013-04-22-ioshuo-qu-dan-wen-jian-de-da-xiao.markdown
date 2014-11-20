@@ -6,7 +6,7 @@ comments: true
 categories: IOS
 ---
 <p>c语言实现：</p>
-{% codeblock lang:objc %}
+
 #include "sys/stat.h"
 - (long long) fileSizeAtPath:(NSString*) filePath
 {  
@@ -18,11 +18,11 @@ categories: IOS
     return 0;  
 }  
 
-{% endcodeblock %}
+
 
 <p>object-c实现：</p>
 
-{% codeblock lang:objc %}
+
 
 -(long long) fileSizeAtPath:(NSString*) filePath
 {  
@@ -34,4 +34,3 @@ categories: IOS
   return 0;  
 }  
 
-{% endcodeblock %}

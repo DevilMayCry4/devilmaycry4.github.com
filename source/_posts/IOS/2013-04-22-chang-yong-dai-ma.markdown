@@ -6,17 +6,17 @@ comments: true
 categories: IOS
 ---
 <p>1.判断邮箱格式是否正确的代码</p>
-{{% blockquote %}
+{
 -(BOOL)isValidateEmail:(NSString *)email
 {
   NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
   NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES%@",emailRegex];
   return [emailTest evaluateWithObject:email];
 }
-{% blockquote %}
+
 
 <p>2.图片压缩</p>
-{% blockquote   %}
+{% codeblock   %}
 - (UIImage*)imageWithImageSimple:(UIImage*)image scaledToSize:(CGSize)newSize
 {
 // Create a graphics image context
@@ -31,10 +31,10 @@ categories: IOS
 // Return the new image.
    return newImage;
 }
-{% blockquote %}
+
 
 <p>3.亲测可用的图片上传代码</p>
-{% codeblock lang:objc %}
+
 - (IBAction)uploadButton:(id)sender 
 {
    UIImage *image = [UIImage imageNamed:@"1.jpg"]; //图片名
@@ -64,19 +64,19 @@ categories: IOS
    NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
    NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
    NSLog(@"3-测试输出：%@",returnString);
-{% endcodeblock %}
+
 
 <!--more-->
 
 <p>4.给imageView加载图片</p>
-{% codeblock lang:objc %}
+
 UIImage *myImage = [UIImage imageNamed:@"1.jpg"];
 [imageView setImage:myImage];
 [self.view addSubview:imageView];
-{% endcodeblock %}
+
 
 <p>5.对图库的操作</p>
-{% codeblock lang:objc %}
+
 UIImagePickerControllerSourceTypesourceType=UIImagePickerControllerSourceTypeCamera;
 if (![UIImagePickerControllerisSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) 
 {
@@ -87,18 +87,18 @@ picker.delegate = self;
 picker.allowsEditing=YES;
 picker.sourceType=sourceType;
 [self presentModalViewController:picker animated:YES];
-{% endcodeblock %}
 
-{% codeblock lang:objc %}
+
+
 -(void)imagePickerController:(UIImagePickerController*)pickerdidFinishPickingMediaWithInfo:(NSDictionary *)info
 {
  [picker dismissModalViewControllerAnimated:YES];
  UIImage * image=[info objectForKey:UIImagePickerControllerEditedImage];
  [self performSelector:@selector(selectPic:) withObject:imageafterDelay:0.1];
 }
-{% endcodeblock %}
 
-{% codeblock lang:objc %}
+
+
 -(void)selectPic:(UIImage*)image
 {
    NSLog(@"image%@",image);
@@ -107,20 +107,20 @@ picker.sourceType=sourceType;
   [self.viewaddSubview:imageView];
   [self performSelectorInBackground:@selector(detect:) withObject:nil];
 }
-{% endcodeblock %}
 
 
-{% codeblock lang:objc %}
+
+
 -(void)imagePickerControllerDIdCancel:(UIImagePickerController*)picker
 {
   [picker dismissModalViewControllerAnimated:YES];
 }
-{% endcodeblock %}
+
 
 
 
 <p>6.跳到下个View</p>
-{% codeblock lang:objc %}
+
 nextWebView = [[WEBViewController alloc] initWithNibName:@"WEBViewController" bundle:nil];
 [self presentModalViewController:nextWebView animated:YES];
 //创建一个UIBarButtonItem右边按钮
@@ -141,10 +141,10 @@ label.textAlignment = UITextAlignmentCenter;
 //自动折行设置
 label.lineBreakMode = UILineBreakModeWordWrap;
 label.numberOfLines = 0;
-{% endcodeblock %}
+
 
 <p>7.代码生成button</p>
-{% codeblock lang:objc %}
+
 CGRect frame = CGRectMake(0, 400, 72.0, 37.0);
 UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 button.frame = frame;
@@ -153,15 +153,15 @@ button.backgroundColor = [UIColor clearColor];
 button.tag = 2000;
 [button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
 [self.view addSubview:button];
-{% endcodeblock %}
+
 
 <p>8.让某个控件在View的中心位置显示</p>
-{% codeblock lang:objc %}
+
 label.center = self.view.center;
-{% endcodeblock %}
+
 
 <p>9.好看的文字处理</p>
-{% codeblock lang:objc %}
+
 cell.backgroundColor = [UIColorscrollViewTexturedBackgroundColor];
 //设置文字的字体
 cell.textLabel.font = [UIFont fontWithName:@"AmericanTypewriter" size:100.0f];
@@ -171,18 +171,18 @@ cell.textLabel.textColor = [UIColor orangeColor];
 cell.textLabel.shadowColor = [UIColor whiteColor];
 //设置文字的显示位置
 cell.textLabel.textAlignment = UITextAlignmentCenter;
-{% endcodeblock %}
+
 
 <p>10.隐藏Status Bar</p>
-{% codeblock lang:objc %}
+
 -(void)ViewDidLoad
 {
   [[UIApplication sharedApplication]setStatusBarHidden:YES animated:NO];
 }
-{% endcodeblock %}
+
 
 <p>11.更改AlertView背景</p>
-{% codeblock lang:objc %}
+
 UIAlertView *theAlert = [[[UIAlertViewalloc] initWithTitle:@"Atention"
 message: @"I'm a Chinese!"
 delegate:nil
@@ -197,15 +197,15 @@ UIGraphicsBeginImageContext(theSize);
 theImage = UIGraphicsGetImageFromCurrentImageContext();
 UIGraphicsEndImageContext();
 theAlert.layer.contents = (id)[theImage CGImage];
-{% endcodeblock %}
+
 
 <p>12.键盘透明</p>
-{% codeblock lang:objc %}
+
 textField.keyboardAppearance = UIKeyboardAppearanceAlert;
-{% endcodeblock %}
+
 
 <p>13.截取屏幕图片</p>
-{% codeblock lang:objc %}
+
 //创建一个基于位图的图形上下文并指定大小为CGSizeMake(200,400)
 UIGraphicsBeginImageContext(CGSizeMake(200,400));
 //renderInContext 呈现接受者及其子范围到指定的上下文
@@ -216,27 +216,27 @@ UIImage *aImage = UIGraphicsGetImageFromCurrentImageContext();
 UIGraphicsEndImageContext();
 //以png格式返回指定图片的数据
 imageData = UIImagePNGRepresentation(aImage);
-{% endcodeblock %}
+
 
 <p>14.更改cell选中的背景</p>
-{% codeblock lang:objc %}
+
 UIView *myview = [[UIView alloc] init];
 myview.frame = CGRectMake(0, 0, 320, 47);
 myview.backgroundColor = [UIColorcolorWithPatternImage:[UIImage imageNamed:@"0006.png"]];
 cell.selectedBackgroundView = myview;
-{% endcodeblock %}
+
 
 <p>15.显示图像</p>
-{% codeblock lang:objc %}
+
 CGRect myImageRect = CGRectMake(0.0f, 0.0f, 320.0f, 109.0f);
 UIImageView *myImage = [[UIImageView alloc] initWithFrame:myImageRect];
 [myImage setImage:[UIImage imageNamed:@"myImage.png"]];
 myImage.opaque = YES; //opaque是否透明
 [self.view addSubview:myImage];
-{% endcodeblock %}
+
 
 <p>16.能让图片适应框的大小（没有确认）</p>
-{% codeblock lang:objc %}
+
 NSString*imagePath = [[NSBundle mainBundle] pathForResource:@"XcodeCrash"ofType:@"png"];
 UIImage *image = [[UIImage alloc]initWithContentsOfFile:imagePath];
 UIImage *newImage= [image transformWidth:80.f height:240.f];
@@ -244,12 +244,12 @@ UIImageView *imageView = [[UIImageView alloc]initWithImage:newImage];
 [newImagerelease];
 [image release];
 [self.view addSubview:imageView];
-{% endcodeblock %}
+
 
 <p>17.实现点击图片进行跳转的代码：生成一个带有背景图片的button，给button绑定想要的事件！</p>
-{% codeblock lang:objc %}
+
 UIButton *imgButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 120, 120)];
 [imgButton setBackgroundImage:(UIImage *)[self.imgArray objectAtIndex:indexPath.row] forState:UIControlStateNormal];
 imgButton.tag=[indexPath row];
 [imgButton addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-{% endcodeblock %}
+

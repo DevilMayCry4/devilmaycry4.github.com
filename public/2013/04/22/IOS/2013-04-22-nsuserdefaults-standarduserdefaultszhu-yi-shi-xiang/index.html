@@ -8,9 +8,9 @@
   
   <meta name="description" content="NSUserDefaults standardUserDefaults一种便利的序列化方式、当使用
 
-1[[NSUserDefaults  standardUserDefaults] setObject:object textforKey:key];
 
-这时候该对象只是写在内存中。要真正保存到磁盘、">
+[[NSUserDefaults  standardUserDefaults] setObject:object textforKey:key];
+这时候该对象只是写在内存中。要真正保存到磁盘、应">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -66,12 +66,12 @@
       
         <p>NSUserDefaults standardUserDefaults一种便利的序列化方式、当使用</p>
 
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[[<span class="built_in">NSUserDefaults</span>  standardUserDefaults] setObject:object textforKey:key];</div></pre></td></tr></table></figure>
 
+<p>[[NSUserDefaults  standardUserDefaults] setObject:object textforKey:key];</p>
 <p>这时候该对象只是写在内存中。要真正保存到磁盘、应该还要调用</p>
 
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[[<span class="built_in">NSUserDefaults</span>  standardUserDefaults] synchronize];</div></pre></td></tr></table></figure>
 
+<p>[[NSUserDefaults  standardUserDefaults] synchronize];</p>
 
       
     </div>

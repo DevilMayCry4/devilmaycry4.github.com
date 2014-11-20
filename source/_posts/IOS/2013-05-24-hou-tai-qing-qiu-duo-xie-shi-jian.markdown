@@ -5,7 +5,7 @@ date: 2013-05-24 15:15
 comments: true
 categories: IOS
 ---
-{% codeblock lang:objc %}
+
    UIApplication *app = [UIApplication sharedApplication];
     
     //一个后台任务标识符
@@ -28,4 +28,4 @@ categories: IOS
     NSLog(@"Finishing background task with %f seconds remaining",app.backgroundTimeRemaining);
     //告诉系统我们完成了
     [app endBackgroundTask:taskID];
-{% endcodeblock %}
+

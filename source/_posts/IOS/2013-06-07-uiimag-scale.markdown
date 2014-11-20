@@ -5,7 +5,7 @@ date: 2013-06-07 13:34
 comments: true
 categories: IOS
 ---
-{% codeblock lang:objc %}
+
 - (UIImage*)scaleToSize:(CGSize)size {
     UIGraphicsBeginImageContext(size);
     
@@ -21,4 +21,4 @@ categories: IOS
     
     return scaledImage;
 }
-{% endcodeblock%}
+

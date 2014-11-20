@@ -8,8 +8,8 @@
   
   <meta name="description" content="A PDF describes the content and appearance of one or more pages. The exact size of that page is not as straightforward as you might think. There can be up to 5 different descriptions in a PDF that relate to its size. These are called the page boxes:
 
-12345678enum CGPDFBox {   kCGPDFMediaBox = 0,   kCGPDFCropBox = 1,   kCGPDFBleedBox = 2,   kCGPDFTrimBox = 3,   kCGPDFArtBox = 4};typedef enum CGPDFBox CGPDFBox;
 
+enum CGPDFBox {   kCGPDFMediaBox = 0,   kCGPDFCropBox = 1,   kCGPDFBleedBox = 2,   kCGPDFTrimBox = 3,   kCGPDFArtBox = 4};typedef enum CGPDFBox CGPDFBox;
 KCGPDFMediaBox
 The MediaBox is used to specify the width and height of the page. For the average user, this probably equals the actual page size. For prepress use, this is not the case as we prefer our pages to be defined slightly oversized so that we can see the bleed (Images or other elements touching an outer edge of a printed page need to extend beyond the edge of the paper to compensate for inaccuracies in trimming the page), the crop marks and useful information such as the file name or the date and time when the file was created. This means that PDF files used in graphic arts usually have a MediaBox which is larger then the trimmed page size. The MediaBox is the largest page box in a PDF. The other page boxes can equal the size of the MediaBox but they cannot be larger.
 
@@ -70,8 +70,8 @@ The CropBox defines the region to which the page contents are to be clipped. Acr
       
         <p>A PDF describes the content and appearance of one or more pages. The exact size of that page is not as straightforward as you might think. There can be up to 5 different descriptions in a PDF that relate to its size. These are called the page boxes:</p>
 
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">enum</span> CGPDFBox {</div><div class="line">   kCGPDFMediaBox = <span class="number">0</span>,</div><div class="line">   kCGPDFCropBox = <span class="number">1</span>,</div><div class="line">   kCGPDFBleedBox = <span class="number">2</span>,</div><div class="line">   kCGPDFTrimBox = <span class="number">3</span>,</div><div class="line">   kCGPDFArtBox = <span class="number">4</span></div><div class="line">};</div><div class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span> CGPDFBox CGPDFBox;</div></pre></td></tr></table></figure>
 
+<p>enum CGPDFBox {<br>   kCGPDFMediaBox = 0,<br>   kCGPDFCropBox = 1,<br>   kCGPDFBleedBox = 2,<br>   kCGPDFTrimBox = 3,<br>   kCGPDFArtBox = 4<br>};<br>typedef enum CGPDFBox CGPDFBox;</p>
 <h5 id="KCGPDFMediaBox">KCGPDFMediaBox</h5>
 <p><br>The MediaBox is used to specify the width and height of the page. For the average user, this probably equals the actual page size. For prepress use, this is not the case as we prefer our pages to be defined slightly oversized so that we can see the bleed (Images or other elements touching an outer edge of a printed page need to extend beyond the edge of the paper to compensate for inaccuracies in trimming the page), the crop marks and useful information such as the file name or the date and time when the file was created. This means that PDF files used in graphic arts usually have a MediaBox which is larger then the trimmed page size. The MediaBox is the largest page box in a PDF. The other page boxes can equal the size of the MediaBox but they cannot be larger.<br></p>
 

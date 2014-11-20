@@ -14,7 +14,7 @@ categories: IOS
 
 <p>相关的URL string：</p>
 <!--more-->
-{% codeblock lang:objc %}
+
 About — prefs:root=General&path=About
 Accessibility — prefs:root=General&path=ACCESSIBILITY
 Airplane Mode On — prefs:root=AIRPLANE_MODE
@@ -51,4 +51,3 @@ VPN — prefs:root=General&path=Network/VPN
 Wallpaper — prefs:root=Wallpaper
 Wi-Fi — prefs:root=WIFI
 INTERNET_TETHERING — prefs:root=INTERNET_TETHERING
-{% endcodeblock %}

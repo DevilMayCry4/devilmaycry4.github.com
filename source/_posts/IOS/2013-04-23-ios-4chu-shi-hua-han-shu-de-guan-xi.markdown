@@ -43,7 +43,7 @@ viewDidUnload中被release的对象必须是很容易被重新创建的对象（
 viewDidUnload和dealloc方法没有关联，dealloc还是继续做它该做的事情。
 举例：
 </p>
-{% codeblock lang:objc %}
+
  /* * The view hierarchy for this controller has been torn down. This usually happens inresponse to low memory notifications. * All IBOutlets should be released by setting their property to nil in order to free upas much memory as possible. * This is also a good place to release other variables that can be recreated when needed. */
  - (void)viewDidUnload
   { 
@@ -58,7 +58,7 @@ viewDidUnload和dealloc方法没有关联，dealloc还是继续做它该做的�
    [setupViewController release];   
    [super dealloc];
   } 
-{% endcodeblock%}
+
 <p>
 loadView 手动加载view
 viewDidLoad用于nib文件加载后，进一步处理

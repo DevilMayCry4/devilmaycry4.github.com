@@ -23,14 +23,14 @@ categories: IOS
  ri: 设置Rendering Intent(呈色意向)
  i: 设置平面化容忍度.
  gs: 设置图形状态参数.
-{% endcodeblock %}
+
 
 <p>2). Special graphics state(特殊图形状态操作符)</p>
 {% codeblock lang:c %}
  q: 保存当前图形状态
  Q：回复图形状态.
  cm：设置当前装换矩阵.
-{% endcodeblock %}
+
 
 <p>3). Path construction(路径构建操作符)</p>
 {% codeblock lang:c %}
@@ -41,7 +41,7 @@ categories: IOS
  y: 添加一条Bezier曲线， 第二个控制点和第二个端点重合.
  h: 闭合路径
  re: 添加一个矩形.
-{% endcodeblock %}
+
 <!--more-->
 
 <p>4). Path painting(路径绘制操作符)</p>
@@ -56,21 +56,21 @@ categories: IOS
  b: 闭合路径, 填充路径，使用非零回转数规则确定区域， 并描绘路径.
  b*: 闭合路径，使用奇偶规则确定区域， 并描绘路径.
  n: 结束路径，不做任何描绘和填充.
-{% endcodeblock %}
+
 
 
 <p>5). Clipping paths(路径修剪操作符)</p>
 {% codeblock lang:c %}
  W: 将当前修剪区域和当前路径做交，使用非零回转数规则.
  W*: 将当前修剪区域和当前路径做交，使用奇偶规则.
-{% endcodeblock %}
+
 
 
 <p>6). Text  objects(文本对象操作符)</p>
 {% codeblock lang:c %}
  BT: 开始一个文本对象.
  ET: 结束一个文本对象.
-{% endcodeblock %}
+
 
 
 <p>7). Text  state(文本状态操作符)</p>
@@ -82,7 +82,7 @@ categories: IOS
  Tf: 设置文本字体.
  Tr: 设置Render(渲染)模式.
  Ts: 设置Rise
-{% endcodeblock %}
+
 
 
 <p>8). Text  positioning(文本位置操作符)</p>
@@ -91,7 +91,7 @@ categories: IOS
  TD: 移动到下一行的开始，通过偏移(tx,ty). 同时设置Leading为-ty.
  Tm: 设置文本矩阵和文本线矩阵.
  T*: 移动到下一行的开始位置. 和0 Tl Td相同.
-{% endcodeblock %}
+
 
 
 <p>9). Text  showing(文本显示操作符)</p>
@@ -100,14 +100,14 @@ categories: IOS
  TJ: 显示一个或者多个文本字符串，允许独立的制定各个字型的位置.
  ': 移动到下一行并显示一个文本字符串.
  ": 移动到下一行并显示一个文本字符串. 并指定字符间距为ac, 单词间距为aw.
-{% endcodeblock %}
+
 
 
 <p>10). Type3 fonts(type3字体操作符)</p>
 {% codeblock lang:c %}
  d0:  设置字型的宽度.
  d1: 设置字型的宽度及自行的bounding box(边界矩形).
-{% endcodeblock %}
+
 
 
 <p>11). Color(颜色操作符)</p>
@@ -124,24 +124,24 @@ categories: IOS
  rg: 设置非描绘样色空间为DeviceRGB，并设置颜色值.
  K: 设置描绘颜色空间为DeviceCMYK，并设置颜色值.
  k: 设置非描绘颜色空间为DeviceCMYK，并设置颜色值.
-{% endcodeblock %}
+
 
 <p>12). Shading patterns(渐变样式操作符)</p>
 {% codeblock lang:c %}
  sh: 输出一个shading对象.
-{% endcodeblock %}
+
 
 <p>13). Inline images(内联图像操作符)</p>
 {% codeblock lang:c %}
  BI: 开始一个内联图像.
  ID: 开始内联图像数据.
  EI: 结束一个内敛图像.
-{% endcodeblock %}
+
 
 <p>14). XObjects(外部对象操作符)</p>
 {% codeblock lang:c %}
  Do: 输出一个外部对象.
-{% endcodeblock %}
+
 
 <p>15). Marked content(标记内容操作符)</p>
 {% codeblock lang:c %}
@@ -150,11 +150,10 @@ categories: IOS
  BMC: 开始一个标记内容序列.
  BDC: 开始一个带属性列表的标记内容序列.
  EMC: 结束一个标记内容序列.
-{% endcodeblock %}
+
 
 
 <p>16). Compatibility(兼容性操作符)</p>
 {% codeblock lang:c %}
  BX: 开始一个兼容段.
  EX: 结束一个兼容段.
-{% endcodeblock %}

@@ -28,4 +28,4 @@ if __name__ == '__main__':
     print("去掉png文件命中的@2x")
     rename()
     print("finish")
-{% endcodeblock %}
+

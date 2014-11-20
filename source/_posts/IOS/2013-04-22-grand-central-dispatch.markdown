@@ -19,7 +19,7 @@ Grand Central Dispatch (GCD)是Apple开发的一个多核编程的解决方法�
 这3个方法的代码如下:
 </p>
 
-{% codeblock lang:objc %}
+
 -(IBAction)someClick:(id)sender
 { 
   self.indicator.hidden = NO; 
@@ -31,9 +31,9 @@ Grand Central Dispatch (GCD)是Apple开发的一个多核编程的解决方法�
   [queueaddOperation:op];
  }
 
-{% endcodeblock %}
+
 <!--more-->
-{% codeblock lang:objc %}
+
 -(void)download
 {
   NSURL *url = [NSURLURLWithString:@"http://www.youdao.com"];
@@ -54,10 +54,10 @@ Grand Central Dispatch (GCD)是Apple开发的一个多核编程的解决方法�
   }
 }
 
-{% endcodeblock %}
 
 
-{% codeblock lang:objc %}
+
+
 
 -(void)download_completed:(NSString*)data
 {
@@ -68,11 +68,11 @@ Grand Central Dispatch (GCD)是Apple开发的一个多核编程的解决方法�
   [queue  release];
 }
 
-{% endcodeblock %}
+
 
 <p>使用GCD后
 如果使用GCD，以上3个方法都可以放到一起，如下所示：</p>
-{% codeblock lang:objc %}
+
 
 - (void)download
 {
@@ -98,7 +98,7 @@ Grand Central Dispatch (GCD)是Apple开发的一个多核编程的解决方法�
    });
 }
 
-{% endcodeblock %}
+
 
 <p>首先我们可以看到，代码变短了。因为少了原来3个方法的定义，也少了相互之间需要传递的变量的封装。
 另外，代码变清楚了，虽然是异步的代码，但是它们被GCD合理的整合在一起，逻辑非常清晰。如果应用上MVC模式，我们也可以将View Controller层的回调函数用GCD的方式传递给Modal层，这相比以前用@selector的方式，代码的逻辑关系会更加清楚。
@@ -107,7 +107,7 @@ Grand Central Dispatch (GCD)是Apple开发的一个多核编程的解决方法�
 ###GCD的定义
 
 <p>简单GCD的定义有点象函数指针，差别是用 ^ 替代了函数指针的 * 号，如下所示：</p>
-{% codeblock lang:objc %}
+
  // 申明变量
  (void) (^loggerBlock)(void);
  // 定义
@@ -117,15 +117,15 @@ Grand Central Dispatch (GCD)是Apple开发的一个多核编程的解决方法�
  };
  // 调用
  loggerBlock();
-{% endcodeblock %}
+
 
 <p>但是大多数时候，我们通常使用内联的方式来定义它，即将它的程序块写在调用的函数里面，例如这样：</p>
 
-{% codeblock lang:objc %}
+
 dispatch_async(dispatch_get_global_queue(0, 0), ^{
       // something
  });
-{% endcodeblock %}
+
 
 <p>从上面大家可以看出，block有如下特点：</p>
 
@@ -140,7 +140,7 @@ dispatch_async(dispatch_get_global_queue(0, 0), ^{
 为了方便地使用GCD，苹果提供了一些方法方便我们将block放在主线程 或 后台线程执行，或者延后执行。使用的例子如下：
 </p>
 
-{% codeblock lang:objc %}
+
  //  后台执行：
  dispatch_async(dispatch_get_global_queue(0, 0), ^{
       // something
@@ -160,24 +160,24 @@ dispatch_async(dispatch_get_global_queue(0, 0), ^{
  dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
      // code to be executed on the main queue after delay
  });
-{% endcodeblock %}
+
 
 <p>dispatch_queue_t 也可以自己定义，如要要自定义queue，可以用dispatch_queue_create方法，示例如下：
 </p>
 
-{% codeblock lang:objc %}
+
 dispatch_queue_t urls_queue = dispatch_queue_create("blog.devtang.com", NULL);
 dispatch_async(urls_queue, ^{
      // your code
 });
 dispatch_release(urls_queue);
-{% endcodeblock %}
+
 
 <p>
 另外，GCD还有一些高级用法，例如让后台2个线程并行执行，然后等2个线程都结束后，再汇总执行结果。这个可以用dispatch_group, dispatch_group_async 和 dispatch_group_notify来实现，示例如下：
 </p>
 
-{% codeblock lang:objc %}
+
 dispatch_group_t group = dispatch_group_create();
  dispatch_group_async(group, dispatch_get_global_queue(0,0), ^{
       // 并行执行的线程一
@@ -188,7 +188,7 @@ dispatch_group_t group = dispatch_group_create();
  dispatch_group_notify(group, dispatch_get_global_queue(0,0), ^{
       // 汇总结果
  });
-{% endcodeblock %}
+
 
 ###修改block之外的变量
 
@@ -197,14 +197,14 @@ dispatch_group_t group = dispatch_group_create();
 默认情况下，在程序块中访问的外部变量是复制过去的，即写操作不对原变量生效。但是你可以加上 __block来让其写操作生效，示例代码如下：
 </p>
 
-{% codeblock lang:objc %}
+
  __block int a = 0;
  void  (^foo)(void) = ^{
       a = 1;
  }
  foo();
  // 这里，a的值被修改为1
-{% endcodeblock %}
+
 
 
 ###后台运行
@@ -215,7 +215,7 @@ GCD的另一个用处是可以让程序在后台较长久的运行。在没有�
 让程序在后台长久运行的示例代码如下：
 </p>
 
-{% codeblock lang:objc %}
+
 // AppDelegate.h文件
 @property (assign, nonatomic) UIBackgroundTaskIdentifier backgroundUpdateTask;
 
@@ -239,7 +239,7 @@ GCD的另一个用处是可以让程序在后台较长久的运行。在没有�
     [[UIApplication sharedApplication] endBackgroundTask: self.backgroundUpdateTask];
     self.backgroundUpdateTask = UIBackgroundTaskInvalid;
 }
-{% endcodeblock %}
+
 
 ###总结
 <p>

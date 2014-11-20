@@ -5,7 +5,7 @@ date: 2013-06-17 09:19
 comments: true
 categories: IOS
 ---
-{% codeblock lang:objc %}
+
 - (void)drawLine: (CGPoint) from to: (CGPoint) to singleArrow:(BOOL)single
 {
     CGFloat radian = 0.5;
@@ -39,4 +39,4 @@ categories: IOS
     }
 }
 
-{% endcodeblock %}
+

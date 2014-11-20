@@ -5,7 +5,7 @@ date: 2013-05-24 11:57
 comments: true
 categories: IOS
 ---
-{% codeblock lang:objc %}
+
 - (void) lowQuailtyWithInputURL:(NSURL*)inputURL
                                    outputURL:(NSURL*)outputURL
                                      blockHandler:(void (^)(AVAssetExportSession*))handler
@@ -20,9 +20,9 @@ categories: IOS
      }];
 }
 
-{% endcodeblock%}
 
-{% codeblock lang:objc %}
+
+
 [self lowQuailtyWithInputURL:video outputURL:output blockHandler:^(AVAssetExportSession *session)
 {
      if (session.status == AVAssetExportSessionStatusCompleted)
@@ -36,7 +36,7 @@ categories: IOS
      }
 }];
 
-{% endcodeblock%}
+
 
 <p>
 在block里面检测成功，失败，或者是取消，然后释放session.

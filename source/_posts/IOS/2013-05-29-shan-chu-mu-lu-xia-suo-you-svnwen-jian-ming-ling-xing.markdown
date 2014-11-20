@@ -8,4 +8,4 @@ categories: IOS
 {% codeblock lang:c %}
 sudo find /Users/user/Desktop/svn目录/ -name ".svn" -exec rm -r {} \;
 
-{% endcodeblock%}
+

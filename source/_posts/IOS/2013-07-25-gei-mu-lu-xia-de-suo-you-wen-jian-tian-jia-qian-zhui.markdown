@@ -25,4 +25,3 @@ if __name__ == '__main__':
     print("给png文件添加@2x")
     rename()
     print("finish")
-{% endcodeblock%}

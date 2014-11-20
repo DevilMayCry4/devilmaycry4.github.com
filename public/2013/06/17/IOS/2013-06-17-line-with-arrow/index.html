@@ -6,7 +6,9 @@
   <title>Line With Arrow | 無限大な夢</title>
   <meta name="author" content="virgil">
   
-  <meta name="description" content="1234567891011121314151617181920212223242526272829303132- (void)drawLine: (CGPoint) from to: (CGPoint) to singleArrow:(BOOL)single{    CGFloat radian =">
+  <meta name="description" content="(void)drawLine: (CGPoint) from to: (CGPoint) to singleArrow:(BOOL)single{  CGFloat radian = 0.5;  CGFloat length = 5;
+
+int a = to.x &amp;gt; from.x?-1:1 ;">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -60,7 +62,35 @@
     </header>
     <div class="entry">
       
-        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)drawLine: (<span class="built_in">CGPoint</span>) from to: (<span class="built_in">CGPoint</span>) to singleArrow:(<span class="built_in">BOOL</span>)single</div><div class="line">{</div><div class="line">    <span class="built_in">CGFloat</span> radian = <span class="number">0.5</span>;</div><div class="line">    <span class="built_in">CGFloat</span> length = <span class="number">5</span>;</div><div class="line"> </div><div class="line">    </div><div class="line">    <span class="keyword">int</span> a = to<span class="variable">.x</span> &gt; from<span class="variable">.x</span>?-<span class="number">1</span>:<span class="number">1</span> ;</div><div class="line">    <span class="built_in">CGFloat</span>  x1 = to<span class="variable">.x</span> + a*length*cos(atan((to<span class="variable">.y</span> - from<span class="variable">.y</span>)/(to<span class="variable">.x</span> - from<span class="variable">.x</span>))- radian);</div><div class="line">    <span class="built_in">CGFloat</span>  y1 = to<span class="variable">.y</span> + a*length*sin(atan((to<span class="variable">.y</span> - from<span class="variable">.y</span>)/(to<span class="variable">.x</span> - from<span class="variable">.x</span>)) - radian);</div><div class="line">    </div><div class="line">   </div><div class="line">    a = to<span class="variable">.y</span> &gt; from<span class="variable">.y</span>? -<span class="number">1</span>:<span class="number">1</span>;</div><div class="line">    <span class="built_in">CGFloat</span>  x2 = to<span class="variable">.x</span> + a*length*sin(atan((to<span class="variable">.x</span> - from<span class="variable">.x</span>)/(to<span class="variable">.y</span> - from<span class="variable">.y</span>)) - radian);</div><div class="line">    <span class="built_in">CGFloat</span>  y2 = to<span class="variable">.y</span> + a*length*cos(atan((to<span class="variable">.x</span> - from<span class="variable">.x</span>)/(to<span class="variable">.y</span> - from<span class="variable">.y</span>)) - radian);</div><div class="line"> </div><div class="line"> </div><div class="line">       </div><div class="line">    <span class="keyword">if</span> (!single)</div><div class="line">    {</div><div class="line"></div><div class="line">        a = to<span class="variable">.y</span> &gt; from<span class="variable">.y</span>?  <span class="number">1</span>:-<span class="number">1</span>;</div><div class="line">        <span class="built_in">CGFloat</span>  x3 = from<span class="variable">.x</span> +  a*length*sin(atan((to<span class="variable">.x</span> - from<span class="variable">.x</span>)/(to<span class="variable">.y</span> - from<span class="variable">.y</span>)) - radian);</div><div class="line">        <span class="built_in">CGFloat</span>  y3 = from<span class="variable">.y</span> +  a*length*cos(atan((to<span class="variable">.x</span> - from<span class="variable">.x</span>)/(to<span class="variable">.y</span> - from<span class="variable">.y</span>)) - radian);</div><div class="line">        [_currentStroke<span class="variable">.path</span> addLineToPoint:CGPointMake(x3,y3)];</div><div class="line">        </div><div class="line">         </div><div class="line">         a = to<span class="variable">.x</span> &gt; from<span class="variable">.x</span>?<span class="number">1</span>:-<span class="number">1</span> ;</div><div class="line">        <span class="built_in">CGFloat</span>  x4 = from<span class="variable">.x</span> + a*length*cos(atan((to<span class="variable">.y</span> - from<span class="variable">.y</span>)/(to<span class="variable">.x</span> - from<span class="variable">.x</span>)) - radian);</div><div class="line">        <span class="built_in">CGFloat</span>  y4 = from<span class="variable">.y</span> + a*length*sin(atan((to<span class="variable">.y</span> - from<span class="variable">.y</span>)/(to<span class="variable">.x</span> - from<span class="variable">.x</span>)) - radian);</div><div class="line">        </div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+        <ul>
+<li>(void)drawLine: (CGPoint) from to: (CGPoint) to singleArrow:(BOOL)single<br>{<br>  CGFloat radian = 0.5;<br>  CGFloat length = 5;</li>
+</ul>
+<pre><code>int a = <span class="keyword">to</span>.x &gt; <span class="keyword">from</span>.x?-<span class="number">1</span>:<span class="number">1</span> ;
+CGFloat  x1 = <span class="keyword">to</span>.x + a*<span class="property">length</span>*cos(atan((<span class="keyword">to</span>.y - <span class="keyword">from</span>.y)/(<span class="keyword">to</span>.x - <span class="keyword">from</span>.x))- radian);
+CGFloat  y1 = <span class="keyword">to</span>.y + a*<span class="property">length</span>*sin(atan((<span class="keyword">to</span>.y - <span class="keyword">from</span>.y)/(<span class="keyword">to</span>.x - <span class="keyword">from</span>.x)) - radian);
+
+
+a = <span class="keyword">to</span>.y &gt; <span class="keyword">from</span>.y? -<span class="number">1</span>:<span class="number">1</span>;
+CGFloat  x2 = <span class="keyword">to</span>.x + a*<span class="property">length</span>*sin(atan((<span class="keyword">to</span>.x - <span class="keyword">from</span>.x)/(<span class="keyword">to</span>.y - <span class="keyword">from</span>.y)) - radian);
+CGFloat  y2 = <span class="keyword">to</span>.y + a*<span class="property">length</span>*cos(atan((<span class="keyword">to</span>.x - <span class="keyword">from</span>.x)/(<span class="keyword">to</span>.y - <span class="keyword">from</span>.y)) - radian);
+
+
+
+<span class="keyword">if</span> (!single)
+{
+
+    a = <span class="keyword">to</span>.y &gt; <span class="keyword">from</span>.y?  <span class="number">1</span>:-<span class="number">1</span>;
+    CGFloat  x3 = <span class="keyword">from</span>.x +  a*<span class="property">length</span>*sin(atan((<span class="keyword">to</span>.x - <span class="keyword">from</span>.x)/(<span class="keyword">to</span>.y - <span class="keyword">from</span>.y)) - radian);
+    CGFloat  y3 = <span class="keyword">from</span>.y +  a*<span class="property">length</span>*cos(atan((<span class="keyword">to</span>.x - <span class="keyword">from</span>.x)/(<span class="keyword">to</span>.y - <span class="keyword">from</span>.y)) - radian);
+    [_currentStroke.path addLineToPoint:CGPointMake(x3,y3)];
+
+
+     a = <span class="keyword">to</span>.x &gt; <span class="keyword">from</span>.x?<span class="number">1</span>:-<span class="number">1</span> ;
+    CGFloat  x4 = <span class="keyword">from</span>.x + a*<span class="property">length</span>*cos(atan((<span class="keyword">to</span>.y - <span class="keyword">from</span>.y)/(<span class="keyword">to</span>.x - <span class="keyword">from</span>.x)) - radian);
+    CGFloat  y4 = <span class="keyword">from</span>.y + a*<span class="property">length</span>*sin(atan((<span class="keyword">to</span>.y - <span class="keyword">from</span>.y)/(<span class="keyword">to</span>.x - <span class="keyword">from</span>.x)) - radian);
+
+}
+</code></pre><p>}</p>
 
       
     </div>

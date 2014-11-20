@@ -5,7 +5,7 @@ tags: IOS
 <p>
 ios6之后开始使用自动约束布局NSLayoutConstraint，这个可以解决对于不同的ios设备、autoresizingMask的不足。
 </p>
- {% codeblock lang:objc %}
+ 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -44,4 +44,4 @@ ios6之后开始使用自动约束布局NSLayoutConstraint，这个可以解决�
     _constran.constant += 5;
     [self.view updateConstraintsIfNeeded];
 }
- {% endcodeblock %}
+ 

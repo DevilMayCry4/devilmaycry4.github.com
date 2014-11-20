@@ -8,7 +8,7 @@ categories: IOS
 
 
 <p>头文件和宏定义</p>
-{% codeblock lang:objc %}
+
 
 #import <MapKit/MapKit.h>
 #import "RegexKitLite.h"
@@ -18,9 +18,9 @@ categories: IOS
 #define Mode_Drive   @"driving"
 #define Mode_Bycle   @"bicycling"
 #define Mode_Transit @"transit"
-{% endcodeblock %}
+
 <p>获取两个点之间的路线</p>
-{% codeblock lang:objc %}- (NSArray *)calculateRoutesFrom:(CLLocationCoordinate2D)f to:(CLLocationCoordinate2D)t mode:(NSString *)mode
+- (NSArray *)calculateRoutesFrom:(CLLocationCoordinate2D)f to:(CLLocationCoordinate2D)t mode:(NSString *)mode
 {
     NSString    *saddr = [NSString stringWithFormat:@"%f,%f", f.latitude, f.longitude];
     NSString    *daddr = [NSString stringWithFormat:@"%f,%f", t.latitude, t.longitude];
@@ -108,10 +108,10 @@ categories: IOS
         return nil;
     }
 
-}{% endcodeblock %}
+}
 <!--more-->
 <p>解析两个点之间路线点的函数:</p>
-{% codeblock lang:objc %}- (NSMutableArray *)decodePolyLine:(NSMutableString *)encoded
+- (NSMutableArray *)decodePolyLine:(NSMutableString *)encoded
 {
     [encoded replaceOccurrencesOfString:@"\\\\" withString:@"\\"
     options :NSLiteralSearch
@@ -154,10 +154,10 @@ categories: IOS
     }
     [pool drain];
     return array;
-}{% endcodeblock %}
+}
 
 <p>绘制函数:</p>
-{% codeblock lang:objc %}- (void)drawFrom:(CLLocationCoordinate2D)from to:(CLLocationCoordinate2D)destination mode:(NSString *)mode
+- (void)drawFrom:(CLLocationCoordinate2D)from to:(CLLocationCoordinate2D)destination mode:(NSString *)mode
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSArray *array =  [self calculateRoutesFrom:from to:destination mode:mode];
@@ -185,16 +185,16 @@ categories: IOS
 
     free(coordinateArray);
     coordinateArray = NULL;
-}{% endcodeblock %}
+}
 
 <p>调用示例:
 
-{% codeblock lang:objc %}- (void)drawTestLine
+- (void)drawTestLine
 {
     CLLocationCoordinate2D  cll0 = CLLocationCoordinate2DMake(23.132901, 113.357223);
     CLLocationCoordinate2D  cll1 = CLLocationCoordinate2DMake(23.051757, 113.392832);
     [self drawFrom:cll0 to:cll1 mode:Mode_Drive];
-}{% endcodeblock %}
+}
 <p>参考资料</p>
 <p><a href="https://developers.google.com/maps/documentation/directions/?hl=zh-CN#Limits">谷歌说明文档</a></p>
 <p><a href="https://developers.google.com/maps/documentation/utilities/polylinealgorithm?hl=zh-CN">路线解码算法</a></p>

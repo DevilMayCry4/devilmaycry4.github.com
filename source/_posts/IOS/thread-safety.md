@@ -59,7 +59,7 @@ from: http://www.objc.io/issue-2/thread-safe-class-design.html
           _userName = userName;
       }
 }
-{% endcodeblock %}
+
 
 <p>This is the variant with manual retain/release; however, the ARC-generated code looks similar. When we look at this code it&#8217;s obvious why this means trouble when <code>setUserName:</code> is called concurrently. We could end up releasing <code>_userName</code> twice, which can corrupt memory and lead to hard-to-find bugs.</p>
 
@@ -101,7 +101,7 @@ static inline void reallySetProperty(id self, SEL _cmd, id newValue,
 
     objc_release(oldValue);
 }
-{% endcodeblock %}
+
 
 <p>Aside from the rather funny name, this method is actually fairly straightforward and uses one of the 128 available spinlocks in <code>PropertyLocks</code>. This is a pragmatic and fast approach &#8211; the worst case scenario is that a setter might have to wait for an unrelated setter to finish because of a hash collision.</p>
 

@@ -7,7 +7,7 @@ categories: IOS
 ---
 <p>A PDF describes the content and appearance of one or more pages. The exact size of that page is not as straightforward as you might think. There can be up to 5 different descriptions in a PDF that relate to its size. These are called the page boxes:</p>
 
-{% codeblock lang:objc %}
+
 enum CGPDFBox {
    kCGPDFMediaBox = 0,
    kCGPDFCropBox = 1,
@@ -16,7 +16,7 @@ enum CGPDFBox {
    kCGPDFArtBox = 4
 };
 typedef enum CGPDFBox CGPDFBox;
-{% endcodeblock %}
+
 
 #####KCGPDFMediaBox
 <p>

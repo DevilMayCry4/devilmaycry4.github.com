@@ -13,7 +13,7 @@ IOS4后苹果开始使用block作为回调函数来取代传统的delegate。这
 假设我们有一个controller，有个view是加到这个controller的view上面，当view中的某些功能完成的时候，view回调原来设置好的block。但是你会发现这个controller和这个view都无法调用到dealloc了。
 </p>
 
-{% codeblock lang:objc %}
+
 
 - (void)viewDidLoad
 {
@@ -30,7 +30,7 @@ typedef void(^Block) block;
 @property(noautomatic,copy)block OnComplete;
 
 
- {% endcodeblock %}
+ 
 
 <p>上例中，view的语法块中访问self，所以view  retian self一次，所以但view没有调用[_OnComplete  release];之前，controller是不会被dealloc的，而view是在controller的view上面。如果controller不释放，view也不会被释放，这样就进入retain circle了。
 </p>

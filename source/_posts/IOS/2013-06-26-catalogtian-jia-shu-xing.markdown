@@ -9,7 +9,7 @@ categories: IOS
 Category是Objective-C中常用的语法特性，通过它可以很方便的为已有的类来添加函数。但是Category不允许为已有的类添加新的属性或者成员变量。    
 一种常见的办法是通过runtime.h中objc_getAssociatedObject / objc_setAssociatedObject来访问和生成关联对象。通过这种方法来模拟生成属性。
 </p>
-{% codeblock lang:objc %}
+
 //NSObject+IndieBandName.h
 @interface NSObject (IndieBandName)
 @property (nonatomic, strong) NSString *indieBandName;
@@ -32,14 +32,14 @@ static const void *IndieBandNameKey = &IndieBandNameKey;
 
 @end DLIntrospection
 
-{% endcodeblock %}
+
 
 
 <p>
 这个和Category无关，但是也是runtime.h的一种应用。DLIntrospection，是 一个NSObject Category。它为NSObject提供了一系列扩展函数： 
 </p>
 
-{% codeblock lang:objc %}
+
 @interface NSObject (DLIntrospection)
 
 + (NSArray *)classes;
@@ -54,7 +54,7 @@ static const void *IndieBandNameKey = &IndieBandNameKey;
 
 + (NSString *)parentClassHierarchy;
 @end
-{% endcodeblock %}
+
 
 <p>
 通过这些函数，你可以在调试时（通过po命令）或者运行时获得对象的各种信息。

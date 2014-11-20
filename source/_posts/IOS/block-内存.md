@@ -5,7 +5,7 @@ tags: IOS
 <p>
 block调用自身在前面添加__block关键字
 </p>
-{% codeblock lang:objc %}
+
 - (IBAction)grabURLInBackground:(id)sender
 {
    NSURL *url = [NSURL URLWithString:@"http://allseeing-i.com"];
@@ -22,4 +22,3 @@ block调用自身在前面添加__block关键字
    }];
    [request startAsynchronous];
 }
-{% endcodeblock %}
