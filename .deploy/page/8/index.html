@@ -49,6 +49,52 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2013-04-21T12:18:00.000Z"><a href="/2013/04/21/IOS/2013-04-21-google-di-tu-de-lu-xian-huo-qu-he-jie-xi/">Apr 21 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/21/IOS/2013-04-21-google-di-tu-de-lu-xian-huo-qu-he-jie-xi/">google 地图的路线获取和解析</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>头文件和宏定义</p>
+
+
+<h1 id="import_">import <mapkit mapkit.h=""></mapkit></h1>
+<h1 id="import_“RegexKitLite-h”">import “RegexKitLite.h”</h1>
+<h1 id="import_“JSONKit-h”">import “JSONKit.h”</h1>
+<h1 id="define_Mode_Walk_@”walking”">define Mode_Walk    @”walking”</h1>
+<h1 id="define_Mode_Drive_@”driving”">define Mode_Drive   @”driving”</h1>
+<h1 id="define_Mode_Bycle_@”bicycling”">define Mode_Bycle   @”bicycling”</h1>
+<h1 id="define_Mode_Transit_@”transit”">define Mode_Transit @”transit”</h1>
+<p>获取两个点之间的路线</p><br>- (NSArray <em>)calculateRoutesFrom:(CLLocationCoordinate2D)f to:(CLLocationCoordinate2D)t mode:(NSString </em>)mode<br>{<br>    NSString    <em>saddr = [NSString stringWithFormat:@”%f,%f”, f.latitude, f.longitude];<br>    NSString    </em>daddr = [NSString stringWithFormat:@”%f,%f”, t.latitude, t.longitude];<br><br>    NSString    <em>apiUrlStr = [NSString stringWithFormat:@”<a href="http://maps.google.com/maps/api/directions/json?origin=%@&amp;destination=%@&amp;sensor=false&amp;mode=%@" target="_blank" rel="external">http://maps.google.com/maps/api/directions/json?origin=%@&amp;destination=%@&amp;sensor=false&amp;mode=%@</a>“, saddr, daddr,mode];<br><br>    NSURL       </em>apiUrl = [NSURL URLWithString:apiUrlStr];<br>    NSString    <em>apiResponse = [NSString stringWithContentsOfURL:apiUrl encoding:NSASCIIStringEncoding error:nil];<br>    NSDictionary </em>dictionaryFromJson = [apiResponse  objectFromJSONString];<br>    if([[dictionaryFromJson objectForKey:@”status”] isEqualToString:@”OK”])<br>    {<br>        NSDictionary  <em>dict = [[[[dictionaryFromJson objectForKey:@”routes”] objectAtIndex:0] objectForKey:@”legs”] objectAtIndex:0];<br>        NSArray </em>legArray = [dict objectForKey:@”steps”];<br><br>        NSMutableArray <em>stepArray = [NSMutableArray array];<br>        NSAutoreleasePool </em>pool = [[NSAutoreleasePool alloc] init];<br>        for (id step in legArray)<br>        {<br>            id start = [step objectForKey:@”start_location”];<br><br>            CLLocation  <em>loc0 = [[[CLLocation alloc] initWithLatitude:[[start objectForKey:@”lat”] doubleValue]<br>                                                            longitude:[[start objectForKey:@”lng”] doubleValue]] autorelease];<br><br>            [stepArray addObject:loc0];<br><br>            NSString </em>polyline = [[step objectForKey:@”polyline”] objectForKey:@”points”];<br>            NSArray <em>polylineArrary = [self decodePolyLine:[[polyline mutableCopy] autorelease]];<br>            [stepArray addObjectsFromArray:polylineArrary];<br><br>            id end = [step objectForKey:@”end_location”];<br><br>            CLLocation  </em>loc1 = [[[CLLocation alloc] initWithLatitude:[[end objectForKey:@”lat”] floatValue]<br>                                                            longitude:[[end objectForKey:@”lng”] floatValue]] autorelease];<br>            [stepArray addObject:loc1];<br><br><br>        }<br>        [pool drain];<br>        return stepArray;<br><br>    }<br>    else<br>    {<br>        NSString <em>tipString = nil;<br>        if ([[dictionaryFromJson objectForKey:@”status”] isEqualToString:@”NOT_FOUND”])<br>        {<br>             tipString = @”请求的起点、终点或路标中指定的至少一个位置无法进行地理编码”;<br>        }<br>        else if ([[dictionaryFromJson objectForKey:@”status”] isEqualToString:@”ZERO_RESULTS”])<br>        {<br>            tipString = @”起点和终点之间找不到路线”;<br>        }<br>        else if ([[dictionaryFromJson objectForKey:@”status”] isEqualToString:@”MAX_WAYPOINTS_EXCEEDED”])<br>        {<br>            tipString = @”请求中提供的 waypoints 过多”;<br>        }<br>        else if ([[dictionaryFromJson objectForKey:@”status”] isEqualToString:@”INVALID_REQUEST”])<br>        {<br>            tipString = @”提供的请求无效”;<br>        }<br>        else if([[dictionaryFromJson objectForKey:@”status”] isEqualToString:@”OVER_QUERY_LIMIT”])<br>        {<br>            tipString = @”该服务在允许的时间段内从您的应用收到的请求过多”;<br>        }<br>        else if([[dictionaryFromJson objectForKey:@”status”] isEqualToString:@”REQUEST_DENIED”])<br>        {<br>             tipString = @”该服务已拒绝您的应用使用路线服务”;<br>        }<br>        else if([[dictionaryFromJson objectForKey:@”status”] isEqualToString:@”OVER_QUERY_LIMIT”])<br>        {<br>            tipString = @”路线请求因服务器出错而无法得到处理。如果您重试一次，该请求可能就会成功”;<br><br>        }<br>        dispatch_async(dispatch_get_main_queue(), ^{<br>            UIAlertView </em>alertView = [[UIAlertView alloc] initWithTitle:@”提示”<br>                                                                message:tipString<br>                                                               delegate:nil<br>                                                      cancelButtonTitle:@”OK”<br>                                                      otherButtonTitles:nil, nil];<br>            [alertView show];<br>            [alertView release];<br>        });<br><br><br>        return nil;<br>    }<br><br>}<br>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/04/21/IOS/2013-04-21-google-di-tu-de-lu-xian-huo-qu-he-jie-xi/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2013-04-21T06:04:00.000Z"><a href="/2013/04/21/OSX/2013-04-21-githubda-jian-zi-ji-de-bo-ke/">Apr 21 2013</a></time>
       
       

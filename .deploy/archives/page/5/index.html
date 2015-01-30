@@ -53,6 +53,57 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2013-05-22T01:54:00.000Z"><a href="/2013/05/22/IOS/2013-05-22-ftpwen-jian-lei-xing/">May 22 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/05/22/IOS/2013-05-22-ftpwen-jian-lei-xing/">FTP文件类型</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><br>IOS FTP获取文件列表信息后。kCFFTPResourceType 对应的是文件类型。这个在 sys/dirent.h 头文件中有定义。<br></p>
+
+
+<h1 id="define_DT_UNKNOWN_0">define    DT_UNKNOWN     0</h1>
+<h1 id="define_DT_FIFO_1">define    DT_FIFO         1</h1>
+<h1 id="define_DT_CHR_2">define    DT_CHR         2</h1>
+<h1 id="define_DT_DIR_4">define    DT_DIR         4</h1>
+<h1 id="define_DT_BLK_6">define    DT_BLK         6</h1>
+<h1 id="define_DT_REG_8">define    DT_REG         8</h1>
+<h1 id="define_DT_LNK_10">define    DT_LNK        10</h1>
+<h1 id="define_DT_SOCK_12">define    DT_SOCK        12</h1>
+<h1 id="define_DT_WHT_14">define    DT_WHT        14</h1>
+<p>DT_UNKNOWN    未知类型</p>
+<p>DT_RET        普通文件</p>
+<p>DT_DIR        目录文件</p>
+<p>DT_FIFO       命名管道</p>
+<p>DT_SOCK       本地套接口</p>
+<p>DT_CHR        字符设备文件</p>
+<p>DT_BLK        块设备文件</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2013-05-14T04:18:00.000Z"><a href="/2013/05/14/IOS/2013-05-14-xi-tong-uiben-di-hua/">May 14 2013</a></time>
       
       
@@ -375,39 +426,6 @@
 <p>定义接口<br><br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">interface</span> IBark</div><div class="line">{</div><div class="line">    <span class="keyword">void</span> Bark();</div><div class="line">}</div></pre></td></tr></table></figure><br><br></p><p><br>再定义一个类,继承于IBark,并且必需实现其中的Bark()方法。<br></p>
 
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> Dog:IBark</div><div class="line">{</div><div class="line">    <span class="keyword">public</span> <span class="title">Dog</span>()</div><div class="line">    {}</div><div class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Bark</span>()</div><div class="line">    {</div><div class="line">       Consol.write(<span class="string">"汪汪"</span>);</div><div class="line">     }</div><div class="line">}</div></pre></td></tr></table></figure>
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-04-24T01:51:00.000Z"><a href="/2013/04/24/Other/2013-04-24-jin-ru-google-dot-com/">Apr 24 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/04/24/Other/2013-04-24-jin-ru-google-dot-com/">进入google.com</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p></p><p>怎么进入www.google.com而不是www.google.com/hk,很简单，进这个地址：<br><a href="http://www.google.com/intl/zh-EN/" target="_blank" rel="external">http://www.google.com/intl/zh-EN/</a> 打开中文google后,<br>点击下面的:<a href="http://www.google.com/ncr" target="_blank" rel="external">http://www.google.com/ncr</a>就可以了。</p><br>&lt;!-103844721&gt;<p></p>
-
       
     </div>
     <footer>

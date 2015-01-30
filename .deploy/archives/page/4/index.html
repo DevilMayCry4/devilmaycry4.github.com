@@ -53,6 +53,47 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2013-06-07T05:34:00.000Z"><a href="/2013/06/07/IOS/2013-06-07-uiimag-scale/">Jun 7 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/06/07/IOS/2013-06-07-uiimag-scale/">UIImag Scale</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <ul>
+<li><p>(UIImage*)scaleToSize:(CGSize)size {<br>  UIGraphicsBeginImageContext(size);</p>
+<p>  CGContextRef context = UIGraphicsGetCurrentContext();<br>  CGContextTranslateCTM(context, 0.0, size.height);<br>  CGContextScaleCTM(context, 1.0, -1.0);</p>
+<p>  CGContextDrawImage(context, CGRectMake(0.0f, 0.0f, size.width, size.height - 4.5), self.CGImage);</p>
+<p>  UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext();</p>
+<p>  UIGraphicsEndImageContext();</p>
+<p>  return scaledImage;<br>}</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2013-06-06T07:45:00.000Z"><a href="/2013/06/06/IOS/2013-06-06-dan-li-de-shu-xing/">Jun 6 2013</a></time>
       
       
@@ -369,57 +410,6 @@ taskID = [app beginBackgroundTaskWithExpirationHandler:^{
  }
 </code></pre><p>}];</p>
 <p><br>在block里面检测成功，失败，或者是取消，然后释放session.<br><br>期间可以通过不断的查看session的progress属性来获取转换的进度。<br><br>可以设置这些压缩质量<br><br>AVF_EXPORT NSString <em>const AVAssetExportPresetLowQuality        NS_AVAILABLE_IOS(4_0);<br>AVF_EXPORT NSString </em>const AVAssetExportPresetMediumQuality     NS_AVAILABLE_IOS(4_0);<br>AVF_EXPORT NSString *const AVAssetExportPresetHighestQuality    NS_AVAILABLE_IOS(4_0);<br></p>
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-05-22T01:54:00.000Z"><a href="/2013/05/22/IOS/2013-05-22-ftpwen-jian-lei-xing/">May 22 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/05/22/IOS/2013-05-22-ftpwen-jian-lei-xing/">FTP文件类型</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p><br>IOS FTP获取文件列表信息后。kCFFTPResourceType 对应的是文件类型。这个在 sys/dirent.h 头文件中有定义。<br></p>
-
-
-<h1 id="define_DT_UNKNOWN_0">define    DT_UNKNOWN     0</h1>
-<h1 id="define_DT_FIFO_1">define    DT_FIFO         1</h1>
-<h1 id="define_DT_CHR_2">define    DT_CHR         2</h1>
-<h1 id="define_DT_DIR_4">define    DT_DIR         4</h1>
-<h1 id="define_DT_BLK_6">define    DT_BLK         6</h1>
-<h1 id="define_DT_REG_8">define    DT_REG         8</h1>
-<h1 id="define_DT_LNK_10">define    DT_LNK        10</h1>
-<h1 id="define_DT_SOCK_12">define    DT_SOCK        12</h1>
-<h1 id="define_DT_WHT_14">define    DT_WHT        14</h1>
-<p>DT_UNKNOWN    未知类型</p>
-<p>DT_RET        普通文件</p>
-<p>DT_DIR        目录文件</p>
-<p>DT_FIFO       命名管道</p>
-<p>DT_SOCK       本地套接口</p>
-<p>DT_CHR        字符设备文件</p>
-<p>DT_BLK        块设备文件</p>
-
       
     </div>
     <footer>
