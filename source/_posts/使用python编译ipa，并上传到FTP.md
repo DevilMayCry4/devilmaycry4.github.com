@@ -26,3 +26,4 @@ ipa的名字是productname+.月+.日,
 加上 export PATH=/users/user/build.py:$PATH
 执行的时候使用：./build.py  /users/user/documents/project
 </p>
+<a href="mailto:aaa@5icool.org?subject=ccc&body=xxx%0d%0ayyy">aaa</a>
