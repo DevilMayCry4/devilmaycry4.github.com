@@ -28,7 +28,6 @@ ipa的名字是productname+.月+.日,
 </p>
 <a href="mailto:aaa@5icool.org">发送邮件</a>
 
-<a href="tel:18688888888">拨号</a>   
-<a href="sms:18688888888">发短信</a>
+ <a href="tel:13800138000">aaa</a>
 
 
